@@ -1,9 +1,9 @@
 import PostList from "./PostList";
 
-const Welcome = ({}) => {
+const Home = ({}) => {
   return (
     <div className="App">
-      {/* <TopNavBar isLoggedIn={user ? true : false} setQuery={setQuery} /> */}
+      { /*<TopNavBar isLoggedIn={user ? true : false} setQuery={setQuery} /> */}
       <PostList />
       <br />
       <br />
@@ -12,4 +12,4 @@ const Welcome = ({}) => {
   );
 };
 
-export default Welcome;
+export default Home;
