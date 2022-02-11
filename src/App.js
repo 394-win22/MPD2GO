@@ -6,12 +6,15 @@ import {useUserState, signInWithGoogle} from "./utilities/firebase.js";
 
 
 
-const [user] = useUserState()
+
 
 
 
 function App() {
-  
+
+  const [user] = useUserState()
+
+    console.log(user)
   return (
     <>
     { user ?

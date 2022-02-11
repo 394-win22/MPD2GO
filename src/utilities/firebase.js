@@ -1,10 +1,9 @@
 // Import the functions you need from the SDKs you need
+import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import 'firebase/auth';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithRedirect, signOut, useAuthState} from 'firebase/auth';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCsLijH-2wBUfU_NwzNNLTBadqqNIHxtFQ",
   authDomain: "mpd2go.firebaseapp.com",
@@ -14,15 +13,15 @@ const firebaseConfig = {
   messagingSenderId: "792215885159",
   appId: "1:792215885159:web:2f30dc65fba26c7644cbc2"
 };
-
+export const firebase = initializeApp(firebaseConfig);
 
 export const useUserState = () => {
     const [user, setUser] = useState();
-  
+    
     useEffect(() => {
       onIdTokenChanged(getAuth(firebase), setUser);
     }, []);
-  
+    alert(user)
     return [user];
 };
 
@@ -35,8 +34,3 @@ export const signInWithGoogle = () => {
   
     signInWithRedirect(getAuth(firebase), provider);
 };
-  
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
