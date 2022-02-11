@@ -21,7 +21,8 @@ export const useUserState = () => {
     useEffect(() => {
       onIdTokenChanged(getAuth(firebase), setUser);
     }, []);
-    alert(user)
+    //alert(user)
+    console.log(user);
     return [user];
 };
 

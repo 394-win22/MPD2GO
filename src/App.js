@@ -1,33 +1,22 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Welcome from "./components/Home";
+import Home from "./components/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {useUserState, signInWithGoogle} from "./utilities/firebase.js"; 
 
-
-
-
-
-
-
 function App() {
 
-  const [user] = useUserState()
-
-    console.log(user)
+  const [user] = useUserState();
+  
   return (
     <>
-    { user ?
-    
       (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Welcome />} />
+          <Route path="/" element={<Home />} />
         </Routes>
         {/* {user && <BottomMenu user={user} />} */}
       </BrowserRouter>)
-    
-    : signInWithGoogle()}
     </>
   );
 
