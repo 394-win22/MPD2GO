@@ -1,17 +1,20 @@
 import React from "react";
 import Post from "./Post";
 import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
 
 const PostList = ({ events, userList, user }) => {
   const userId = user ? user.uid : "";
 
   return (
-    <Box sx={{ mx: "auto", width: 300 }}>
-      {/* {events.map((event) => {
-        return <Event key={event.id} event={event} />;
-      })} */}
-      <Post />
-    </Box>
+    <>
+      <Typography>Post Event</Typography>
+      <Box sx={{ mx: "auto", maxWidth: "80%", minWidth: "100%" }}>
+        <Post />
+        <Post />
+        <Post />
+      </Box>
+    </>
   );
 };
 
