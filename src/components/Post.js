@@ -30,8 +30,9 @@ export default function Post() {
   };
 
   return (
-    <Card sx={{ maxWidth: 450, m: 5 }}>
+    <Card sx={{ m: 5 }}>
       <CardHeader
+        align="left"
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             ICON
@@ -41,21 +42,21 @@ export default function Post() {
         subheader="September 14, 2016"
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" align="left">
           For our capstone projects, these were our ideas:
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <ExpandMore
+        {/* <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
         >
           <ExpandMoreIcon />
-        </ExpandMore>
+        </ExpandMore> */}
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit> */}
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
@@ -81,7 +82,7 @@ export default function Post() {
             Set aside off of the heat to let rest for 10 minutes, and then serve.
           </Typography>
         </CardContent>
-      </Collapse>
+      {/* </Collapse> */}
     </Card>
   );
 }

@@ -1,7 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Welcome from "./components/Welcome";
+import Main from "./components/Main";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import TopNavBar from "./components/TopNavBar";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       {" "}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Welcome />} />
+          <Route path="/" element={<Main />} />
         </Routes>
         {/* {user && <BottomMenu user={user} />} */}
       </BrowserRouter>

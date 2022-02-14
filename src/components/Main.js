@@ -1,9 +1,10 @@
 import PostList from "./PostList";
+import TopNavBar from "./TopNavBar";
 
-const Welcome = ({}) => {
+const Main = ({}) => {
   return (
     <div className="App">
-      {/* <TopNavBar isLoggedIn={user ? true : false} setQuery={setQuery} /> */}
+      <TopNavBar/>
       <PostList />
       <br />
       <br />
@@ -12,4 +13,4 @@ const Welcome = ({}) => {
   );
 };
 
-export default Welcome;
+export default Main;
