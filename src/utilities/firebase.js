@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import 'firebase/auth';
-import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithRedirect, signOut, useAuthState} from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut, useAuthState} from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCsLijH-2wBUfU_NwzNNLTBadqqNIHxtFQ",
@@ -22,7 +22,6 @@ export const useUserState = () => {
       onIdTokenChanged(getAuth(firebase), setUser);
     }, []);
     //alert(user)
-    console.log(user);
     return [user];
 };
 
@@ -33,5 +32,8 @@ export const signInWithGoogle = () => {
       prompt: "select_account",
     });
   
-    signInWithRedirect(getAuth(firebase), provider);
+    signInWithPopup(getAuth(firebase), provider);
 };
+
+const firebaseSignOut = () => signOut(getAuth(firebase))
+export {firebaseSignOut as signOut};
