@@ -1,15 +1,12 @@
-import PostList from "./PostList";
+import SignInButton from "./SignInButton"
 
-const Welcome = ({}) => {
-  return (
-    <div className="App">
-      {/* <TopNavBar isLoggedIn={user ? true : false} setQuery={setQuery} /> */}
-      <PostList />
-      <br />
-      <br />
-      <br />
-    </div>
-  );
-};
+const Welcome = () => {
+    return (
+        <>
+            <h3>Please Sign in</h3>
+            <SignInButton />
+        </>
+    )
+}
 
-export default Welcome;
+export default Welcome
