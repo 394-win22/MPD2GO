@@ -1,17 +1,25 @@
 import React from "react";
 import Post from "./Post";
-import Box from "@mui/material/Box";
+import { Typography, Grid, Box } from "@mui/material";
 
 const PostList = ({ events, userList, user }) => {
   const userId = user ? user.uid : "";
 
   return (
-    <Box sx={{ mx: "auto", width: 300 }}>
-      {/* {events.map((event) => {
-        return <Event key={event.id} event={event} />;
-      })} */}
-      <Post />
-    </Box>
+    <>
+      <Typography>Post Event</Typography>
+      <Grid container align="center" sx={{ mx: "auto" }}>
+        <Grid item xs={12} md={6} xl={4}>
+          <Post />
+        </Grid>
+        <Grid item xs={12} md={6} xl={4}>
+          <Post />
+        </Grid>
+        <Grid item xs={12} md={6} xl={4}>
+          <Post />
+        </Grid>
+      </Grid>
+    </>
   );
 };
 

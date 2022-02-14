@@ -1,19 +1,15 @@
 import PostList from "./PostList";
-import {signInWithGoogle} from "../utilities/firebase";
+import SignOutButton from "./SignOutButton";
 
-const SignInButton = () => (
-  <button className="btn btn-secondary btn-sm"
-      onClick={() => signInWithGoogle()}>
-    Sign In
-  </button>
-);
+const Home = ({ user }) => {
+  console.log(user)
 
-const Home = ({}) => {
   return (
     <div className="App">
       { /*<TopNavBar isLoggedIn={user ? true : false} setQuery={setQuery} /> */}
-      <PostList />
-      <SignInButton/>
+        
+        <SignOutButton/>
+        <PostList />
       <br />
       <br />
       <br />
