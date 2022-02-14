@@ -6,7 +6,7 @@ import Welcome from './components/Welcome'
 
 function App() {
   const [user] = useUserState();
-  
+
   return (
     <>
       {user === undefined || user == null ?
@@ -14,6 +14,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home user={user}/>} />
+            <Route path="/createPost" element={<CreatePost />} />
           </Routes>
         </BrowserRouter>
       }
