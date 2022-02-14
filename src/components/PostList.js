@@ -8,7 +8,7 @@ const PostList = ({ events, userList, user }) => {
   return (
     <>
       <Typography>Post Event</Typography>
-      <Grid container align="center" sx={{ mx: "auto" }}>
+      <Grid container align="center" sx={{ mx: "auto", maxWidth:900 }}>
         <Grid item xs={12} md={6} xl={4}>
           <Post />
         </Grid>
