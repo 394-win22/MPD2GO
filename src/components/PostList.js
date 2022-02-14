@@ -1,7 +1,6 @@
 import React from "react";
 import Post from "./Post";
-import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Typography, Grid, Box } from "@mui/material";
 
 const PostList = ({ events, userList, user }) => {
   const userId = user ? user.uid : "";
@@ -9,11 +8,17 @@ const PostList = ({ events, userList, user }) => {
   return (
     <>
       <Typography>Post Event</Typography>
-      <Box sx={{ mx: "auto", maxWidth: "80%", minWidth: "100%" }}>
-        <Post />
-        <Post />
-        <Post />
-      </Box>
+      <Grid container spacing={5} align="center" sx={{ mx: "auto", maxWidth: "80%" }}>
+        <Grid item xs={12} md={6} xl={4}>
+          <Post />
+        </Grid>
+        <Grid item xs={12} md={6} xl={4}>
+          <Post />
+        </Grid>
+        <Grid item xs={12} md={6} xl={4}>
+          <Post />
+        </Grid>
+      </Grid>
     </>
   );
 };
