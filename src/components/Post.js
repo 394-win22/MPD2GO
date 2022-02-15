@@ -58,15 +58,14 @@ export default function Post() {
         </Typography>
       </CardContent>
 
-      
+
 
         <CardContent align="left" style={{ backgroundColor: "#eceff1" }}>
-          <Button 
-          expand={expanded}
+          <Button
           onClick={handleExpandClick}
           aria-expanded={expanded}
-          aria-label="show more"> 
-              View more comments 
+          aria-label="show more">
+              View more comments
           </Button>
             <Box >
               <Comment />
@@ -75,10 +74,10 @@ export default function Post() {
                 <Comment />
                 <Comment />
               </Collapse>
-            </Box>  
-                
+            </Box>
+
         </CardContent>
-      
+
 
       {/* Comment box start here */}
       <Paper
@@ -90,20 +89,20 @@ export default function Post() {
             ICON
           </Avatar>
         </IconButton>
-        
+
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Add comments here"
           inputProps={{ 'aria-label': 'Add comments here' }}
         />
-        
+
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        
+
         <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
           <SendIcon />
         </IconButton>
       </Paper>
-     
+
     </Card>
   );
 }
