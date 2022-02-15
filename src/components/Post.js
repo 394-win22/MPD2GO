@@ -58,14 +58,29 @@ export default function Post() {
         </Typography>
       </CardContent>
 
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit> */}
+      
 
-      <CardContent align="left" style={{ backgroundColor: "#eceff1" }}>
-        <Button> View more comments </Button>
-        <Box >
-          <Comment />
-        </Box>          
-      </CardContent>
+        <CardContent align="left" style={{ backgroundColor: "#eceff1" }}>
+          <Button 
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"> 
+              View more comments 
+          </Button>
+            <Box >
+              <Comment />
+              <Collapse in={expanded} timeout="auto" unmountOnExit sx={{m:0, p:0}}>
+                <Comment />
+                <Comment />
+                <Comment />
+              </Collapse>
+            </Box>  
+                
+        </CardContent>
+      
+
+      {/* Comment box start here */}
       <Paper
       component="form"
       sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: "100%" }}
@@ -88,7 +103,7 @@ export default function Post() {
           <SendIcon />
         </IconButton>
       </Paper>
-     {/* </Collapse> */}
+     
     </Card>
   );
 }

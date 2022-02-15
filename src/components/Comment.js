@@ -9,7 +9,7 @@ import { Box } from "@mui/system";
 export default function Comment() {
   return (
     <>
-      <Box display="block">
+      <Box display="block" sx={{mt:1}}>
         <Card
           sx={{ padding: 1 }}
           style={{ backgroundColor: "#cfd8dc", display: "inline-block" }}
@@ -24,7 +24,6 @@ export default function Comment() {
                 This looks like a great idea!{" "}
               </Typography>
             </Box>
-            <Box></Box>
           </Box>
         </Card>
       </Box>
