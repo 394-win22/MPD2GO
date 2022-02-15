@@ -17,11 +17,10 @@ export const firebase = initializeApp(firebaseConfig);
 
 export const useUserState = () => {
     const [user, setUser] = useState();
-    
+
     useEffect(() => {
       onIdTokenChanged(getAuth(firebase), setUser);
     }, []);
-    //alert(user)
     return [user];
 };
 
@@ -31,7 +30,7 @@ export const signInWithGoogle = () => {
     provider.setCustomParameters({
       prompt: "select_account",
     });
-  
+
     signInWithPopup(getAuth(firebase), provider);
 };
 

@@ -1,7 +1,9 @@
 import { Stack, Box, Typography, TextField, Button} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import {useState} from "react";
-
+import {createPostInFirebase} from '../utilities/posts.js';
+import { useUserState } from "../utilities/firebase.js";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   container: {
@@ -15,32 +17,43 @@ const useStyles = makeStyles({
 
 
 const CreatePost = ({}) => {
-	
+  const [user] = useUserState();
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
+	const navigate = useNavigate();
 
 	const classes = useStyles();
 	const handleSubmit = async (e)=>{
 		console.log(title , description)
-		//createPostInFirebase();
-   	};
+		createPostInFirebase({
+			title: title,
+			description: description,
+			time: Date.now(),
+			author: user.uid
+		});
+		setTitle("");
+		setDescription("");
+		navigate("/")
+  };
+
+
   return (
-	
+
     <Box >
 			<Typography>Create Post</Typography>
 			<Box sx={{'& .MuiTextField-root': { m: 1, width: '50ch' },}} className={classes.container}>
-				<TextField id="outlined-basic"
+				<TextField
 				label="Title"
 				value = {title}
 				variant="outlined"
-				onChange ={(value)=> {setTitle(value)}} />
+				onChange ={(event)=> {setTitle(event.target.value)}}
+				/>
 				<TextField
-						id="outlined-multiline-flexible"
 						label="Text (optional)"
 						multiline
 						minRows={4}
 						value={description}
-						onChange= {(value)=> {setDescription(value)}}
+						onChange= {(event)=> {setDescription(event.target.value)}}
 					/>
 					<Stack spacing={2} direction="row">
 						<Button variant="contained">Cancel</Button>
