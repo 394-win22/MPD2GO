@@ -40,16 +40,6 @@ export const firebase = initializeApp(firebaseConfig);
 export const database = getDatabase(firebase);
 const storage = getStorage();
 
-/* authentication functions */
-export const signInWithGoogle = () => {
-  const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({
-    prompt: "select_account",
-  });
-
-  signInWithPopup(getAuth(firebase), provider);
-};
-
 const firebaseSignOut = () => signOut(getAuth(firebase));
 
 export { firebaseSignOut as signOut };
@@ -94,18 +84,6 @@ export const useData = (path, transform) => {
 
 
 export const setData = (path, value) => set(ref(database, path), value);
-
-export const pushData = (path, value) => {
-  const listRef = ref(database, path);
-  const objRef = push(listRef);
-  set(objRef, value);
-    const [user, setUser] = useState();
-
-    useEffect(() => {
-      onIdTokenChanged(getAuth(firebase), setUser);
-    }, []);
-    return [user];
-};
 
 /* authentication functions */
 export const signInWithGoogle = () => {
