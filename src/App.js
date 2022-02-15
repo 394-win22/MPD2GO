@@ -3,12 +3,13 @@ import Home from "./components/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   useUserState,
-  getUserDataFromUid,
+  getUserFromUid,
   saveUserToDb,
 } from "./utilities/firebase.js";
 import Welcome from "./components/Welcome";
 import CreatePost from "./components/CreatePost";
 import { useEffect } from "react";
+import Profile from "./components/Profile";
 
 function App() {
   const [user, setUser] = useUserState();
@@ -16,7 +17,7 @@ function App() {
   useEffect(async () => {
     if (!user) return;
 
-    await getUserDataFromUid(user.uid).then((userData) => {
+    await getUserFromUid(user.uid).then((userData) => {
       if (!userData) {
         saveUserToDb(user);
       }
@@ -32,6 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home user={user} />} />
             <Route path="/createPost" element={<CreatePost />} />
+            <Route path="/profile" element={<Profile user={user} />} />
           </Routes>
         </BrowserRouter>
       )}

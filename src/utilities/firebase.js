@@ -135,20 +135,41 @@ export const deleteData = (dataPath) => {
 };
 
 export const saveUserToDb = (userObject) => {
-  console.log(userObject)
   setData("/users/" + userObject.uid, {
     displayName: userObject.displayName,
     email: userObject.email,
     photoURL: userObject.photoURL,
   });
+
   setData("/user-data/" + userObject.uid, {
     bio: "",
-    year: "",
+    year: ""
   });
 };
 
-export const getUserDataFromUid = async (uid) => {
+export const saveUserDataToDb = (userDataObject) => {
+  setData("/user-data/" + userDataObject.uid, {
+    bio: userDataObject.bio,
+    year: userDataObject.year,
+  });
+};
+
+export const getUserFromUid = async (uid) => {
   const dbRef = ref(database, `/users/${uid}`);
+  var output;
+  await onValue(
+    dbRef,
+    (snapshot) => {
+      // return val;
+      output = snapshot.val();
+    },
+    (error) => {}
+  );
+  return output;
+};
+
+export const getUserDatafromUid = async (uid) => {
+  const dbRef = ref(database, `/user-data/${uid}`);
   var output;
   await onValue(
     dbRef,
