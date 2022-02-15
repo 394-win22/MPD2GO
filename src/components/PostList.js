@@ -8,13 +8,13 @@ const PostList = ({ events, userList, user }) => {
   return (
     <>
       <Grid container align="center" sx={{ mx: "12% auto", minWidth:"90%",  }}>
-        <Grid item xs={12} lg ={9} sx={{mx:"auto"}}>
+        <Grid item xs={12} md={9} sx={{mx:"auto"}}>
           <Post />
         </Grid>
-        <Grid item xs={12} lg ={9} sx={{mx:"auto"}}>
+        <Grid item xs={12} md={9} sx={{mx:"auto"}}>
           <Post />
         </Grid>
-        <Grid item xs={12} lg ={9} sx={{mx:"auto"}}>
+        <Grid item xs={12} md={9} sx={{mx:"auto"}}>
           <Post />
         </Grid>
       </Grid>
