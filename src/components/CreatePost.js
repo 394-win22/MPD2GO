@@ -1,6 +1,9 @@
-import { Box, Typography, TextField, Button} from "@mui/material";
+import { Stack, Box, Typography, TextField, Button} from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
+import {useState} from "react";
+import {createPostInFirebase} from '../utilities/posts.js';
+import { useUserState } from "../utilities/firebase.js";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   container: {
@@ -12,27 +15,51 @@ const useStyles = makeStyles({
 
 });
 
+
 const CreatePost = ({}) => {
+  const [user] = useUserState();
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const navigate = useNavigate();
+
 	const classes = useStyles();
+	const handleSubmit = async (e)=>{
+		console.log(title , description)
+		createPostInFirebase({
+			title: title,
+			description: description,
+			time: Date.now(),
+			author: user.uid
+		});
+		setTitle("");
+		setDescription("");
+		navigate("/")
+  };
+
+
   return (
+
     <Box >
 			<Typography>Create Post</Typography>
-			<Box className={classes.container}>
-				<TextField id="outlined-basic"
-				label="Title"
-				variant="outlined" />
+			<Box sx={{'& .MuiTextField-root': { m: 1, width: '50ch' },}} className={classes.container}>
 				<TextField
-						id="outlined-multiline-flexible"
+				label="Title"
+				value = {title}
+				variant="outlined"
+				onChange ={(event)=> {setTitle(event.target.value)}}
+				/>
+				<TextField
 						label="Text (optional)"
 						multiline
-						maxRows={4}
-						// value={value}
-						// onChange={handleChange}
+						minRows={4}
+						value={description}
+						onChange= {(event)=> {setDescription(event.target.value)}}
 					/>
-
-					<Button variant="contained">Cancel</Button>
-					<Button variant="contained">Post</Button>
-				</Box>
+					<Stack spacing={2} direction="row">
+						<Button variant="contained" style={{backgroundColor: "#808080"}}>Cancel</Button>
+						<Button variant="contained" type="submit" onClick={handleSubmit} >Post</Button>
+					</Stack>
+			</Box>
 
 
     </Box>
