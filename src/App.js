@@ -1,22 +1,22 @@
 import "./App.css";
-import Home from "./components/Home";
+import Main from "./components/Main";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import TopNavBar from "./components/TopNavBar";
+import Home from "./components/Home";
 import {
   useUserState,
   getUserDataFromUid,
   saveUserToDb,
 } from "./utilities/firebase.js";
-import Welcome from "./components/Welcome";
 import CreatePost from "./components/CreatePost";
 import { useEffect } from "react";
 
 function App() {
   const [user, setUser] = useUserState();
 
-  useEffect(async () => {
+  useEffect( () => {
     if (!user) return;
-
-    await getUserDataFromUid(user.uid).then((userData) => {
+     getUserDataFromUid(user.uid).then((userData) => {
       if (!userData) {
         saveUserToDb(user);
       }
@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       {user === undefined || user == null ? (
-        <Welcome />
+        <Main />
       ) : (
         <BrowserRouter>
           <Routes>
