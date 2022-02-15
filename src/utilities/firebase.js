@@ -25,6 +25,62 @@ export const useUserState = () => {
     return [user];
 };
 
+export const saveUserToDb = (userObject) => {
+  setData("/users/" + userObject.uid, {
+    displayName: userObject.displayName,
+    email: userObject.email,
+    photoURL: userObject.photoURL,
+  });
+}
+
+export const deleteData = (dataPath) => {
+  const listRef = ref(database, dataPath);
+  remove(listRef);
+};
+
+export const useData = (path, transform) => {
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    const dbRef = ref(database, path);
+    return onValue(
+      dbRef,
+      (snapshot) => {
+        const val = snapshot.val();
+        setData(transform ? transform(val) : val);
+        setLoading(false);
+        setError(null);
+      },
+      (error) => {
+        setData(null);
+        setLoading(false);
+        setError(error);
+      }
+    );
+  }, [path, transform]);
+
+  return [data, loading, error];
+};
+
+export const getUserDataFromUid = async (uid) => {
+  const dbRef = ref(database, `/users/${uid}`);
+  var output;
+  await onValue(
+    dbRef,
+    (snapshot) => {
+      const val = snapshot.val();
+      // return val;
+      output = snapshot.val();
+    },
+    (error) => {
+
+    }
+  );
+  return output;
+}
+
 /* authentication functions */
 export const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();

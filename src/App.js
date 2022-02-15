@@ -4,9 +4,19 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useUserState } from "./utilities/firebase.js"; 
 import Welcome from './components/Welcome'
 import CreatePost from './components/CreatePost'
+import { useEffect } from "react";
 
 function App() {
-  const [user] = useUserState();
+  const [user] = useUserState()
+
+  useEffect(() => {
+    if (!user) return
+
+    // Try to pull user from id
+        // If it exists, then just update the user fields
+        // If not, push to the DB
+
+  }, [user])
 
   return (
     <>
