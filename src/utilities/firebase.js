@@ -91,35 +91,7 @@ export const useData = (path, transform) => {
   return [data, loading, error];
 };
 
-export const useEvents = (path, transform) => {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
 
-  useEffect(() => {
-    const orderByRef = query(
-      ref(database, "/events"),
-      orderByChild("eventTime")
-    );
-    const startAtRef = query(orderByRef, startAt(Date.now()));
-    return onValue(
-      startAtRef,
-      (snapshot) => {
-        const val = snapshot.val();
-        setData(transform ? transform(val) : val);
-        setLoading(false);
-        setError(null);
-      },
-      (error) => {
-        setData(null);
-        setLoading(false);
-        setError(error);
-      }
-    );
-  }, [path, transform]);
-
-  return [data, loading, error];
-};
 
 export const setData = (path, value) => set(ref(database, path), value);
 
@@ -127,6 +99,22 @@ export const pushData = (path, value) => {
   const listRef = ref(database, path);
   const objRef = push(listRef);
   set(objRef, value);
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+      onIdTokenChanged(getAuth(firebase), setUser);
+    }, []);
+    return [user];
+};
+
+/* authentication functions */
+export const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: "select_account",
+    });
+
+    signInWithPopup(getAuth(firebase), provider);
 };
 
 export const deleteData = (dataPath) => {
