@@ -56,7 +56,7 @@ const CreatePost = ({}) => {
 						onChange= {(event)=> {setDescription(event.target.value)}}
 					/>
 					<Stack spacing={2} direction="row">
-						<Button variant="contained">Cancel</Button>
+						<Button variant="contained" style={{backgroundColor: "#808080"}}>Cancel</Button>
 						<Button variant="contained" type="submit" onClick={handleSubmit} >Post</Button>
 					</Stack>
 			</Box>
