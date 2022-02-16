@@ -33,12 +33,13 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Post(postList, key, post) {
+export default function Post({postList, post}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  console.log(post);
 
   return (
     <Card sx={{ m: 5 }}>

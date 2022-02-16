@@ -1,7 +1,7 @@
 import PostList from "./PostList";
 import SignOutButton from "./SignOutButton";
 
-const Home = ({ user }) => {
+const Home = ({ user, postList }) => {
   console.log(user)
 
   return (
@@ -9,7 +9,7 @@ const Home = ({ user }) => {
       { /*<TopNavBar isLoggedIn={user ? true : false} setQuery={setQuery} /> */}
         
         <SignOutButton/>
-        <PostList />
+        <PostList posts={postList} />
       <br />
       <br />
       <br />

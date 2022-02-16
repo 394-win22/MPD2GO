@@ -3,7 +3,8 @@ import Post from "./Post";
 import { Typography, Grid, Box } from "@mui/material";
 
 const PostList = ({ posts, userList, user }) => {
-  const userId = user ? user.uid : "";
+  console.log(posts);
+  //const userId = user ? user.uid : "";
 
   // return (
   //   <>
@@ -24,6 +25,7 @@ const PostList = ({ posts, userList, user }) => {
   return (
     <Box sx={{ mx: "auto", width: 300 }}>
       {posts.map((post) => {
+        console.log(post);
         return (
           
             <Post
