@@ -2,7 +2,8 @@ import "./App.css";
 import Main from "./components/Main";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import TopNavBar from "./components/TopNavBar";
-import Home from "./components/Home";
+import Login from "./components/Login";
+
 import {
   useUserState,
   getUserDataFromUid,
@@ -25,12 +26,12 @@ function App() {
 
   return (
     <>
-      {user === undefined || user == null ? (
-        <Main />
+      {!user ? (
+        <Login />
       ) : (
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home user={user} />} />
+            <Route path="/" element={<Main user={user} />} />
             <Route path="/createPost" element={<CreatePost />} />
           </Routes>
         </BrowserRouter>
