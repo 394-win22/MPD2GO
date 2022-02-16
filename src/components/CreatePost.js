@@ -40,7 +40,7 @@ const CreatePost = ({}) => {
   return (
 
     <Box >
-			<Typography>Create Post</Typography>
+			<Typography align="center" variant="h4">Create Post</Typography>
 			<Box sx={{'& .MuiTextField-root': { m: 1, width: '50ch' },}} className={classes.container}>
 				<TextField
 				label="Title"
@@ -56,7 +56,7 @@ const CreatePost = ({}) => {
 						onChange= {(event)=> {setDescription(event.target.value)}}
 					/>
 					<Stack spacing={2} direction="row">
-						<Button variant="contained" style={{backgroundColor: "#808080"}}>Cancel</Button>
+						<Button variant="contained" style={{backgroundColor: "#808080"}} onClick={() => navigate("/")}>Cancel</Button>
 						<Button variant="contained" type="submit" onClick={handleSubmit} >Post</Button>
 					</Stack>
 			</Box>
