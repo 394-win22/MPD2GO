@@ -2,23 +2,39 @@ import React from "react";
 import Post from "./Post";
 import { Typography, Grid, Box } from "@mui/material";
 
-const PostList = ({ events, userList, user }) => {
+const PostList = ({ posts, userList, user }) => {
   const userId = user ? user.uid : "";
 
+  // return (
+  //   <>
+  //     <Grid container align="center" sx={{ mx: "12% auto", minWidth:"90%",  }}>
+  //       <Grid item xs={12} md={9} sx={{mx:"auto"}}>
+  //         <Post />
+  //       </Grid>
+  //       <Grid item xs={12} md={9} sx={{mx:"auto"}}>
+  //         <Post />
+  //       </Grid>
+  //       <Grid item xs={12} md={9} sx={{mx:"auto"}}>
+  //         <Post />
+  //       </Grid>
+  //     </Grid>
+  //   </>
+  // );
+
   return (
-    <>
-      <Grid container align="center" sx={{ mx: "12% auto", minWidth:"90%",  }}>
-        <Grid item xs={12} md={9} sx={{mx:"auto"}}>
-          <Post />
-        </Grid>
-        <Grid item xs={12} md={9} sx={{mx:"auto"}}>
-          <Post />
-        </Grid>
-        <Grid item xs={12} md={9} sx={{mx:"auto"}}>
-          <Post />
-        </Grid>
-      </Grid>
-    </>
+    <Box sx={{ mx: "auto", width: 300 }}>
+      {posts.map((post) => {
+        return (
+          
+            <Post
+              postList={posts}
+              key={post.id}
+              post={post}
+            />
+          
+        );
+      })}
+    </Box>
   );
 };
 

@@ -33,7 +33,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Post() {
+export default function Post(postList, key, post) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -49,12 +49,12 @@ export default function Post() {
             ICON
           </Avatar>
         }
-        title="First name, last name"
+        title={post.title}
         subheader="September 14, 2016"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary" align="left">
-          For our capstone projects, these were our ideas:
+          {post.description}
         </Typography>
       </CardContent>
 
