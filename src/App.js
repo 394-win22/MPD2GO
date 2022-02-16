@@ -28,12 +28,12 @@ function App() {
       {user === undefined || user == null ? (
         <Main />
       ) : (
-        <BrowserRouter>
+        
           <Routes>
             <Route path="/" element={<Home user={user} />} />
             <Route path="/createPost" element={<CreatePost />} />
           </Routes>
-        </BrowserRouter>
+        
       )}
     </>
   );

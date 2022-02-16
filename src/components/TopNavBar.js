@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { signInWithGoogle } from "../utilities/firebase.js";
+import { useNavigate } from "react-router-dom";
 
 
 const TopNavBar = ({ isLoggedIn, setQuery }) => {
@@ -37,6 +38,8 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
+
+  const navigate = useNavigate();
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -83,7 +86,11 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
               <AccountCircle />
             </IconButton>
           </MenuItem>
-          <MenuItem>{isLoggedIn? <AddCircleIcon/> : ""}</MenuItem>
+          {isLoggedIn? 
+            <MenuItem onClick={() => navigate("/createPost")}>
+              <AddCircleIcon/>
+            </MenuItem>
+           : ""}
           <MenuItem>{isLoggedIn? <SignOutButton/> : <SignInButton/>}</MenuItem>
         </Toolbar>
       </AppBar>
