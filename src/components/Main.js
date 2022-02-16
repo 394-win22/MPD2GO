@@ -1,11 +1,16 @@
 import PostList from "./PostList";
+import SignOutButton from "./SignOutButton";
 import TopNavBar from "./TopNavBar";
 
-const Main = ({}) => {
+const Main = ({ user }) => {
+  console.log(user)
+
   return (
     <div className="App">
-      <TopNavBar/>
-      <PostList />
+      { /*<TopNavBar isLoggedIn={user ? true : false} setQuery={setQuery} /> */}
+        <TopNavBar isLoggedIn={user ? true : false} />
+        {/* <SignOutButton/> */}
+        <PostList />
       <br />
       <br />
       <br />
