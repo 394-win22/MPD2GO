@@ -36,12 +36,12 @@ function App() {
       {!user ? (
         <Login />
       ) : (
-        <BrowserRouter>
+        
           <Routes>
             <Route path="/" element={<Main user={user} />} />
             <Route path="/createPost" element={<CreatePost />} />
           </Routes>
-        </BrowserRouter>
+        
       )}
     </>
   );
