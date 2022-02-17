@@ -1,6 +1,6 @@
 import "./App.css";
 import Main from "./components/Main";
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 
@@ -12,6 +12,7 @@ import {
 } from "./utilities/firebase.js";
 import CreatePost from "./components/CreatePost";
 import { useEffect } from "react";
+import PostWithThreads from "./components/PostWithThreads/PostWithThreads.js";
 
 function getPostList(posts) {
   const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
@@ -60,15 +61,21 @@ function App() {
       {user === undefined || user == null ? (
         <Login />
       ) : (
-				<UserContext.Provider value={user}>
+        <UserContext.Provider value={{
+          user: user,
+          postList: postList,
+          userList: userList
+        }}>
           <Routes>
             <Route
               path="/"
               element={<Main user={user} users={userList} posts={postList} />}
             />
             <Route path="/createPost" element={<CreatePost />} />
+            <Route path="/post/:pageId" element={<PostWithThreads />}>
+            </Route>
           </Routes>
-				</UserContext.Provider>
+        </UserContext.Provider>
 
       )}
     </>

@@ -14,6 +14,7 @@ const useStyles = makeStyles({
 		flexDirection: "column",
 		alignItems: "flex-start",
 		justifyContent: "flex-start",
+		marginBottom: "15px"
 	},
 	collapseButton: {
 		display: "flex",
@@ -51,12 +52,12 @@ const useStyles = makeStyles({
 	}
 
 });
-export default function Thread(props) {
+function Thread(props) {
 	const classes = useStyles();
 	const [showTextField, setShowTextField] = useState(false)
 	const [showThreads, setShowThreads] = useState(true)
 
-	const user = React.useContext(UserContext);
+	const user = React.useContext(UserContext).user;
 	const [comment, setComment] = React.useState("");
 
 	function replyToComment() {
@@ -80,7 +81,11 @@ export default function Thread(props) {
 	}
 
 
+	let sortedThreads = [];
 	const haveChild = ("threads" in props.data && Object.values(props.data.threads).length > 0);
+
+	if (haveChild) sortedThreads = Object.entries(props.data.threads).sort().reverse();
+
 	return (
 		<Box className={classes.threadContainer} style={props.style}>
 			<Comment author={props.data.author} comment={props.data.comment} time={props.data.time} />
@@ -118,7 +123,7 @@ export default function Thread(props) {
 						/>
 					</Collapse>
 					<Collapse in={showThreads}>
-						{(haveChild) && Object.entries(props.data.threads).map(([id, thread], i) => {
+						{(haveChild) && sortedThreads.map(([id, thread], i) => {
 							return <Thread style={{ marginLeft: "35px" }} postId={props.postId} key={i} data={thread} ids={[...props.ids, id]} />
 						})}
 					</Collapse>
@@ -127,3 +132,5 @@ export default function Thread(props) {
 		</Box>
 	);
 }
+
+export default React.memo(Thread);
