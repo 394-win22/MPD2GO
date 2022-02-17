@@ -44,11 +44,15 @@ export default function Post({ posts, users, post }) {
 	// console.log(posts, users, post);
 	const submitComment = () => {
 		// console.log(comment);
-		addCommentToPost(post.author, post.id, comment );
+		addCommentToPost(post.author, post.id, comment, [] );
 		setComment("");
 	}
 
   const user = getUserFromUID(post.author, users);
+
+	function replyToComment () {
+		console.log("replyToComment");
+	}
 
   return (
     <Card sx={{ m: 5 }}>
@@ -65,7 +69,7 @@ export default function Post({ posts, users, post }) {
         <CardContent align="left" style={{ backgroundColor: "#eceff1" }}>
 					{("threads" in post && Object.values(post.threads).length > 0) &&
 					(Object.values(post.threads).map((thread, i)=> {
-						return (<Thread key={i} data={thread}></Thread>)
+						return (<Thread key={i} postId={post.id} data={thread} ids={[]}></Thread>)
 					}))}
         </CardContent>
 

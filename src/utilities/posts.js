@@ -10,9 +10,17 @@ export function createPostInFirebase(postObj) {
 	set(postId, postObj);
 }
 
-export function addCommentToPost(uid, postId, comment) {
+export function addCommentToPost(uid, postId, comment, commentIds=[]) {
 	console.log("adding comment to post", comment, postId);
 	pushData(`posts/${postId}/threads`, {
+		author: uid,
+		comment: comment,
+		time: Date.now()
+	});
+}
+
+export function replyToThread(uid, path, comment) {
+	pushData(`posts/${path}`, {
 		author: uid,
 		comment: comment,
 		time: Date.now()

@@ -1,11 +1,25 @@
 import React, {useState} from "react";
 import { Box } from "@mui/system";
 import Comment from "./Comment.js"
-import {Collapse, TextField, Button, IconButton} from "@mui/material";
+import {Collapse, TextField, Button} from "@mui/material";
 import MessageIcon from '@mui/icons-material/Message';
+import {replyToThread} from "../utilities/posts";
 
 export default function Thread(props) {
 	const [showTextField, setShowTextField] = useState(false)
+
+	function replyToComment() {
+		// console.log("replyToComment", props.ids, props.postId);
+		// GENERATE A PATH TO PUSH TO IN DATABASE
+		let path = `${props.postId}`;
+		props.ids.forEach((id)=>{
+			path += "/threads/"
+			path += id;
+		})
+		path += "/threads/"
+		// console.log(path);
+		replyToThread(path)
+	}
 
 	const haveChild = ("threads" in props.data && Object.values(props.data.threads).length > 0);
   return (
@@ -26,13 +40,13 @@ export default function Thread(props) {
 						if (ev.key === 'Enter') {
 							// Enter clicked
 							ev.preventDefault();
-							// submitComment();
+							replyToComment();
 						}
 					}}
         />
 				</Collapse>
-				{(haveChild) && Object.values(props.data.threads).map((thread, i)=>{
-					return <Thread style={{marginLeft: "40px"}} key={i} data={thread}/>})}
+				{(haveChild) && Object.entries(props.data.threads).map(([id, thread], i)=>{
+					return <Thread style={{marginLeft: "40px"}} postId={props.postId} key={i} data={thread} ids={[...props.ids, id]}/>})}
       </Box>
   );
 }
