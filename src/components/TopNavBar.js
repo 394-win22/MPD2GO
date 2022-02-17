@@ -11,6 +11,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import HomeIcon from '@mui/icons-material/Home'
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { signInWithGoogle } from "../utilities/firebase.js";
 import { useNavigate } from "react-router-dom";
@@ -39,6 +40,17 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
 
   const navigate = useNavigate();
 
+  const RenderIcon = props => (
+    <IconButton
+      size="medium"
+      aria-haspopup="true"
+      color="inherit"
+      sx={{marginLeft: -1, marginRight: -1}}
+    >
+      {props.children}
+    </IconButton>
+  )
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -64,6 +76,11 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
     <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
       <AppBar position="static" style={{ background: "#465a82" }}>
         <Toolbar>
+          <MenuItem onClick={() => {navigate('/')}}>
+            <RenderIcon>
+              <HomeIcon/>
+            </RenderIcon>
+          </MenuItem>
           <Typography
             variant="h5"
             component="div"
@@ -72,23 +89,19 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
           >
             MPD2Go
           </Typography>
-          <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </MenuItem>
-          {isLoggedIn ? (
-            <MenuItem onClick={() => navigate("/createPost")}>
-              <AddCircleIcon />
+          {isLoggedIn && (
+            <>
+              <MenuItem onClick={() => navigate("/createPost")}>
+              <RenderIcon>
+                <AddCircleIcon/>
+              </RenderIcon>
+              </MenuItem>
+              <MenuItem onClick={() => {navigate('/profile')}}>
+              <RenderIcon>
+                <AccountCircle/>
+              </RenderIcon>
             </MenuItem>
-          ) : (
-            ""
+           </>
           )}
           <MenuItem>
             {isLoggedIn ? <SignOutButton /> : <SignInButton />}

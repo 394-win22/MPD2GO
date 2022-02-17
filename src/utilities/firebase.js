@@ -41,7 +41,6 @@ export const firebase = initializeApp(firebaseConfig);
 export const database = getDatabase(firebase);
 const storage = getStorage();
 
-
 const firebaseSignOut = () => signOut(getAuth(firebase));
 
 export { firebaseSignOut as signOut };
@@ -121,12 +120,12 @@ export const saveUserToDb = (userObject) => {
     displayName: userObject.displayName,
     email: userObject.email,
     photoURL: userObject.photoURL,
-		bio: "",
-    year: "",
+    bio: userObject.bio || '',
+    year: userObject.year || ''
   });
 };
 
-export const getUserDataFromUid = async (uid) => {
+export const getUserFromUid = async (uid) => {
   const dbRef = ref(database, `/users/${uid}`);
   var output;
   await onValue(

@@ -1,17 +1,18 @@
 import "./App.css";
 import Main from "./components/Main";
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 
 import {
   useUserState,
-  getUserDataFromUid,
+  getUserFromUid,
   saveUserToDb,
   useData,
 } from "./utilities/firebase.js";
 import CreatePost from "./components/CreatePost";
 import { useEffect } from "react";
+import Profile from "./components/Profile";
 import PostWithThreads from "./components/PostWithThreads/PostWithThreads.js";
 
 function getPostList(posts) {
@@ -45,7 +46,7 @@ function App() {
 
   useEffect(() => {
     if (!user) return;
-    getUserDataFromUid(user.uid).then((userData) => {
+    getUserFromUid(user.uid).then((userData) => {
       if (!userData) {
         saveUserToDb(user);
       }
@@ -53,7 +54,7 @@ function App() {
   }, [user]);
 
   if (postListLoading || userListLoading) {
-    return <h1>Loading Posts...</h1>;
+    return <h1 style={{marginLeft: 20}}>Loading...</h1>;
   }
 
   return (
@@ -67,8 +68,10 @@ function App() {
           userList: userList
         }}>
           <Routes>
-            <Route
-              path="/"
+            <Route exact path="/createPost" element={<CreatePost />} />
+            <Route exact path="/profile" element={<Profile user={user} />} />
+            <Route exact path="/profile/:userID" element={<Profile user={user} />} />
+            <Route exact path="/"
               element={<Main user={user} users={userList} posts={postList} />}
             />
             <Route path="/createPost" element={<CreatePost />} />

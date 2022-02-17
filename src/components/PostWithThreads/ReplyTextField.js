@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 import { Button, TextField, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
@@ -13,6 +14,7 @@ import { addCommentToPost } from "../../utilities/posts.js";
 
 export default function ReplyTextField({ post, user }) {
 	const [comment, setComment] = useState("");
+	const navigate = useNavigate()
 
 	const submitComment = () => {
 		addCommentToPost(user.uid, post.id, comment);
@@ -28,7 +30,7 @@ export default function ReplyTextField({ post, user }) {
 		}
 		}
 		>
-			<IconButton sx={{ p: "10px" }} aria-label="menu">
+			<IconButton onClick={() => {navigate(`/profile/${user.uid}`)}} sx={{ p: "10px" }} aria-label="menu">
 				<Avatar aria-label="recipe" src={user.photoURL}></Avatar>
 			</IconButton>
 			<TextField

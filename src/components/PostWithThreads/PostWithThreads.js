@@ -56,7 +56,11 @@ export default function PostWithThreads() {
       <Card sx={{ m: 5 }}>
         <CardHeader
           align="left"
-          avatar={<Avatar src={postAuthor.photoURL} aria-label="avatar"></Avatar>}
+          avatar={
+            <IconButton onClick={() => {navigate(`/profile/${postAuthor.uid}`)}} aria-label="menu">
+              <Avatar src={postAuthor.photoURL} aria-label="avatar" />
+            </IconButton>
+          }
           title={postAuthor.displayName}
           subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")} />
         <CardContent>

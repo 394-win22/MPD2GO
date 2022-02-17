@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import moment from "moment";
@@ -12,7 +13,6 @@ import Avatar from "@mui/material/Avatar";
 import { Typography, IconButton } from "@mui/material/";
 
 import { makeStyles } from "@mui/styles";
-import { useNavigate } from "react-router-dom";
 const getUserFromUID = (uid, users) => {
   return users.filter((user) => user.uid === uid)[0];
 };
@@ -40,7 +40,7 @@ export default function Post({ posts, users, post }) {
     <Card className={classes.card} sx={{ m: 5 }} onClick={() => { navigate(`/post/${post.id}`); }}>
       <CardHeader
         align="left"
-        avatar={<Avatar src={user.photoURL} aria-label="avatar"></Avatar>}
+        avatar={<Avatar src={user.photoURL} aria-label="avatar" />}
         title={user.displayName}
         subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")} />
       <CardContent>
