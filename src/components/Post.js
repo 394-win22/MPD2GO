@@ -10,6 +10,9 @@ import { Box } from "@mui/system";
 import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import { Typography, IconButton } from "@mui/material/";
+
+import { makeStyles } from "@mui/styles";
+import { useNavigate } from "react-router-dom";
 import { red } from "@mui/material/colors";
 import Comment from "./Comment.js";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -34,28 +37,39 @@ const ExpandMore = styled((props) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-const getUserFromUID = (uid, users) => {
-  return users.filter((user) => user.uid === uid)[0];
-};
+
+const useStyles = makeStyles({
+  card: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "space-evenly",
+    '&:hover': {
+      cursor: "pointer"
+    }
+  },
+
+});
+
 
 export default function Post({ posts, users, post }) {
+  const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const user = getUserFromUID(post.author, users);
 
-	console.log(user)
+  
+  const navigate = useNavigate();
 
   return (
-    <Card sx={{ m: 5 }}>
+    <Card className={classes.card} sx={{ m: 5 }} onClick={() => { navigate(`/post/${post.id}`); }}>
       <CardHeader
         align="left"
         avatar={<Avatar src={user.photoURL} aria-label="avatar"></Avatar>}
         title={user.displayName}
-        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
-      />
+        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")} />
       <CardContent>
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
@@ -97,26 +111,3 @@ export default function Post({ posts, users, post }) {
     </Card>
   );
 }
-// export default function Post({}) {
-//   return (
-//     <Card sx={{ maxWidth: 345 }}>
-//       <CardActionArea>
-//         <CardMedia
-//           component="img"
-//           height="140"
-//           image="/static/images/cards/contemplative-reptile.jpg"
-//           alt="green iguana"
-//         />
-//         <CardContent>
-//           <Typography gutterBottom variant="h5" component="div">
-//             Lizard
-//           </Typography>
-//           <Typography variant="body2" color="text.secondary">
-//             Lizards are a widespread group of squamate reptiles, with over 6,000
-//             species, ranging across all continents except Antarctica
-//           </Typography>
-//         </CardContent>
-//       </CardActionArea>
-//     </Card>
-//   );
-// }
