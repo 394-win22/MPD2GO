@@ -6,8 +6,8 @@ import { useData } from "../utilities/firebase.js";
 const Main = ({ user, posts, users }) => {
   return (
     <div className="App">
-      <TopNavBar isLoggedIn={user ? true : false} />
-      <PostList posts={posts} users={users} />
+        <TopNavBar isLoggedIn={user ? true : false} />
+        <PostList posts={posts} users={users} />
       <br />
       <br />
       <br />

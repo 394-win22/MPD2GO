@@ -9,8 +9,7 @@ import { Button, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import { Typography, IconButton } from "@mui/material/";
 import { red } from "@mui/material/colors";
 import Comment from "./Comment.js";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -24,8 +23,6 @@ import SendIcon from '@mui/icons-material/Send';
 
 import Thread from "./Thread"
 import exampleData from "../exampleData.json"
-
-
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -70,7 +67,6 @@ export default function Post({ posts, users, post }) {
 
 
         </CardContent>
-
 
       {/* Comment box start here */}
       <Paper
