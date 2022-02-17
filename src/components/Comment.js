@@ -6,7 +6,19 @@ import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 
-export default function Comment() {
+export default function Comment(props) {
+	/*
+
+	{author: ,
+	comment,
+	threads:
+	time:
+	}
+
+	*/
+
+	console.log(props)
+
   return (
     <>
       <Box display="block" sx={{mt:1}}>
@@ -19,9 +31,9 @@ export default function Comment() {
               ICON
             </Avatar>
             <Box>
-              <Typography variant="subtitle2">@username</Typography>
+              <Typography variant="subtitle2">{props.author}</Typography>
               <Typography variant="body2">
-                This looks like a great idea!{" "}
+								{props.comment}
               </Typography>
             </Box>
           </Box>

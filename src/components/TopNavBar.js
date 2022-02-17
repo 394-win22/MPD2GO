@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -6,18 +6,16 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import SignInButton from "./SignInButton";
 import SignOutButton from "./SignOutButton";
-import Menu from '@mui/material/Menu';
+import Menu from "@mui/material/Menu";
 
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { signInWithGoogle } from "../utilities/firebase.js";
 import { useNavigate } from "react-router-dom";
 
-
 const TopNavBar = ({ isLoggedIn, setQuery }) => {
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -41,24 +39,23 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
 
   const navigate = useNavigate();
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
     </Menu>
   );
@@ -86,15 +83,18 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
               <AccountCircle />
             </IconButton>
           </MenuItem>
-          {isLoggedIn? 
+          {isLoggedIn ? (
             <MenuItem onClick={() => navigate("/createPost")}>
-              <AddCircleIcon/>
+              <AddCircleIcon />
             </MenuItem>
-           : ""}
-          <MenuItem>{isLoggedIn? <SignOutButton/> : <SignInButton/>}</MenuItem>
+          ) : (
+            ""
+          )}
+          <MenuItem>
+            {isLoggedIn ? <SignOutButton /> : <SignInButton />}
+          </MenuItem>
         </Toolbar>
       </AppBar>
-      {/* {renderMenu} */}
     </Box>
   );
 };
