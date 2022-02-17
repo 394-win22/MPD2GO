@@ -2,7 +2,7 @@ import React from "react";
 import Post from "./Post";
 import { Typography, Grid, Box } from "@mui/material";
 
-const PostList = ({ posts, userList, user }) => {
+const PostList = ({ posts, users, user }) => {
   console.log(posts);
   //const userId = user ? user.uid : "";
 
@@ -23,18 +23,10 @@ const PostList = ({ posts, userList, user }) => {
   // );
 
   return (
-    <Box sx={{ mx: "auto", width: 300 }}>
+    <Box sx={{ mx: "auto" }}>
       {posts.map((post) => {
         console.log(post);
-        return (
-          
-            <Post
-              postList={posts}
-              key={post.id}
-              post={post}
-            />
-          
-        );
+        return <Post posts={posts} users={users} key={post.id} post={post} />;
       })}
     </Box>
   );
