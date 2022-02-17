@@ -52,7 +52,7 @@ function App() {
   }, [user]);
 
   if (postListError || postListLoading || userListLoading) {
-    return <h1>Loading...</h1>;
+    return <h1 style={{marginLeft: 20}}>Loading...</h1>;
   }
 
   return (

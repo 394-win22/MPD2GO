@@ -1,46 +1,52 @@
 import { useEffect, useState } from "react"
-import { Typography, Avatar, Box } from "@mui/material"
+import { Typography, Avatar, Box, Button } from "@mui/material"
 import { useParams } from "react-router"
 
 import TopNavBar from "./TopNavBar"
 import { getUserFromUid } from "../utilities/firebase"
 
 const Profile = ({ user }) => {
-  const [loading, setLoading] = useState(true)
-
+  const [userData, setUserData] = useState(null)
   const params = useParams()
 
   useEffect(() => {
-    if (!('userID' in params)) {
-      setLoading(false)
-      return
-    }
+    const userToSearch = params.userID || user.uid
 
-    getUserFromUid(params.userID).then((user) => {
-      console.log(user)
-      setLoading(false)
+    getUserFromUid(userToSearch).then(data => {
+      console.log(data)
+      if (!data)
+        setUserData('not found')
+      else
+        setUserData(data)
     })
 
   }, [params])
+  console.log(userData)
 
-  if (loading)
-    return <h1>Loading...</h1>
+  if (!userData)
+    return <h1 style={{marginLeft: 20}}>Loading...</h1>
+
+  if (userData === 'not found')
+    return (<>
+      <TopNavBar isLoggedIn={user ? true : false} />
+      <h1 style={{marginLeft: 20}}>User Not Found</h1>
+      </>
+    )
 
   return (
     <>
       <TopNavBar isLoggedIn={user ? true : false} />
-      <Box margin='auto'> 
+      <Box textAlign="center"> 
         <Typography
           variant="h3"
           component="div"
-          align="center"
           sx={{ flexGrow: 1, paddingLeft: 1, paddingBottom: 5 }}
         >
-          {user.displayName}
+          {userData.displayName}
         </Typography>
         <Avatar 
-          alt={user.displayName} 
-          src={user.photoURL}
+          alt={userData.displayName} 
+          src={userData.photoURL}
           variant='rounded'
           sx={{
             height: 1/6,
@@ -51,13 +57,23 @@ const Profile = ({ user }) => {
         <Typography
           variant="h6"
           component="div"
-          align="center"
           sx={{ flexGrow: 1, paddingLeft: 1, paddingTop: 5 }}
         >
-          {user.bio ? user.bio : "No Bio"}
+          {userData.bio ? userData.bio : "No Bio"}
           <br />
-          {user.year ? user.year : "No Year"}
+          {userData.year ? userData.year : "No Year"}
         </Typography>
+        {!params.userID && 
+            <Button 
+              variant="text" 
+              size="small" 
+              sx={{marginTop: 2}}
+              onClick={() => {
+                alert('This button should only show for current user, but no editing functionality is implemented yet.');
+            }}>
+              Edit Profile
+            </Button>
+        }
       </Box>
     </>
   )

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import moment from "moment";
@@ -39,6 +40,7 @@ const getUserFromUid = (uid, users) => {
 };
 
 export default function Post({ posts, users, post }) {
+  const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -46,13 +48,14 @@ export default function Post({ posts, users, post }) {
   };
   const user = getUserFromUid(post.author, users);
 
-	console.log(user)
-
   return (
     <Card sx={{ m: 5 }}>
       <CardHeader
         align="left"
-        avatar={<Avatar src={user.photoURL} aria-label="avatar"></Avatar>}
+        avatar={
+          <IconButton onClick={() => {navigate(`/profile/${user.uid}`)}} sx={{ p: "10px" }} aria-label="menu">
+            <Avatar src={user.photoURL} aria-label="avatar" />
+          </IconButton>}
         title={user.displayName}
         subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
       />
@@ -79,7 +82,7 @@ export default function Post({ posts, users, post }) {
         }}
       >
         <IconButton sx={{ p: "10px" }} aria-label="menu">
-          <Avatar aria-label="recipe">ICON</Avatar>
+          <Avatar aria-label="recipe">P</Avatar>
         </IconButton>
 
         <InputBase
