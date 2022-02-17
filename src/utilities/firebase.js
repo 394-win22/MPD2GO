@@ -102,6 +102,15 @@ export const deleteData = (dataPath) => {
   remove(listRef);
 };
 
+export const savePost = (post) => {
+  setData("/post/" + post.uid, {
+    author: psot.author,
+    description: post.author,
+    time: post.author,
+    title
+  });
+}
+
 export const saveUserToDb = (userObject) => {
   console.log(userObject)
   setData("/users/" + userObject.uid, {
