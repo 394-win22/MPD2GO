@@ -1,15 +1,13 @@
 import PostList from "./PostList";
+import SignOutButton from "./SignOutButton";
 import TopNavBar from "./TopNavBar";
-import SignOutButton from "./SignOutButton"
+import { useData } from "../utilities/firebase.js";
 
-const Main = ({user}) => {
-  console.log(user)
+const Main = ({ user, posts, users }) => {
   return (
     <div className="App">
-            { /*<TopNavBar isLoggedIn={user ? true : false} setQuery={setQuery} /> */}
-      <TopNavBar/>
-      <SignOutButton/>
-      <PostList />
+      <TopNavBar isLoggedIn={user ? true : false} />
+      <PostList posts={posts} users={users} />
       <br />
       <br />
       <br />
