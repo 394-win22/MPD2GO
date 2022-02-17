@@ -30,7 +30,7 @@ const Welcome = () => {
             md={7}
             sx={{
               backgroundImage:
-                "url(https://www.agilitypr.com/wp-content/uploads/2020/09/networking-1.jpg)",
+                "url(https://ideas.ted.com/wp-content/uploads/sites/3/2018/11/featured_art_loosetouch_yifan_wu.jpg)",
               backgroundRepeat: "no-repeat",
               backgroundColor: (t) =>
                 t.palette.mode === "light"
