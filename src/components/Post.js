@@ -15,12 +15,17 @@ import { red } from "@mui/material/colors";
 import Comment from "./Comment.js";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import SendIcon from "@mui/icons-material/Send";
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import Divider from '@mui/material/Divider';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import SendIcon from '@mui/icons-material/Send';
+
+import Thread from "./Thread"
+import exampleData from "../exampleData.json"
+
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -59,25 +64,13 @@ export default function Post({ posts, users, post }) {
           {post.description}
         </Typography>
       </CardContent>
+        <CardContent align="left" style={{ backgroundColor: "#eceff1" }}>
 
-      <CardContent align="left" style={{ backgroundColor: "#eceff1" }}>
-        <Button
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          View more comments
-        </Button>
-        <Box>
-          <Comment />
-          <Collapse
-            in={expanded}
-            timeout="auto"
-            unmountOnExit
-            sx={{ m: 0, p: 0 }}
-          ></Collapse>
-        </Box>
-      </CardContent>
+					<Thread data={exampleData.posts["randomPostId"].threads["commentId"]}/>
+
+
+        </CardContent>
+
 
       {/* Comment box start here */}
       <Paper
