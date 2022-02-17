@@ -52,7 +52,7 @@ function App() {
   }, [user]);
 
   if (postListError || postListLoading || userListLoading) {
-    return <h1>Loading Posts...</h1>;
+    return <h1>Loading...</h1>;
   }
 
   return (
@@ -64,7 +64,7 @@ function App() {
           <Routes>
             <Route exact path="/createPost" element={<CreatePost />} />
             <Route exact path="/profile" element={<Profile user={user} />} />
-            <Route exact path="/profile/:id" element={<Profile user={user} />} />
+            <Route exact path="/profile/:userID" element={<Profile user={user} />} />
             <Route exact path="/"
               element={<Main user={user} users={userList} posts={postList} />}
             />

@@ -1,11 +1,30 @@
-import TopNavBar from "./TopNavBar"
+import { useEffect, useState } from "react"
 import { Typography, Avatar, Box } from "@mui/material"
 import { useParams } from "react-router"
 
-const Profile = ({ user }) => {
+import TopNavBar from "./TopNavBar"
+import { getUserFromUid } from "../utilities/firebase"
 
-  let params = useParams()
-  console.log(Object.keys(params).length === 0)
+const Profile = ({ user }) => {
+  const [loading, setLoading] = useState(true)
+
+  const params = useParams()
+
+  useEffect(() => {
+    if (!('userID' in params)) {
+      setLoading(false)
+      return
+    }
+
+    getUserFromUid(params.userID).then((user) => {
+      console.log(user)
+      setLoading(false)
+    })
+
+  }, [params])
+
+  if (loading)
+    return <h1>Loading...</h1>
 
   return (
     <>
