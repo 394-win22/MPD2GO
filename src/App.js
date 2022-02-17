@@ -1,41 +1,81 @@
 import "./App.css";
-import Home from "./components/Home";
+import Main from "./components/Main";
+import { useState }  from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
+
 import {
   useUserState,
   getUserFromUid,
   saveUserToDb,
+  useData,
 } from "./utilities/firebase.js";
-import Welcome from "./components/Welcome";
 import CreatePost from "./components/CreatePost";
 import { useEffect } from "react";
 import Profile from "./components/Profile";
 
+function getPostList(posts) {
+  const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
+    return { ...postObj, id: postId };
+  });
+  // listOfEvent = listOfEvent.sort((item1, item2) => {
+  //   return item1.eventTime - item2.eventTime;
+  // });
+  return listOfPost;
+}
+
+function getUserList(users) {
+  return Object.entries(users).map(([uid, userObj]) => {
+    return { ...userObj, uid: uid };
+  });
+}
+
 function App() {
   const [user, setUser] = useUserState();
+  const [loading, setLoading] = useState(true);
+  const [postList, postListLoading, postListError] = useData(
+    "/posts",
+    getPostList
+  );
 
-  useEffect(async () => {
+  const [userList, userListLoading, userListError] = useData(
+    "/users",
+    getUserList
+  );
+
+  // if (!user) {
+  //   setTimeout(() => {setLoading(false)}, 100)
+  //   return
+  // }
+
+  useEffect(() => {
     if (!user) return;
-
-    await getUserFromUid(user.uid).then((userData) => {
+    getUserDataFromUid(user.uid).then((userData) => {
       if (!userData) {
         saveUserToDb(user);
       }
     });
   }, [user]);
 
+  if (postListError || postListLoading || userListLoading) {
+    return <h1>Loading Posts...</h1>;
+  }
+
   return (
     <>
       {user === undefined || user == null ? (
-        <Welcome />
+        <Login />
       ) : (
-        <BrowserRouter>
+
           <Routes>
-            <Route path="/" element={<Home user={user} />} />
+            <Route
+              path="/"
+              element={<Main user={user} users={userList} posts={postList} />}
+            />
             <Route path="/createPost" element={<CreatePost />} />
             <Route path="/profile" element={<Profile user={user} />} />
           </Routes>
-        </BrowserRouter>
+
       )}
     </>
   );
