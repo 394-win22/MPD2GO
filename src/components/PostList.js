@@ -25,8 +25,7 @@ const PostList = ({ posts, users, user }) => {
   return (
     <Box sx={{ mx: "auto" }}>
       {posts.map((post) => {
-        console.log(post);
-        return <Post posts={posts} users={users} key={post.id} post={post} />;
+        return <Post user={user} posts={posts} users={users} key={post.id} post={post} />;
       })}
     </Box>
   );

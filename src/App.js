@@ -42,10 +42,10 @@ function App() {
     getUserList
   );
 
-  if (!user) {
-    setTimeout(() => {setLoading(false)}, 100)
-    return
-  }
+  // if (!user) {
+  //   setTimeout(() => {setLoading(false)}, 100)
+  //   return
+  // }
 
   useEffect(() => {
     if (!user) return;
@@ -65,15 +65,15 @@ function App() {
       {user === undefined || user == null ? (
         <Login />
       ) : (
-        
+
           <Routes>
             <Route
               path="/"
-              element={<Home user={user} users={userList} posts={postList} />}
+              element={<Main user={user} users={userList} posts={postList} />}
             />
             <Route path="/createPost" element={<CreatePost />} />
           </Routes>
-        
+
       )}
     </>
   );

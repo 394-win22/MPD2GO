@@ -3,7 +3,7 @@ import SignOutButton from "./SignOutButton";
 import TopNavBar from "./TopNavBar";
 import { useData } from "../utilities/firebase.js";
 
-const Main = ({ posts, users }) => {
+const Main = ({ user, posts, users }) => {
   return (
     <div className="App">
       <TopNavBar isLoggedIn={user ? true : false} />

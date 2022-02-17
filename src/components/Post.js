@@ -44,6 +44,8 @@ export default function Post({ posts, users, post }) {
   };
   const user = getUserFromUID(post.author, users);
 
+	console.log(user)
+
   return (
     <Card sx={{ m: 5 }}>
       <CardHeader
