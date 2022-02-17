@@ -13,13 +13,14 @@ import { Typography, IconButton } from "@mui/material/";
 import { red } from "@mui/material/colors";
 import Comment from "./Comment.js";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { savePost } from "../utilities/firebase.js";
 
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import SendIcon from '@mui/icons-material/Send';
+
+import { v4 as uuidv4 } from 'uuid'
 
 import Thread from "./Thread"
 import exampleData from "../exampleData.json"
@@ -38,8 +39,23 @@ const getUserFromUID = (uid, users) => {
   return users.filter((user) => user.uid === uid)[0];
 };
 
+const submitComment = (comment, author, postData) => {
+  const commentId = uuidv4()  // Generate uuid
+  const currentTime = Math.round(new Date().getTime() / 1000) 
+
+  postData.threads[commentId] = {
+    'comment': comment,
+    'author': author,
+    'threads': {},
+    'time': currentTime
+  }
+
+  savePost(postData)
+}
+
 export default function Post({ posts, users, post }) {
   const [expanded, setExpanded] = React.useState(false);
+  const [comment, setComment] = React.useState("");
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -85,13 +101,14 @@ export default function Post({ posts, users, post }) {
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Add comments here"
-          inputProps={{ "aria-label": "Add comments here" }}
+          inputProps={{ 'aria-label': 'Add comments here' }}
+          onChange={(e) => {setComment(e.target.value)}}
         />
 
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
-        <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-          <SendIcon />
+        <IconButton sx={{ p: '10px', paddingRight: '10px' }} aria-label="search">
+          <SendIcon onClick={() => {console.log(comment)}}/>
         </IconButton>
       </Paper>
     </Card>
