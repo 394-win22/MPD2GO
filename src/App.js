@@ -30,7 +30,7 @@ function getUserList(users) {
 }
 
 function App() {
-  const [user, setUser] = useUserState();
+  const user = useUserState();
   const [loading, setLoading] = useState(true);
   const [postList, postListLoading, postListError] = useData(
     "/posts",
@@ -42,11 +42,6 @@ function App() {
     getUserList
   );
 
-  // if (!user) {
-  //   setTimeout(() => {setLoading(false)}, 100)
-  //   return
-  // }
-
   useEffect(() => {
     if (!user) return;
     getUserDataFromUid(user.uid).then((userData) => {
@@ -56,7 +51,7 @@ function App() {
     });
   }, [user]);
 
-  if (postListError || postListLoading || userListLoading) {
+  if (postListLoading || userListLoading) {
     return <h1>Loading Posts...</h1>;
   }
 

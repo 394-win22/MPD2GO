@@ -8,16 +8,12 @@ import { Box } from "@mui/system";
 
 export default function Comment(props) {
 	/*
-
 	{author: ,
 	comment,
 	threads:
 	time:
 	}
-
 	*/
-
-	console.log(props)
 
   return (
     <>
@@ -28,7 +24,6 @@ export default function Comment(props) {
         >
           <Box display="flex">
             <Avatar display="flex" sx={{ mr: 2 }}>
-              ICON
             </Avatar>
             <Box>
               <Typography variant="subtitle2">{props.author}</Typography>

@@ -53,7 +53,7 @@ export const useUserState = () => {
     onIdTokenChanged(getAuth(firebase), setUser);
   }, []);
 
-  return [user];
+  return user;
 };
 
 /* data functions */
@@ -87,6 +87,9 @@ export const useData = (path, transform) => {
 
 export const setData = (path, value) => set(ref(database, path), value);
 
+export const pushData = (path, value) => push(ref(database, path), value);
+
+
 
 /* authentication functions */
 export const signInWithGoogle = () => {
@@ -103,24 +106,22 @@ export const deleteData = (dataPath) => {
   remove(listRef);
 };
 
-export const savePost = (post) => {
-  setData("/post/" + post.uid, {
-    author: psot.author,
+export const addPost = (post) => {
+  pushData("/post/", {
+    author: post.author,
     description: post.author,
     time: post.author,
-    title
+    title: post.title
   });
 }
 
 export const saveUserToDb = (userObject) => {
-  console.log(userObject)
+	// console.log("save User to DB", userObject);
   setData("/users/" + userObject.uid, {
     displayName: userObject.displayName,
     email: userObject.email,
     photoURL: userObject.photoURL,
-  });
-  setData("/user-data/" + userObject.uid, {
-    bio: "",
+		bio: "",
     year: "",
   });
 };
@@ -131,7 +132,6 @@ export const getUserDataFromUid = async (uid) => {
   await onValue(
     dbRef,
     (snapshot) => {
-      // return val;
       output = snapshot.val();
     },
     (error) => {}
@@ -145,5 +145,3 @@ export const uploadPhotoToStorage = async (image) => {
     getDownloadURL(snapshot.ref).then((downloadURL) => downloadURL)
   );
 };
-
-
