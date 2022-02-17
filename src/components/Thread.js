@@ -80,10 +80,8 @@ function Thread(props) {
 		return "1 Reply"
 	}
 
-
 	let sortedThreads = [];
 	const haveChild = ("threads" in props.data && Object.values(props.data.threads).length > 0);
-
 	if (haveChild) sortedThreads = Object.entries(props.data.threads).sort().reverse();
 
 	return (
@@ -102,7 +100,7 @@ function Thread(props) {
 							<MessageIcon style={{ marginLeft: "10px" }} />
 						</Button>
 						:
-						<Button color="primary" onClick={() => { setShowThreads(true) }}>
+						(haveChild) && <Button color="primary" onClick={() => { setShowThreads(true) }}>
 							Show {getShowRepliesText(Object.values(props.data.threads).length)}
 						</Button>
 					}
