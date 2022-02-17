@@ -1,8 +1,9 @@
 import "./App.css";
 import Main from "./components/Main";
+import { useState }  from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import TopNavBar from "./components/TopNavBar";
-import Home from "./components/Home";
+import Login from "./components/Login";
+
 import {
   useUserState,
   getUserDataFromUid,
@@ -30,6 +31,7 @@ function getUserList(users) {
 
 function App() {
   const [user, setUser] = useUserState();
+  const [loading, setLoading] = useState(true);
   const [postList, postListLoading, postListError] = useData(
     "/posts",
     getPostList
@@ -39,6 +41,11 @@ function App() {
     "/users",
     getUserList
   );
+
+  if (!user) {
+    setTimeout(() => {setLoading(false)}, 100)
+    return
+  }
 
   useEffect(() => {
     if (!user) return;
@@ -56,9 +63,9 @@ function App() {
   return (
     <>
       {user === undefined || user == null ? (
-        <Main posts={postList} users={userList} />
+        <Login />
       ) : (
-        <BrowserRouter>
+        
           <Routes>
             <Route
               path="/"
@@ -66,7 +73,7 @@ function App() {
             />
             <Route path="/createPost" element={<CreatePost />} />
           </Routes>
-        </BrowserRouter>
+        
       )}
     </>
   );
