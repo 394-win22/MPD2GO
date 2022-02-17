@@ -21,6 +21,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import SendIcon from '@mui/icons-material/Send';
 
+import Thread from "./Thread"
+import exampleData from "../exampleData.json"
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -57,17 +60,8 @@ export default function Post() {
           For our capstone projects, these were our ideas:
         </Typography>
       </CardContent>
-
-
-
         <CardContent align="left" style={{ backgroundColor: "#eceff1" }}>
-          <Button
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more">
-              View more comments
-          </Button>
-            <Box >
+				{/* <Box >
               <Comment />
               <Collapse in={expanded} timeout="auto" unmountOnExit sx={{m:0, p:0}}>
                 <Comment />
@@ -75,6 +69,14 @@ export default function Post() {
                 <Comment />
               </Collapse>
             </Box>
+          <Button
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more">
+              View more comments
+          </Button> */}
+					<Thread data={exampleData.posts["randomPostId"].threads["commentId"]}/>
+
 
         </CardContent>
 
