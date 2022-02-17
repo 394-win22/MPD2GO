@@ -1,52 +1,129 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/system";
 import Comment from "./Comment.js"
-import {Collapse, TextField, Button} from "@mui/material";
+import { Collapse, TextField, Button } from "@mui/material";
 import MessageIcon from '@mui/icons-material/Message';
-import {replyToThread} from "../utilities/posts";
+import { replyToThread } from "../utilities/posts";
+import { UserContext } from "../App";
+import { makeStyles } from "@mui/styles";
 
+
+const useStyles = makeStyles({
+	threadContainer: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "flex-start",
+		justifyContent: "flex-start",
+	},
+	collapseButton: {
+		display: "flex",
+		minHeight: "100%",
+		width: "20px",
+		boxSizing: "border-box",
+		justifyContent: "center",
+		alignItems: "center",
+		// borderLeft: "2px solid grey",
+		// backgroundColor: "red",
+		'&:hover': {
+			cursor: "pointer"
+		}
+	},
+	collapseLine: {
+		minHeight: "100%",
+		width: "5px",
+		backgroundColor: "gray",
+		boxSizing: "border-box",
+		'&:hover': {
+			cursor: "pointer"
+		}
+	},
+	verticalContainer: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "flex-start",
+		justifyContent: "flex-start"
+	},
+	rowContainer: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "stretch",
+		justifyContent: "flex-start"
+	}
+
+});
 export default function Thread(props) {
+	const classes = useStyles();
 	const [showTextField, setShowTextField] = useState(false)
+	const [showThreads, setShowThreads] = useState(true)
+
+	const user = React.useContext(UserContext);
+	const [comment, setComment] = React.useState("");
 
 	function replyToComment() {
-		// console.log("replyToComment", props.ids, props.postId);
 		// GENERATE A PATH TO PUSH TO IN DATABASE
 		let path = `${props.postId}`;
-		props.ids.forEach((id)=>{
+		props.ids.forEach((id) => {
 			path += "/threads/"
 			path += id;
 		})
 		path += "/threads/"
-		// console.log(path);
-		replyToThread(path)
+		replyToThread(user.uid, path, comment)
+		setComment("");
+		setShowTextField(false);
 	}
 
+	function getShowRepliesText(x) {
+		if (x > 1) {
+			return x + " Replies"
+		}
+		return "1 Reply"
+	}
+
+
 	const haveChild = ("threads" in props.data && Object.values(props.data.threads).length > 0);
-  return (
-      <Box style={props.style}>
-				<Comment author={props.data.author} comment={props.data.comment} time={props.data.time}/>
-				<Button color="primary" onClick={()=>{
-					setShowTextField(!showTextField)}}>
-						Reply
-					<MessageIcon style={{marginLeft: "10px"}}/>
-				</Button>
-				<Collapse in={showTextField}>
-				<TextField
-          placeholder="Add comments here"
-          inputProps={{ 'aria-label': 'Add comments here' }}
-          // onChange={(e) => {setComment(e.target.value)}}
-					variant="filled"
-					onKeyPress={(ev) => {
-						if (ev.key === 'Enter') {
-							// Enter clicked
-							ev.preventDefault();
-							replyToComment();
-						}
-					}}
-        />
-				</Collapse>
-				{(haveChild) && Object.entries(props.data.threads).map(([id, thread], i)=>{
-					return <Thread style={{marginLeft: "40px"}} postId={props.postId} key={i} data={thread} ids={[...props.ids, id]}/>})}
-      </Box>
-  );
+	return (
+		<Box className={classes.threadContainer} style={props.style}>
+			<Comment author={props.data.author} comment={props.data.comment} time={props.data.time} />
+			<Box className={classes.rowContainer}>
+				{(showThreads && haveChild) &&
+					<Box className={classes.collapseButton} onClick={() => setShowThreads(false)}>
+						<Box className={classes.collapseLine} />
+					</Box>
+				}
+				<Box className={classes.verticalContainer}>
+					{(showThreads) ?
+						<Button color="primary" onClick={() => { setShowTextField(!showTextField) }}>
+							Reply
+							<MessageIcon style={{ marginLeft: "10px" }} />
+						</Button>
+						:
+						<Button color="primary" onClick={() => { setShowThreads(true) }}>
+							Show {getShowRepliesText(Object.values(props.data.threads).length)}
+						</Button>
+					}
+					<Collapse in={showTextField}>
+						<TextField
+							placeholder="Add comments here"
+							inputProps={{ 'aria-label': 'Add comments here' }}
+							value={comment}
+							onChange={(e) => { setComment(e.target.value) }}
+							variant="filled"
+							onKeyPress={(ev) => {
+								if (ev.key === 'Enter') {
+									// Enter clicked
+									ev.preventDefault();
+									replyToComment();
+								}
+							}}
+						/>
+					</Collapse>
+					<Collapse in={showThreads}>
+						{(haveChild) && Object.entries(props.data.threads).map(([id, thread], i) => {
+							return <Thread style={{ marginLeft: "35px" }} postId={props.postId} key={i} data={thread} ids={[...props.ids, id]} />
+						})}
+					</Collapse>
+				</Box>
+			</Box>
+		</Box>
+	);
 }

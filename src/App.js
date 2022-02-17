@@ -1,6 +1,6 @@
 import "./App.css";
 import Main from "./components/Main";
-import { useState }  from 'react';
+import React, { useState }  from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 
@@ -28,7 +28,7 @@ function getUserList(users) {
     return { ...userObj, uid: uid };
   });
 }
-
+export const UserContext = React.createContext();
 function App() {
   const user = useUserState();
   const [loading, setLoading] = useState(true);
@@ -60,7 +60,7 @@ function App() {
       {user === undefined || user == null ? (
         <Login />
       ) : (
-
+				<UserContext.Provider value={user}>
           <Routes>
             <Route
               path="/"
@@ -68,6 +68,7 @@ function App() {
             />
             <Route path="/createPost" element={<CreatePost />} />
           </Routes>
+				</UserContext.Provider>
 
       )}
     </>

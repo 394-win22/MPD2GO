@@ -41,18 +41,14 @@ const getUserFromUID = (uid, users) => {
 export default function Post({ posts, users, post }) {
   const [expanded, setExpanded] = React.useState(false);
   const [comment, setComment] = React.useState("");
-	// console.log(posts, users, post);
-	const submitComment = () => {
-		// console.log(comment);
-		addCommentToPost(post.author, post.id, comment, [] );
-		setComment("");
-	}
+  // console.log(posts, users, post);
+  const submitComment = () => {
+    // console.log(comment);
+    addCommentToPost(post.author, post.id, comment);
+    setComment("");
+  }
 
   const user = getUserFromUID(post.author, users);
-
-	function replyToComment () {
-		console.log("replyToComment");
-	}
 
   return (
     <Card sx={{ m: 5 }}>
@@ -60,18 +56,18 @@ export default function Post({ posts, users, post }) {
         align="left"
         avatar={<Avatar src={user.photoURL} aria-label="avatar"></Avatar>}
         title={user.displayName}
-        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}/>
+        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")} />
       <CardContent>
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
       </CardContent>
-        <CardContent align="left" style={{ backgroundColor: "#eceff1" }}>
-					{("threads" in post && Object.values(post.threads).length > 0) &&
-					(Object.values(post.threads).map((thread, i)=> {
-						return (<Thread key={i} postId={post.id} data={thread} ids={[]}></Thread>)
-					}))}
-        </CardContent>
+      <CardContent align="left" style={{ backgroundColor: "#eceff1" }}>
+        {("threads" in post && Object.values(post.threads).length > 0) &&
+          (Object.entries(post.threads).map(([id, thread], i) => {
+            return (<Thread key={i} postId={post.id} data={thread} ids={[id]}></Thread>)
+          }))}
+      </CardContent>
 
       {/* Comment box start here */}
       <Paper
@@ -89,19 +85,19 @@ export default function Post({ posts, users, post }) {
           sx={{ ml: 1, flex: 1 }}
           placeholder="Add comments here"
           inputProps={{ 'aria-label': 'Add comments here' }}
-          onChange={(e) => {setComment(e.target.value)}}
-					variant="standard"
-					onKeyPress={(ev) => {
-						if (ev.key === 'Enter') {
-							// Enter clicked
-							ev.preventDefault();
-							submitComment();
-						}
-					}}
+          onChange={(e) => { setComment(e.target.value) }}
+          variant="standard"
+          onKeyPress={(ev) => {
+            if (ev.key === 'Enter') {
+              // Enter clicked
+              ev.preventDefault();
+              submitComment();
+            }
+          }}
         />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <IconButton  onClick={submitComment} sx={{ p: '10px', paddingRight: '10px' }} aria-label="search">
-          <SendIcon/>
+        <IconButton onClick={submitComment} sx={{ p: '10px', paddingRight: '10px' }} aria-label="search">
+          <SendIcon />
         </IconButton>
       </Paper>
     </Card>
