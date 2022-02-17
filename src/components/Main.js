@@ -7,9 +7,7 @@ const Main = ({ user }) => {
 
   return (
     <div className="App">
-      { /*<TopNavBar isLoggedIn={user ? true : false} setQuery={setQuery} /> */}
         <TopNavBar isLoggedIn={user ? true : false} />
-        {/* <SignOutButton/> */}
         <PostList />
       <br />
       <br />
