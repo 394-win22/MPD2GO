@@ -1,7 +1,7 @@
 import "./App.css";
 import Main from "./components/Main";
 import { useState }  from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 
 import {
@@ -32,7 +32,6 @@ function getUserList(users) {
 
 function App() {
   const [user, setUser] = useUserState();
-  const [loading, setLoading] = useState(true);
   const [postList, postListLoading, postListError] = useData(
     "/posts",
     getPostList
@@ -43,14 +42,9 @@ function App() {
     getUserList
   );
 
-  // if (!user) {
-  //   setTimeout(() => {setLoading(false)}, 100)
-  //   return
-  // }
-
   useEffect(() => {
     if (!user) return;
-    getUserDataFromUid(user.uid).then((userData) => {
+    getUserFromUid(user.uid).then((userData) => {
       if (!userData) {
         saveUserToDb(user);
       }
@@ -68,12 +62,12 @@ function App() {
       ) : (
 
           <Routes>
-            <Route
-              path="/"
+            <Route exact path="/createPost" element={<CreatePost />} />
+            <Route exact path="/profile" element={<Profile user={user} />} />
+            <Route exact path="/profile/:id" element={<Profile user={user} />} />
+            <Route exact path="/"
               element={<Main user={user} users={userList} posts={postList} />}
             />
-            <Route path="/createPost" element={<CreatePost />} />
-            <Route path="/profile" element={<Profile user={user} />} />
           </Routes>
 
       )}

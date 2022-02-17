@@ -34,7 +34,7 @@ const ExpandMore = styled((props) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-const getUserFromUID = (uid, users) => {
+const getUserFromUid = (uid, users) => {
   return users.filter((user) => user.uid === uid)[0];
 };
 
@@ -44,7 +44,7 @@ export default function Post({ posts, users, post }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const user = getUserFromUID(post.author, users);
+  const user = getUserFromUid(post.author, users);
 
 	console.log(user)
 

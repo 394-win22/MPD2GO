@@ -101,42 +101,20 @@ export const deleteData = (dataPath) => {
   remove(listRef);
 };
 
-export const saveUserToDb = (userObject) => {
+export const saveUserToDb = userObject => {
+  
+  // First three fields are garunteed to be set by Google
   setData("/users/" + userObject.uid, {
     displayName: userObject.displayName,
     email: userObject.email,
     photoURL: userObject.photoURL,
-  });
-
-  setData("/user-data/" + userObject.uid, {
-    bio: "",
-    year: ""
-  });
-};
-
-export const saveUserDataToDb = (userDataObject) => {
-  setData("/user-data/" + userDataObject.uid, {
-    bio: userDataObject.bio,
-    year: userDataObject.year,
+    bio: userObject.bio || '',
+    year: userObject.year || ''
   });
 };
 
 export const getUserFromUid = async (uid) => {
   const dbRef = ref(database, `/users/${uid}`);
-  var output;
-  await onValue(
-    dbRef,
-    (snapshot) => {
-      // return val;
-      output = snapshot.val();
-    },
-    (error) => {}
-  );
-  return output;
-};
-
-export const getUserDatafromUid = async (uid) => {
-  const dbRef = ref(database, `/user-data/${uid}`);
   var output;
   await onValue(
     dbRef,
