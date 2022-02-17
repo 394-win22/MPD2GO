@@ -3,9 +3,14 @@ import { signInWithGoogle } from "../utilities/firebase.js";
 
 const SignInButton = () => (
   <div>
-    <p color="inherit" onClick={signInWithGoogle}>
-      Sign In
-    </p>
+    <Button
+      fullWidth
+      variant="contained"
+      sx={{ mt: 3, mb: 2 }}
+      onClick={signInWithGoogle}
+    >
+      Sign In{" "}
+    </Button>
   </div>
 );
 
