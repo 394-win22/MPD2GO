@@ -16,8 +16,8 @@ const useStyles = makeStyles({
 });
 
 
-const CreatePost = ({}) => {
-  const [user] = useUserState();
+const CreatePost = () => {
+  const user = useUserState();
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const navigate = useNavigate();

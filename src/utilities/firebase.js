@@ -52,7 +52,7 @@ export const useUserState = () => {
     onIdTokenChanged(getAuth(firebase), setUser);
   }, []);
 
-  return [user];
+  return user;
 };
 
 /* data functions */
@@ -86,6 +86,10 @@ export const useData = (path, transform) => {
 
 export const setData = (path, value) => set(ref(database, path), value);
 
+export const pushData = (path, value) => push(ref(database, path), value);
+
+
+
 /* authentication functions */
 export const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -101,9 +105,17 @@ export const deleteData = (dataPath) => {
   remove(listRef);
 };
 
-export const saveUserToDb = userObject => {
-  
-  // First three fields are garunteed to be set by Google
+export const addPost = (post) => {
+  pushData("/post/", {
+    author: post.author,
+    description: post.author,
+    time: post.author,
+    title: post.title
+  });
+}
+
+export const saveUserToDb = (userObject) => {
+	// console.log("save User to DB", userObject);
   setData("/users/" + userObject.uid, {
     displayName: userObject.displayName,
     email: userObject.email,
@@ -119,7 +131,6 @@ export const getUserFromUid = async (uid) => {
   await onValue(
     dbRef,
     (snapshot) => {
-      // return val;
       output = snapshot.val();
     },
     (error) => {}
@@ -133,5 +144,3 @@ export const uploadPhotoToStorage = async (image) => {
     getDownloadURL(snapshot.ref).then((downloadURL) => downloadURL)
   );
 };
-
-

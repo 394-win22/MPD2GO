@@ -13,7 +13,6 @@ const Profile = ({ user }) => {
     const userToSearch = params.userID || user.uid
 
     getUserFromUid(userToSearch).then(data => {
-      console.log(data)
       if (!data)
         setUserData('not found')
       else
@@ -21,7 +20,6 @@ const Profile = ({ user }) => {
     })
 
   }, [params])
-  console.log(userData)
 
   if (!userData)
     return <h1 style={{marginLeft: 20}}>Loading...</h1>
@@ -63,7 +61,7 @@ const Profile = ({ user }) => {
           <br />
           {userData.year ? userData.year : "No Year"}
         </Typography>
-        {!params.userID && 
+        {(!params.userID || params.userID == user.uid) && 
             <Button 
               variant="text" 
               size="small" 
