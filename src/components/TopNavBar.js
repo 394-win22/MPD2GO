@@ -11,10 +11,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import HomeIcon from '@mui/icons-material/Home'
+import HomeIcon from "@mui/icons-material/Home";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useNavigate } from "react-router-dom";
-
+import { ThemeProvider } from "@mui/styles";
+import theme from "../theme.js";
 const TopNavBar = ({ isLoggedIn }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -39,7 +40,7 @@ const TopNavBar = ({ isLoggedIn }) => {
 
   const navigate = useNavigate();
 
-  const RenderIcon = props => (
+  const RenderIcon = (props) => (
     <IconButton
       size="medium"
       aria-haspopup="true"
@@ -48,7 +49,7 @@ const TopNavBar = ({ isLoggedIn }) => {
     >
       {props.children}
     </IconButton>
-  )
+  );
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -73,40 +74,50 @@ const TopNavBar = ({ isLoggedIn }) => {
 
   return (
     <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
-      <AppBar position="static" style={{ background: "#465a82" }}>
-        <Toolbar>
-          <MenuItem onClick={() => { navigate('/') }}>
-            <RenderIcon>
-              <HomeIcon />
-            </RenderIcon>
-          </MenuItem>
-          <Typography
-            variant="h5"
-            component="div"
-            align="left"
-            sx={{ flexGrow: 1, paddingLeft: 1 }}
-          >
-            The Hive
-          </Typography>
-          {isLoggedIn && (
-            <>
-              <MenuItem onClick={() => navigate("/createPost")}>
-                <RenderIcon>
-                  <AddCircleIcon />
-                </RenderIcon>
-              </MenuItem>
-              <MenuItem onClick={() => { navigate('/profile') }}>
-                <RenderIcon>
-                  <AccountCircle />
-                </RenderIcon>
-              </MenuItem>
-            </>
-          )}
-          <MenuItem>
-            {isLoggedIn ? <SignOutButton /> : <SignInButton />}
-          </MenuItem>
-        </Toolbar>
-      </AppBar>
+      <ThemeProvider theme={theme}>
+        <AppBar position="static" color={"secondary"}>
+          <Toolbar>
+            <MenuItem
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <RenderIcon>
+                <HomeIcon />
+              </RenderIcon>
+            </MenuItem>
+            <Typography
+              variant="h5"
+              component="div"
+              align="left"
+              sx={{ flexGrow: 1, paddingLeft: 1 }}
+            >
+              The Hive
+            </Typography>
+            {isLoggedIn && (
+              <>
+                <MenuItem onClick={() => navigate("/createPost")}>
+                  <RenderIcon>
+                    <AddCircleIcon />
+                  </RenderIcon>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    navigate("/profile");
+                  }}
+                >
+                  <RenderIcon>
+                    <AccountCircle />
+                  </RenderIcon>
+                </MenuItem>
+              </>
+            )}
+            <MenuItem>
+              {isLoggedIn ? <SignOutButton /> : <SignInButton />}
+            </MenuItem>
+          </Toolbar>
+        </AppBar>
+      </ThemeProvider>
     </Box>
   );
 };
