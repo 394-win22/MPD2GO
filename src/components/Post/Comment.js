@@ -6,7 +6,7 @@ import { Typography, IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { makeStyles } from "@mui/styles";
-import { UserContext } from "../../App";
+import { UserContext } from "components/LoggedIn";
 import moment from "moment";
 import { useNavigate } from "react-router";
 

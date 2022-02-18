@@ -3,25 +3,16 @@ import Card from "@mui/material/Card";
 import moment from "moment";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import { Button, TextField, Container } from "@mui/material";
-import { Box } from "@mui/system";
-import Collapse from "@mui/material/Collapse";
+
+import { Button, Container } from "@mui/material";
+
 import Avatar from "@mui/material/Avatar";
 import { Typography, IconButton } from "@mui/material/";
-import { red } from "@mui/material/colors";
-import Comment from "./Comment.js";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { savePost } from "../../utilities/firebase.js";
 
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
-import SendIcon from "@mui/icons-material/Send";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Thread from "./Thread";
-import { UserContext } from "../../App";
+import { UserContext } from "components/LoggedIn";
 import ReplyTextField from "./ReplyTextField";
 
 export default function PostWithThreads() {
@@ -48,9 +39,9 @@ export default function PostWithThreads() {
   if (haveChild) sortedThreads = Object.entries(post.threads).sort().reverse();
 
   return (
-    <Container>
+    <>
       <Button
-        style={{ marginTop: "20px", marginLeft: "40px" }}
+        style={{ marginTop: "0px", marginLeft: "40px", color: "white" }}
         variant="contained"
         onClick={() => {
           navigate("/");
@@ -90,6 +81,6 @@ export default function PostWithThreads() {
             })}
         </CardContent>
       </Card>
-    </Container>
+    </>
   );
 }

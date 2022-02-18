@@ -9,7 +9,7 @@ import {
   Card,
   Box,
 } from "@mui/material/";
-import { UserContext } from "../../App";
+import { UserContext } from "components/LoggedIn";
 import { makeStyles, useTheme } from "@mui/styles";
 import CommentIcon from "@mui/icons-material/Comment";
 const getUserDataFromUID = (uid, users) => {

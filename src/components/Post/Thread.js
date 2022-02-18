@@ -4,7 +4,7 @@ import Comment from "./Comment.js"
 import { Collapse, TextField, Button } from "@mui/material";
 import MessageIcon from '@mui/icons-material/Message';
 import { replyToThread } from "../../utilities/posts";
-import { UserContext } from "../../App";
+import { UserContext } from "components/LoggedIn";
 import { makeStyles } from "@mui/styles";
 
 
