@@ -1,5 +1,5 @@
 import "./App.css";
-import Main from "components/Feed";
+import Main from "components/feed";
 import React, { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 import Login from "components/Login";
