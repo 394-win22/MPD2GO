@@ -3,8 +3,8 @@ import { Box } from "@mui/system";
 import Comment from "./Comment.js"
 import { Collapse, TextField, Button } from "@mui/material";
 import MessageIcon from '@mui/icons-material/Message';
-import { replyToThread } from "../utilities/posts";
-import { UserContext } from "../App";
+import { replyToThread } from "../../utilities/posts";
+import { UserContext } from "../../App";
 import { makeStyles } from "@mui/styles";
 
 

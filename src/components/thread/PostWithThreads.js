@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import moment from "moment";
 import CardHeader from "@mui/material/CardHeader";
@@ -11,7 +10,7 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import { Typography, IconButton } from "@mui/material/";
 import { red } from "@mui/material/colors";
-import Comment from "../Comment.js";
+import Comment from "./Comment.js";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { savePost } from "../../utilities/firebase.js";
 
@@ -21,7 +20,7 @@ import Divider from '@mui/material/Divider';
 import SendIcon from '@mui/icons-material/Send';
 import { useNavigate, useParams } from "react-router-dom";
 
-import Thread from "../Thread"
+import Thread from "./Thread"
 import { UserContext } from "../../App";
 import ReplyTextField from "./ReplyTextField";
 
@@ -57,7 +56,7 @@ export default function PostWithThreads() {
         <CardHeader
           align="left"
           avatar={
-            <IconButton onClick={() => {navigate(`/profile/${postAuthor.uid}`)}} aria-label="menu">
+            <IconButton onClick={() => { navigate(`/profile/${postAuthor.uid}`) }} aria-label="menu">
               <Avatar src={postAuthor.photoURL} aria-label="avatar" />
             </IconButton>
           }

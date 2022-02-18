@@ -1,8 +1,8 @@
 import "./App.css";
-import Main from "./components/Main";
+import Main from "components/Main";
 import React, { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
-import Login from "./components/Login";
+import Login from "components/auth/Login";
 
 import {
   useUserState,
@@ -10,10 +10,10 @@ import {
   saveUserToDb,
   useData,
 } from "./utilities/firebase.js";
-import CreatePost from "./components/CreatePost";
+import CreatePost from "./components/createPost/CreatePost";
 import { useEffect } from "react";
-import Profile from "./components/Profile";
-import PostWithThreads from "./components/PostWithThreads/PostWithThreads.js";
+import Profile from "./components/profile/Profile";
+import PostWithThreads from "./components/thread/PostWithThreads.js";
 
 function getPostList(posts) {
   const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
@@ -54,7 +54,7 @@ function App() {
   }, [user]);
 
   if (postListLoading || userListLoading) {
-    return <h1 style={{marginLeft: 20}}>Loading...</h1>;
+    return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
   }
 
   return (
