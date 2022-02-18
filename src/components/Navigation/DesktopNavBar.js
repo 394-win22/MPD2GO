@@ -19,9 +19,8 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 // Drawer
 import { styled, useTheme, ThemeProvider } from "@mui/material/styles";
+
 import Menu from "@mui/material/Menu";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import theme from "theme";
 
@@ -39,14 +38,6 @@ const DesktopNavBar = ({ isLoggedIn }) => {
     setAnchorEl(null);
   };
 
-  const DrawerHeader = styled("div")(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-start",
-  }));
-
   const handleClickAway = () => {
     setAnchorEl(null);
   };
@@ -56,7 +47,6 @@ const DesktopNavBar = ({ isLoggedIn }) => {
       size="medium"
       aria-haspopup="true"
       color="inherit"
-      sx={{ marginLeft: -1, marginRight: -1 }}
     >
       {props.children}
     </IconButton>
@@ -65,7 +55,7 @@ const DesktopNavBar = ({ isLoggedIn }) => {
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box sx={{ flexGrow: 1, paddingBottom: 3, mb: 10 }}>
-        <ThemeProvider theme={theme}>
+        
           <AppBar position="fixed" sx={{ top: "auto", top: 0 }}>
             <Toolbar>
               {/* <Typography
@@ -128,7 +118,7 @@ const DesktopNavBar = ({ isLoggedIn }) => {
               </MenuItem>
             </Toolbar>
           </AppBar>
-        </ThemeProvider>
+
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}

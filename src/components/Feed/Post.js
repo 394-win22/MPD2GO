@@ -9,7 +9,7 @@ import {
   Card,
   Box,
 } from "@mui/material/";
-import { UserContext } from "../../App";
+import { UserContext } from "components/LoggedIn";
 import { makeStyles, useTheme } from "@mui/styles";
 import CommentIcon from "@mui/icons-material/Comment";
 const getUserDataFromUID = (uid, users) => {
@@ -27,6 +27,11 @@ const useStyles = makeStyles((theme) => ({
     },
     backgroundColor: theme.palette.foreground,
   },
+  comment: {
+    marginLeft: "10px",
+    fontsize: "12px",
+    color: "grey"
+  }
 }));
 
 export default function Post({ post }) {
@@ -37,6 +42,13 @@ export default function Post({ post }) {
   const users = context.userList;
   const user = getUserDataFromUID(post.author, users);
 
+  function getNumCommentsText(post) {
+    if (!("numComments" in post)) return "0 Comments"
+    const num = post.numComments;
+    if (num === 0) return "0 Comments"
+    else if (num === 1) return "1 Comment"
+    else return `${num} Comments`
+  }
   return (
     <Card
       className={classes.card}
@@ -57,8 +69,8 @@ export default function Post({ post }) {
         </Typography>
       </CardContent>
       <Box sx={{ display: "flex", m: 1 }}>
-        <Typography variant="body2">
-          {post.numComments || "0"} Comments
+        <Typography className={classes.comment} variant="body2">
+          {getNumCommentsText(post)}
         </Typography>
       </Box>
     </Card>

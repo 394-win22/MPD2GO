@@ -1,6 +1,6 @@
-import { getDatabase, ref, push, set, onValue } from "firebase/database";
+import { getDatabase, ref, push, set, increment } from "firebase/database";
 import { useState, useEffect } from "react";
-import { database, pushData, setData, firebase } from "./firebase.js";
+import { database, pushData, setData, firebase, updateData } from "./firebase.js";
 
 export function createPostInFirebase(postObj) {
   const db = getDatabase();
@@ -15,16 +15,18 @@ export function addCommentToPost(uid, postId, comment) {
     comment: comment,
     time: Date.now(),
   });
-
-  //   setData(`posts/${postId}`, {
-  //     numComments: firebase.database.ServerValue.increment(1),
-  //   });
+  updateData(`posts/${postId}`, {
+    numComments: increment(1)
+  })
 }
 
-export function replyToThread(uid, path, comment) {
+export function replyToThread(uid, postId, path, comment) {
   pushData(`posts/${path}`, {
     author: uid,
     comment: comment,
     time: Date.now(),
   });
+  updateData(`posts/${postId}`, {
+    numComments: increment(1)
+  })
 }
