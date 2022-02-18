@@ -8,11 +8,11 @@ const theme = createTheme({
     backgroundColor: "#f1b844",
   },
   palette: {
+    foreground: "#FFFFFF",
     primary: {
-      main: "#e5b843",
-      contrastText: "white",
+      main: "#f1b844",
     },
-    secondary: { main: "#ffffff", contrastText: "#e0aa43" },
+    secondary: { main: "#f1b844", contrastText: "white" },
   },
   typography: {
     fontFamily: font,
