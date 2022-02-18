@@ -1,6 +1,5 @@
 import { Button } from "@mui/material";
-
-import { signOut } from "../utilities/firebase.js";
+import { signOut } from "../../utilities/firebase.js";
 
 const SignOutButton = () => (
   <div>

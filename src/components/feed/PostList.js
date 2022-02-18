@@ -6,7 +6,7 @@ const PostList = ({ posts, users, user }) => {
   return (
     <Box sx={{ mx: "auto" }}>
       {posts.map((post) => {
-        return <Post user={user} posts={posts} users={users} key={post.id} post={post} />;
+        return <Post key={post.id} post={post} />;
       })}
     </Box>
   );

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import { Typography, Avatar, Box, Button } from "@mui/material"
 import { useParams } from "react-router"
-
-import TopNavBar from "./TopNavBar"
-import { getUserFromUid } from "../utilities/firebase"
+import TopNavBar from "components/TopNavBar"
+import { getUserFromUid } from "utilities/firebase"
 
 const Profile = ({ user }) => {
   const [userData, setUserData] = useState(null)
@@ -22,19 +21,19 @@ const Profile = ({ user }) => {
   }, [params])
 
   if (!userData)
-    return <h1 style={{marginLeft: 20}}>Loading...</h1>
+    return <h1 style={{ marginLeft: 20 }}>Loading...</h1>
 
   if (userData === 'not found')
     return (<>
       <TopNavBar isLoggedIn={user ? true : false} />
-      <h1 style={{marginLeft: 20}}>User Not Found</h1>
-      </>
+      <h1 style={{ marginLeft: 20 }}>User Not Found</h1>
+    </>
     )
 
   return (
     <>
       <TopNavBar isLoggedIn={user ? true : false} />
-      <Box textAlign="center"> 
+      <Box textAlign="center">
         <Typography
           variant="h3"
           component="div"
@@ -42,15 +41,15 @@ const Profile = ({ user }) => {
         >
           {userData.displayName}
         </Typography>
-        <Avatar 
-          alt={userData.displayName} 
+        <Avatar
+          alt={userData.displayName}
           src={userData.photoURL}
           variant='rounded'
           sx={{
-            height: 1/6,
-            width: 1/6,
+            height: 1 / 6,
+            width: 1 / 6,
             margin: 'auto'
-        }} />
+          }} />
 
         <Typography
           variant="h6"
@@ -61,16 +60,16 @@ const Profile = ({ user }) => {
           <br />
           {userData.year ? userData.year : "No Year"}
         </Typography>
-        {(!params.userID || params.userID == user.uid) && 
-            <Button 
-              variant="text" 
-              size="small" 
-              sx={{marginTop: 2}}
-              onClick={() => {
-                alert('This button should only show for current user, but no editing functionality is implemented yet.');
+        {(!params.userID || params.userID == user.uid) &&
+          <Button
+            variant="text"
+            size="small"
+            sx={{ marginTop: 2 }}
+            onClick={() => {
+              alert('This button should only show for current user, but no editing functionality is implemented yet.');
             }}>
-              Edit Profile
-            </Button>
+            Edit Profile
+          </Button>
         }
       </Box>
     </>

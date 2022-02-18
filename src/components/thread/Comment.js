@@ -6,7 +6,7 @@ import { Typography, IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { makeStyles } from "@mui/styles";
-import { UserContext } from "../App";
+import { UserContext } from "../../App";
 import moment from "moment";
 import { useNavigate } from "react-router";
 
@@ -54,8 +54,8 @@ export default function Comment(props) {
   const postAuthor = userList.find((obj) => obj.uid === props.author);
   return (
     <Box className={classes.container}>
-      <IconButton sx={{marginRight: -1}} onClick={() => {navigate(`/profile/${postAuthor.uid}`)}}>
-      <Avatar className={classes.avatar} src={postAuthor.photoURL} />
+      <IconButton sx={{ marginRight: -1 }} onClick={() => { navigate(`/profile/${postAuthor.uid}`) }}>
+        <Avatar className={classes.avatar} src={postAuthor.photoURL} />
       </IconButton>
       <Box className={classes.contentContainer}>
         <Box className={classes.infoContainer} >
