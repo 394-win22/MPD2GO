@@ -9,11 +9,11 @@ import {
   getUserFromUid,
   saveUserToDb,
   useData,
-} from "./utilities/firebase.js";
-import CreatePost from "./components/createPost/CreatePost";
+} from "utilities/firebase.js";
+import CreatePost from "components/createPost/CreatePost";
 import { useEffect } from "react";
-import Profile from "./components/profile/Profile";
-import PostWithThreads from "./components/thread/PostWithThreads.js";
+import Profile from "components/profile/Profile";
+import PostWithThreads from "components/thread/PostWithThreads.js";
 
 function getPostList(posts) {
   const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
