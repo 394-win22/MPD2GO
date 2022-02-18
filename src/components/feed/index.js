@@ -1,5 +1,4 @@
 import PostList from "./PostsList";
-import TopNavBar from "../TopNavBar";
 import React from "react";
 import { UserContext } from "../../App";
 
@@ -9,7 +8,7 @@ const Main = () => {
 
   return (
     <div className="App">
-      <TopNavBar isLoggedIn={context.user ? true : false} />
+      {/* <BottomNavBar isLoggedIn={context.user ? true : false} /> */}
       <PostList posts={context.postList} />
       <br />
       <br />
