@@ -93,7 +93,8 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
 
             {isLoggedIn && (
               <>
-                <MenuItem>
+                {/* enable when function done */}
+                <MenuItem disabled={true}>
                   <RenderIcon>
                     <EmailIcon />
                   </RenderIcon>

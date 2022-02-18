@@ -4,6 +4,7 @@ import {useState} from "react";
 import {createPostInFirebase} from '../utilities/posts.js';
 import { useUserState } from "../utilities/firebase.js";
 import { useNavigate } from "react-router-dom";
+import TopNavBar from "./TopNavBar"
 
 const useStyles = makeStyles({
   container: {
@@ -11,6 +12,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-evenly",
+	padding: 2
   },
 
 });
@@ -40,8 +42,8 @@ const CreatePost = () => {
   return (
 
     <Box >
-			<Typography align="center" variant="h4">Create Post</Typography>
-			<Box sx={{'& .MuiTextField-root': { m: 1, width: '50ch' },}} className={classes.container}>
+			<Typography align="center" variant="h4" sx={{padding: 2}}>Create Post</Typography>
+			<Box sx={{'& .MuiTextField-root': { m: 1, width: 300 },}} className={classes.container}>
 				<TextField
 				label="Title"
 				value = {title}
@@ -55,14 +57,14 @@ const CreatePost = () => {
 						value={description}
 						onChange= {(event)=> {setDescription(event.target.value)}}
 					/>
-					<Stack spacing={2} direction="row">
+					<Stack spacing={2} direction="row" padding={2}>
 						<Button variant="contained" style={{backgroundColor: "#808080"}} onClick={() => navigate("/")}>Cancel</Button>
 						<Button variant="contained" type="submit" onClick={handleSubmit} >Post</Button>
 					</Stack>
 			</Box>
-
-
+			<TopNavBar isLoggedIn={user ? true : false} />
     </Box>
+	
   );
 };
 
