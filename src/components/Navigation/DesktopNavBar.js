@@ -14,15 +14,9 @@ import EmailIcon from "@mui/icons-material/Email";
 import HomeIcon from "@mui/icons-material/Home";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-
 // Drawer
-import { styled, useTheme, ThemeProvider } from "@mui/material/styles";
-
 import Menu from "@mui/material/Menu";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
-import theme from "theme";
 
 const DesktopNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
@@ -54,88 +48,61 @@ const DesktopNavBar = ({ isLoggedIn }) => {
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Box sx={{ flexGrow: 1, paddingBottom: 3, mb: 10 }}>
-        
-          <AppBar position="fixed" sx={{ top: "auto", top: 0 }}>
-            <Toolbar>
-              {/* <Typography
-                variant="h5"
-                component="div"
-                align="left"
-                sx={{ flexGrow: 1, paddingLeft: 1 }}
-              >
-                The Hive
-              </Typography> */}
-              <Box sx={{ mr: "auto" }}>
-                <img
-                  alt="The Hive Logo"
-                  src="logo.png"
-                  sx={{ flexGrow: 1, paddingLeft: 1 }}
-                  style={{ height: "4em" }}
-                />
-              </Box>
+      <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
+        <AppBar position="fixed" sx={{ top: "auto", top: 0 }}>
+          <Toolbar>
+            <Typography
+              variant="h5"
+              component="div"
+              align="left"
+              sx={{ flexGrow: 1, paddingLeft: 1 }}
+            >
+              The Hive
+            </Typography>
 
-              <MenuItem
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                <RenderIcon>
-                  <HomeIcon />
-                </RenderIcon>
-              </MenuItem>
+            <MenuItem onClick={() => {navigate("/");}}>
+              <HomeIcon />
+            </MenuItem>
 
-              {isLoggedIn && (
-                <>
-                  {/* enable when function done */}
-                  <MenuItem disabled={true}>
-                    <RenderIcon>
-                      <EmailIcon />
-                    </RenderIcon>
-                  </MenuItem>
+            {isLoggedIn && (
+              <>
+                <MenuItem disabled={true}>
+                    <EmailIcon />
+                </MenuItem>
 
-                  <MenuItem onClick={() => navigate("/createPost")}>
-                    <RenderIcon>
-                      <AddCircleIcon />
-                    </RenderIcon>
-                  </MenuItem>
+                <MenuItem onClick={() => navigate("/createPost")}>
+                    <AddCircleIcon />
+                </MenuItem>
 
-                  <MenuItem
-                    onClick={() => {
-                      navigate("/profile");
-                    }}
-                  >
-                    <RenderIcon>
-                      <AccountCircle />
-                    </RenderIcon>
-                  </MenuItem>
-                </>
-              )}
-              <MenuItem onClick={handleDrawerOpen}>
-                <RenderIcon>
-                  <MoreHorizIcon />
-                </RenderIcon>
-              </MenuItem>
-            </Toolbar>
-          </AppBar>
+                <MenuItem onClick={() => {navigate("/profile");}}>
+                  <AccountCircle />
+                </MenuItem>
+              </>
+            )}
+            <MenuItem onClick={handleDrawerOpen}>
+                <MoreHorizIcon />
+            </MenuItem>
+          </Toolbar>
+        </AppBar>
 
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}
           anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
+            vertical: 'bottom',
+            horizontal: 'center',
           }}
           transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
+            vertical: 'top',
+            horizontal: 'right',
           }}
           open={isMenuOpen}
           onClose={handleDrawerClose}
           MenuListProps={{
-            "aria-labelledby": "basic-button",
+            'aria-labelledby': 'basic-button',
           }}
         >
+
           <MenuItem onClick={handleDrawerClose}>
             <SignOutButton />
           </MenuItem>

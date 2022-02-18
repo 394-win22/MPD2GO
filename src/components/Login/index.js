@@ -13,7 +13,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import theme from "theme";
 
 const Login = () => {
   return (
@@ -28,12 +27,15 @@ const Login = () => {
           backgroundImage:
             "url(https://ideas.ted.com/wp-content/uploads/sites/3/2018/11/featured_art_loosetouch_yifan_wu.jpg)",
           backgroundRepeat: "no-repeat",
+          backgroundColor: (t) =>
+            t.palette.mode === "light"
+              ? t.palette.grey[50]
+              : t.palette.grey[900],
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       />
       <Grid
-        backgroundColor="#f1b844"
         item
         xs={12}
         sm={8}
@@ -51,13 +53,13 @@ const Login = () => {
             alignItems: "center",
           }}
         >
-          <img
-            src="logo.png"
-            alt="The Hive Logo"
-            sx={{ flexGrow: 1, paddingLeft: 1 }}
-            style={{ height: "10em" }}
-          />
-          <Box component="form" sx={{ mt: 15, width: 200 }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" sx={{ mt: 1, width: 200 }}>
             <SignInButton />
           </Box>
         </Box>
