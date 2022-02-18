@@ -1,12 +1,11 @@
 import * as React from "react";
-
+import { useNavigate } from "react-router-dom";
+// Bar
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import SignInButton from "./SignInButton";
 import SignOutButton from "./SignOutButton";
-import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 //icons
 import IconButton from "@mui/material/IconButton";
@@ -15,20 +14,13 @@ import EmailIcon from "@mui/icons-material/Email";
 import HomeIcon from "@mui/icons-material/Home";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useNavigate } from "react-router-dom";
-
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+// Drawer
 import { styled, useTheme } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Avatar from '@mui/material/Avatar';
 
