@@ -1,11 +1,16 @@
 import PostList from "./feed/PostList";
 import TopNavBar from "./TopNavBar";
+import React from "react";
+import { UserContext } from "../App";
 
-const Main = ({ user, posts, users }) => {
+
+const Main = () => {
+  const context = React.useContext(UserContext);
+
   return (
     <div className="App">
-      <TopNavBar isLoggedIn={user ? true : false} />
-      <PostList posts={posts} users={users} />
+      <TopNavBar isLoggedIn={context.user ? true : false} />
+      <PostList posts={context.postList} />
       <br />
       <br />
       <br />
