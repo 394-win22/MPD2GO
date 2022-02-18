@@ -74,7 +74,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
         <AppBar
           position="fixed"
           sx={{ top: "auto", bottom: 0 }}
-          style={{ background: "#465a82" }}
+          style={{ background: "#465a82", alignItems:"center" }}
         >
           <Toolbar>
            

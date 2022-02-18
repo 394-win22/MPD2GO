@@ -72,7 +72,7 @@ function App() {
             postList: postList,
             userList: userList
           }}>
-            <Navigation />
+            <Navigation user={user}/>
             <Routes>
               <Route exact path="/createPost" element={<CreatePost />} />
               <Route exact path="/profile" element={<Profile user={user} />} />

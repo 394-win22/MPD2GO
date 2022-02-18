@@ -26,11 +26,9 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 const DesktopNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
 
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
-
 
   // Drawer Consts
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -84,11 +82,81 @@ const DesktopNavBar = ({ isLoggedIn }) => {
               sx={{ flexGrow: 1, paddingLeft: 1 }}
             >
               The Hive
-            </Typography>        
+            </Typography>
+
+            <MenuItem
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <RenderIcon>
+                <HomeIcon />
+              </RenderIcon>
+            </MenuItem>
+
+            {isLoggedIn && (
+              <>
+                {/* enable when function done */}
+                <MenuItem disabled={true}>
+                  <RenderIcon>
+                    <EmailIcon />
+                  </RenderIcon>
+                </MenuItem>
+
+                <MenuItem onClick={() => navigate("/createPost")}>
+                  <RenderIcon>
+                    <AddCircleIcon />
+                  </RenderIcon>
+                </MenuItem>
+
+                <MenuItem
+                  onClick={() => {
+                    navigate("/profile");
+                  }}
+                >
+                  <RenderIcon>
+                    <AccountCircle />
+                  </RenderIcon>
+                </MenuItem>
+              </>
+            )}
+            <MenuItem onClick={handleDrawerOpen}>
+              <RenderIcon>
+                <MoreHorizIcon />
+              </RenderIcon>
+            </MenuItem>
           </Toolbar>
         </AppBar>
 
-        
+        <Drawer
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+            },
+          }}
+          variant="persistent"
+          anchor="right"
+          open={drawerOpen}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+
+          <Divider />
+
+          {/* Drawer Menu */}
+          <List>
+            <SignOutButton />
+          </List>
+        </Drawer>
       </Box>
     </ClickAwayListener>
   );
