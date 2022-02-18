@@ -68,7 +68,7 @@ function Thread(props) {
 			path += id;
 		})
 		path += "/threads/"
-		replyToThread(user.uid, path, comment)
+		replyToThread(user.uid, props.postId, path, comment)
 		setComment("");
 		setShowTextField(false);
 	}
@@ -93,7 +93,7 @@ function Thread(props) {
 						<Box className={classes.collapseLine} />
 					</Box>
 				}
-				<Box className={classes.verticalContainer} sx = {{width: "100%"}}>
+				<Box className={classes.verticalContainer} sx={{ width: "100%" }}>
 					{(showThreads) ?
 						<Button color="primary" onClick={() => { setShowTextField(!showTextField) }}>
 							Reply
@@ -105,7 +105,7 @@ function Thread(props) {
 						</Button>
 					}
 					<Collapse in={showTextField}>
-						<TextField 
+						<TextField
 							placeholder="Add comments here"
 							inputProps={{ 'aria-label': 'Add comments here' }}
 							value={comment}

@@ -28,7 +28,7 @@ const CreatePost = () => {
       description: description,
       time: Date.now(),
       author: user.uid,
-      comments: 0,
+      numComments: 0,
     });
     setTitle("");
     setDescription("");
