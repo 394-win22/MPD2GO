@@ -7,6 +7,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import SignOutButton from "../Login/SignOutButton";
 import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+
 //icons
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -28,21 +30,15 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
 
-  // Drawer Consts
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const drawerWidth = 240;
-  const theme = useTheme();
-
-  const handleDrawerOpen = () => {
-    setDrawerOpen(true);
+  const handleDrawerOpen = (e) => {
+    setAnchorEl(e.currentTarget);
   };
 
   const handleDrawerClose = () => {
-    setDrawerOpen(false);
+    setAnchorEl(null);
   };
 
   const DrawerHeader = styled("div")(({ theme }) => ({
@@ -54,10 +50,11 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
   }));
 
   const handleClickAway = () => {
-    setDrawerOpen(false);
+    setAnchorEl(null);
+
   };
 
-  const RenderIcon = (props) => (
+  const ListIconButton = (props) => (
     <IconButton
       size="medium"
       aria-haspopup="true"
@@ -74,86 +71,77 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
         <AppBar
           position="fixed"
           sx={{ top: "auto", bottom: 0 }}
-          style={{ background: "#465a82", alignItems:"center" }}
+          style={{ background: "#465a82", alignItems: "center", justifyContent: "space-between", display: "flex", flexDirection: "row", padding: "0px 30px" }}
         >
-          <Toolbar>
-           
-            <MenuItem
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              <RenderIcon>
-                <HomeIcon />
-              </RenderIcon>
-            </MenuItem>
 
-            {isLoggedIn && (
-              <>
-                {/* enable when function done */}
-                <MenuItem disabled={true}>
-                  <RenderIcon>
-                    <EmailIcon />
-                  </RenderIcon>
-                </MenuItem>
+          <MenuItem
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <ListIconButton>
+              <HomeIcon />
+            </ListIconButton>
+          </MenuItem>
 
-                <MenuItem onClick={() => navigate("/createPost")}>
-                  <RenderIcon>
-                    <AddCircleIcon />
-                  </RenderIcon>
-                </MenuItem>
+          {isLoggedIn && (
+            <>
+              {/* enable when function done */}
+              <MenuItem disabled={true}>
+                <ListIconButton>
+                  <EmailIcon />
+                </ListIconButton>
+              </MenuItem>
 
-                <MenuItem
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
-                >
-                  <RenderIcon>
-                    <AccountCircle />
-                  </RenderIcon>
-                </MenuItem>
-              </>
-            )}
-            <MenuItem onClick={handleDrawerOpen}>
-              <RenderIcon>
-                <MoreHorizIcon  />
-              </RenderIcon>
-            </MenuItem>
-          </Toolbar>
+              <MenuItem onClick={() => navigate("/createPost")}>
+                <ListIconButton>
+                  <AddCircleIcon />
+                </ListIconButton>
+              </MenuItem>
+
+              <MenuItem
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              >
+                <ListIconButton>
+                  <AccountCircle />
+                </ListIconButton>
+              </MenuItem>
+            </>
+          )}
+          <MenuItem onClick={handleDrawerOpen}>
+            <ListIconButton>
+              <MoreHorizIcon />
+            </ListIconButton>
+          </MenuItem>
         </AppBar>
 
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-            },
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
           }}
-          variant="persistent"
-          anchor="right"
-          open={drawerOpen}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          open={isMenuOpen}
+          onClose={handleDrawerClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
         >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-        
-          <Divider />
-        
-          {/* Drawer Menu */}
-          <List>
+
+          <MenuItem onClick={handleDrawerClose}>
             <SignOutButton />
-          </List>
-        </Drawer>
+          </MenuItem>
+        </Menu>
 
       </Box>
-    </ClickAwayListener>
+    </ClickAwayListener >
   );
 };
 

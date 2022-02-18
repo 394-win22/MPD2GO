@@ -1,5 +1,5 @@
 import "./App.css";
-import Main from "components/feed";
+import Main from "components/Feed";
 import React, { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 import Login from "components/Login";
@@ -72,7 +72,7 @@ function App() {
             postList: postList,
             userList: userList
           }}>
-            <Navigation user={user}/>
+            <Navigation user={user} />
             <Routes>
               <Route exact path="/createPost" element={<CreatePost />} />
               <Route exact path="/profile" element={<Profile user={user} />} />

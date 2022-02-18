@@ -18,7 +18,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // Drawer
 import { styled, useTheme } from "@mui/material/styles";
-import Drawer from "@mui/material/Drawer";
+import Menu from "@mui/material/Menu";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -27,20 +27,15 @@ const DesktopNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
-  // Drawer Consts
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const drawerWidth = 240;
-  const theme = useTheme();
 
-  const handleDrawerOpen = () => {
-    setDrawerOpen(true);
+  const handleDrawerOpen = (e) => {
+    setAnchorEl(e.currentTarget);
   };
 
   const handleDrawerClose = () => {
-    setDrawerOpen(false);
+    setAnchorEl(null);
   };
 
   const DrawerHeader = styled("div")(({ theme }) => ({
@@ -52,7 +47,7 @@ const DesktopNavBar = ({ isLoggedIn }) => {
   }));
 
   const handleClickAway = () => {
-    setDrawerOpen(false);
+    setAnchorEl(null);
   };
 
   const RenderIcon = (props) => (
@@ -128,35 +123,28 @@ const DesktopNavBar = ({ isLoggedIn }) => {
           </Toolbar>
         </AppBar>
 
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-            },
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
           }}
-          variant="persistent"
-          anchor="right"
-          open={drawerOpen}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={isMenuOpen}
+          onClose={handleDrawerClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
         >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
 
-          <Divider />
-
-          {/* Drawer Menu */}
-          <List>
+          <MenuItem onClick={handleDrawerClose}>
             <SignOutButton />
-          </List>
-        </Drawer>
+          </MenuItem>
+        </Menu>
       </Box>
     </ClickAwayListener>
   );
