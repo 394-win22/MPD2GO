@@ -1,10 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import { Typography, CardHeader, CardContent, Avatar, Card } from "@mui/material/";
+import {
+  Typography,
+  CardHeader,
+  CardContent,
+  Avatar,
+  Card,
+  Box,
+} from "@mui/material/";
 import { UserContext } from "../../App";
 import { makeStyles, useTheme } from "@mui/styles";
-
+import CommentIcon from "@mui/icons-material/Comment";
 const getUserDataFromUID = (uid, users) => {
   return users.find((user) => user.uid === uid);
 };
@@ -15,13 +22,12 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "space-evenly",
-    '&:hover': {
-      cursor: "pointer"
+    "&:hover": {
+      cursor: "pointer",
     },
-    backgroundColor: theme.palette.foreground
+    backgroundColor: theme.palette.foreground,
   },
 }));
-
 
 export default function Post({ post }) {
   const theme = useTheme();
@@ -31,19 +37,30 @@ export default function Post({ post }) {
   const users = context.userList;
   const user = getUserDataFromUID(post.author, users);
 
-
   return (
-    <Card className={classes.card} sx={{ m: 5 }} onClick={() => { navigate(`/post/${post.id}`); }}>
+    <Card
+      className={classes.card}
+      sx={{ m: 5 }}
+      onClick={() => {
+        navigate(`/post/${post.id}`);
+      }}
+    >
       <CardHeader
         align="left"
         avatar={<Avatar src={user.photoURL} aria-label="avatar" />}
         title={user.displayName}
-        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")} />
+        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
+      />
       <CardContent>
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
       </CardContent>
+      <Box sx={{ display: "flex", m: 1 }}>
+        <Typography variant="body2">
+          {post.numComments || "0"} Comments
+        </Typography>
+      </Box>
     </Card>
   );
 }

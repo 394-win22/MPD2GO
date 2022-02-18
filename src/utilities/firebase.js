@@ -34,7 +34,7 @@ const firebaseConfig = {
   projectId: "mpd2go",
   storageBucket: "mpd2go.appspot.com",
   messagingSenderId: "792215885159",
-  appId: "1:792215885159:web:2f30dc65fba26c7644cbc2"
+  appId: "1:792215885159:web:2f30dc65fba26c7644cbc2",
 };
 
 export const firebase = initializeApp(firebaseConfig);
@@ -82,22 +82,18 @@ export const useData = (path, transform) => {
   return [data, loading, error];
 };
 
-
-
 export const setData = (path, value) => set(ref(database, path), value);
 
 export const pushData = (path, value) => push(ref(database, path), value);
 
-
-
 /* authentication functions */
 export const signInWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({
-      prompt: "select_account",
-    });
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: "select_account",
+  });
 
-    signInWithPopup(getAuth(firebase), provider);
+  signInWithPopup(getAuth(firebase), provider);
 };
 
 export const deleteData = (dataPath) => {
@@ -110,18 +106,18 @@ export const addPost = (post) => {
     author: post.author,
     description: post.author,
     time: post.author,
-    title: post.title
+    title: post.title,
   });
-}
+};
 
 export const saveUserToDb = (userObject) => {
-	// console.log("save User to DB", userObject);
+  // console.log("save User to DB", userObject);
   setData("/users/" + userObject.uid, {
     displayName: userObject.displayName,
     email: userObject.email,
     photoURL: userObject.photoURL,
-    bio: userObject.bio || '',
-    year: userObject.year || ''
+    bio: userObject.bio || "",
+    year: userObject.year || "",
   });
 };
 

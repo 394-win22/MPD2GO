@@ -19,6 +19,7 @@ export default function ReplyTextField({ post, user }) {
 	const submitComment = () => {
 		addCommentToPost(user.uid, post.id, comment);
 		setComment("");
+
 	}
 
 	return (
