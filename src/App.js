@@ -16,6 +16,7 @@ import Profile from "components/Profile";
 import PostWithThreads from "components/Post/index.js";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "theme.js"
+import Navigation from "components/Navigation";
 
 function getPostList(posts) {
   const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
@@ -71,6 +72,7 @@ function App() {
             postList: postList,
             userList: userList
           }}>
+            <Navigation />
             <Routes>
               <Route exact path="/createPost" element={<CreatePost />} />
               <Route exact path="/profile" element={<Profile user={user} />} />

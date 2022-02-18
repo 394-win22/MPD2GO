@@ -23,7 +23,7 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
-const BottomNavBar = ({ isLoggedIn }) => {
+const MobileBottomNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
 
 
@@ -77,15 +77,7 @@ const BottomNavBar = ({ isLoggedIn }) => {
           style={{ background: "#465a82" }}
         >
           <Toolbar>
-            <Typography
-              variant="h5"
-              component="div"
-              align="left"
-              sx={{ flexGrow: 1, paddingLeft: 1 }}
-            >
-              MPD2Go
-            </Typography>
-
+           
             <MenuItem
               onClick={() => {
                 navigate("/");
@@ -165,4 +157,4 @@ const BottomNavBar = ({ isLoggedIn }) => {
   );
 };
 
-export default BottomNavBar;
+export default MobileBottomNavBar;
