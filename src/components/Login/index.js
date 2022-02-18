@@ -52,7 +52,7 @@ const Login = () => {
           }}
         >
           <img
-            src="%PUBLIC_URL%/logo.png"
+            src="logo.png"
             alt="The Hive Logo"
             sx={{ flexGrow: 1, paddingLeft: 1 }}
             style={{ height: "10em" }}
