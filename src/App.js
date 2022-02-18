@@ -1,8 +1,8 @@
 import "./App.css";
-import Main from "components/Main";
+import Main from "components/Feed";
 import React, { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
-import Login from "components/auth/Login";
+import Login from "components/Login";
 
 import {
   useUserState,
@@ -10,10 +10,10 @@ import {
   saveUserToDb,
   useData,
 } from "utilities/firebase.js";
-import CreatePost from "components/createPost/CreatePost";
+import CreatePost from "components/CreatePost";
 import { useEffect } from "react";
-import Profile from "components/profile/Profile";
-import PostWithThreads from "components/thread/PostWithThreads.js";
+import Profile from "components/Profile";
+import PostWithThreads from "components/Post/index.js";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "theme.js"
 
