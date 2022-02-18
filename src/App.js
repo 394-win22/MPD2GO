@@ -14,6 +14,8 @@ import CreatePost from "components/createPost/CreatePost";
 import { useEffect } from "react";
 import Profile from "components/profile/Profile";
 import PostWithThreads from "components/thread/PostWithThreads.js";
+import { ThemeProvider } from '@mui/material/styles';
+import theme from "theme.js"
 
 function getPostList(posts) {
   const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
@@ -34,6 +36,7 @@ export const UserContext = React.createContext();
 function App() {
   const user = useUserState();
   const [loading, setLoading] = useState(true);
+
   const [postList, postListLoading, postListError] = useData(
     "/posts",
     getPostList
@@ -58,30 +61,32 @@ function App() {
   }
 
   return (
-    <>
-      {user === undefined || user == null ? (
-        <Login />
-      ) : (
-        <UserContext.Provider value={{
-          user: user,
-          postList: postList,
-          userList: userList
-        }}>
-          <Routes>
-            <Route exact path="/createPost" element={<CreatePost />} />
-            <Route exact path="/profile" element={<Profile user={user} />} />
-            <Route exact path="/profile/:userID" element={<Profile user={user} />} />
-            <Route exact path="/"
-              element={<Main user={user} users={userList} posts={postList} />}
-            />
-            <Route path="/createPost" element={<CreatePost />} />
-            <Route path="/post/:pageId" element={<PostWithThreads />}>
-            </Route>
-          </Routes>
-        </UserContext.Provider>
+    <ThemeProvider theme={theme}>
+      {
+        user === undefined || user == null ? (
+          <Login />
+        ) : (
+          <UserContext.Provider value={{
+            user: user,
+            postList: postList,
+            userList: userList
+          }}>
+            <Routes>
+              <Route exact path="/createPost" element={<CreatePost />} />
+              <Route exact path="/profile" element={<Profile user={user} />} />
+              <Route exact path="/profile/:userID" element={<Profile user={user} />} />
+              <Route exact path="/"
+                element={<Main user={user} users={userList} posts={postList} />}
+              />
+              <Route path="/createPost" element={<CreatePost />} />
+              <Route path="/post/:pageId" element={<PostWithThreads />}>
+              </Route>
+            </Routes>
+          </UserContext.Provider>
 
-      )}
-    </>
+        )
+      }
+    </ThemeProvider>
   );
 }
 

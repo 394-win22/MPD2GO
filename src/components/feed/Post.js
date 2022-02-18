@@ -7,14 +7,13 @@ import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
 import { Typography } from "@mui/material/";
 import { UserContext } from "../../App";
-import { makeStyles } from "@mui/styles";
+import { makeStyles, useTheme } from "@mui/styles";
 
-
-const getUserFromUID = (uid, users) => {
-  return users.filter((user) => user.uid === uid)[0];
+const getUserDataFromUID = (uid, users) => {
+  return users.find((user) => user.uid === uid);
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   card: {
     display: "flex",
     flexDirection: "column",
@@ -22,17 +21,19 @@ const useStyles = makeStyles({
     justifyContent: "space-evenly",
     '&:hover': {
       cursor: "pointer"
-    }
+    },
+    backgroundColor: theme.palette.foreground
   },
-});
+}));
 
 
 export default function Post({ post }) {
-  const classes = useStyles();
+  const theme = useTheme();
+  const classes = useStyles(theme);
   const navigate = useNavigate();
   const context = React.useContext(UserContext);
   const users = context.userList;
-  const user = getUserFromUID(post.author, users);
+  const user = getUserDataFromUID(post.author, users);
 
 
   return (
