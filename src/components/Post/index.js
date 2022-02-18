@@ -49,7 +49,7 @@ export default function PostWithThreads() {
       >
         Back
       </Button>
-      <Card sx={{ mx: 1 }}>
+      <Card sx={{ mx: 1, mb: 10 }}>
         <CardHeader
           align="left"
           avatar={
