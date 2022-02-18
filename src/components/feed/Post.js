@@ -56,10 +56,10 @@ export default function Post({ post }) {
           {post.description}
         </Typography>
 
-        <Box sx={{ justifyContent: "right", mt: 2 }}>
-          <CommentIcon />
-          <Typography variant="body2">
-            {post.commentLength || "0"} Comments
+        <Box >
+          
+          <Typography align= "right" variant="body2">
+            {post.numComments || "0"} Comments
           </Typography>
         </Box>
       </CardContent>
