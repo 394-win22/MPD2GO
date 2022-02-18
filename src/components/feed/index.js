@@ -1,7 +1,7 @@
-import PostList from "./feed/PostList";
-import TopNavBar from "./TopNavBar";
+import PostList from "./PostsList";
+import TopNavBar from "../TopNavBar";
 import React from "react";
-import { UserContext } from "../App";
+import { UserContext } from "../../App";
 
 
 const Main = () => {

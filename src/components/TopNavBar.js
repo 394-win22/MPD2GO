@@ -4,8 +4,8 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import SignInButton from "./auth/SignInButton";
-import SignOutButton from "./auth/SignOutButton";
+import SignInButton from "./Login/SignInButton";
+import SignOutButton from "./Login/SignOutButton";
 import Menu from "@mui/material/Menu";
 
 import MenuItem from "@mui/material/MenuItem";
@@ -86,7 +86,7 @@ const TopNavBar = ({ isLoggedIn }) => {
             align="left"
             sx={{ flexGrow: 1, paddingLeft: 1 }}
           >
-            MPD2Go
+            The Hive
           </Typography>
           {isLoggedIn && (
             <>
