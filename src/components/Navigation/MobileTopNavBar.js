@@ -7,9 +7,9 @@ import Typography from "@mui/material/Typography";
 
 const MobileTopNavBar = ({ isLoggedIn }) => {
   return (
-    <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position="fixed"
+        position="relative"
         sx={{ top: "auto", top: 0 }}
       >
         <Toolbar>

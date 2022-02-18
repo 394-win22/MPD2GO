@@ -49,7 +49,7 @@ const DesktopNavBar = ({ isLoggedIn }) => {
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
-        <AppBar position="fixed" sx={{ top: "auto", top: 0 }}>
+        <AppBar position="relative" sx={{ top: "auto", top: 0 }}>
           <Toolbar>
             <Typography
               variant="h5"

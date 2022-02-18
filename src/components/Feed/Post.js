@@ -52,7 +52,7 @@ export default function Post({ post }) {
   return (
     <Card
       className={classes.card}
-      sx={{ m: 5 }}
+      sx={{ mx: 1, mb: 3}}
       onClick={() => {
         navigate(`/post/${post.id}`);
       }}

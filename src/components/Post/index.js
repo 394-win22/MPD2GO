@@ -41,7 +41,7 @@ export default function PostWithThreads() {
   return (
     <>
       <Button
-        style={{ marginTop: "0px", marginLeft: "40px", color: "white" }}
+        sx={{ml: 1, mb:2, color: "white"}}
         variant="contained"
         onClick={() => {
           navigate("/");
@@ -49,7 +49,7 @@ export default function PostWithThreads() {
       >
         Back
       </Button>
-      <Card sx={{ m: 5 }}>
+      <Card sx={{ mx: 1 }}>
         <CardHeader
           align="left"
           avatar={

@@ -49,7 +49,7 @@ function LoggedIn({ user }) {
 			userList: userList
 		}}>
 			<Navigation user={user} />
-			<Container sx={{ marginTop: "80px" }}>
+			<Container >
 				<Routes>
 					<Route exact path="/createPost" element={<CreatePost />} />
 					<Route exact path="/profile" element={<Profile user={user} />} />
