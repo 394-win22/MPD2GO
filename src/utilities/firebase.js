@@ -14,9 +14,7 @@ import {
   ref,
   set,
   push,
-  query,
-  orderByChild,
-  startAt,
+  update,
   remove,
 } from "firebase/database";
 import {
@@ -86,6 +84,9 @@ export const setData = (path, value) => set(ref(database, path), value);
 
 export const pushData = (path, value) => push(ref(database, path), value);
 
+export const updateData = (path, value) => update(ref(database, path), value);
+
+
 /* authentication functions */
 export const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
@@ -129,7 +130,7 @@ export const getUserFromUid = async (uid) => {
     (snapshot) => {
       output = snapshot.val();
     },
-    (error) => {}
+    (error) => { }
   );
   return output;
 };
