@@ -67,7 +67,6 @@ const DesktopNavBar = ({ isLoggedIn }) => {
         <AppBar
           position="fixed"
           sx={{ top: "auto", top: 0 }}
-          style={{ background: "#465a82" }}
         >
           <Toolbar>
             <Typography

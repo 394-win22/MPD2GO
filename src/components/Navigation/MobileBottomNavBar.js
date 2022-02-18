@@ -71,7 +71,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
         <AppBar
           position="fixed"
           sx={{ top: "auto", bottom: 0 }}
-          style={{ background: "#465a82", alignItems: "center", justifyContent: "space-between", display: "flex", flexDirection: "row", padding: "0px 30px" }}
+          style={{ alignItems: "center", justifyContent: "space-between", display: "flex", flexDirection: "row", padding: "0px 30px" }}
         >
 
           <MenuItem
