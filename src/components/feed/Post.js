@@ -55,14 +55,12 @@ export default function Post({ post }) {
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
-
-        <Box >
-          
-          <Typography align= "right" variant="body2">
-            {post.numComments || "0"} Comments
-          </Typography>
-        </Box>
       </CardContent>
+      <Box sx={{ display: "flex", m: 1 }}>
+        <Typography variant="body2">
+          {post.numComments || "0"} Comments
+        </Typography>
+      </Box>
     </Card>
   );
 }

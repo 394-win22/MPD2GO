@@ -31,12 +31,13 @@ const useStyles = makeStyles({
   },
   infoContainer: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "space-between",
+    textAlign: "left",
   },
   time: {
-    marginLeft: "70px",
+    // marginLeft: "70px",
     marginTop: "1px",
     color: "#888888",
     fontSize: "13px",

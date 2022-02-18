@@ -36,12 +36,12 @@ const CreatePost = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{ width: "90%", mx: "auto", mt: 5 }}>
       <Typography align="center" variant="h4">
         Create Post
       </Typography>
       <Box
-        sx={{ "& .MuiTextField-root": { m: 1, width: "50ch" } }}
+        sx={{ "& .MuiTextField-root": { m: 1, width: "100%" } }}
         className={classes.container}
       >
         <TextField
