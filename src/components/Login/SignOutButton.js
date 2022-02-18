@@ -1,7 +1,8 @@
-import { Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { signOut } from "../utilities/firebase.js";
+import { signOut } from "utilities/firebase.js";
 import ListItem from "@mui/material/ListItem";
+
+
 
 const SignOutButton = () => (
   <div>
@@ -9,7 +10,7 @@ const SignOutButton = () => (
       Sign Out
     </Button> */}
 
-    <ListItem Button onClick={signOut}>
+    <ListItem button onClick={signOut}>
       <LogoutIcon sx={{paddingRight: 2}}/>
       Sign out
     </ListItem>

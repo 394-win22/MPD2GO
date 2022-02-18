@@ -5,7 +5,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import SignOutButton from "./SignOutButton";
+import SignOutButton from "../Login/SignOutButton";
 import MenuItem from "@mui/material/MenuItem";
 //icons
 import IconButton from "@mui/material/IconButton";
@@ -22,10 +22,15 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Avatar from '@mui/material/Avatar';
 
-const TopNavBar = ({ isLoggedIn, setQuery }) => {
+const BottomNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
+
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const isMenuOpen = Boolean(anchorEl);
+
 
   // Drawer Consts
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -117,9 +122,9 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
                 </MenuItem>
               </>
             )}
-            <MenuItem>
+            <MenuItem onClick={handleDrawerOpen}>
               <RenderIcon>
-                <MoreHorizIcon onClick={handleDrawerOpen} />
+                <MoreHorizIcon  />
               </RenderIcon>
             </MenuItem>
           </Toolbar>
@@ -160,4 +165,4 @@ const TopNavBar = ({ isLoggedIn, setQuery }) => {
   );
 };
 
-export default TopNavBar;
+export default BottomNavBar;
