@@ -26,11 +26,9 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 const MobileTopNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
 
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
-
 
   // Drawer Consts
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -71,24 +69,24 @@ const MobileTopNavBar = ({ isLoggedIn }) => {
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
-        <AppBar
-          position="fixed"
-          sx={{ top: "auto", top: 0 }}
-          style={{ background: "#465a82" }}
-        >
+        <AppBar position="fixed" sx={{ top: "auto", top: 0 }}>
           <Toolbar>
-            <Typography
+            {/* <Typography
               variant="h5"
               component="div"
               align="left"
               sx={{ flexGrow: 1, paddingLeft: 1 }}
             >
               The Hive
-            </Typography>        
+            </Typography> */}
+            <img
+              src="logo.png"
+              alt="The Hive Logo"
+              sx={{ flexGrow: 1, paddingLeft: 1 }}
+              style={{ height: "4em" }}
+            />
           </Toolbar>
         </AppBar>
-
-        
       </Box>
     </ClickAwayListener>
   );
