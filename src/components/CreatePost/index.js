@@ -36,15 +36,20 @@ const CreatePost = () => {
   };
 
   return (
-    <Box sx={{ width: "90%", mx: "auto", mt: 5 }}>
-      <Typography align="center" variant="h4">
+    <Box
+      alignItems="center"
+      justifyContent="center"
+      backgroundColor="white"
+      sx={{ px: 3, py: 5 }}>
+      <Typography align="center" variant="h4" sx={{ mb: 3 }}>
         Create Post
       </Typography>
       <Box
-        sx={{ "& .MuiTextField-root": { m: 1, width: "100%" } }}
+        sx={{ "& .MuiTextField-root": { my: 1, width: "100%" } }}
         className={classes.container}
       >
         <TextField
+          margin="normal"
           label="Title"
           value={title}
           variant="outlined"
@@ -53,6 +58,7 @@ const CreatePost = () => {
           }}
         />
         <TextField
+          margin="normal"
           label="Text (optional)"
           multiline
           minRows={4}
@@ -61,7 +67,7 @@ const CreatePost = () => {
             setDescription(event.target.value);
           }}
         />
-        <Stack spacing={2} direction="row">
+        <Stack spacing={2} direction="row" sx={{ mt: 3 }}>
           <Button
             variant="contained"
             style={{ backgroundColor: "#808080" }}
