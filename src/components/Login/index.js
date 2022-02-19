@@ -36,6 +36,7 @@ const Login = () => {
         }}
       />
       <Grid
+        backgroundColor="#f1b844"
         item
         xs={12}
         sm={8}
@@ -53,13 +54,8 @@ const Login = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" sx={{ mt: 1, width: 200 }}>
+          <img src="logo.png" alt="Hive Logo" style={{ height: "10em" }} />
+          <Box component="form" sx={{ mt: 20, width: 200 }}>
             <SignInButton />
           </Box>
         </Box>

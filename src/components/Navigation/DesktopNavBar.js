@@ -37,11 +37,7 @@ const DesktopNavBar = ({ isLoggedIn }) => {
   };
 
   const RenderIcon = (props) => (
-    <IconButton
-      size="medium"
-      aria-haspopup="true"
-      color="inherit"
-    >
+    <IconButton size="medium" aria-haspopup="true" color="inherit">
       {props.children}
     </IconButton>
   );
@@ -51,36 +47,45 @@ const DesktopNavBar = ({ isLoggedIn }) => {
       <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
         <AppBar position="relative" sx={{ top: "auto", top: 0 }}>
           <Toolbar>
-            <Typography
+            <img src="logo.png" alt="Hive Logo" style={{ height: "4em" }} />
+            {/* <Typography
               variant="h5"
               component="div"
               align="left"
               sx={{ flexGrow: 1, paddingLeft: 1 }}
             >
               The Hive
-            </Typography>
+            </Typography> */}
 
-            <MenuItem onClick={() => {navigate("/");}}>
+            <MenuItem
+              onClick={() => {
+                navigate("/");
+              }}
+            >
               <HomeIcon />
             </MenuItem>
 
             {isLoggedIn && (
               <>
                 <MenuItem disabled={true}>
-                    <EmailIcon />
+                  <EmailIcon />
                 </MenuItem>
 
                 <MenuItem onClick={() => navigate("/createPost")}>
-                    <AddCircleIcon />
+                  <AddCircleIcon />
                 </MenuItem>
 
-                <MenuItem onClick={() => {navigate("/profile");}}>
+                <MenuItem
+                  onClick={() => {
+                    navigate("/profile");
+                  }}
+                >
                   <AccountCircle />
                 </MenuItem>
               </>
             )}
             <MenuItem onClick={handleDrawerOpen}>
-                <MoreHorizIcon />
+              <MoreHorizIcon />
             </MenuItem>
           </Toolbar>
         </AppBar>
@@ -89,20 +94,19 @@ const DesktopNavBar = ({ isLoggedIn }) => {
           id="basic-menu"
           anchorEl={anchorEl}
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
+            vertical: "bottom",
+            horizontal: "center",
           }}
           transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
+            vertical: "top",
+            horizontal: "right",
           }}
           open={isMenuOpen}
           onClose={handleDrawerClose}
           MenuListProps={{
-            'aria-labelledby': 'basic-button',
+            "aria-labelledby": "basic-button",
           }}
         >
-
           <MenuItem onClick={handleDrawerClose}>
             <SignOutButton />
           </MenuItem>
