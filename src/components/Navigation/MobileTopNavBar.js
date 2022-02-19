@@ -5,16 +5,16 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
+import logo from "../../logo.png"
+
 const MobileTopNavBar = ({ isLoggedIn }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative" sx={{ top: "auto", top: 0 }}>
         <Toolbar>
-          <img
-            src="logo.png"
-            alt="Hive Logo"
-            style={{ height: "4em", ml: "auto" }}
-          />
+          <Typography sx={{ flexGrow: 1, ml: 1 }}>
+            <img src={logo} alt="Hive Logo" style={{ height: "3em" }} />
+          </Typography>
           {/* <Typography
             variant="h5"
             component="div"
