@@ -18,6 +18,8 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Menu from "@mui/material/Menu";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
+import logo from "../../logo.png"
+
 const DesktopNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
 
@@ -47,7 +49,9 @@ const DesktopNavBar = ({ isLoggedIn }) => {
       <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
         <AppBar position="relative" sx={{ top: "auto", top: 0 }}>
           <Toolbar>
-            <img src="logo.png" alt="Hive Logo" style={{ height: "4em" }} />
+            <Typography sx={{ flexGrow: 1, ml: 1 }}>
+              <img src={logo} alt="Hive Logo" style={{ height: "3em" }} />
+            </Typography>
             {/* <Typography
               variant="h5"
               component="div"
@@ -57,11 +61,7 @@ const DesktopNavBar = ({ isLoggedIn }) => {
               The Hive
             </Typography> */}
 
-            <MenuItem
-              onClick={() => {
-                navigate("/");
-              }}
-            >
+            <MenuItem onClick={() => { navigate("/"); }}>
               <HomeIcon />
             </MenuItem>
 
@@ -75,11 +75,7 @@ const DesktopNavBar = ({ isLoggedIn }) => {
                   <AddCircleIcon />
                 </MenuItem>
 
-                <MenuItem
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
-                >
+                <MenuItem onClick={() => { navigate("/profile"); }}>
                   <AccountCircle />
                 </MenuItem>
               </>
