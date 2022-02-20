@@ -1,11 +1,11 @@
 import { Toolbar, Typography, AppBar, Box } from '@mui/material'
 
-import logo from '../../logo.png'
+import logo from 'logo.png'
 
 const MobileTopNavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='relative' sx={{ top: 'auto', top: 0 }}>
+      <AppBar position='relative' sx={{ top: 'auto'}}>
         <Toolbar>
           <Typography sx={{ flexGrow: 1, ml: 1 }}>
             <img src={logo} alt='Hive Logo' style={{ height: '3em' }} />

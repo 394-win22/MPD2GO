@@ -4,13 +4,13 @@ import { AppBar, Box, Toolbar, Typography, ClickAwayListener, Menu, MenuItem } f
 import { AccountCircle as AccountCircleIcon, Email as EmailIcon, Home as HomeIcon, MoreHoriz as MoreHorizIcon, AddCircle as AddCircleIcon } from '@mui/icons-material'
 
 import SignOutButton from '../Login/SignOutButton'
-import logo from '../../logo.png'
+import logo from 'logo.png'
 
 const DesktopNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState(null)
-  
+
   const isMenuOpen = Boolean(anchorEl)
 
   const handleDrawerOpen = (e) => {

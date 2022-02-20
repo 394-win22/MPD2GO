@@ -1,7 +1,7 @@
 import { Grid, Box, Paper } from '@mui/material'
 import { CssBaseline } from '@mui/material'
 
-import logo from '../../logo.png'
+import logo from 'logo.png'
 import SignInButton from './SignInButton'
 
 const Login = () => {
