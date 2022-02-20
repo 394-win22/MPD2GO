@@ -13,7 +13,7 @@ const PostWithThreads = () => {
   const user = context.user
   const userList = context.userList
   const postList = context.postList
-  let { pageId } = useParams()
+  const { pageId } = useParams()
   const [post, setPost] = useState({})
   const [postAuthor, setPostAuthor] = useState({})
 

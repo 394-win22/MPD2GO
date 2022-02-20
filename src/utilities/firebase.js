@@ -107,7 +107,7 @@ export const getUserFromUid = async (uid) => {
     (snapshot) => {
       output = snapshot.val()
     },
-    (error) => {}
+    (error) => { console.log(error) }
   )
   return output
 }
