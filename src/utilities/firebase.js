@@ -35,7 +35,7 @@ export const useUserState = () => {
 /* data functions */
 export const useData = (path, transform) => {
   const [data, setData] = useState()
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState()
 
   useEffect(() => {
@@ -45,18 +45,18 @@ export const useData = (path, transform) => {
       (snapshot) => {
         const val = snapshot.val()
         setData(transform ? transform(val) : val)
-        setLoading(false)
+        setIsLoading(false)
         setError(null)
       },
       (error) => {
         setData(null)
-        setLoading(false)
+        setIsLoading(false)
         setError(error)
       }
     )
   }, [path, transform])
 
-  return [data, loading, error]
+  return [data, isLoading, error]
 }
 
 export const setData = (path, value) => set(ref(database, path), value)

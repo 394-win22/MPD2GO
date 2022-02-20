@@ -53,8 +53,8 @@ const useStyles = makeStyles({
 
 const Thread = ({ postId, ids, data, style }) => {
 	const classes = useStyles()
-	const [showTextField, setShowTextField] = useState(false)
-	const [showThreads, setShowThreads] = useState(true)
+	const [isShowTextField, setIsShowTextField] = useState(false)
+	const [isShowThreads, setIsShowThreads] = useState(true)
 
 	const user = useContext(UserContext).user
 	const [comment, setComment] = useState('')
@@ -69,7 +69,7 @@ const Thread = ({ postId, ids, data, style }) => {
 		path += '/threads/'
 		replyToThread(user.uid, postId, path, comment)
 		setComment('')
-		setShowTextField(false)
+		setIsShowTextField(false)
 	}
 
 	function getShowRepliesText(x) {
@@ -87,23 +87,23 @@ const Thread = ({ postId, ids, data, style }) => {
 		<Box className={classes.threadContainer} style={style}>
 			<Comment author={data.author} comment={data.comment} time={data.time} />
 			<Box className={classes.rowContainer}>
-				{(showThreads && haveChild) &&
-					<Box className={classes.collapseButton} onClick={() => setShowThreads(false)}>
+				{(isShowThreads && haveChild) &&
+					<Box className={classes.collapseButton} onClick={() => setIsShowThreads(false)}>
 						<Box className={classes.collapseLine} />
 					</Box>
 				}
 				<Box className={classes.verticalContainer} sx={{ width: '100%' }}>
-					{(showThreads) ?
-						<Button color='primary' onClick={() => { setShowTextField(!showTextField) }}>
+					{(isShowThreads) ?
+						<Button color='primary' onClick={() => { setIsShowTextField(!isShowTextField) }}>
 							Reply
 							<MessageIcon style={{ marginLeft: '10px' }} />
 						</Button>
 						:
-						(haveChild) && <Button color='primary' onClick={() => { setShowThreads(true) }}>
+						(haveChild) && <Button color='primary' onClick={() => { setIsShowThreads(true) }}>
 							Show {getShowRepliesText(Object.values(data.threads).length)}
 						</Button>
 					}
-					<Collapse in={showTextField}>
+					<Collapse in={isShowTextField}>
 						<TextField
 							placeholder='Add comments here'
 							inputProps={{ 'aria-label': 'Add comments here' }}
@@ -119,7 +119,7 @@ const Thread = ({ postId, ids, data, style }) => {
 							}}
 						/>
 					</Collapse>
-					<Collapse in={showThreads}>
+					<Collapse in={isShowThreads}>
 						{(haveChild) && sortedThreads.map(([id, thread], i) => {
 							return <Thread style={{ marginLeft: '35px' }} postId={postId} key={i} data={thread} ids={[...ids, id]} />
 						})}

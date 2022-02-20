@@ -27,7 +27,7 @@ const DesktopNavBar = ({ isLoggedIn }) => {
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
-        <AppBar position='relative' sx={{ top: 'auto', top: 0 }}>
+        <AppBar position='relative' sx={{ top: 'auto' }}>
           <Toolbar>
             <Typography sx={{ flexGrow: 1, ml: 1 }}>
               <img src={logo} alt='Hive Logo' style={{ height: '3em' }} />
