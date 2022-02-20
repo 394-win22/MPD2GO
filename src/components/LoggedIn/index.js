@@ -6,7 +6,6 @@ import CreatePost from 'components/CreatePost'
 import Profile from 'components/Profile'
 import PostWithThreads from 'components/Post/index.js'
 import Navigation from 'components/Navigation'
-
 import { useData } from 'utilities/firebase.js'
 import Main from 'components/Feed'
 
