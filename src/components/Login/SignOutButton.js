@@ -1,20 +1,15 @@
-import LogoutIcon from "@mui/icons-material/Logout";
-import { signOut } from "utilities/firebase.js";
-import ListItem from "@mui/material/ListItem";
+import { Logout as LogoutIcon } from '@mui/icons-material'
+import { ListItem } from '@mui/material'
 
-
+import { signOut } from 'utilities/firebase.js'
 
 const SignOutButton = () => (
   <div>
-    {/* <Button color="inherit" onClick={signOut}>
-      Sign Out
-    </Button> */}
-
     <ListItem button onClick={signOut}>
       <LogoutIcon sx={{paddingRight: 2}}/>
       Sign out
     </ListItem>
   </div>
-);
+)
 
-export default SignOutButton;
+export default SignOutButton

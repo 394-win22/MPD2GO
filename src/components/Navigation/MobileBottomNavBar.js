@@ -1,49 +1,39 @@
-import * as React from "react";
-import { useNavigate } from "react-router-dom";
-// Bar
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import SignOutButton from "../Login/SignOutButton";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AppBar, Box, Menu, MenuItem, ClickAwayListener } from '@mui/material'
+import { AccountCircle as AccountCircleIcon, Email as EmailIcon, Home as HomeIcon, MoreHoriz as MoreHorizIcon, AddCircle as AddCircleIcon } from '@mui/icons-material'
 
-//icons
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import EmailIcon from "@mui/icons-material/Email";
-import HomeIcon from "@mui/icons-material/Home";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-// Drawer
-import ClickAwayListener from "@mui/material/ClickAwayListener";
+import SignOutButton from '../Login/SignOutButton'
 
 const MobileBottomNavBar = ({ isLoggedIn }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const isMenuOpen = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null)
+  
+  const isMenuOpen = Boolean(anchorEl)
 
   const handleDrawerOpen = (e) => {
-    setAnchorEl(e.currentTarget);
-  };
+    setAnchorEl(e.currentTarget)
+  }
 
   const handleDrawerClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   const handleClickAway = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
         <AppBar
-          position="fixed"
-          sx={{ top: "auto", bottom: 0 }}
-          style={{ alignItems: "center", justifyContent: "space-between", display: "flex", flexDirection: "row", padding: "0px 30px" }}
+          position='fixed'
+          sx={{ top: 'auto', bottom: 0 }}
+          style={{ alignItems: 'center', justifyContent: 'space-between', display: 'flex', flexDirection: 'row', padding: '0px 30px' }}
         >
 
-          <MenuItem onClick={() => {navigate("/");}}>
+          <MenuItem onClick={() => {navigate('/')}}>
               <HomeIcon />
           </MenuItem>
 
@@ -53,12 +43,12 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
                   <EmailIcon />
               </MenuItem>
 
-              <MenuItem onClick={() => navigate("/createPost")}>
+              <MenuItem onClick={() => navigate('/createPost')}>
                   <AddCircleIcon />
               </MenuItem>
 
-              <MenuItem onClick={() => {navigate("/profile");}}>
-                  <AccountCircle />
+              <MenuItem onClick={() => {navigate('/profile')}}>
+                  <AccountCircleIcon />
               </MenuItem>
             </>
           )}
@@ -68,7 +58,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
         </AppBar>
 
         <Menu
-          id="basic-menu"
+          id='basic-menu'
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: 'top',
@@ -92,7 +82,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
 
       </Box>
     </ClickAwayListener >
-  );
-};
+  )
+}
 
-export default MobileBottomNavBar;
+export default MobileBottomNavBar

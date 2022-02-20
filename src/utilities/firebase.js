@@ -1,143 +1,120 @@
-import { initializeApp } from "firebase/app";
-import { useState, useEffect } from "react";
-
-import "firebase/storage";
-import {
-  getStorage,
-  ref as sRef,
-  uploadBytes,
-  getDownloadURL,
-} from "firebase/storage";
-import {
-  getDatabase,
-  onValue,
-  ref,
-  set,
-  push,
-  update,
-  remove,
-} from "firebase/database";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  onIdTokenChanged,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
+import { useState, useEffect } from 'react'
+import { initializeApp } from 'firebase/app'
+import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { getDatabase, onValue, ref, set, push, update, remove } from 'firebase/database'
+import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCsLijH-2wBUfU_NwzNNLTBadqqNIHxtFQ",
-  authDomain: "mpd2go.firebaseapp.com",
-  databaseURL: "https://mpd2go-default-rtdb.firebaseio.com",
-  projectId: "mpd2go",
-  storageBucket: "mpd2go.appspot.com",
-  messagingSenderId: "792215885159",
-  appId: "1:792215885159:web:2f30dc65fba26c7644cbc2",
-};
+  apiKey: 'AIzaSyCsLijH-2wBUfU_NwzNNLTBadqqNIHxtFQ',
+  authDomain: 'mpd2go.firebaseapp.com',
+  databaseURL: 'https://mpd2go-default-rtdb.firebaseio.com',
+  projectId: 'mpd2go',
+  storageBucket: 'mpd2go.appspot.com',
+  messagingSenderId: '792215885159',
+  appId: '1:792215885159:web:2f30dc65fba26c7644cbc2',
+}
 
-export const firebase = initializeApp(firebaseConfig);
-export const database = getDatabase(firebase);
-const storage = getStorage();
+export const firebase = initializeApp(firebaseConfig)
+export const database = getDatabase(firebase)
+const storage = getStorage()
 
-const firebaseSignOut = () => signOut(getAuth(firebase));
+const firebaseSignOut = () => signOut(getAuth(firebase))
 
-export { firebaseSignOut as signOut };
+export { firebaseSignOut as signOut }
 
 export const useUserState = () => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState()
 
   useEffect(() => {
-    onIdTokenChanged(getAuth(firebase), setUser);
-  }, []);
+    onIdTokenChanged(getAuth(firebase), setUser)
+  }, [])
 
-  return user;
-};
+  return user
+}
 
 /* data functions */
 export const useData = (path, transform) => {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [data, setData] = useState()
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState()
 
   useEffect(() => {
-    const dbRef = ref(database, path);
+    const dbRef = ref(database, path)
     return onValue(
       dbRef,
       (snapshot) => {
-        const val = snapshot.val();
-        setData(transform ? transform(val) : val);
-        setLoading(false);
-        setError(null);
+        const val = snapshot.val()
+        setData(transform ? transform(val) : val)
+        setIsLoading(false)
+        setError(null)
       },
       (error) => {
-        setData(null);
-        setLoading(false);
-        setError(error);
+        setData(null)
+        setIsLoading(false)
+        setError(error)
       }
-    );
-  }, [path, transform]);
+    )
+  }, [path, transform])
 
-  return [data, loading, error];
-};
+  return [data, isLoading, error]
+}
 
-export const setData = (path, value) => set(ref(database, path), value);
+export const setData = (path, value) => set(ref(database, path), value)
 
-export const pushData = (path, value) => push(ref(database, path), value);
+export const pushData = (path, value) => push(ref(database, path), value)
 
-export const updateData = (path, value) => update(ref(database, path), value);
-
+export const updateData = (path, value) => update(ref(database, path), value)
 
 /* authentication functions */
 export const signInWithGoogle = () => {
-  const provider = new GoogleAuthProvider();
+  const provider = new GoogleAuthProvider()
   provider.setCustomParameters({
-    prompt: "select_account",
-  });
+    prompt: 'select_account',
+  })
 
-  signInWithPopup(getAuth(firebase), provider);
-};
+  signInWithPopup(getAuth(firebase), provider)
+}
 
 export const deleteData = (dataPath) => {
-  const listRef = ref(database, dataPath);
-  remove(listRef);
-};
+  const listRef = ref(database, dataPath)
+  remove(listRef)
+}
 
 export const addPost = (post) => {
-  pushData("/post/", {
+  pushData('/post/', {
     author: post.author,
     description: post.author,
     time: post.author,
     title: post.title,
-  });
-};
+  })
+}
 
 export const saveUserToDb = (userObject) => {
-  // console.log("save User to DB", userObject);
-  setData("/users/" + userObject.uid, {
+  setData('/users/' + userObject.uid, {
     displayName: userObject.displayName,
     email: userObject.email,
     photoURL: userObject.photoURL,
-    bio: userObject.bio || "",
-    year: userObject.year || "",
-  });
-};
+    bio: userObject.bio || '',
+    year: userObject.year || '',
+  })
+}
 
 export const getUserFromUid = async (uid) => {
-  const dbRef = ref(database, `/users/${uid}`);
-  var output;
+  const dbRef = ref(database, `/users/${uid}`)
+  var output
   await onValue(
     dbRef,
     (snapshot) => {
-      output = snapshot.val();
+      output = snapshot.val()
     },
-    (error) => { }
-  );
-  return output;
-};
+    (error) => { console.log(error) }
+  )
+  return output
+}
 
 export const uploadPhotoToStorage = async (image) => {
-  const storageRef = sRef(storage, "images/" + image.name);
+  const storageRef = sRef(storage, 'images/' + image.name)
   return uploadBytes(storageRef, image).then((snapshot) =>
     getDownloadURL(snapshot.ref).then((downloadURL) => downloadURL)
-  );
-};
+  )
+}

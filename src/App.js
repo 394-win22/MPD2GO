@@ -1,27 +1,23 @@
-import "./App.css";
-import React, { useState } from 'react';
-import Login from "components/Login";
+import { useEffect } from 'react'
+import { ThemeProvider } from '@mui/material/styles'
 
-import {
-  useUserState,
-  getUserFromUid,
-  saveUserToDb,
-} from "utilities/firebase.js";
-import { useEffect } from "react";
-import { ThemeProvider } from '@mui/material/styles';
-import theme from "theme.js"
-import LoggedIn from "components/LoggedIn";
+import theme from 'theme.js'
+import LoggedIn from 'components/LoggedIn'
+import { useUserState, getUserFromUid, saveUserToDb } from 'utilities/firebase.js'
+import './App.css'
+import Login from 'components/Login'
 
-function App() {
+const App = () => {
   const user = useUserState();
+  
   useEffect(() => {
-    if (!user) return;
+    if (!user) return
     getUserFromUid(user.uid).then((userData) => {
       if (!userData) {
-        saveUserToDb(user);
+        saveUserToDb(user)
       }
-    });
-  }, [user]);
+    })
+  }, [user])
 
 
   return (
@@ -33,7 +29,7 @@ function App() {
       )
       }
     </ThemeProvider>
-  );
+  )
 }
 
 export default App;
