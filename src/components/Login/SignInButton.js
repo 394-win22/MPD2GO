@@ -1,18 +1,18 @@
-import { Button } from "@mui/material";
-import { signInWithGoogle } from "utilities/firebase.js";
+import { Button } from '@mui/material'
+import { signInWithGoogle } from 'utilities/firebase.js'
 
 const SignInButton = () => (
   <div>
     <Button
-      color="secondary"
+      color='secondary'
       fullWidth
-      variant="contained"
+      variant='contained'
       sx={{ mt: 3, mb: 2 }}
       onClick={signInWithGoogle}
     >
-      LOG IN{" "}
+      LOG IN{' '}
     </Button>
   </div>
-);
+)
 
-export default SignInButton;
+export default SignInButton
