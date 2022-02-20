@@ -5,13 +5,13 @@ import { getDatabase, onValue, ref, set, push, update, remove } from 'firebase/d
 import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCsLijH-2wBUfU_NwzNNLTBadqqNIHxtFQ',
-  authDomain: 'mpd2go.firebaseapp.com',
-  databaseURL: 'https://mpd2go-default-rtdb.firebaseio.com',
-  projectId: 'mpd2go',
-  storageBucket: 'mpd2go.appspot.com',
-  messagingSenderId: '792215885159',
-  appId: '1:792215885159:web:2f30dc65fba26c7644cbc2',
+  apiKey: "AIzaSyALmMHVtIxzi3hogJcDlbbaue9_nfEzUjQ",
+  authDomain: "hive-mpd2.firebaseapp.com",
+  databaseURL: "https://hive-mpd2-default-rtdb.firebaseio.com",
+  projectId: "hive-mpd2",
+  storageBucket: "hive-mpd2.appspot.com",
+  messagingSenderId: "276071050379",
+  appId: "1:276071050379:web:50d75b811610e8f60df88e"
 }
 
 export const firebase = initializeApp(firebaseConfig)
