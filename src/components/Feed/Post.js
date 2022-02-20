@@ -29,10 +29,11 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Post = ({ post }) => {
-  const theme = useTheme()
-  const classes = useStyles(theme)
   const navigate = useNavigate()
   const context = useContext(UserContext)
+  const theme = useTheme()
+  const classes = useStyles(theme)
+
   const users = context.userList
   const user = getUserDataFromUID(post.author, users)
 

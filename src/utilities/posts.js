@@ -6,6 +6,7 @@ export const createPostInFirebase = (postObj) => {
   const db = getDatabase()
   const postListRef = ref(db, 'posts')
   const postId = push(postListRef)
+  
   set(postId, postObj)
 }
 

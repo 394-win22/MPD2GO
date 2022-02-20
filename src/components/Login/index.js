@@ -1,6 +1,7 @@
 import { Grid, Box, Paper } from '@mui/material'
 import { CssBaseline } from '@mui/material'
 
+import logo from '../../logo.png'
 import SignInButton from './SignInButton'
 
 const Login = () => {
@@ -43,7 +44,7 @@ const Login = () => {
             alignItems: 'center',
           }}
         >
-          <img src='logo.png' alt='Hive Logo' style={{ height: '10em' }} />
+          <img src={logo} alt='Hive Logo' style={{ height: '10em' }} />
           <Box component='form' sx={{ mt: 20, width: 200 }}>
             <SignInButton />
           </Box>

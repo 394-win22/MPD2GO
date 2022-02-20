@@ -53,10 +53,10 @@ const useStyles = makeStyles({
 
 const Thread = ({ postId, ids, data, style }) => {
 	const classes = useStyles()
+	const user = useContext(UserContext).user
+
 	const [isShowTextField, setIsShowTextField] = useState(false)
 	const [isShowThreads, setIsShowThreads] = useState(true)
-
-	const user = useContext(UserContext).user
 	const [comment, setComment] = useState('')
 
 	const replyToComment = () => {

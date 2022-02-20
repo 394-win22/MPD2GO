@@ -5,8 +5,9 @@ import { Typography, Avatar, Box, Button } from '@mui/material'
 import { getUserFromUid } from 'utilities/firebase'
 
 const Profile = ({ user }) => {
-  const [userData, setUserData] = useState(null)
   const params = useParams()
+
+  const [userData, setUserData] = useState(null)
 
   useEffect(() => {
     const userToSearch = params.userID || user.uid
@@ -15,7 +16,7 @@ const Profile = ({ user }) => {
       if (!data) setUserData('not found')
       else setUserData(data)
     })
-  }, [params])
+  }, [params, user])
 
   if (!userData) return <h1 style={{ marginLeft: 20 }}>Loading...</h1>
 
@@ -51,7 +52,7 @@ const Profile = ({ user }) => {
         <br />
         {userData.year ? userData.year : 'No Year'}
       </Typography>
-      {(!params.userID || params.userID == user.uid) && (
+      {(!params.userID || params.userID === user.uid) && (
         <Button
           variant='text'
           size='small'

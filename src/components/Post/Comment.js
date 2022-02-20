@@ -43,11 +43,12 @@ const useStyles = makeStyles({
 
 export default function Comment({ author, time, comment }) {
   const navigate = useNavigate()
-
   const classes = useStyles()
   const context = useContext(UserContext)
+  
   const userList = context.userList
   const postAuthor = userList.find((obj) => obj.uid === author)
+
   return (
     <Box className={classes.container}>
       <IconButton

@@ -16,10 +16,12 @@ const useStyles = makeStyles({
 })
 
 const CreatePost = () => {
-  const user = useUserState()
+  const navigate = useNavigate()
+
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const navigate = useNavigate()
+
+  const user = useUserState()
 
   const classes = useStyles()
   const handleSubmit = async (e) => {

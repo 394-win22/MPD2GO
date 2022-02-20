@@ -10,6 +10,7 @@ const DesktopNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState(null)
+  
   const isMenuOpen = Boolean(anchorEl)
 
   const handleDrawerOpen = (e) => {

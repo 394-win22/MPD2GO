@@ -10,16 +10,19 @@ import ReplyTextField from './ReplyTextField'
 const PostWithThreads = () => {
   const navigate = useNavigate()
   const context = useContext(UserContext)
+  const { pageId } = useParams()
+  
+  const [post, setPost] = useState({})
+  const [postAuthor, setPostAuthor] = useState({})
+
   const user = context.user
   const userList = context.userList
   const postList = context.postList
-  const { pageId } = useParams()
-  const [post, setPost] = useState({})
-  const [postAuthor, setPostAuthor] = useState({})
 
   useEffect(() => {
     const post = postList.find((obj) => obj.id === pageId)
     setPost(post)
+
     const postAuthor = userList.find((obj) => obj.uid === post.author)
     setPostAuthor(postAuthor)
   }, [pageId, postList, userList])

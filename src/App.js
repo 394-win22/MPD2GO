@@ -9,6 +9,7 @@ import Login from 'components/Login'
 
 const App = () => {
   const user = useUserState();
+  
   useEffect(() => {
     if (!user) return
     getUserFromUid(user.uid).then((userData) => {

@@ -7,8 +7,9 @@ import { Send as SendIcon } from '@mui/icons-material'
 import { addCommentToPost } from '../../utilities/posts.js'
 
 const ReplyTextField = ({ post, user }) => {
-	const [comment, setComment] = useState('')
 	const navigate = useNavigate()
+	
+	const [comment, setComment] = useState('')
 
 	const submitComment = () => {
 		addCommentToPost(user.uid, post.id, comment)
