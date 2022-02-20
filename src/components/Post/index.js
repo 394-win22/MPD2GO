@@ -7,7 +7,7 @@ import Thread from './Thread'
 import { UserContext } from 'components/LoggedIn'
 import ReplyTextField from './ReplyTextField'
 
-export default function PostWithThreads() {
+const PostWithThreads = () => {
   const navigate = useNavigate()
   const context = useContext(UserContext)
   const user = context.user
@@ -75,3 +75,5 @@ export default function PostWithThreads() {
     </>
   )
 }
+
+export default PostWithThreads

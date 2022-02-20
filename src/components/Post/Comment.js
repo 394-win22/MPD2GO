@@ -41,13 +41,13 @@ const useStyles = makeStyles({
   },
 })
 
-export default function Comment(props) {
+export default function Comment({ author, time, comment }) {
   const navigate = useNavigate()
 
   const classes = useStyles()
   const context = useContext(UserContext)
   const userList = context.userList
-  const postAuthor = userList.find((obj) => obj.uid === props.author)
+  const postAuthor = userList.find((obj) => obj.uid === author)
   return (
     <Box className={classes.container}>
       <IconButton
@@ -62,10 +62,10 @@ export default function Comment(props) {
         <Box className={classes.infoContainer}>
           <Typography variant='subtitle2'>{postAuthor.displayName}</Typography>
           <Typography className={classes.time}>
-            {moment(props.time).format('MMMM Do YYYY, h:mm a')}
+            {moment(time).format('MMMM Do YYYY, h:mm a')}
           </Typography>
         </Box>
-        <Typography variant='body2'>{props.comment}</Typography>
+        <Typography variant='body2'>{comment}</Typography>
       </Box>
     </Box>
   )

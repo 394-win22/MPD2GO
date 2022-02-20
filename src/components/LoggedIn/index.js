@@ -10,27 +10,28 @@ import Navigation from 'components/Navigation'
 import { useData } from 'utilities/firebase.js'
 import Main from 'components/Feed'
 
-function getPostList(posts) {
+const getPostList = (posts) => {
 	const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
 		return { ...postObj, id: postId }
 	})
 	return listOfPost
 }
 
-function getUserList(users) {
+const getUserList = (users) => {
 	return Object.entries(users).map(([uid, userObj]) => {
 		return { ...userObj, uid: uid }
 	})
 }
+
 export const UserContext = createContext()
 
-function LoggedIn({ user }) {
-	const [postList, postListLoading, postListError] = useData(
+const LoggedIn = ({ user }) => {
+	const [postList, postListLoading] = useData(
 		'/posts',
 		getPostList
 	)
 
-	const [userList, userListLoading, userListError] = useData(
+	const [userList, userListLoading] = useData(
 		'/users',
 		getUserList
 	)

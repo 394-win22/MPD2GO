@@ -6,7 +6,7 @@ import { Send as SendIcon } from '@mui/icons-material'
 
 import { addCommentToPost } from '../../utilities/posts.js'
 
-export default function ReplyTextField({ post, user }) {
+const ReplyTextField = ({ post, user }) => {
 	const [comment, setComment] = useState('')
 	const navigate = useNavigate()
 
@@ -50,3 +50,5 @@ export default function ReplyTextField({ post, user }) {
 
 	)
 }
+
+export default ReplyTextField

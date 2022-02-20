@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Post({ post }) {
+const Post = ({ post }) => {
   const theme = useTheme()
   const classes = useStyles(theme)
   const navigate = useNavigate()
@@ -36,7 +36,7 @@ export default function Post({ post }) {
   const users = context.userList
   const user = getUserDataFromUID(post.author, users)
 
-  function getNumCommentsText(post) {
+  const getNumCommentsText = (post) => {
     if (!('numComments' in post)) return '0 Comments'
     const num = post.numComments
     if (num === 0) return '0 Comments'
@@ -70,3 +70,5 @@ export default function Post({ post }) {
     </Card>
   )
 }
+
+export default Post

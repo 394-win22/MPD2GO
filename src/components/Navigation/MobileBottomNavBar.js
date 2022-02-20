@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppBar, Box, Menu, MenuItem, ClickAwayListener } from '@mui/material'
-import { AccountCircle, Email as EmailIcon, Home as HomeIcon, MoreHoriz as MoreHorizIcon, AddCircle as AddCircleIcon } from '@mui/icons-material'
+import { AccountCircle as AccountCircleIcon, Email as EmailIcon, Home as HomeIcon, MoreHoriz as MoreHorizIcon, AddCircle as AddCircleIcon } from '@mui/icons-material'
 
 import SignOutButton from '../Login/SignOutButton'
 
@@ -47,7 +47,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
               </MenuItem>
 
               <MenuItem onClick={() => {navigate('/profile')}}>
-                  <AccountCircle />
+                  <AccountCircleIcon />
               </MenuItem>
             </>
           )}

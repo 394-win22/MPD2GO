@@ -50,7 +50,8 @@ const useStyles = makeStyles({
 	}
 
 })
-function Thread(props) {
+
+const Thread = ({ postId, ids, data, style }) => {
 	const classes = useStyles()
 	const [showTextField, setShowTextField] = useState(false)
 	const [showThreads, setShowThreads] = useState(true)
@@ -58,15 +59,15 @@ function Thread(props) {
 	const user = useContext(UserContext).user
 	const [comment, setComment] = useState('')
 
-	function replyToComment() {
+	const replyToComment = () => {
 		// GENERATE A PATH TO PUSH TO IN DATABASE
-		let path = `${props.postId}`
-		props.ids.forEach((id) => {
+		let path = `${postId}`
+		ids.forEach((id) => {
 			path += '/threads/'
 			path += id
 		})
 		path += '/threads/'
-		replyToThread(user.uid, props.postId, path, comment)
+		replyToThread(user.uid, postId, path, comment)
 		setComment('')
 		setShowTextField(false)
 	}
@@ -79,12 +80,12 @@ function Thread(props) {
 	}
 
 	let sortedThreads = []
-	const haveChild = ('threads' in props.data && Object.values(props.data.threads).length > 0)
-	if (haveChild) sortedThreads = Object.entries(props.data.threads).sort().reverse()
+	const haveChild = ('threads' in data && Object.values(data.threads).length > 0)
+	if (haveChild) sortedThreads = Object.entries(data.threads).sort().reverse()
 
 	return (
-		<Box className={classes.threadContainer} style={props.style}>
-			<Comment author={props.data.author} comment={props.data.comment} time={props.data.time} />
+		<Box className={classes.threadContainer} style={style}>
+			<Comment author={data.author} comment={data.comment} time={data.time} />
 			<Box className={classes.rowContainer}>
 				{(showThreads && haveChild) &&
 					<Box className={classes.collapseButton} onClick={() => setShowThreads(false)}>
@@ -99,7 +100,7 @@ function Thread(props) {
 						</Button>
 						:
 						(haveChild) && <Button color='primary' onClick={() => { setShowThreads(true) }}>
-							Show {getShowRepliesText(Object.values(props.data.threads).length)}
+							Show {getShowRepliesText(Object.values(data.threads).length)}
 						</Button>
 					}
 					<Collapse in={showTextField}>
@@ -120,7 +121,7 @@ function Thread(props) {
 					</Collapse>
 					<Collapse in={showThreads}>
 						{(haveChild) && sortedThreads.map(([id, thread], i) => {
-							return <Thread style={{ marginLeft: '35px' }} postId={props.postId} key={i} data={thread} ids={[...props.ids, id]} />
+							return <Thread style={{ marginLeft: '35px' }} postId={postId} key={i} data={thread} ids={[...ids, id]} />
 						})}
 					</Collapse>
 				</Box>
