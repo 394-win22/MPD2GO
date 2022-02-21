@@ -8,15 +8,16 @@ import './App.css'
 import Login from 'components/Login'
 
 const App = () => {
-  const user = useUserState();
+  const user = useUserState()
   
-  useEffect(() => {
+  useEffect(async () => {
     if (user === undefined || user === null) return
-    getUserFromUid(user.uid).then(userData => {
-      if (userData !== null || userData !== undefined) {
-        saveUserToDb(user)
-      }
-    })
+    console.log(user)
+    const userData = await getUserFromUid(user.uid)
+    if (userData === 'not found') {
+      console.log('Called!')
+      saveUserToDb(user)
+    }
   }, [user])
 
   return (
@@ -31,4 +32,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
