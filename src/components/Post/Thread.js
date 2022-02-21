@@ -64,7 +64,6 @@ const useStyles = makeStyles({
 	time: {
 		color: '#888888',
 		fontSize: '13px',
-
 	},
 	collapseButton: {
 		display: 'flex',
@@ -87,31 +86,20 @@ const useStyles = makeStyles({
 			cursor: 'pointer'
 		}
 	},
-	verticalContainer: {
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'flex-start',
-		justifyContent: 'flex-start',
-		marginLeft: "3px"
-	},
-	textField: {
-		marginLeft: "10px",
-		width: "100%"
+	buttonContainer: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		marginBottom: "5px"
 	},
 
-	rowContainer: {
-		display: 'flex',
-		flexDirection: 'row',
-		alignItems: 'stretch',
-		justifyContent: 'flex-start',
-		marginLeft: "10px"
-	},
 	replyButton: {
 		fontSize: "13px",
 		padding: "8px 14px 8px 14px",
-		marginBottom: "5px"
 	},
 	showReplies: {
+		fontSize: "13px",
+		padding: "8px 14px 8px 14px",
 	}
 
 })
@@ -180,21 +168,24 @@ const Thread = ({ postId, ids, data, style }) => {
 					<Typography variant='body2'>{data.comment}</Typography>
 				</Box>
 
+				{/* Box to add comment */}
+				<Collapse in={isShowTextField} sx={{ width: "100%" }}>
+					<AddComment replyToComment={replyToComment} setIsShowTextField={setIsShowTextField} />
+				</Collapse>
+
 				{/* buttons to show threads and/or view comments  */}
-				{(isShowThreads) ?
-					(!isShowTextField) &&
-					<Button className={classes.replyButton} color='primary' onClick={() => { setIsShowTextField(!isShowTextField) }}>
-						Reply
-						<MessageIcon style={{ marginLeft: '5px', height: "16px", marginTop: "2px" }} />
-					</Button>
-					:
-					(haveChild) && <Button color='primary' className={classes.showReplies} onClick={() => { setIsShowThreads(true) }}>
+				<Box className={classes.buttonContainer}>
+					{(!isShowThreads && haveChild) && <Button color='primary' className={classes.showReplies} onClick={() => { setIsShowThreads(true) }}>
 						Show {getShowRepliesText(Object.values(data.threads).length)}
 					</Button>
-				}
-				<Collapse in={isShowTextField} sx={{ width: "100%" }}>
-					<AddComment replyToComment={replyToComment} />
-				</Collapse>
+					}
+
+					{(!isShowTextField) &&
+						<Button className={classes.replyButton} color='primary' onClick={() => { setIsShowTextField(!isShowTextField) }}>
+							Reply
+							<MessageIcon style={{ marginLeft: '5px', height: "16px", marginTop: "2px" }} />
+						</Button>}
+				</Box>
 
 				{/* child threads */}
 				<Collapse in={isShowThreads}>
