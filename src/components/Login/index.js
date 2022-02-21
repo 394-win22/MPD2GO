@@ -49,12 +49,12 @@ const Login = () => {
           }}
         >
           <img src={logo} alt="Hive Logo" style={{ height: "10em" }} />
-          {(!signUpSwitcher) ? <LogIn /> : <div></div>}
+          {(!signUpSwitcher) ? <LogIn /> : <SignUp />}
           
 
           <Grid item>
-            <Link onClick={() => setSignUpSwitcher(true)} variant="body2" sx={{color: 'white'}}>
-              {"Don't have an account? Sign Up"}
+            <Link onClick={() => setSignUpSwitcher(!signUpSwitcher)} variant="body2" sx={{color: 'white'}}>
+              {signUpSwitcher?  "Already have an account? Sign in" : "Don't have an account? Sign Up"}
             </Link>
           </Grid>
         </Box>
