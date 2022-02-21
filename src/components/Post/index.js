@@ -11,7 +11,7 @@ const PostWithThreads = () => {
   const navigate = useNavigate()
   const context = useContext(UserContext)
   const { pageId } = useParams()
-  
+
   const [post, setPost] = useState({})
   const [postAuthor, setPostAuthor] = useState({})
 
@@ -35,7 +35,7 @@ const PostWithThreads = () => {
   return (
     <>
       <Button
-        sx={{ml: 1, mb:2, color: 'white'}}
+        sx={{ ml: 1, mb: 2, color: 'white' }}
         variant='contained'
         onClick={() => {
           navigate('/')
