@@ -99,7 +99,7 @@ const useStyles = makeStyles({
 	},
 	showReplies: {
 		fontSize: "13px",
-		padding: "8px 14px 8px 14px",
+		padding: "8px 14px 8px 10px",
 	}
 
 })
@@ -190,7 +190,7 @@ const Thread = ({ postId, ids, data, style }) => {
 				{/* child threads */}
 				<Collapse in={isShowThreads}>
 					{(haveChild) && sortedThreads.map(([id, thread], i) => {
-						return <Thread style={{ marginLeft: '35px' }} postId={postId} key={i} data={thread} ids={[...ids, id]} />
+						return <Thread style={{ marginLeft: '0px' }} postId={postId} key={i} data={thread} ids={[...ids, id]} />
 					})}
 				</Collapse>
 			</Box>
