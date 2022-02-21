@@ -101,13 +101,12 @@ export const saveUserToDb = (userObject) => {
 
 export const getUserFromUid = async (uid) => {
   const dbRef = ref(database, `/users/${uid}`)
-  var output
+  let output
   await onValue(
     dbRef,
     (snapshot) => {
       output = snapshot.val()
-    },
-    (error) => { console.log(error) }
+    }
   )
   return output
 }
