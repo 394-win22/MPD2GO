@@ -12,9 +12,11 @@ const App = () => {
   
   useEffect(() => {
     if (!user) return
+    console.log(user.uid)
     getUserFromUid(user.uid).then((userData) => {
+      console.log(userData)
       if (!userData) {
-        saveUserToDb(user)
+        saveUserToDb(user) 
       }
     })
   }, [user])
