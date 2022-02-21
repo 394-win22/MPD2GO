@@ -10,7 +10,7 @@ const SignInButton = () => (
       sx={{ mt: 3, mb: 2 }}
       onClick={signInWithGoogle}
     >
-      LOG IN{' '}
+      LOG IN WITH GOOGLE{' '}
     </Button>
   </div>
 )
