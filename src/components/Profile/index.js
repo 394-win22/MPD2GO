@@ -1,33 +1,32 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
-import { Typography, Avatar, Box, Button } from '@mui/material'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { Typography, Avatar, Box, Button } from "@mui/material";
 
-import { getUserFromUid } from 'utilities/firebase'
+import { getUserFromUid } from "utilities/firebase";
 
 const Profile = ({ user }) => {
-  const params = useParams()
-
-  const [userData, setUserData] = useState(null)
+  const params = useParams();
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const userToSearch = params.userID || user.uid
+    const userToSearch = params.userID || user.uid;
 
     getUserFromUid(userToSearch).then((data) => {
-      if (!data) setUserData('not found')
-      else setUserData(data)
-    })
-  }, [params, user])
+      if (!data) setUserData("not found");
+      else setUserData(data);
+    });
+  }, [params, user]);
 
-  if (!userData) return <h1 style={{ marginLeft: 20 }}>Loading...</h1>
+  if (!userData) return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
 
-  if (userData === 'not found')
-    return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>
+  if (userData === "not found")
+    return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>;
 
   return (
-    <Box textAlign='center'>
+    <Box textAlign="center">
       <Typography
-        variant='h3'
-        component='div'
+        variant="h3"
+        component="div"
         sx={{ flexGrow: 1, paddingLeft: 1, paddingBottom: 5 }}
       >
         {userData.displayName}
@@ -35,39 +34,39 @@ const Profile = ({ user }) => {
       <Avatar
         alt={userData.displayName}
         src={userData.photoURL}
-        variant='rounded'
+        variant="rounded"
         sx={{
           height: 1 / 6,
           width: 1 / 6,
-          margin: 'auto',
+          margin: "auto",
         }}
       />
 
       <Typography
-        variant='h6'
-        component='div'
+        variant="h6"
+        component="div"
         sx={{ flexGrow: 1, paddingLeft: 1, paddingTop: 5 }}
       >
-        {userData.bio ? userData.bio : 'No Bio'}
+        {userData.bio ? userData.bio : "No Bio"}
         <br />
-        {userData.year ? userData.year : 'No Year'}
+        {userData.year ? userData.year : "No Year"}
       </Typography>
       {(!params.userID || params.userID === user.uid) && (
         <Button
-          variant='text'
-          size='small'
+          variant="text"
+          size="small"
           sx={{ marginTop: 2 }}
           onClick={() => {
             alert(
-              'This button should only show for current user, but no editing functionality is implemented yet.'
-            )
+              "This button should only show for current user, but no editing functionality is implemented yet."
+            );
           }}
         >
           Edit Profile
         </Button>
       )}
     </Box>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
