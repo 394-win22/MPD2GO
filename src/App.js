@@ -7,6 +7,8 @@ import { useUserState, getUserFromUid, saveUserToDb } from 'utilities/firebase.j
 import './App.css'
 import Login from 'components/Login'
 
+import { TryPres } from './Presentation'
+
 const App = () => {
   const user = useUserState();
   
