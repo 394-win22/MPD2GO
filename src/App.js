@@ -11,18 +11,17 @@ const App = () => {
   const user = useUserState();
   
   useEffect(() => {
-    if (!user) return
-    getUserFromUid(user.uid).then((userData) => {
-      if (!userData) {
+    if (user === undefined || user === null) return
+    getUserFromUid(user.uid).then(userData => {
+      if (userData !== null || userData !== undefined) {
         saveUserToDb(user)
       }
     })
   }, [user])
 
-
   return (
     <ThemeProvider theme={theme}>
-      {(user === undefined || user == null) ? (
+      {(user === null) ? (
         <Login />
       ) : (
         <LoggedIn user={user} />
