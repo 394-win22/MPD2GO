@@ -104,8 +104,11 @@ export const getUserFromUid = async (uid) => {
   let output
   await onValue(
     dbRef,
-    (snapshot) => {
-      output = snapshot.val()
+    snapshot => {
+      output = (snapshot !== undefined ) ? snapshot.val() : 'not found'
+    }, () => {
+      // Will get called if fail, usually b/c unauthorized
+      output = null
     }
   )
   return output
