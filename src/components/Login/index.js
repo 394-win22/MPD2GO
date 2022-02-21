@@ -2,9 +2,13 @@ import { Grid, Box, Paper, Typography, TextField, Button, Link } from "@mui/mate
 import { CssBaseline } from "@mui/material";
 
 import logo from "logo.png";
-import SignInButton from "./SignInButton";
+import { useState } from "react";
+import LogIn from "./LogIn";
+import SignUp from "./SignUp";
 
 const Login = () => {
+  const [signUpSwitcher, setSignUpSwitcher] = useState(false);
+
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -45,51 +49,14 @@ const Login = () => {
           }}
         >
           <img src={logo} alt="Hive Logo" style={{ height: "10em" }} />
-          <Box component="form" sx={{ mt: 20, width: 200 }}>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <Box
-              component="form"
-              noValidate
-              sx={{ mt: 1, backgroundColor: "white" }}
-            >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-            </Box>
-            <SignInButton />
-            <Grid item>
-                  <Link href="#" variant="body2" sx={{color: 'white'}}>
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-          </Box>
+          {(!signUpSwitcher) ? <LogIn /> : <div></div>}
+          
+
+          <Grid item>
+            <Link onClick={() => setSignUpSwitcher(true)} variant="body2" sx={{color: 'white'}}>
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </Grid>
         </Box>
       </Grid>
     </Grid>

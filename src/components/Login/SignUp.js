@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function signUp() {
+export default function SignUp() {
   // States for registration
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
