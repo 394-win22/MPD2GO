@@ -1,15 +1,30 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AppBar, Box, Menu, MenuItem, ClickAwayListener } from '@mui/material'
-import { AccountCircle as AccountCircleIcon, Email as EmailIcon, Home as HomeIcon, MoreHoriz as MoreHorizIcon, AddCircle as AddCircleIcon } from '@mui/icons-material'
+import {
+  AppBar,
+  Box,
+  Menu,
+  MenuItem,
+  ClickAwayListener,
+  ListItemIcon,
+  ListItemText
+} from '@mui/material'
+import {
+  AccountCircle as AccountCircleIcon,
+  Email as EmailIcon,
+  Home as HomeIcon,
+  MoreHoriz as MoreHorizIcon,
+  AddCircle as AddCircleIcon,
+  Logout as LogoutIcon
+} from '@mui/icons-material'
 
-import SignOutButton from '../Login/SignOutButton'
+import { signOut } from 'utilities/firebase'
 
 const MobileBottomNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState(null)
-  
+
   const isMenuOpen = Boolean(anchorEl)
 
   const handleDrawerOpen = (e) => {
@@ -33,27 +48,27 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
           style={{ alignItems: 'center', justifyContent: 'space-between', display: 'flex', flexDirection: 'row', padding: '0px 30px' }}
         >
 
-          <MenuItem onClick={() => {navigate('/')}}>
-              <HomeIcon />
+          <MenuItem onClick={() => { navigate('/') }}>
+            <HomeIcon />
           </MenuItem>
 
           {isLoggedIn && (
             <>
               <MenuItem disabled={true}>
-                  <EmailIcon />
+                <EmailIcon />
               </MenuItem>
 
               <MenuItem onClick={() => navigate('/createPost')}>
-                  <AddCircleIcon />
+                <AddCircleIcon />
               </MenuItem>
 
-              <MenuItem onClick={() => {navigate('/profile')}}>
-                  <AccountCircleIcon />
+              <MenuItem onClick={() => { navigate('/profile') }}>
+                <AccountCircleIcon />
               </MenuItem>
             </>
           )}
           <MenuItem onClick={handleDrawerOpen}>
-              <MoreHorizIcon />
+            <MoreHorizIcon />
           </MenuItem>
         </AppBar>
 
@@ -75,8 +90,9 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
           }}
         >
 
-          <MenuItem onClick={handleDrawerClose}>
-            <SignOutButton />
+          <MenuItem onClick={signOut}>
+            <ListItemIcon><LogoutIcon /></ListItemIcon>
+            <ListItemText>Sign out</ListItemText>
           </MenuItem>
         </Menu>
 

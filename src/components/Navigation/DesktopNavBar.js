@@ -1,9 +1,26 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AppBar, Box, Toolbar, Typography, ClickAwayListener, Menu, MenuItem } from '@mui/material'
-import { AccountCircle as AccountCircleIcon, Email as EmailIcon, Home as HomeIcon, MoreHoriz as MoreHorizIcon, AddCircle as AddCircleIcon } from '@mui/icons-material'
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  ClickAwayListener,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText
+} from '@mui/material'
+import {
+  AccountCircle as AccountCircleIcon,
+  Email as EmailIcon,
+  Home as HomeIcon,
+  MoreHoriz as MoreHorizIcon,
+  AddCircle as AddCircleIcon,
+  Logout as LogoutIcon
+} from '@mui/icons-material'
 
-import SignOutButton from '../Login/SignOutButton'
+import { signOut } from 'utilities/firebase'
 import logo from 'logo.png'
 
 const DesktopNavBar = ({ isLoggedIn }) => {
@@ -76,10 +93,12 @@ const DesktopNavBar = ({ isLoggedIn }) => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={handleDrawerClose}>
-            <SignOutButton />
+          <MenuItem onClick={signOut}>
+            <ListItemIcon><LogoutIcon /></ListItemIcon>
+            <ListItemText>Sign out</ListItemText>
           </MenuItem>
         </Menu>
+
       </Box>
     </ClickAwayListener>
   )
