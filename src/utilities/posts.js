@@ -31,3 +31,7 @@ export const replyToThread = (uid, postId, path, comment) => {
     numComments: increment(1)
   })
 }
+
+export const getUserDataFromUID = (uid, users) => {
+  return users.find((user) => user.uid === uid);
+};
