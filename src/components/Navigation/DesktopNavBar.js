@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AppBar, Box, Toolbar, Typography, ClickAwayListener, Menu, MenuItem } from '@mui/material'
+import { AppBar, Box, Button, Toolbar, Typography, ClickAwayListener, Menu, MenuItem } from '@mui/material'
 import { AccountCircle as AccountCircleIcon, Email as EmailIcon, Home as HomeIcon, MoreHoriz as MoreHorizIcon, AddCircle as AddCircleIcon } from '@mui/icons-material'
 
 import SignOutButton from '../Login/SignOutButton'
@@ -27,16 +27,12 @@ const DesktopNavBar = ({ isLoggedIn }) => {
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
+      <Box sx={{ flexGrow: 1, paddingBottom: 3, }}>
         <AppBar position='relative' sx={{ top: 'auto' }}>
           <Toolbar>
-            <Typography sx={{ flexGrow: 1, ml: 1 }}>
+            <Button sx={{ flexGrow: 1, ml: 1, display: "flex", justifyContent: "flex-start", alignItems: "flex-start" }} onClick={() => { navigate('/') }}>
               <img src={logo} alt='Hive Logo' style={{ height: '3em' }} />
-            </Typography>
-
-            <MenuItem onClick={() => { navigate('/') }}>
-              <HomeIcon />
-            </MenuItem>
+            </Button>
 
             {isLoggedIn && (
               <>
