@@ -58,6 +58,7 @@ const CreatePost = () => {
           onChange={(event) => {
             setTitle(event.target.value)
           }}
+          autoComplete='off'
         />
         <TextField
           margin='normal'
@@ -65,6 +66,7 @@ const CreatePost = () => {
           multiline
           minRows={4}
           value={description}
+          autoComplete='off'
           onChange={(event) => {
             setDescription(event.target.value)
           }}

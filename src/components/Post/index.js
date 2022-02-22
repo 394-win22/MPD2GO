@@ -11,7 +11,7 @@ const PostWithThreads = () => {
   const navigate = useNavigate()
   const context = useContext(UserContext)
   const { pageId } = useParams()
-  
+
   const [post, setPost] = useState({})
   const [postAuthor, setPostAuthor] = useState({})
 
@@ -22,20 +22,18 @@ const PostWithThreads = () => {
   useEffect(() => {
     const post = postList.find((obj) => obj.id === pageId)
     setPost(post)
-
     const postAuthor = userList.find((obj) => obj.uid === post.author)
     setPostAuthor(postAuthor)
   }, [pageId, postList, userList])
 
   let sortedThreads = []
   const haveChild = 'threads' in post && Object.values(post.threads).length > 0
-
   if (haveChild) sortedThreads = Object.entries(post.threads).sort().reverse()
 
   return (
     <>
       <Button
-        sx={{ml: 1, mb:2, color: 'white'}}
+        sx={{ ml: 1, mb: 2, color: 'white' }}
         variant='contained'
         onClick={() => {
           navigate('/')
@@ -65,7 +63,7 @@ const PostWithThreads = () => {
           </Typography>
         </CardContent>
         <ReplyTextField post={post} user={user} />
-        <CardContent align='left'>
+        <CardContent sx={{ paddingLeft: "2%" }} align='left'>
           {'threads' in post &&
             Object.values(post.threads).length > 0 &&
             sortedThreads.map(([id, thread], i) => {
