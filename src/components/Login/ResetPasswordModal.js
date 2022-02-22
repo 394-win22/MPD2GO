@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, TextField, Button, Divider, Link, Typography, Modal, Stack, IconButton } from "@mui/material";
+import { Box, TextField, Button, Typography, Modal, IconButton } from "@mui/material";
 import { Send as SendIcon } from '@mui/icons-material'
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -65,9 +65,17 @@ const ResetPasswordModal = ({ open, handleClose }) => {
                         autoComplete="email"
                         autoFocus
                     />
-                    <IconButton sx={{ mt: 3, mx: 2 }} type="submit">
-                        <SendIcon />
-                    </IconButton>
+                    <Button
+                        type="submit"
+                        variant='contained'
+                        sx={{
+                            mt: 3,
+                            ml: 1
+                        }}
+                        startIcon={<SendIcon />}
+                    >
+                        Submit
+                    </Button>
                 </Box>
 
             </Box>

@@ -117,10 +117,12 @@ export const logInWithEmailAndPassword = async (email, password) => {
 export const forgotPassword = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
+    alert("Check your email. You'll receive a link to reset your account password.");
   } catch (err) {
     console.error(err);
     alert(err.message);
   }
+
 };
 
 export const deleteData = (dataPath) => {
