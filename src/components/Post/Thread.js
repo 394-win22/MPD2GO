@@ -1,6 +1,7 @@
 import { useState, useContext, memo } from 'react'
 import { Box, Collapse, TextField, Button } from '@mui/material'
 import { Message as MessageIcon } from '@mui/icons-material'
+import { flexbox } from '@mui/system';
 import { UserContext } from 'components/LoggedIn'
 import { makeStyles } from '@mui/styles'
 import { Avatar, Typography, IconButton } from '@mui/material'
@@ -30,11 +31,12 @@ const useStyles = makeStyles({
 		flexDirection: "column",
 		alignItems: "flex-start",
 		height: "100%",
-		minWidth: "0px"
+		minWidth: "0px",
+		flexWrap: "wrap"
 	},
 	avatarButton: {
-		width: "30px",
-		height: "30px",
+		width: "24px",
+		height: "24px",
 		display: "flex",
 		marginTop: '4px',
 		marginRight: '1px',
@@ -48,10 +50,12 @@ const useStyles = makeStyles({
 	},
 	contentContainer: {
 		marginLeft: '10px',
-		display: 'flex',
+		display: 'inline-flex',
 		flexDirection: 'column',
 		alignItems: 'flex-start',
 		justifyContent: 'flex-start',
+		flexWrap: "wrap",
+		minWidth: "0px"
 	},
 	infoContainer: {
 		display: 'flex',
@@ -59,7 +63,9 @@ const useStyles = makeStyles({
 		alignItems: 'flex-start',
 		justifyContent: 'space-between',
 		textAlign: 'left',
-		marginBottom: "4px"
+		marginBottom: "4px",
+		flexWrap: "wrap",
+		minWidth: "0px"
 	},
 	time: {
 		color: '#888888',
@@ -158,14 +164,14 @@ const Thread = ({ postId, ids, data, style }) => {
 			</Box>
 			<Box className={classes.rightContainer}>
 				{/* comment */}
-				<Box className={classes.contentContainer}>
+				<Box className={classes.contentContainer} >
 					<Box className={classes.infoContainer}>
 						<Typography variant='subtitle2'>{postAuthor.displayName}</Typography>
 						<Typography className={classes.time}>
 							{moment(data.time).format('MMMM Do YYYY, h:mm a')}
 						</Typography>
 					</Box>
-					<Typography variant='body2'>{data.comment}</Typography>
+					<Typography sx={{ flexWrap: "wrap" }} variant='body2'>{data.comment}</Typography>
 				</Box>
 
 				{/* Box to add comment */}
@@ -190,7 +196,7 @@ const Thread = ({ postId, ids, data, style }) => {
 				{/* child threads */}
 				<Collapse in={isShowThreads}>
 					{(haveChild) && sortedThreads.map(([id, thread], i) => {
-						return <Thread style={{ marginLeft: '0px' }} postId={postId} key={i} data={thread} ids={[...ids, id]} />
+						return <Thread style={{ marginLeft: '0px', flexWrap: "wrap" }} postId={postId} key={i} data={thread} ids={[...ids, id]} />
 					})}
 				</Collapse>
 			</Box>

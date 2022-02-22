@@ -20,7 +20,7 @@ const AddComment = ({ replyToComment, setIsShowTextField }) => {
 	const [comment, setComment] = useState('')
 
 	return (
-		<Box sx={{ display: "flex", flexDirection: "column", maxWidth: "400px" }}>
+		<Box sx={{ display: "flex", flexDirection: "column", maxWidth: "600px" }}>
 			<TextField
 				placeholder='Add comments here'
 				inputProps={{ 'aria-label': 'Add comments here', style: { fontSize: "14px" } }}
@@ -31,6 +31,7 @@ const AddComment = ({ replyToComment, setIsShowTextField }) => {
 				multiline
 				minRows={1}
 				maxRows={3}
+				autoComplete='off'
 				onKeyPress={(ev) => {
 					if (ev.key === 'Enter') {
 						ev.preventDefault()
