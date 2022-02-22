@@ -25,6 +25,9 @@ const Project = () => {
     else setProjectData(data)
   }, [])
 
+  if (!projectData) {
+    return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
+  }
   return (
     <>
       <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
@@ -36,8 +39,8 @@ const Project = () => {
           ></Avatar>
           <CardHeader
             align="left"
-            title="Green Team"
-            subheader="Last Updated"
+            title={projectData.name}
+            subheader={moment(projectData.lastUpdateTime).format('MMMM Do YYYY, h:mm a')}
             aria-label="avatar"
           />
         </Box>
@@ -65,9 +68,7 @@ const Project = () => {
           <ReactGoogleSlides
             width={"100%"}
             height={480}
-            slidesLink={
-              "https://docs.google.com/presentation/d/1_yL24szhWnvjrKfW9bAv9tDJNzhKnr9gtAdC62s2V0E/edit?usp=sharing"
-            }
+            slidesLink={projectData.slideURL}
             slideDuration={5}
             position={1}
             showControls
