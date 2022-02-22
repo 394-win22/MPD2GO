@@ -12,12 +12,11 @@ const App = () => {
   
   useEffect(async () => {
     if (user === undefined || user === null) return
-    getUserFromUid(user.uid).then((userData) => {
-      console.log('userdata: ', userData)
-      if (userData === null) {
-        saveUserToDb(user)
-      }
-    })
+    const userData = await getUserFromUid(user.uid)
+      
+    // If the user doesn't exist, create it
+    if (userData === null)
+      saveUserToDb(user)
   }, [user])
 
   return (
