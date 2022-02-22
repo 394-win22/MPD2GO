@@ -9,12 +9,13 @@ import Login from 'components/Login/index'
 
 const App = () => {
 
+
   const user = useUserState()
-  
+
   useEffect(async () => {
     if (user === undefined || user === null) return
     const userData = await getUserFromUid(user.uid)
-      
+
     // If the user doesn't exist, create it
     if (userData === null)
       saveUserToDb(user)

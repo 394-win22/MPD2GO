@@ -2,7 +2,16 @@ import { useState, useEffect } from 'react'
 import { initializeApp } from 'firebase/app'
 import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { getDatabase, onValue, ref, set, push, update, remove } from 'firebase/database'
-import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
+import {
+  getAuth,
+  GoogleAuthProvider,
+  onIdTokenChanged,
+  signInWithPopup,
+  signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
+} from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyALmMHVtIxzi3hogJcDlbbaue9_nfEzUjQ",
@@ -103,6 +112,17 @@ export const logInWithEmailAndPassword = async (email, password) => {
     console.error(err);
     alert(err.message);
   }
+};
+
+export const forgotPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("Check your email. You'll receive a link to reset your account password.");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+
 };
 
 export const deleteData = (dataPath) => {

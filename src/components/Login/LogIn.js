@@ -1,6 +1,10 @@
-import { Box, TextField, Button, Divider } from "@mui/material";
-import { logInWithEmailAndPassword, signInWithGoogle } from "utilities/firebase";
+import { useState } from "react";
+import { Box, TextField, Button, Divider, Link, Typography } from "@mui/material";
 import GoogleIcon from '@mui/icons-material/Google';
+
+
+import { logInWithEmailAndPassword, signInWithGoogle } from "utilities/firebase";
+import ResetPasswordModal from "./ResetPasswordModal";
 
 const LogIn = () => {
   const handleSubmit = (event) => {
@@ -8,6 +12,10 @@ const LogIn = () => {
     const data = new FormData(event.currentTarget);
     logInWithEmailAndPassword(data.get('email'), data.get('password'));
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleModalOpen = () => setIsModalOpen(true);
+  const handleModalClose = () => setIsModalOpen(false);
 
   return (
     <Box sx={{ mt: 5, width: 300 }} >
@@ -40,12 +48,22 @@ const LogIn = () => {
           id="password"
           autoComplete="current-password"
         />
+        <Link
+          variant="body2"
+          sx={{ color: 'white' }}
+          onClick={handleModalOpen}
+        >
+          <Typography color='rgb(240, 242, 245)'>
+            Forgot password?
+          </Typography>
+        </Link>
+
         <Button
           color='secondary'
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 3 }}
+          sx={{ mt: 2, mb: 3 }}
         >
           Sign In
         </Button>
@@ -61,6 +79,7 @@ const LogIn = () => {
           Sign in with Google
         </Button>
       </Box>
+      <ResetPasswordModal open={isModalOpen} handleClose={handleModalClose} />
     </Box>
   );
 }
