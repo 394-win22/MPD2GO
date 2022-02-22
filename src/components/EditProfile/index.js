@@ -8,6 +8,10 @@ import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { setData } from "../../utilities/firebase";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const useStyles = makeStyles({
   container: {
@@ -25,14 +29,12 @@ const useStyles = makeStyles({
     borderRadius: "10px",
     overflow: "auto",
     height: "80%",
-    overflowY: "scroll",
   },
   title: {
     textAlign: "center",
   },
   form: {
     height: "100%",
-    overflowY: "scroll",
   },
 });
 function editUserInFirebase(user, userID, formValues) {
@@ -40,13 +42,13 @@ function editUserInFirebase(user, userID, formValues) {
 }
 
 const EditUserModal = ({ user, userID, open, handleClose }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const [formValues, setFormValues] = useState(user)
+  const [formValues, setFormValues] = useState(user);
 
   const handleInputChange = (e) => {
-    const name = e.target.name
-    const value = e.target.value
+    const name = e.target.name;
+    const value = e.target.value;
 
     setFormValues({
       ...formValues,
@@ -71,7 +73,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
       sx={{ "& .MuiTextField-root": { m: 2, width: "25ch" } }}
     >
       <Box className={classes.container}>
-        <form
+        <FormControl 
           onSubmit={handleSubmit}
           style={{ textAlign: "center" }}
           className={classes.form}
@@ -103,10 +105,10 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             InputLabelProps={{ shrink: true }}
           />
           <TextField
-            name="bio"
-            value={formValues.bio}
+            name="location"
+            value={formValues.location}
             onChange={handleInputChange}
-            label="bio"
+            label="location"
             type="text"
             InputLabelProps={{ shrink: true }}
           />
@@ -115,7 +117,15 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             value={formValues.year}
             onChange={handleInputChange}
             label="year"
-            type="number"
+            type="text"
+            InputLabelProps={{ shrink: true }}
+          />
+          <TextField
+            name="bio"
+            value={formValues.bio}
+            onChange={handleInputChange}
+            label="bio"
+            type="text"
             InputLabelProps={{ shrink: true }}
           />{" "}
           <Button variant="contained" endIcon={<SendIcon />} type="submit">
@@ -125,7 +135,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             {" "}
             Cancel{" "}
           </Button>
-        </form>
+        </FormControl >
       </Box>
     </Modal>
   );

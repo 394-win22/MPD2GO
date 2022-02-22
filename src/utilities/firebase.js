@@ -146,6 +146,7 @@ export const saveUserToDb = (userObject) => {
     photoURL: userObject.photoURL,
     bio: userObject.bio || '',
     year: userObject.year || '',
+    location: userObject.location || '',
   })
 }
 
