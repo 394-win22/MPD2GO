@@ -30,10 +30,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Post = ({ post }) => {
   const navigate = useNavigate()
-  const context = useContext(UserContext)
-  const theme = useTheme()
-  const classes = useStyles(theme)
-
+  const context = useContext(UserContext);
+  const theme = useTheme();
+  const classes = useStyles(theme);
   const users = context.userList
   const user = getUserDataFromUID(post.author, users)
 
@@ -47,7 +46,7 @@ const Post = ({ post }) => {
   return (
     <Card
       className={classes.card}
-      sx={{ mx: 1, mb: 3}}
+      sx={{ mx: 1, mb: 3 }}
       onClick={() => {
         navigate(`/post/${post.id}`)
       }}

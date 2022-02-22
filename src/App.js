@@ -8,6 +8,7 @@ import './App.css'
 import Login from 'components/Login'
 
 const App = () => {
+
   const user = useUserState()
   
   useEffect(async () => {
@@ -21,11 +22,9 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      {(user === null) ? (
-        <Login />
-      ) : (
-        <LoggedIn user={user} />
-      )
+      {(user === undefined || user == null) ?
+        <Login /> : <LoggedIn user={user} />
+
       }
     </ThemeProvider>
   )

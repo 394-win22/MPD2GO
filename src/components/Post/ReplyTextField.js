@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Box } from '@mui/system'
-import { Avatar, Divider, TextField, IconButton } from '@mui/material'
+import { Avatar, Divider, TextField, Button } from '@mui/material'
 import { Send as SendIcon } from '@mui/icons-material'
 
 import { addCommentToPost } from '../../utilities/posts.js'
 
 const ReplyTextField = ({ post, user }) => {
-	const navigate = useNavigate()
-	
 	const [comment, setComment] = useState('')
 
 	const submitComment = () => {
@@ -18,35 +16,47 @@ const ReplyTextField = ({ post, user }) => {
 
 	return (
 		<Box sx={{
-			p: '2px 4px',
-			display: 'flex',
-			alignItems: 'center',
-			width: '100%',
-		}
-		}
+			alignItems: 'flex-start',
+			// width: '100%',
+			display: "flex",
+			flexDirection: "column",
+			fontSize: "12px",
+			// marginLeft: "30px",
+			// padding: "5px 50px 20px 50px",
+			color: "#6e6e6e",
+			paddingTop: "10px",
+			paddingLeft: "7%",
+			paddingRight: "5%",
+			paddingBottom: "20px"
+
+		}}
+			borderBottom={"1px solid #e9e9e9"}
 		>
-			<IconButton onClick={() => {navigate(`/profile/${user.uid}`)}} sx={{ p: '10px' }} aria-label='menu'>
-				<Avatar aria-label='recipe' src={user.photoURL}></Avatar>
-			</IconButton>
-			<TextField
-				sx={{ ml: 1, flex: 1 }}
-				placeholder='Comment on this post'
-				inputProps={{ 'aria-label': 'Comment on this post' }}
-				onChange={(e) => { setComment(e.target.value) }}
-				variant='standard'
-				value={comment}
-				onKeyPress={(ev) => {
-					if (ev.key === 'Enter') {
-						// Enter clicked
-						ev.preventDefault()
-						submitComment()
-					}
-				}}
-			/>
-			<Divider sx={{ height: 28, m: 0.5 }} orientation='vertical' />
-			<IconButton onClick={submitComment} sx={{ p: '10px', paddingRight: '10px' }} aria-label='search'>
-				<SendIcon />
-			</IconButton>
+			Comment as {user.displayName}
+			<Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", marginTop: "5px", width: "100%" }}>
+				<TextField
+					placeholder='Comment on this post'
+					inputProps={{ style: { fontSize: "13px" } }}
+					onChange={(e) => { setComment(e.target.value) }}
+					variant='outlined'
+					value={comment}
+					multiline
+					minRows={2}
+					maxRows={4}
+					autoComplete='off'
+					sx={{ flexGrow: 1, width: "100%" }}
+					onKeyPress={(ev) => {
+						if (ev.key === 'Enter') {
+							// Enter clicked
+							ev.preventDefault()
+							submitComment()
+						}
+					}}
+				/>
+				<Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", paddingTop: "10px" }}>
+					<Button variant='contained' onClick={submitComment}>Send</Button>
+				</Box>
+			</Box >
 		</Box >
 
 	)
