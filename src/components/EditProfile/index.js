@@ -73,69 +73,71 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
       sx={{ "& .MuiTextField-root": { m: 2, width: "25ch" } }}
     >
       <Box className={classes.container}>
-        <FormControl 
+        <form
           onSubmit={handleSubmit}
           style={{ textAlign: "center" }}
           className={classes.form}
         >
-          <Typography
-            variant="h5"
-            component="h5"
-            align="center"
-            className={classes.title}
-          >
-            Edit Your Profile
-          </Typography>
-          <TextField
-            required
-            name="Name"
-            value={formValues.displayName}
-            onChange={handleInputChange}
-            label="name"
-            type="text"
-            InputLabelProps={{ shrink: true }}
-          />
-          <TextField
-            required
-            name="email"
-            value={formValues.email}
-            onChange={handleInputChange}
-            label="Email Address"
-            type="email"
-            InputLabelProps={{ shrink: true }}
-          />
-          <TextField
-            name="location"
-            value={formValues.location}
-            onChange={handleInputChange}
-            label="location"
-            type="text"
-            InputLabelProps={{ shrink: true }}
-          />
-          <TextField
-            name="year"
-            value={formValues.year}
-            onChange={handleInputChange}
-            label="year"
-            type="text"
-            InputLabelProps={{ shrink: true }}
-          />
-          <TextField
-            name="bio"
-            value={formValues.bio}
-            onChange={handleInputChange}
-            label="bio"
-            type="text"
-            InputLabelProps={{ shrink: true }}
-          />{" "}
-          <Button variant="contained" endIcon={<SendIcon />} type="submit">
-            Edit
-          </Button>
-          <Button type="button" onClick={() => handleClose()}>
-            {" "}
-            Cancel{" "}
-          </Button>
-        </FormControl >
+          <FormControl fullWidth>
+            <Typography
+              variant="h5"
+              component="h5"
+              align="center"
+              className={classes.title}
+            >
+              Edit Your Profile
+            </Typography>
+            <TextField
+              required
+              name="Name"
+              value={formValues.displayName}
+              onChange={handleInputChange}
+              label="name"
+              type="text"
+              InputLabelProps={{ shrink: true }}
+            />
+            <TextField
+              required
+              name="email"
+              value={formValues.email}
+              onChange={handleInputChange}
+              label="Email Address"
+              type="email"
+              InputLabelProps={{ shrink: true }}
+            />
+            <TextField
+              name="location"
+              value={formValues.location}
+              onChange={handleInputChange}
+              label="location"
+              type="text"
+              InputLabelProps={{ shrink: true }}
+            />
+            <TextField
+              name="year"
+              value={formValues.year}
+              onChange={handleInputChange}
+              label="year"
+              type="text"
+              InputLabelProps={{ shrink: true }}
+            />
+            <TextField
+              name="bio"
+              value={formValues.bio}
+              onChange={handleInputChange}
+              label="bio"
+              type="text"
+              InputLabelProps={{ shrink: true }}
+            />{" "}
+            <Button variant="contained" endIcon={<SendIcon />} type="submit">
+              Edit
+            </Button>
+            <Button type="button" onClick={() => handleClose()}>
+              {" "}
+              Cancel{" "}
+            </Button>
+          </FormControl>
+        </form>
       </Box>
     </Modal>
   );
