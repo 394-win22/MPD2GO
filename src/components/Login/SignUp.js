@@ -19,15 +19,17 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    registerWithEmailAndPassword((data.get("firstName")+ data.get("lastName")), data.get("email"),data.get("password"));
+    registerWithEmailAndPassword((data.get("firstName") + data.get("lastName")), data.get("email"), data.get("password"));
   };
 
   return (
     <Box sx={{ mt: 5, width: 300 }}>
-      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+      <Box component="form" noValidate onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
+              variant="filled"
+              color="secondary"
               autoComplete="given-name"
               name="firstName"
               required
@@ -39,6 +41,8 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              variant="filled"
+              color="secondary"
               required
               fullWidth
               id="lastName"
@@ -49,6 +53,8 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              variant="filled"
+              color="secondary"
               required
               fullWidth
               id="email"
@@ -59,6 +65,8 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              variant="filled"
+              color="secondary"
               required
               fullWidth
               name="password"
@@ -70,6 +78,7 @@ export default function SignUp() {
           </Grid>
         </Grid>
         <Button
+          color="secondary"
           type="submit"
           fullWidth
           variant="contained"

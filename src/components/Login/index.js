@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { Grid, Box, Paper, Typography, TextField, Button, Link } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 
 import logo from "logo.png";
-import { useState } from "react";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
+
+
 
 const Login = () => {
   const [signUpSwitcher, setSignUpSwitcher] = useState(false);
@@ -50,11 +52,11 @@ const Login = () => {
         >
           <img src={logo} alt="Hive Logo" style={{ height: "10em" }} />
           {(!signUpSwitcher) ? <LogIn /> : <SignUp />}
-          
+
 
           <Grid item>
-            <Link onClick={() => setSignUpSwitcher(!signUpSwitcher)} variant="body2" sx={{color: 'white'}}>
-              {signUpSwitcher?  "Already have an account? Sign in" : "Don't have an account? Sign Up"}
+            <Link onClick={() => setSignUpSwitcher(!signUpSwitcher)} variant="body2" sx={{ color: 'white' }}>
+              <Typography color='rgb(240, 242, 245)'> {signUpSwitcher ? "Already have an account? Sign in" : "Don't have an account? Sign Up"}</Typography>
             </Link>
           </Grid>
         </Box>
