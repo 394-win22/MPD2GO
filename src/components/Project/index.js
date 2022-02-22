@@ -18,13 +18,11 @@ const Project = () => {
   const { projectId } = useParams();
   const [projectData, setProjectData] = useState(null);
 
-  useEffect(() => {
-    getProjectFromUid(projectId).then((data) => {
-      console.log(data)
-      if (!data) setProjectData("not found")
-      else setProjectData(data)
-    })
+  useEffect(async () => {
+    const data = await getProjectFromUid(projectId)
 
+    if (!data) setProjectData("not found")
+    else setProjectData(data)
   }, [])
 
   return (
