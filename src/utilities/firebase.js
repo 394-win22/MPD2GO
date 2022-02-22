@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { initializeApp } from 'firebase/app'
 import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { getDatabase, onValue, ref, set, push, update, remove } from 'firebase/database'
-import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyALmMHVtIxzi3hogJcDlbbaue9_nfEzUjQ",
@@ -76,28 +76,48 @@ export const signInWithGoogle = () => {
 }
 
 const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
 
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+// createUserWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // ..
+//   });
+
+export const registerWithEmailAndPassword = async (name, email, password) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    // const user = res.user;
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+export const logInWithEmailAndPassword = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+// signInWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//   });
 
 export const deleteData = (dataPath) => {
   const listRef = ref(database, dataPath)

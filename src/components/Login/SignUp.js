@@ -12,20 +12,24 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { registerWithEmailAndPassword } from "utilities/firebase";
 
 export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    registerWithEmailAndPassword((data.get("firstName")+ data.get("lastName")), data.get("email"),data.get("password"))
+    
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
   };
 
   return (
-    <Box component="form" sx={{ mt: 20, width: 200 }}>
+    <Box sx={{ mt: 20, width: 200 }}>
       <Typography component="h1" variant="h5">
         Sign up
       </Typography>
