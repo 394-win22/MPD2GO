@@ -112,17 +112,17 @@ export const getUserFromUid = async (uid) => {
   return output
 }
 
-export const getProjectFromUid = async (projectId) => {
-  const dbRef = ref(database, `/project/${projectId}`)
-  var output
-  await onValue(
-    dbRef,
-    (snapshot) => {
-      output = snapshot.val()
-    },
-    (error) => { console.log(error) }
-  )
-  return output
+export const getProjectFromUid = (projectId) => {
+  return new Promise((resolve, reject) => {
+    const dbRef = ref(database, `/project/${projectId}`)
+    onValue(
+      dbRef,
+      (snapshot) => {
+        resolve(snapshot.val())
+      },
+      (error) => { reject(error) }
+    )
+  })
 }
 
 export const uploadPhotoToStorage = async (image) => {
