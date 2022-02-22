@@ -63,7 +63,7 @@ const PostWithThreads = () => {
           </Typography>
         </CardContent>
         <ReplyTextField post={post} user={user} />
-        <CardContent align='left'>
+        <CardContent sx={{ paddingLeft: "2%" }} align='left'>
           {'threads' in post &&
             Object.values(post.threads).length > 0 &&
             sortedThreads.map(([id, thread], i) => {

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Box } from '@mui/system'
-import { Avatar, Divider, TextField, IconButton } from '@mui/material'
+import { Avatar, Divider, TextField, Button } from '@mui/material'
 import { Send as SendIcon } from '@mui/icons-material'
 
 import { addCommentToPost } from '../../utilities/posts.js'
@@ -33,7 +33,7 @@ const ReplyTextField = ({ post, user }) => {
 			borderBottom={"1px solid #e9e9e9"}
 		>
 			Comment as {user.displayName}
-			<Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", marginTop: "5px", width: "100%" }}>
+			<Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", marginTop: "5px", width: "100%" }}>
 				<TextField
 					placeholder='Comment on this post'
 					inputProps={{ style: { fontSize: "13px" } }}
@@ -44,7 +44,7 @@ const ReplyTextField = ({ post, user }) => {
 					minRows={2}
 					maxRows={4}
 					autoComplete='off'
-					sx={{ flexGrow: 1 }}
+					sx={{ flexGrow: 1, width: "100%" }}
 					onKeyPress={(ev) => {
 						if (ev.key === 'Enter') {
 							// Enter clicked
@@ -53,10 +53,9 @@ const ReplyTextField = ({ post, user }) => {
 						}
 					}}
 				/>
-				<Divider sx={{ height: 28, m: 0.5 }} orientation='vertical' />
-				<IconButton onClick={submitComment} sx={{ p: '10px', paddingRight: '10px' }} aria-label='search'>
-					<SendIcon />
-				</IconButton>
+				<Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", paddingTop: "10px" }}>
+					<Button variant='contained' onClick={submitComment}>Send</Button>
+				</Box>
 			</Box >
 		</Box >
 

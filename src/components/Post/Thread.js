@@ -35,8 +35,8 @@ const useStyles = makeStyles({
 		flexWrap: "wrap"
 	},
 	avatarButton: {
-		width: "30px",
-		height: "30px",
+		width: "24px",
+		height: "24px",
 		display: "flex",
 		marginTop: '4px',
 		marginRight: '1px',
