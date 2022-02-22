@@ -5,7 +5,7 @@ import theme from 'theme.js'
 import LoggedIn from 'components/LoggedIn'
 import { useUserState, getUserFromUid, saveUserToDb } from 'utilities/firebase.js'
 import './App.css'
-import Login from 'components/Login'
+import Login from 'components/Login/index'
 
 const App = () => {
 
@@ -26,6 +26,7 @@ const App = () => {
         <Login /> : <LoggedIn user={user} />
 
       }
+
     </ThemeProvider>
   )
 }

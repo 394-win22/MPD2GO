@@ -1,12 +1,18 @@
-import { Grid, Box, Paper } from '@mui/material'
-import { CssBaseline } from '@mui/material'
+import { useState } from "react";
+import { Grid, Box, Paper, Typography, TextField, Button, Link } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 
-import logo from 'logo.png'
-import SignInButton from './SignInButton'
+import logo from "logo.png";
+import LogIn from "./LogIn";
+import SignUp from "./SignUp";
+
+
 
 const Login = () => {
+  const [signUpSwitcher, setSignUpSwitcher] = useState(false);
+
   return (
-    <Grid container component='main' sx={{ height: '100vh' }}>
+    <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
       <Grid
         item
@@ -15,18 +21,18 @@ const Login = () => {
         md={7}
         sx={{
           backgroundImage:
-            'url(https://ideas.ted.com/wp-content/uploads/sites/3/2018/11/featured_art_loosetouch_yifan_wu.jpg)',
-          backgroundRepeat: 'no-repeat',
+            "url(https://ideas.ted.com/wp-content/uploads/sites/3/2018/11/featured_art_loosetouch_yifan_wu.jpg)",
+          backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
-            t.palette.mode === 'light'
+            t.palette.mode === "light"
               ? t.palette.grey[50]
               : t.palette.grey[900],
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       />
       <Grid
-        backgroundColor='#f1b844'
+        backgroundColor="#f1b844"
         item
         xs={12}
         sm={8}
@@ -39,19 +45,24 @@ const Login = () => {
           sx={{
             my: 8,
             mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <img src={logo} alt='Hive Logo' style={{ height: '10em' }} />
-          <Box component='form' sx={{ mt: 20, width: 200 }}>
-            <SignInButton />
-          </Box>
+          <img src={logo} alt="Hive Logo" style={{ height: "10em" }} />
+          {(!signUpSwitcher) ? <LogIn /> : <SignUp />}
+
+
+          <Grid item>
+            <Link onClick={() => setSignUpSwitcher(!signUpSwitcher)} variant="body2" sx={{ color: 'white' }}>
+              <Typography color='rgb(240, 242, 245)'> {signUpSwitcher ? "Already have an account? Sign in" : "Don't have an account? Sign Up"}</Typography>
+            </Link>
+          </Grid>
         </Box>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

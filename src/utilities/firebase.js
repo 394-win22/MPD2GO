@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { initializeApp } from 'firebase/app'
 import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { getDatabase, onValue, ref, set, push, update, remove } from 'firebase/database'
-import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyALmMHVtIxzi3hogJcDlbbaue9_nfEzUjQ",
@@ -74,6 +74,36 @@ export const signInWithGoogle = () => {
 
   signInWithPopup(getAuth(firebase), provider)
 }
+
+const auth = getAuth();
+
+export const registerWithEmailAndPassword = async (name, email, password) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    class user {
+      constructor() {
+        this.email = email;
+        this.uid = res._tokenResponse.localId;
+        this.displayName = name;
+        this.photoURL = "https://firebasestorage.googleapis.com/v0/b/hive-mpd2.appspot.com/o/demo_ico%2Fdefult%20avatar.png?alt=media&token=b6439e6a-b4b6-4440-aff7-9bccd9df7a36";
+      }
+    }
+    const newUser = new user();
+    saveUserToDb(newUser);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+export const logInWithEmailAndPassword = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
 
 export const deleteData = (dataPath) => {
   const listRef = ref(database, dataPath)
