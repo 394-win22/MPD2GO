@@ -7,6 +7,8 @@ import Profile from "components/Profile";
 import PostWithThreads from "components/Post/index.js";
 import Navigation from "components/Navigation";
 import Project from "components/Project";
+import NotFound from "components/NotFound";
+
 import { useData } from "utilities/firebase.js";
 import Main from "components/Feed";
 
@@ -55,7 +57,8 @@ const LoggedIn = ({ user }) => {
           <Route exact path="/" element={<Main />} />
           <Route path="/createPost" element={<CreatePost />} />
           <Route path="/post/:pageId" element={<PostWithThreads />}></Route>
-          <Route path="/project" element={<Project />}></Route>
+          <Route path="/project/:projectId" element={<Project />}></Route>
+		  <Route path="/404" element={<NotFound />} />
         </Routes>
       </Container>
     </UserContext.Provider>

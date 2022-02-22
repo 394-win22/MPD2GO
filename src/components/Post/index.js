@@ -29,11 +29,13 @@ const PostWithThreads = () => {
 
   useEffect(() => {
     const post = postList.find((obj) => obj.id === pageId);
-    setPost(post);
-
-    const postAuthor = userList.find((obj) => obj.uid === post.author);
-    setPostAuthor(postAuthor);
-  }, [pageId, postList, userList]);
+      if(!post){
+        navigate("/404")
+      }else{
+        setPost(post);
+        const postAuthor = userList.find((obj) => obj.uid === post.author);
+        setPostAuthor(postAuthor);
+      }}, [pageId, postList, userList]);
 
   let sortedThreads = [];
   const haveChild = "threads" in post && Object.values(post.threads).length > 0;

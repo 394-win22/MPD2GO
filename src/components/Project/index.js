@@ -13,8 +13,20 @@ import {
 import moment from "moment";
 import { UserContext } from "components/LoggedIn";
 import ReactGoogleSlides from "react-google-slides";
-
+import{getProjectFromUid}from "../../utilities/firebase"
 const Project = () => {
+  const { projectId } = useParams();
+  const [projectData, setProjectData] = useState(null);
+
+  
+  useEffect(() => {
+    getProjectFromUid(projectId).then((data) => {
+      
+      if (!data) setProjectData("not found");
+      else setProjectData(data);
+    });
+  }, [projectData])
+
   return (
     <>
       <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>

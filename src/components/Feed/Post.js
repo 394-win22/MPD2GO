@@ -52,6 +52,7 @@ const Post = ({ post }) => {
     else if (num === 1) return "1 Comment";
     else return `${num} Comments`;
   };
+  console.log(post)
   return (
     <Card
       className={classes.card}
@@ -72,8 +73,10 @@ const Post = ({ post }) => {
         </Typography>
       </CardContent>
       {"project" in post && (
+        
         <Button
-          onClick={() => {
+          onClick={(event) => {
+            event.stopPropagation();
             navigate(`/project/${post.project}`);
           }}
         >
