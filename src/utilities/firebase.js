@@ -77,18 +77,6 @@ export const signInWithGoogle = () => {
 
 const auth = getAuth();
 
-// createUserWithEmailAndPassword(auth, email, password)
-//   .then((userCredential) => {
-//     // Signed in 
-//     const user = userCredential.user;
-//     // ...
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // ..
-//   });
-
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -107,17 +95,6 @@ export const logInWithEmailAndPassword = async (email, password) => {
     alert(err.message);
   }
 };
-
-// signInWithEmailAndPassword(auth, email, password)
-//   .then((userCredential) => {
-//     // Signed in 
-//     const user = userCredential.user;
-//     // ...
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//   });
 
 export const deleteData = (dataPath) => {
   const listRef = ref(database, dataPath)

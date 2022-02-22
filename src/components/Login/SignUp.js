@@ -18,21 +18,12 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
 
-    registerWithEmailAndPassword((data.get("firstName")+ data.get("lastName")), data.get("email"),data.get("password"))
-    
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
+    registerWithEmailAndPassword((data.get("firstName")+ data.get("lastName")), data.get("email"),data.get("password"));
   };
 
   return (
-    <Box sx={{ mt: 20, width: 200 }}>
-      <Typography component="h1" variant="h5">
-        Sign up
-      </Typography>
+    <Box sx={{ mt: 5, width: 300 }}>
       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>

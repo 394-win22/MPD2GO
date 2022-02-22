@@ -1,6 +1,7 @@
-import { Grid, Box, Paper, Typography, TextField, Button, Link } from "@mui/material";
+import { Grid, Box, Paper, Typography, TextField, Button, Link, CssBaseline, styled } from "@mui/material";
 import SignInButton from "./SignInButton";
 import { logInWithEmailAndPassword } from "utilities/firebase";
+import GoogleIcon from '@mui/icons-material/Google';
 
 
 
@@ -8,26 +9,19 @@ const LogIn =() => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
         logInWithEmailAndPassword(data.get('email'), data.get('password'));
-        // console.log({
-        //   email: data.get('email'),
-        //   password: data.get('password'),
-        // });
       };
 
     return (
-        <Box sx={{ mt: 20, width: 200 }} >
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
+        <Box sx={{ mt: 5, width: 300 }} >
             <Box
               component="form"
               noValidate
-              sx={{ mt: 1, backgroundColor: "white" }}
+              sx={{ mt: 1 }}
               onSubmit={handleSubmit}
             >
               <TextField
+                variant="filled"
                 margin="normal"
                 required
                 fullWidth
@@ -38,6 +32,7 @@ const LogIn =() => {
                 autoFocus
               />
               <TextField
+              variant="filled"
                 margin="normal"
                 required
                 fullWidth
@@ -48,6 +43,7 @@ const LogIn =() => {
                 autoComplete="current-password"
               />
               <Button
+                color='secondary'
                 type="submit"
                 fullWidth
                 variant="contained"
