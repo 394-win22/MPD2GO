@@ -25,24 +25,25 @@ const Profile = ({ user }) => {
 
   return (
     <Box textAlign='center'>
-      <Typography
-        variant='h3'
-        component='div'
-        sx={{ flexGrow: 1, paddingLeft: 1, paddingBottom: 5 }}
-      >
-        {userData.displayName}
-      </Typography>
       <Avatar
         alt={userData.displayName}
         src={userData.photoURL}
         variant='rounded'
         sx={{
-          height: 1 / 6,
-          width: 1 / 6,
-          margin: 'auto',
+          height: 1 / 2,
+          width: 1 / 2,
+          margin: "auto",
+          marginBottom: '30px',
           borderRadius: "50%",
         }}
       />
+      <Typography
+        variant='h3'
+        component='div'
+        sx={{ flexGrow: 1, paddingLeft: 1, paddingBottom: 5, marginBottom: "15px" }}
+      >
+        {userData.displayName}
+      </Typography>
       <Typography
         variant='h8'
         component='div'
