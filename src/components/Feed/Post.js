@@ -13,10 +13,7 @@ import { makeStyles, useTheme } from "@mui/styles";
 import moment from "moment";
 
 import { UserContext } from "components/LoggedIn";
-
-const getUserDataFromUID = (uid, users) => {
-  return users.find((user) => user.uid === uid);
-};
+import {getUserDataFromUID} from "../../utilities/posts"
 
 const useStyles = makeStyles((theme) => ({
   card: {

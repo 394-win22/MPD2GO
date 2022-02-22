@@ -1,29 +1,33 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect,useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Typography,
-  IconButton,
   Card,
-  Button,
   CardHeader,
   CardContent,
   Avatar,
   Box,
 } from "@mui/material";
 import moment from "moment";
-import { UserContext } from "components/LoggedIn";
+import Chip from "@mui/material/Chip";
 import ReactGoogleSlides from "react-google-slides";
-import{getProjectFromUid}from "../../utilities/firebase"
+import { getProjectFromUid } from "../../utilities/firebase";
+import {getUserDataFromUID} from "../../utilities/posts"
+import { UserContext } from "components/LoggedIn";
+
 const Project = () => {
+  const navigate = useNavigate()
   const { projectId } = useParams();
   const [projectData, setProjectData] = useState(null);
+  const context = useContext(UserContext);
+  const users = context.userList;
 
   useEffect(async () => {
-    const data = await getProjectFromUid(projectId)
+    const data = await getProjectFromUid(projectId);
 
-    if (!data) setProjectData("not found")
-    else setProjectData(data)
-  }, [])
+    if (!data) setProjectData("not found");
+    else setProjectData(data);
+  }, []);
 
   if (!projectData) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
@@ -35,12 +39,15 @@ const Project = () => {
           <Avatar
             sx={{ width: 100, height: "auto", mx: 2 }}
             style={{ float: "left" }}
-            src="https://p.kindpng.com/picc/s/128-1289659_green-circle-png-page-green-bubbles-speech-png.png"
+            src={projectData.photoURL}
           ></Avatar>
           <CardHeader
             align="left"
             title={projectData.name}
-            subheader={moment(projectData.lastUpdateTime).format('MMMM Do YYYY, h:mm a')}
+            subheader={
+              "Last Updated " +
+              moment(projectData.lastUpdateTime).format("MMMM Do YYYY")
+            }
             aria-label="avatar"
           />
         </Box>
@@ -50,19 +57,36 @@ const Project = () => {
             Team Members
           </Typography>
           <Typography variant="h6" align="left">
-            Current Phase
+          {projectData.member.map((member) => {
+            const user = getUserDataFromUID(member, users);
+            return(
+            <Chip
+            avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
+            label={user.displayName}
+            variant="outlined"
+            sx={{mx:1}}
+            onClick={() => {
+              navigate(`/profile/${user.uid}`);
+            }}
+            clickable 
+          />)
+          })}</Typography>
+          <hr></hr>
+          <Typography variant="h6" align="left" sx={{ my: 1 }}>
+            Current Phase&emsp;
+            <Chip
+              label={projectData.phase}
+              color="primary"
+              variant="outlined"
+              size="small"
+            />
           </Typography>
-          <Typography> Product Ideation</Typography>
-          <Typography variant="h6" align="left">
+          <Typography variant="h6" align="left" sx={{ my: 1 }}>
             Description
           </Typography>
 
-          <Typography variant="body2">
-            Our team is exploring ways to create a home lighting system that
-            adapts to the different lighting needs during different activities
-            throughout the day.
-          </Typography>
-          <Typography variant="h6" align="left">
+          <Typography variant="body2">{projectData.description}</Typography>
+          <Typography variant="h6" align="left" sx={{ my: 1 }}>
             Project Snapshot
           </Typography>
           <ReactGoogleSlides
