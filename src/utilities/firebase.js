@@ -89,7 +89,16 @@ const auth = getAuth();
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    // const user = res.user;
+    class user {
+      constructor() {
+        this.email = email;
+        this.uid = res._tokenResponse.localId;
+        this.displayName = name;
+        this.photoURL = "https://firebasestorage.googleapis.com/v0/b/hive-mpd2.appspot.com/o/demo_ico%2Fdefult%20avatar.png?alt=media&token=b6439e6a-b4b6-4440-aff7-9bccd9df7a36";
+      }
+    }
+    const newUser = new user();
+    saveUserToDb(newUser);
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -139,16 +148,17 @@ export const saveUserToDb = (userObject) => {
 }
 
 export const getUserFromUid = async (uid) => {
-  const dbRef = ref(database, `/users/${uid}`)
-  var output
-  await onValue(
-    dbRef,
-    (snapshot) => {
-      output = snapshot.val()
-    },
-    (error) => { console.log(error) }
-  )
-  return output
+  return new Promise((resolve, reject) => {
+    const dbRef = ref(database, `/users/${uid}`)
+    onValue(
+      dbRef,
+      snapshot => {
+        resolve(snapshot.val())
+      }, (error) => {
+        reject(error)
+      }
+    )
+  })
 }
 
 export const uploadPhotoToStorage = async (image) => {

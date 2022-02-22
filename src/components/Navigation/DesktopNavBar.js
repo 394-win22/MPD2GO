@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import {
   AppBar,
   Box,
   Toolbar,
+  Button,
   Typography,
   ClickAwayListener,
   Menu,
@@ -44,16 +46,12 @@ const DesktopNavBar = ({ isLoggedIn }) => {
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
+      <Box sx={{ flexGrow: 1, paddingBottom: 3, }}>
         <AppBar position='relative' sx={{ top: 'auto' }}>
           <Toolbar>
-            <Typography sx={{ flexGrow: 1, ml: 1 }}>
+            <Button sx={{ flexGrow: 1, ml: 1, display: "flex", justifyContent: "flex-start", alignItems: "flex-start" }} onClick={() => { navigate('/') }}>
               <img src={logo} alt='Hive Logo' style={{ height: '3em' }} />
-            </Typography>
-
-            <MenuItem onClick={() => { navigate('/') }}>
-              <HomeIcon />
-            </MenuItem>
+            </Button>
 
             {isLoggedIn && (
               <>

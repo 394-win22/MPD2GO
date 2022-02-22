@@ -8,30 +8,28 @@ import './App.css'
 import Login from 'components/Login/index'
 
 const App = () => {
-  const user = useUserState();
 
-  console.log(user)
-  useEffect(() => {
-    if (!user) return
-    getUserFromUid(user.uid).then((userData) => {
-      if (!userData) {
-        saveUserToDb(user)
-      }
-    })
+
+  const user = useUserState()
+
+  useEffect(async () => {
+    if (user === undefined || user === null) return
+    const userData = await getUserFromUid(user.uid)
+
+    // If the user doesn't exist, create it
+    if (userData === null)
+      saveUserToDb(user)
   }, [user])
-
 
   return (
     <ThemeProvider theme={theme}>
-      {(user === undefined || user == null) ? (
-        <Login />
-      ) : (
-        <LoggedIn user={user} />
-      )
+      {(user === undefined || user == null) ?
+        <Login /> : <LoggedIn user={user} />
+
       }
 
     </ThemeProvider>
   )
 }
 
-export default App;
+export default App
