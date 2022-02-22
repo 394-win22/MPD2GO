@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Typography, Avatar, Box, Button } from "@mui/material";
-
-import { getUserFromUid } from "utilities/firebase";
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+import { Typography, Avatar, Box } from '@mui/material'
+import { EditUserButton } from '../EditProfile/EditUserButton'
+import { getUserFromUid } from 'utilities/firebase'
 
 const Profile = ({ user }) => {
   const params = useParams();
@@ -38,10 +38,17 @@ const Profile = ({ user }) => {
         sx={{
           height: 1 / 6,
           width: 1 / 6,
-          margin: "auto",
+          margin: 'auto',
+          borderRadius: "50%",
         }}
       />
-
+      <Typography
+        variant='h8'
+        component='div'
+        sx={{ flexGrow: 1, paddingLeft: 1, paddingTop: 5 }}
+      >
+        {userData.year ? "Class of " + userData.year : 'No Year'}
+      </Typography>
       <Typography
         variant="h6"
         component="div"
@@ -49,22 +56,16 @@ const Profile = ({ user }) => {
       >
         {userData.bio ? userData.bio : "No Bio"}
         <br />
-        {userData.year ? userData.year : "No Year"}
-      </Typography>
-      {(!params.userID || params.userID === user.uid) && (
-        <Button
-          variant="text"
-          size="small"
-          sx={{ marginTop: 2 }}
-          onClick={() => {
-            alert(
-              "This button should only show for current user, but no editing functionality is implemented yet."
-            );
-          }}
-        >
-          Edit Profile
-        </Button>
+        <br />
+        
+        {(!params.userID || params.userID === user.uid) && (
+        <EditUserButton
+        key={userData}
+        user={userData}
+        userID={user.uid}
+      />
       )}
+      </Typography>
     </Box>
   );
 };

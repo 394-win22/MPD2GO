@@ -16,26 +16,25 @@ import { UserContext } from "components/LoggedIn";
 import ReplyTextField from "./ReplyTextField";
 
 const PostWithThreads = () => {
-  const navigate = useNavigate();
-  const context = useContext(UserContext);
-  const { pageId } = useParams();
-
-  const [post, setPost] = useState({});
-  const [postAuthor, setPostAuthor] = useState({});
-
+  const navigate = useNavigate()
+  const context = useContext(UserContext)
+  const { pageId } = useParams()
+  const [post, setPost] = useState({})
+  const [postAuthor, setPostAuthor] = useState({})
+  
   const user = context.user;
   const userList = context.userList;
   const postList = context.postList;
 
   useEffect(() => {
-    const post = postList.find((obj) => obj.id === pageId);
-      if(!post){
-        navigate("/404")
-      }else{
-        setPost(post);
-        const postAuthor = userList.find((obj) => obj.uid === post.author);
-        setPostAuthor(postAuthor);
-      }}, [pageId, postList, userList]);
+    const post = postList.find((obj) => obj.id === pageId)
+    if(!post){
+      navigate("/404")
+    }else{
+    setPost(post)
+    const postAuthor = userList.find((obj) => obj.uid === post.author)
+    setPostAuthor(postAuthor)
+  }}, [pageId, postList, userList])
 
   let sortedThreads = [];
   const haveChild = "threads" in post && Object.values(post.threads).length > 0;
@@ -45,8 +44,8 @@ const PostWithThreads = () => {
   return (
     <>
       <Button
-        sx={{ ml: 1, mb: 2, color: "white" }}
-        variant="contained"
+        sx={{ ml: 1, mb: 2, color: 'white' }}
+        variant='contained'
         onClick={() => {
           navigate("/");
         }}
@@ -75,8 +74,8 @@ const PostWithThreads = () => {
           </Typography>
         </CardContent>
         <ReplyTextField post={post} user={user} />
-        <CardContent align="left">
-          {"threads" in post &&
+        <CardContent sx={{ paddingLeft: "2%" }} align='left'>
+          {'threads' in post &&
             Object.values(post.threads).length > 0 &&
             sortedThreads.map(([id, thread], i) => {
               return (

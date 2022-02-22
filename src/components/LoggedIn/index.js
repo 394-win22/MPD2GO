@@ -58,7 +58,7 @@ const LoggedIn = ({ user }) => {
           <Route path="/createPost" element={<CreatePost />} />
           <Route path="/post/:pageId" element={<PostWithThreads />}></Route>
           <Route path="/project/:projectId" element={<Project />}></Route>
-		  <Route path="/404" element={<NotFound />} />
+		      <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
     </UserContext.Provider>

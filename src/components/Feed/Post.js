@@ -41,7 +41,6 @@ const Post = ({ post }) => {
   const context = useContext(UserContext);
   const theme = useTheme();
   const classes = useStyles(theme);
-
   const users = context.userList;
   const user = getUserDataFromUID(post.author, users);
 
@@ -52,7 +51,6 @@ const Post = ({ post }) => {
     else if (num === 1) return "1 Comment";
     else return `${num} Comments`;
   };
-  console.log(post)
   return (
     <Card
       className={classes.card}
@@ -73,7 +71,6 @@ const Post = ({ post }) => {
         </Typography>
       </CardContent>
       {"project" in post && (
-        
         <Button
           onClick={(event) => {
             event.stopPropagation();
