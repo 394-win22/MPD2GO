@@ -9,8 +9,7 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    registerWithEmailAndPassword((data.get("firstName") + data.get("lastName")), data.get("email"), data.get("password"));
+    registerWithEmailAndPassword(`${data.get("firstName")} ${data.get("lastName")}`, data.get("email"), data.get("password"));
   };
 
   return (
