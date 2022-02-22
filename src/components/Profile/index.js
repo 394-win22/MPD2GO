@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Typography, Avatar, Box } from '@mui/material'
-import {EditUserButton} from '../EditProfile/EditUserButton'
+import { EditUserButton } from '../EditProfile/EditUserButton'
 import { getUserFromUid } from 'utilities/firebase'
 
 const Profile = ({ user }) => {
@@ -43,7 +43,13 @@ const Profile = ({ user }) => {
           borderRadius: "50%",
         }}
       />
-
+      <Typography
+        variant='h8'
+        component='div'
+        sx={{ flexGrow: 1, paddingLeft: 1, paddingTop: 5 }}
+      >
+        {userData.year ? "Class of " + userData.year : 'No Year'}
+      </Typography>
       <Typography
         variant='h6'
         component='div'
@@ -51,8 +57,8 @@ const Profile = ({ user }) => {
       >
         {userData.bio ? userData.bio : 'No Bio'}
         <br />
-        {userData.year ? userData.year : 'No Year'}
         <br />
+        
         {(!params.userID || params.userID === user.uid) && (
         <EditUserButton
         key={userData}

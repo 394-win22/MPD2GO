@@ -39,14 +39,14 @@ function editUserInFirebase(user, userID, formValues) {
   setData("users/" + userID, formValues);
 }
 
-const EditUserModal = ({ user, userID, open, handleOpen, handleClose }) => {
-  const classes = useStyles();
+const EditUserModal = ({ user, userID, open, handleClose }) => {
+  const classes = useStyles()
 
-  const [formValues, setFormValues] = useState(user);
+  const [formValues, setFormValues] = useState(user)
 
   const handleInputChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+    const name = e.target.name
+    const value = e.target.value
 
     setFormValues({
       ...formValues,
@@ -111,11 +111,11 @@ const EditUserModal = ({ user, userID, open, handleOpen, handleClose }) => {
             InputLabelProps={{ shrink: true }}
           />
           <TextField
-            name="Year"
+            name="year"
             value={formValues.year}
             onChange={handleInputChange}
             label="year"
-            type="text"
+            type="number"
             InputLabelProps={{ shrink: true }}
           />{" "}
           <Button variant="contained" endIcon={<SendIcon />} type="submit">

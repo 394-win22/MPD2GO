@@ -1,9 +1,9 @@
-import React from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import EditUserModal from "../EditProfile";
 
 export const EditUserButton = ({ user,userID }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,7 +25,6 @@ export const EditUserButton = ({ user,userID }) => {
           user={user}
           userID={userID}
           open={open}
-          setOpen={setOpen}
           handleClose={handleClose}
         />
     </>
