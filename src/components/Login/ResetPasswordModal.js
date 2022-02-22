@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, TextField, Button, Divider, Link, Typography, Modal, Stack, IconButton } from "@mui/material";
 import { Send as SendIcon } from '@mui/icons-material'
+import CloseIcon from '@mui/icons-material/Close';
 
 import { forgotPassword } from "utilities/firebase";
 
@@ -12,7 +13,7 @@ const style = {
     width: '90%',
     maxWidth: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '2px solid #f1b844',
     boxShadow: 24,
     p: 4,
 };
@@ -34,30 +35,40 @@ const ResetPasswordModal = ({ open, handleClose }) => {
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     Reset Password
                 </Typography>
+                <IconButton
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                    }}
+                    onClick={handleClose}
+                >
+                    <CloseIcon />
+                </IconButton>
+
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     Please enter your account email address below.
                 </Typography>
-                <Stack direction="row" alignItems="center">
-                    <Box
-                        component="form"
-                        noValidate
-                        onSubmit={handleSubmitModal}
-                    >
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <IconButton sx={{ p: '10px', paddingRight: '10px' }} type="submit">
-                            <SendIcon />
-                        </IconButton>
-                    </Box>
-                </Stack>
+                <Box
+                    component="form"
+                    noValidate
+                    alignItems="center"
+                    justify="center"
+                    onSubmit={handleSubmitModal}
+                >
+                    <TextField
+                        margin="normal"
+                        required
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                    />
+                    <IconButton sx={{ mt: 3, mx: 2 }} type="submit">
+                        <SendIcon />
+                    </IconButton>
+                </Box>
 
             </Box>
         </Modal>
