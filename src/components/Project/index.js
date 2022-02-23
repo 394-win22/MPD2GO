@@ -5,9 +5,11 @@ import {
   Card,
   CardHeader,
   CardContent,
+  CardMedia,
   Avatar,
   Box,
-  Button
+  Button,
+  Stack
 } from "@mui/material";
 import moment from "moment";
 import Chip from "@mui/material/Chip";
@@ -15,6 +17,8 @@ import ReactGoogleSlides from "react-google-slides";
 import { getProjectFromUid } from "../../utilities/firebase";
 import { getUserDataFromUID } from "../../utilities/posts"
 import { UserContext } from "components/LoggedIn";
+import driveLogo from 'google-drive.png'
+import muralLogo from './../../mural.png'
 
 const Project = () => {
   const navigate = useNavigate()
@@ -111,21 +115,40 @@ const Project = () => {
             showControls
             loop
           />
-          <Typography variant="h6" align="left" sx={{ my: 1 }}>
-            Additional Resources
-          </Typography>
-          {projectData.drive &&
-            <Button sx={{ marginLeft: "8px" }}
-              onClick={() => {
-                window.open(projectData.drive)
-              }}
-            >Project Folder</Button>}
-          {projectData.mural &&
-            <Button sx={{ marginLeft: "8px" }}
-              onClick={() => {
-                window.open(projectData.mural)
-              }}
-            >Project Mural</Button>}
+          { (projectData.drive || projectData.mural) && 
+          <Stack>
+            <Typography variant="h6" align="left" sx={{ my: 1 }}>
+              Additional Resources
+            </Typography>
+            {projectData.drive &&
+            <>
+              <Button sx={{ marginLeft: '8px' }}
+                startIcon={<CardMedia
+                  component='img'
+                  style={{width: 20, height: 20}}
+                  image={driveLogo}
+                  alt='drive'
+                />}
+                onClick={() => {
+                  window.open(projectData.drive)
+                }}
+              >Project Folder</Button>
+              </>}
+            {projectData.mural &&
+              <>
+                <Button sx={{ marginLeft: '8px' }}
+                  startIcon={<CardMedia
+                    component='img'
+                    style={{width: 20, height: 20}}
+                    image={muralLogo}
+                    alt='mural'
+                  />}
+                  onClick={() => {
+                    window.open(projectData.mural)
+                  }}
+                >Project Mural</Button>
+              </>}
+            </Stack>}
         </CardContent>
       </Card>
     </>
