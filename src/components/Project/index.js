@@ -32,6 +32,7 @@ const Project = () => {
   if (!projectData) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
   }
+  const groupMember = projectData.member;
   return (
     <>
       <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
@@ -57,8 +58,8 @@ const Project = () => {
             Team Members
           </Typography>
           <Typography variant="h6" align="left">
-          {projectData.member.map((member) => {
-            const user = getUserDataFromUID(member, users);
+          {groupMember.map((theMember) => {
+            const user = getUserDataFromUID(theMember, users);
             return(
             <Chip
             avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
@@ -71,7 +72,7 @@ const Project = () => {
             clickable 
           />)
           })}</Typography>
-          <hr></hr>
+          <hr />
           <Typography variant="h6" align="left" sx={{ my: 1 }}>
             Current Phase&emsp;
             <Chip
