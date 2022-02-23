@@ -5,18 +5,19 @@ import theme from 'theme.js'
 import LoggedIn from 'components/LoggedIn'
 import { useUserState, getUserFromUid, saveUserToDb } from 'utilities/firebase.js'
 import './App.css'
-import Login from 'components/Login'
+import Login from 'components/Login/index'
 
 import { TryPres } from './Presentation'
 
 const App = () => {
 
+
   const user = useUserState()
-  
+
   useEffect(async () => {
     if (user === undefined || user === null) return
     const userData = await getUserFromUid(user.uid)
-      
+
     // If the user doesn't exist, create it
     if (userData === null)
       saveUserToDb(user)
@@ -28,6 +29,7 @@ const App = () => {
         <Login /> : <LoggedIn user={user} />
 
       }
+
     </ThemeProvider>
   )
 }
