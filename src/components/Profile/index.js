@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Typography, Avatar, Box, Divider, Button, Stack } from "@mui/material";
+import { useParams,useNavigate } from "react-router";
+import { Typography, Avatar, Box,Paper, Divider, Button, Stack, Card } from "@mui/material";
 import { EditUserButton } from "../EditProfile/EditUserButton";
 import { getUserFromUid } from "utilities/firebase";
 import {
@@ -11,10 +11,8 @@ import {
   AddCircle as AddCircleIcon,
 } from "@mui/icons-material";
 import Chip from "@mui/material/Chip";
-import { useNavigate } from "react-router-dom";
 import { getProjectFromUid } from "../../utilities/firebase";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-
 const Profile = ({ user }) => {
   const params = useParams();
   const [userData, setUserData] = useState(null);
@@ -47,6 +45,17 @@ const Profile = ({ user }) => {
     return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>;
 
   return (
+    <>
+    <Button
+      sx={{ ml: 1, mb: 2, color: "white" }}
+      variant="contained"
+      onClick={() => {
+        navigate(-1);
+      }}
+    >
+      Back
+    </Button>
+    <Card sx={{ px: 4, py:4, mb: 10 }} style={{ borderRadius: 10 }}>
     <Box textAlign="center">
       <Avatar
         alt={userData.displayName}
@@ -157,7 +166,8 @@ const Profile = ({ user }) => {
         <EditUserButton key={userData} user={userData} userID={user.uid} />
       )}
     </Box>
-  );
+    </Card>
+  </>);
 };
 
 export default Profile;

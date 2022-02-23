@@ -22,7 +22,6 @@ const PostWithThreads = () => {
   const { pageId } = useParams();
   const [post, setPost] = useState({});
   const [postAuthor, setPostAuthor] = useState({});
-
   const user = context.user;
   const userList = context.userList;
   const postList = context.postList;
@@ -37,7 +36,6 @@ const PostWithThreads = () => {
       setPostAuthor(postAuthor);
     }
   }, [pageId, postList, userList]);
-
   let sortedThreads = [];
   const haveChild = "threads" in post && Object.values(post.threads).length > 0;
 
@@ -49,7 +47,7 @@ const PostWithThreads = () => {
         sx={{ ml: 1, mb: 2, color: "white" }}
         variant="contained"
         onClick={() => {
-          navigate("/");
+          navigate(-1);
         }}
       >
         Back

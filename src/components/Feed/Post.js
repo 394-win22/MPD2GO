@@ -84,7 +84,6 @@ const Post = ({ post }) => {
           {post.description}
         </Typography>
       </CardContent>
-
       <Box sx={{ display: "flex", m: 1 }}>
         <Typography className={classes.comment} variant="body2">
           {getNumCommentsText(post)}

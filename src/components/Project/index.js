@@ -7,6 +7,7 @@ import {
   CardContent,
   Avatar,
   Box,
+  Button
 } from "@mui/material";
 import moment from "moment";
 import Chip from "@mui/material/Chip";
@@ -22,12 +23,14 @@ const Project = () => {
   const context = useContext(UserContext);
   const users = context.userList;
 
-  useEffect(async () => {
-    const data = await getProjectFromUid(projectId);
-
-    if (!data) setProjectData("not found");
-    else setProjectData(data);
-  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getProjectFromUid(projectId);
+      if (!data) setProjectData("not found");
+      else setProjectData(data);
+    }
+    fetchData();
+  }, [projectId]);
 
   if (!projectData) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
@@ -35,6 +38,15 @@ const Project = () => {
   const groupMember = Object.values(projectData.member);
   return (
     <>
+      <Button
+        sx={{ ml: 1, mb: 2, color: 'white' }}
+        variant='contained'
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        Back
+      </Button>
       <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
         <Box sx={{ my: 2 }} style={{ display: "block" }}>
           <Avatar
@@ -58,9 +70,8 @@ const Project = () => {
             Team Members
           </Typography>
           <Typography variant="h6" align="left">
-            {groupMember.map((theMember) => {
-              const user = getUserDataFromUID(theMember, users);
-
+            {Object.values(projectData.member).map((member) => {
+              const user = getUserDataFromUID(member, users);
               return (
                 <Chip
                   avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
