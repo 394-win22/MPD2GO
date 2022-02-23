@@ -7,7 +7,13 @@ import { makeStyles } from "@mui/styles";
 /* For "Create" Button in Modal Box */
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { setData, useData,addToProject,removeFromProject,getProjectFromId } from "../../utilities/firebase";
+import {
+  setData,
+  useData,
+  addToProject,
+  removeFromProject,
+  getProjectFromId,
+} from "../../utilities/firebase";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -74,11 +80,11 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
     e.preventDefault();
     console.log(formValues);
     formValues.photoURL = user.photoURL;
-    const oldTeamId=user.teamId
-    const newTeamId= formValues.teamId
-    if(oldTeamId!=newTeamId){
-      addToProject(userID,getProjectFromId(newTeamId,projectList));
-      removeFromProject(userID,getProjectFromId(oldTeamId,projectList))
+    const oldTeamId = user.teamId;
+    const newTeamId = formValues.teamId;
+    if (oldTeamId != newTeamId) {
+      addToProject(userID, getProjectFromId(newTeamId, projectList));
+      removeFromProject(userID, getProjectFromId(oldTeamId, projectList));
     }
     editUserInFirebase(user, userID, formValues);
     handleClose();
@@ -163,7 +169,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               onChange={handleInputChange}
             >
               {projectList.map((project) => {
-                return(<MenuItem value={project.id}>{project.name}</MenuItem>);
+                return <MenuItem value={project.id}>{project.name}</MenuItem>;
               })}
             </Select>
           </FormControl>
