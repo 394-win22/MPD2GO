@@ -180,11 +180,11 @@ const Profile = ({ user }) => {
           <Divider />
           <Stack direction="row" sx={{ marginBottom: 3 }}>
             <EmailIcon />
-            <Typography>mail link</Typography>
+            <Typography>{userData.email}</Typography>
           </Stack>
           <Stack direction="row" sx={{ marginBottom: 3 }}>
             <AddCircleIcon />
-            <Typography>linkedIn link</Typography>
+            <Typography>{(userData.linkedIn)? userData.linkedIn: "No LinkedIn"}</Typography>
           </Stack>
           {(!params.userID || params.userID === user.uid) && (
             <EditUserButton key={userData} user={userData} userID={user.uid} />
