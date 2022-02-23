@@ -15,6 +15,8 @@ import Chip from "@mui/material/Chip";
 import Thread from "./Thread";
 import { UserContext } from "components/LoggedIn";
 import ReplyTextField from "./ReplyTextField";
+import { DeletePostButton } from "./DeletePostButton";
+import Box from "@mui/material/Box";
 
 const PostWithThreads = () => {
   const navigate = useNavigate();
@@ -43,15 +45,19 @@ const PostWithThreads = () => {
 
   return (
     <>
-      <Button
-        sx={{ ml: 1, mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Button
+          sx={{ ml: 1, mb: 2, color: "white" }}
+          variant="contained"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </Button>
+        {post.author == user.uid &&
+        <DeletePostButton key={post} post={post} />}
+      </Box>
       <Card sx={{ mx: 1, mb: 10 }}>
         <CardHeader
           align="left"
@@ -65,22 +71,24 @@ const PostWithThreads = () => {
               <Avatar src={postAuthor.photoURL} aria-label="avatar" />
             </IconButton>
           }
-          title={<Typography>
-            {postAuthor.displayName}
-            {"teamId" in postAuthor && (
-              <Chip
-                icon={<InsertDriveFileIcon />}
-                size="small"
-                label="Capstone Page"
-                variant="outlined"
-                sx={{ mx: 1 }}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  navigate(`/project/${postAuthor.teamId}`);
-                }}
-              />
-            )}
-          </Typography>}
+          title={
+            <Typography>
+              {postAuthor.displayName}
+              {"teamId" in postAuthor && (
+                <Chip
+                  icon={<InsertDriveFileIcon />}
+                  size="small"
+                  label="Capstone Page"
+                  variant="outlined"
+                  sx={{ mx: 1 }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    navigate(`/project/${postAuthor.teamId}`);
+                  }}
+                />
+              )}
+            </Typography>
+          }
           subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
         />
         <CardContent>
