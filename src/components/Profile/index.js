@@ -107,13 +107,13 @@ const Profile = ({ user }) => {
           >
             {userData.year ? "Class of " + userData.year : "No Year"}
           </Typography>
-          <Typography
-            variant="body1"
-            display="block"
-            style={{ color: "#7B7B7B" }}
-            sx={{ flexGrow: 1, paddingLeft: 1, my: 1 }}
-          >
-            {userData.status ? userData.status : "Unknown Status"}
+          <Stack direction="row" justifyContent="center">
+            <Typography
+              variant="body1"
+              style={{ color: "#7B7B7B" }}
+            >
+              {userData.status ? userData.status : "Unknown Status"}
+            </Typography>
             {"teamId" in userData && (
               <Chip
                 size="small"
@@ -122,7 +122,8 @@ const Profile = ({ user }) => {
                 sx={{ mx: 1 }}
               />
             )}
-          </Typography>
+          </Stack>
+
           {"teamId" in userData && (
             <Button
               variant="contained"
@@ -156,6 +157,7 @@ const Profile = ({ user }) => {
                   padding: "3px 6px",
                   fontSize: "10px",
                 }}
+                key={x}
                 variant="contained"
               >
                 {x}

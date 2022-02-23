@@ -69,6 +69,7 @@ const Project = () => {
           <Typography variant="h6" align="left">
             Team Members
           </Typography>
+          
           <Typography variant="h6" align="left">
             {Object.values(projectData.member).map((member) => {
               const user = getUserDataFromUID(member, users);
@@ -81,6 +82,7 @@ const Project = () => {
                   onClick={() => {
                     navigate(`/profile/${user.uid}`);
                   }}
+                  key={member}
                   clickable
                 />
               );
