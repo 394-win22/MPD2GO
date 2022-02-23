@@ -10,33 +10,32 @@ import {
   Avatar,
 } from "@mui/material";
 import moment from "moment";
-
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import Chip from "@mui/material/Chip";
 import Thread from "./Thread";
 import { UserContext } from "components/LoggedIn";
 import ReplyTextField from "./ReplyTextField";
 
 const PostWithThreads = () => {
-  const navigate = useNavigate()
-  const context = useContext(UserContext)
-  const { pageId } = useParams()
-  const [post, setPost] = useState({})
-  const [postAuthor, setPostAuthor] = useState({})
-
+  const navigate = useNavigate();
+  const context = useContext(UserContext);
+  const { pageId } = useParams();
+  const [post, setPost] = useState({});
+  const [postAuthor, setPostAuthor] = useState({});
   const user = context.user;
   const userList = context.userList;
   const postList = context.postList;
 
   useEffect(() => {
-    const post = postList.find((obj) => obj.id === pageId)
+    const post = postList.find((obj) => obj.id === pageId);
     if (!post) {
-      navigate("/404")
+      navigate("/404");
     } else {
-      setPost(post)
-      const postAuthor = userList.find((obj) => obj.uid === post.author)
-      setPostAuthor(postAuthor)
+      setPost(post);
+      const postAuthor = userList.find((obj) => obj.uid === post.author);
+      setPostAuthor(postAuthor);
     }
-  }, [pageId, postList, userList])
-
+  }, [pageId, postList, userList]);
   let sortedThreads = [];
   const haveChild = "threads" in post && Object.values(post.threads).length > 0;
 
@@ -45,8 +44,8 @@ const PostWithThreads = () => {
   return (
     <>
       <Button
-        sx={{ ml: 1, mb: 2, color: 'white' }}
-        variant='contained'
+        sx={{ ml: 1, mb: 2, color: "white" }}
+        variant="contained"
         onClick={() => {
           navigate(-1);
         }}
@@ -66,7 +65,22 @@ const PostWithThreads = () => {
               <Avatar src={postAuthor.photoURL} aria-label="avatar" />
             </IconButton>
           }
-          title={postAuthor.displayName}
+          title={<Typography>
+            {postAuthor.displayName}
+            {"teamId" in postAuthor && (
+              <Chip
+                icon={<InsertDriveFileIcon />}
+                size="small"
+                label="Capstone Page"
+                variant="outlined"
+                sx={{ mx: 1 }}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  navigate(`/project/${postAuthor.teamId}`);
+                }}
+              />
+            )}
+          </Typography>}
           subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
         />
         <CardContent>
@@ -74,21 +88,9 @@ const PostWithThreads = () => {
             {post.description}
           </Typography>
         </CardContent>
-        {"project" in post && (
-          <Button
-            sx={{ marginLeft: "8px", marginBottom: "10px" }}
-            onClick={(event) => {
-              event.stopPropagation();
-              navigate(`/project/${post.project}`);
-            }}
-          >
-            Project Link
-          </Button>
-        )}
-
         <ReplyTextField post={post} user={user} />
-        <CardContent sx={{ paddingLeft: "2%" }} align='left'>
-          {'threads' in post &&
+        <CardContent sx={{ paddingLeft: "2%" }} align="left">
+          {"threads" in post &&
             Object.values(post.threads).length > 0 &&
             sortedThreads.map(([id, thread], i) => {
               return (

@@ -13,11 +13,11 @@ import moment from "moment";
 import Chip from "@mui/material/Chip";
 import ReactGoogleSlides from "react-google-slides";
 import { getProjectFromUid } from "../../utilities/firebase";
-import { getUserDataFromUID } from "../../utilities/posts"
+import { getUserDataFromUID } from "../../utilities/posts";
 import { UserContext } from "components/LoggedIn";
 
 const Project = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { projectId } = useParams();
   const [projectData, setProjectData] = useState(null);
   const context = useContext(UserContext);
@@ -35,6 +35,7 @@ const Project = () => {
   if (!projectData) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
   }
+  const groupMember = Object.values(projectData.member);
   return (
     <>
       <Button
@@ -76,15 +77,16 @@ const Project = () => {
                   avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
                   label={user.displayName}
                   variant="outlined"
-                  key={user.uid}
                   sx={{ mx: 1 }}
                   onClick={() => {
                     navigate(`/profile/${user.uid}`);
                   }}
                   clickable
-                />)
-            })}</Typography>
-          <hr></hr>
+                />
+              );
+            })}
+          </Typography>
+          <hr />
           <Typography variant="h6" align="left" sx={{ my: 1 }}>
             Current Phase&emsp;
             <Chip
