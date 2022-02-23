@@ -8,8 +8,7 @@ import {
   CardMedia,
   Avatar,
   Box,
-  Button,
-  Stack
+  Button
 } from "@mui/material";
 import moment from "moment";
 import Chip from "@mui/material/Chip";
@@ -116,7 +115,7 @@ const Project = () => {
             loop
           />
           { (projectData.drive || projectData.mural) && 
-          <Stack>
+          <>
             <Typography variant="h6" align="left" sx={{ my: 1 }}>
               Additional Resources
             </Typography>
@@ -148,7 +147,7 @@ const Project = () => {
                   }}
                 >Project Mural</Button>
               </>}
-            </Stack>}
+            </>}
         </CardContent>
       </Card>
     </>
