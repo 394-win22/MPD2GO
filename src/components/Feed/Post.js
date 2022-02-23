@@ -13,7 +13,7 @@ import { makeStyles, useTheme } from "@mui/styles";
 import moment from "moment";
 
 import { UserContext } from "components/LoggedIn";
-import {getUserDataFromUID} from "../../utilities/posts"
+import { getUserDataFromUID } from "../../utilities/posts"
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -68,7 +68,7 @@ const Post = ({ post }) => {
         </Typography>
       </CardContent>
       {"project" in post && (
-        <Button
+        <Button sx={{ marginLeft: "8px" }}
           onClick={(event) => {
             event.stopPropagation();
             navigate(`/project/${post.project}`);
