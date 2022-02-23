@@ -22,11 +22,25 @@ import {
 import Chip from "@mui/material/Chip";
 import { getProjectFromUid } from "../../utilities/firebase";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+
+const getStatus=(userData)=>{
+     if (!("year" in userData) || userData.year == "" ){
+       return "Unknown Status";
+     }
+     if (userData.year < new Date().getFullYear()){
+       return "Alumni";
+     }
+     else{
+       return "Current Student";
+     }
+}
+
 const Profile = ({ user }) => {
   const params = useParams();
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
+
 
   useEffect(() => {
     const userToSearch = params.userID || user.uid;
@@ -113,7 +127,7 @@ const Profile = ({ user }) => {
             style={{ color: "#7B7B7B" }}
             sx={{ flexGrow: 1, paddingLeft: 1, my: 1 }}
           >
-            {userData.status ? userData.status : "Unknown Status"}
+            { getStatus(userData)}
             {"teamId" in userData && (
               <Chip
                 size="small"
@@ -148,7 +162,8 @@ const Profile = ({ user }) => {
             Expertise
           </Typography>
           <Stack direction="row" sx={{ marginBottom: 3 }}>
-            {["Rocket Science", "Product Design"].map((x) => (
+            
+            { "expertise" in userData && Object.values(userData.expertise).map((x) => (
               <Button
                 style={{
                   borderRadius: 15,
