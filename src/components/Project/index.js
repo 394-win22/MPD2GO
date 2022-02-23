@@ -111,6 +111,21 @@ const Project = () => {
             showControls
             loop
           />
+          <Typography variant="h6" align="left" sx={{ my: 1 }}>
+            Additional Resources
+          </Typography>
+          {projectData.drive &&
+            <Button sx={{ marginLeft: "8px" }}
+              onClick={() => {
+                window.open(projectData.drive)
+              }}
+            >Project Folder</Button>}
+          {projectData.mural &&
+            <Button sx={{ marginLeft: "8px" }}
+              onClick={() => {
+                window.open(projectData.mural)
+              }}
+            >Project Mural</Button>}
         </CardContent>
       </Card>
     </>
