@@ -21,20 +21,21 @@ const PostWithThreads = () => {
   const { pageId } = useParams()
   const [post, setPost] = useState({})
   const [postAuthor, setPostAuthor] = useState({})
-  
+
   const user = context.user;
   const userList = context.userList;
   const postList = context.postList;
 
   useEffect(() => {
     const post = postList.find((obj) => obj.id === pageId)
-    if(!post){
+    if (!post) {
       navigate("/404")
-    }else{
-    setPost(post)
-    const postAuthor = userList.find((obj) => obj.uid === post.author)
-    setPostAuthor(postAuthor)
-  }}, [pageId, postList, userList])
+    } else {
+      setPost(post)
+      const postAuthor = userList.find((obj) => obj.uid === post.author)
+      setPostAuthor(postAuthor)
+    }
+  }, [pageId, postList, userList])
 
   let sortedThreads = [];
   const haveChild = "threads" in post && Object.values(post.threads).length > 0;
@@ -47,7 +48,7 @@ const PostWithThreads = () => {
         sx={{ ml: 1, mb: 2, color: 'white' }}
         variant='contained'
         onClick={() => {
-          navigate("/");
+          navigate(-1);
         }}
       >
         Back
@@ -73,6 +74,18 @@ const PostWithThreads = () => {
             {post.description}
           </Typography>
         </CardContent>
+        {"project" in post && (
+          <Button
+            sx={{ marginLeft: "8px", marginBottom: "10px" }}
+            onClick={(event) => {
+              event.stopPropagation();
+              navigate(`/project/${post.project}`);
+            }}
+          >
+            Project Link
+          </Button>
+        )}
+
         <ReplyTextField post={post} user={user} />
         <CardContent sx={{ paddingLeft: "2%" }} align='left'>
           {'threads' in post &&

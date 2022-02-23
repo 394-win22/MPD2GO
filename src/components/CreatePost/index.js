@@ -38,6 +38,7 @@ const CreatePost = () => {
   }
 
   return (
+
     <Box
       alignItems='center'
       justifyContent='center'
@@ -75,7 +76,7 @@ const CreatePost = () => {
           <Button
             variant='contained'
             style={{ backgroundColor: '#808080' }}
-            onClick={() => navigate('/')}
+            onClick={() => navigate(-1)}
           >
             Cancel
           </Button>
