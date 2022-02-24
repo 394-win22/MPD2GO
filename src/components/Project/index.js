@@ -51,7 +51,8 @@ const Project = () => {
       </Button>
       <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
         <EditProjectButton project = {projectData}
-          projectId={projectId}/>
+          projectId={projectId}
+          setProjectData={setProjectData}/>
         <Box sx={{ my: 2 }} style={{ display: "block" }}>
           <Avatar
             sx={{ width: 100, height: "auto", mx: 2 }}

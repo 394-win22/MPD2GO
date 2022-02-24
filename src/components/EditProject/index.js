@@ -37,7 +37,7 @@ const useStyles = makeStyles({
   },
 });
 
-const EditProject = ({ project, projectId, open, handleClose }) => {
+const EditProject = ({ project, projectId, open, handleClose, setProjectData }) => {
   const classes = useStyles()
 
   const [formValues, setFormValues] = useState(project)
@@ -55,8 +55,10 @@ const EditProject = ({ project, projectId, open, handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    projectId = "projectID";
-    editProjectInFirebase(projectId, formValues);    
+    //projectId = "projectID";
+    editProjectInFirebase(projectId, formValues);   
+    // re-render 
+    setProjectData(formValues);
     handleClose();
   };
 

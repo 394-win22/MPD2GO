@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import EditProject from "/";
 
-const EditProjectButton = ({ project, projectId }) => {
+const EditProjectButton = ({ project, projectId, setProjectData }) => {
   console.log("EditProjectButton: project: " + project + ", projectId: " + projectId);
   
   const [open, setOpen] = useState(false);
@@ -28,6 +28,7 @@ const EditProjectButton = ({ project, projectId }) => {
           projectId={projectId}
           open={open}
           handleClose={handleClose}
+          setProjectData={setProjectData}
         />
     </>
   );
