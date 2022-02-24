@@ -1,12 +1,12 @@
-import {useState} from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+
 import { registerWithEmailAndPassword } from "utilities/firebase";
 
 export default function SignUp() {
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -61,7 +61,7 @@ export default function SignUp() {
               label="Email Address"
               name="email"
               autoComplete="email"
-            /> 
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField

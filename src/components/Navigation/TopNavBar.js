@@ -6,7 +6,6 @@ import {
   Box,
   Toolbar,
   Button,
-  Typography,
   ClickAwayListener,
   Menu,
   MenuItem,
@@ -16,7 +15,6 @@ import {
 import {
   AccountCircle as AccountCircleIcon,
   Email as EmailIcon,
-  Home as HomeIcon,
   MoreHoriz as MoreHorizIcon,
   AddCircle as AddCircleIcon,
   Logout as LogoutIcon

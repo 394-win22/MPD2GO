@@ -8,7 +8,6 @@ import {
   ClickAwayListener,
   ListItemIcon,
   ListItemText,
-  Toolbar
 } from '@mui/material'
 import {
   AccountCircle as AccountCircleIcon,

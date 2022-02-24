@@ -1,5 +1,4 @@
 import { useMediaQuery } from '@mui/material'
-import { useState } from 'react'
 
 import TopNavBar from './TopNavBar'
 import MobileBottomNavBar from './MobileBottomNavBar'

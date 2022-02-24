@@ -1,15 +1,14 @@
 import { useState, useContext, memo } from "react";
-import { Box, Collapse, TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router";
+import { Box, Collapse, Button } from "@mui/material";
 import { Message as MessageIcon } from "@mui/icons-material";
-import { flexbox } from "@mui/system";
 import { UserContext } from "components/LoggedIn";
 import { makeStyles } from "@mui/styles";
 import { Avatar, Typography, IconButton } from "@mui/material";
-import { replyToThread } from "utilities/posts";
-import { useNavigate } from "react-router";
 import moment from "moment";
-import { deleteData } from "../../utilities/firebase";
 
+import { deleteData } from "../../utilities/firebase";
+import { replyToThread } from "utilities/posts";
 import AddComment from "./AddComment";
 
 const useStyles = makeStyles({
