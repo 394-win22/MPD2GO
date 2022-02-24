@@ -5,16 +5,20 @@ import {
   Card,
   CardHeader,
   CardContent,
+  CardMedia,
   Avatar,
   Box,
   Button
 } from "@mui/material";
+import LinkIcon from '@mui/icons-material/Link'
 import moment from "moment";
 import Chip from "@mui/material/Chip";
 import ReactGoogleSlides from "react-google-slides";
 import { getProjectFromUid } from "../../utilities/firebase";
 import { getUserDataFromUID } from "../../utilities/posts";
 import { UserContext } from "components/LoggedIn";
+import DriveLogo from 'google-drive.png'
+import MuralLogo from 'mural.png'
 
 const Project = () => {
   const navigate = useNavigate();
@@ -115,6 +119,23 @@ const Project = () => {
             showControls
             loop
           />
+          { projectData.resources !== undefined && Object.values(projectData.resources).length > 0 && 
+          <>
+            <Typography variant="h6" align="left" sx={{ my: 1 }}>
+              Additional Resources
+            </Typography>
+            {Object.values(projectData.resources).map((resource) => (
+              <>
+              <Button sx={{ marginLeft: '8px' }}
+                startIcon={(resource.url.includes('mural')) ? <img src={MuralLogo} style={{height: 20, width: 20}}/> : (
+                  (resource.url.includes('drive') ? <img src={DriveLogo} style={{height: '20px', width: '20px'}}/> : <LinkIcon />))}
+                onClick={() => {
+                  window.open(resource.url)
+                }}
+              >{resource.text}</Button>
+              </>
+            ))}
+          </>}
         </CardContent>
       </Card>
     </>
