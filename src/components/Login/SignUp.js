@@ -1,4 +1,4 @@
-import * as React from "react";
+import {useState} from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -6,10 +6,19 @@ import Box from "@mui/material/Box";
 import { registerWithEmailAndPassword } from "utilities/firebase";
 
 export default function SignUp() {
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    registerWithEmailAndPassword(`${data.get("firstName")} ${data.get("lastName")}`, data.get("email"), data.get("password"));
+    if (data.get("password") !== data.get("passwordConfirmation")) {
+      alert("Passwords don't match");
+    } else {
+      registerWithEmailAndPassword(
+        `${data.get("firstName")} ${data.get("lastName")}`,
+        data.get("email"),
+        data.get("password")
+      );
+    }
   };
 
   return (
@@ -46,12 +55,13 @@ export default function SignUp() {
               variant="filled"
               color="secondary"
               required
+              type="email"
               fullWidth
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
-            />
+            /> 
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -64,6 +74,18 @@ export default function SignUp() {
               type="password"
               id="password"
               autoComplete="new-password"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="filled"
+              color="secondary"
+              required
+              fullWidth
+              name="passwordConfirmation"
+              label="Confirm Password"
+              type="password"
+              id="passwordConfirmation"
             />
           </Grid>
         </Grid>

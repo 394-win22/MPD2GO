@@ -7,13 +7,14 @@ import {
   Avatar,
   Card,
   Box,
-  Button,
+  Stack,
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
 import moment from "moment";
-
+import Chip from "@mui/material/Chip";
 import { UserContext } from "components/LoggedIn";
-import { getUserDataFromUID } from "../../utilities/posts"
+import { getUserDataFromUID } from "../../utilities/posts";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -59,25 +60,31 @@ const Post = ({ post }) => {
       <CardHeader
         align="left"
         avatar={<Avatar src={user.photoURL} aria-label="avatar" />}
-        title={user.displayName}
+        title={
+          <Stack direction="row">
+            <Typography>{user.displayName}</Typography>
+            {"teamId" in user && (
+              <Chip
+                icon={<InsertDriveFileIcon />}
+                size="small"
+                label="Capstone Page"
+                variant="outlined"
+                sx={{ mx: 1 }}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  navigate(`/project/${user.teamId}`);
+                }}
+              />
+            )}
+          </Stack>
+        }
         subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
       />
-      <CardContent>
+      <CardContent sx={{ pt: 0 }}>
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
       </CardContent>
-      {"project" in post && (
-        <Button sx={{ marginLeft: "8px" }}
-          onClick={(event) => {
-            event.stopPropagation();
-            navigate(`/project/${post.project}`);
-          }}
-        >
-          Project Link
-        </Button>
-      )}
-
       <Box sx={{ display: "flex", m: 1 }}>
         <Typography className={classes.comment} variant="body2">
           {getNumCommentsText(post)}

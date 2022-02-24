@@ -19,5 +19,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIVE_MPD2 }}'
           projectId: hive-mpd2
-          channelId: main
-
+          channelId: live

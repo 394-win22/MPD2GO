@@ -7,13 +7,14 @@ const MobileTopNavBar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='relative' sx={{ top: 'auto' }}>
+      <AppBar  sx={{ top: 0, position: "fixed" }}>
         <Toolbar>
           <Button sx={{ flexGrow: 1, ml: 1, display: "flex", justifyContent: "flex-start", alignItems: "flex-start" }} onClick={() => { navigate('/') }}>
             <img src={logo} alt='Hive Logo' style={{ height: '3em' }} />
           </Button>
         </Toolbar>
       </AppBar>
+      <Toolbar />
     </Box>
   )
 }
