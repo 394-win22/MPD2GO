@@ -57,7 +57,7 @@ const PostWithThreads = () => {
           Back
         </Button>
         {post.author == user.uid &&
-        <DeletePostButton key={post} post={post} />}
+          <DeletePostButton key={post} post={post} />}
       </Box>
       <Card sx={{ mx: 1, mb: 10 }}>
         <CardHeader
@@ -74,7 +74,7 @@ const PostWithThreads = () => {
           }
           title={
             <Stack direction="row">
-              <Typography>{user.displayName}</Typography>
+              <Typography>{postAuthor.displayName}</Typography>
               {"teamId" in user && (
                 <Chip
                   icon={<InsertDriveFileIcon />}
