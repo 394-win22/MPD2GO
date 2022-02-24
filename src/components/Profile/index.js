@@ -22,11 +22,27 @@ import {
 import Chip from "@mui/material/Chip";
 import { getProjectFromUid } from "../../utilities/firebase";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
+const getStatus = (userData) => {
+  if (!("year" in userData) || userData.year == "") {
+    return "Unknown Status";
+  }
+  if (userData.year < new Date().getFullYear()) {
+    return "Alumni";
+  }
+  else {
+    return "Current Student";
+  }
+}
+
 const Profile = ({ user }) => {
   const params = useParams();
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
+
 
   useEffect(() => {
     const userToSearch = params.userID || user.uid;
@@ -90,6 +106,14 @@ const Profile = ({ user }) => {
           >
             {userData.displayName}
           </Typography>
+
+          <Typography
+            component="div"
+            sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}
+          >
+            {userData.bio ? userData.bio : "No Bio"}
+          </Typography>
+          
           <Typography
             variant="body1"
             display="block"
@@ -107,13 +131,20 @@ const Profile = ({ user }) => {
           >
             {userData.year ? "Class of " + userData.year : "No Year"}
           </Typography>
-          <Typography
+
+          <Stack direction="row" justifyContent="center">
+            <Typography
             variant="body1"
             display="block"
             style={{ color: "#7B7B7B" }}
             sx={{ flexGrow: 1, paddingLeft: 1, my: 1 }}
           >
-            {userData.status ? userData.status : "Unknown Status"}
+            {getStatus(userData)}
+            
+            </Typography>
+
+
+
             {"teamId" in userData && (
               <Chip
                 size="small"
@@ -122,7 +153,8 @@ const Profile = ({ user }) => {
                 sx={{ mx: 1 }}
               />
             )}
-          </Typography>
+          </Stack>
+
           {"teamId" in userData && (
             <Button
               variant="contained"
@@ -135,20 +167,15 @@ const Profile = ({ user }) => {
               View Capstone Page
             </Button>
           )}
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, paddingLeft: 1, paddingTop: 5 }}
-          >
-            {userData.bio ? userData.bio : "No Bio"}
+          
+          <Divider />
 
-            <Divider />
-          </Typography>
-          <Typography align="left" sx={{ marginBottom: 3 }}>
+          <Typography align="left" sx={{ marginBottom: 3, ml:1, color: "#7B7B7B" }}>
             Expertise
           </Typography>
           <Stack direction="row" sx={{ marginBottom: 3 }}>
-            {["Rocket Science", "Product Design"].map((x) => (
+
+            {"expertise" in userData && Object.values(userData.expertise).map((x) => (
               <Button
                 style={{
                   borderRadius: 15,
@@ -156,6 +183,7 @@ const Profile = ({ user }) => {
                   padding: "3px 6px",
                   fontSize: "10px",
                 }}
+                key={x}
                 variant="contained"
               >
                 {x}
@@ -163,14 +191,18 @@ const Profile = ({ user }) => {
             ))}
           </Stack>
           <Divider />
-          <Stack direction="row" sx={{ marginBottom: 3 }}>
-            <EmailIcon />
-            <Typography>mail link</Typography>
-          </Stack>
-          <Stack direction="row" sx={{ marginBottom: 3 }}>
-            <AddCircleIcon />
-            <Typography>linkedIn link</Typography>
-          </Stack>
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
+              <Stack direction="row" sx={{ marginBottom: 3, marginTop: 2 }} spacing={1}>
+                <EmailIcon sx={{ color: "#999999" }} />
+                <Typography>{userData.email}</Typography>
+              </Stack>
+              <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
+                <LinkedInIcon sx={{ color: "#4173ac" }} />
+                <Typography>{(userData.linkedIn) ? userData.linkedIn : "No LinkedIn"}</Typography>
+              </Stack>
+            </Box>
+          </Box>
           {(!params.userID || params.userID === user.uid) && (
             <EditUserButton key={userData} user={userData} userID={user.uid} />
           )}
