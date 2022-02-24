@@ -23,16 +23,18 @@ import Chip from "@mui/material/Chip";
 import { getProjectFromUid } from "../../utilities/firebase";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
-const getStatus=(userData)=>{
-     if (!("year" in userData) || userData.year == "" ){
-       return "Unknown Status";
-     }
-     if (userData.year < new Date().getFullYear()){
-       return "Alumni";
-     }
-     else{
-       return "Current Student";
-     }
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
+const getStatus = (userData) => {
+  if (!("year" in userData) || userData.year == "") {
+    return "Unknown Status";
+  }
+  if (userData.year < new Date().getFullYear()) {
+    return "Alumni";
+  }
+  else {
+    return "Current Student";
+  }
 }
 
 const Profile = ({ user }) => {
@@ -127,7 +129,7 @@ const Profile = ({ user }) => {
             style={{ color: "#7B7B7B" }}
             sx={{ flexGrow: 1, paddingLeft: 1, my: 1 }}
           >
-            { getStatus(userData)}
+            {getStatus(userData)}
             {"teamId" in userData && (
               <Chip
                 size="small"
@@ -162,8 +164,8 @@ const Profile = ({ user }) => {
             Expertise
           </Typography>
           <Stack direction="row" sx={{ marginBottom: 3 }}>
-            
-            { "expertise" in userData && Object.values(userData.expertise).map((x) => (
+
+            {"expertise" in userData && Object.values(userData.expertise).map((x) => (
               <Button
                 style={{
                   borderRadius: 15,
@@ -178,14 +180,18 @@ const Profile = ({ user }) => {
             ))}
           </Stack>
           <Divider />
-          <Stack direction="row" sx={{ marginBottom: 3 }}>
-            <EmailIcon />
-            <Typography>{userData.email}</Typography>
-          </Stack>
-          <Stack direction="row" sx={{ marginBottom: 3 }}>
-            <AddCircleIcon />
-            <Typography>{(userData.linkedIn)? userData.linkedIn: "No LinkedIn"}</Typography>
-          </Stack>
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
+              <Stack direction="row" sx={{ marginBottom: 3, marginTop: 2 }} spacing={1}>
+                <EmailIcon sx={{ color: "#999999" }} />
+                <Typography>{userData.email}</Typography>
+              </Stack>
+              <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
+                <LinkedInIcon sx={{ color: "#4173ac" }} />
+                <Typography>{(userData.linkedIn) ? userData.linkedIn : "No LinkedIn"}</Typography>
+              </Stack>
+            </Box>
+          </Box>
           {(!params.userID || params.userID === user.uid) && (
             <EditUserButton key={userData} user={userData} userID={user.uid} />
           )}
