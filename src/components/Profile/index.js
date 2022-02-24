@@ -135,9 +135,8 @@ const Profile = ({ user }) => {
           <Stack direction="row" justifyContent="center">
             <Typography
             variant="body1"
-            display="block"
             style={{ color: "#7B7B7B" }}
-            sx={{ flexGrow: 1, paddingLeft: 1, my: 1 }}
+            sx={{  paddingLeft: 1 }}
           >
             {getStatus(userData)}
             
