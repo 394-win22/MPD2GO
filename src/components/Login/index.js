@@ -1,15 +1,31 @@
 import { useState } from "react";
 import { Grid, Box, Paper, Typography, TextField, Button, Link } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
 
 import logo from "logo.png";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 
-
+const useStyles = makeStyles({
+  leftImg: {
+    backgroundImage:
+      "url(https://ideas.ted.com/wp-content/uploads/sites/3/2018/11/featured_art_loosetouch_yifan_wu.jpg)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  },
+  rightPanel: {
+    margin: "64px 32px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+});
 
 const Login = () => {
-  const [signUpSwitcher, setSignUpSwitcher] = useState(false);
+  const classes = useStyles();
+  const [isSignUp, setIsSignUp] = useState(false);
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -19,17 +35,7 @@ const Login = () => {
         xs={false}
         sm={4}
         md={7}
-        sx={{
-          backgroundImage:
-            "url(https://ideas.ted.com/wp-content/uploads/sites/3/2018/11/featured_art_loosetouch_yifan_wu.jpg)",
-          backgroundRepeat: "no-repeat",
-          backgroundColor: (t) =>
-            t.palette.mode === "light"
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        className={classes.leftImg}
       />
       <Grid
         backgroundColor="#f1b844"
@@ -41,25 +47,18 @@ const Login = () => {
         elevation={6}
         square
       >
-        <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <Box className={classes.rightPanel}>
           <img src={logo} alt="Hive Logo" style={{ height: "10em" }} />
-          {(!signUpSwitcher) ? <LogIn /> : <SignUp />}
+
+          {(!isSignUp) ? <LogIn /> : <SignUp />}
 
           <Link
             variant="body2"
             sx={{ color: 'white' }}
-            onClick={() => setSignUpSwitcher(!signUpSwitcher)}
+            onClick={() => setIsSignUp(!isSignUp)}
           >
             <Typography color='rgb(240, 242, 245)'>
-              {signUpSwitcher ? "Already have an account? Sign in" : "Don't have an account? Sign Up"}
+              {isSignUp ? "Already have an account? Sign in" : "Don't have an account? Sign Up"}
             </Typography>
           </Link>
 
