@@ -106,6 +106,14 @@ const Profile = ({ user }) => {
           >
             {userData.displayName}
           </Typography>
+
+          <Typography
+            component="div"
+            sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}
+          >
+            {userData.bio ? userData.bio : "No Bio"}
+          </Typography>
+          
           <Typography
             variant="body1"
             display="block"
@@ -151,16 +159,10 @@ const Profile = ({ user }) => {
               View Capstone Page
             </Button>
           )}
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, paddingLeft: 1, paddingTop: 5 }}
-          >
-            {userData.bio ? userData.bio : "No Bio"}
+          
+          <Divider />
 
-            <Divider />
-          </Typography>
-          <Typography align="left" sx={{ marginBottom: 3 }}>
+          <Typography align="left" sx={{ marginBottom: 3, ml:1, color: "#7B7B7B" }}>
             Expertise
           </Typography>
           <Stack direction="row" sx={{ marginBottom: 3 }}>
