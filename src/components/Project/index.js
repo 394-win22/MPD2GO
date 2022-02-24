@@ -39,7 +39,7 @@ const Project = () => {
   if (!projectData) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
   }
-  const groupMember = Object.values(projectData.member);
+
   return (
     <>
       <Button
