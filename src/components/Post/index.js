@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardContent,
   Avatar,
+  Stack,
 } from "@mui/material";
 import moment from "moment";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
@@ -65,22 +66,24 @@ const PostWithThreads = () => {
               <Avatar src={postAuthor.photoURL} aria-label="avatar" />
             </IconButton>
           }
-          title={<Typography>
-            {postAuthor.displayName}
-            {"teamId" in postAuthor && (
-              <Chip
-                icon={<InsertDriveFileIcon />}
-                size="small"
-                label="Capstone Page"
-                variant="outlined"
-                sx={{ mx: 1 }}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  navigate(`/project/${postAuthor.teamId}`);
-                }}
-              />
-            )}
-          </Typography>}
+          title={
+            <Stack direction="row">
+              <Typography>{user.displayName}</Typography>
+              {"teamId" in user && (
+                <Chip
+                  icon={<InsertDriveFileIcon />}
+                  size="small"
+                  label="Capstone Page"
+                  variant="outlined"
+                  sx={{ mx: 1 }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    navigate(`/project/${user.teamId}`);
+                  }}
+                />
+              )}
+            </Stack>
+          }
           subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
         />
         <CardContent>

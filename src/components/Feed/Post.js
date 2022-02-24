@@ -7,6 +7,7 @@ import {
   Avatar,
   Card,
   Box,
+  Stack,
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
 import moment from "moment";
@@ -60,8 +61,8 @@ const Post = ({ post }) => {
         align="left"
         avatar={<Avatar src={user.photoURL} aria-label="avatar" />}
         title={
-          <Typography>
-            {user.displayName}
+          <Stack direction="row">
+            <Typography>{user.displayName}</Typography>
             {"teamId" in user && (
               <Chip
                 icon={<InsertDriveFileIcon />}
@@ -75,11 +76,11 @@ const Post = ({ post }) => {
                 }}
               />
             )}
-          </Typography>
+          </Stack>
         }
         subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
       />
-      <CardContent>
+      <CardContent sx={{ pt: 0 }}>
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
