@@ -15,10 +15,13 @@ import ReactGoogleSlides from "react-google-slides";
 import { getProjectFromUid } from "../../utilities/firebase";
 import { getUserDataFromUID } from "../../utilities/posts"
 import { UserContext } from "components/LoggedIn";
+import EditProjectButton from "components/EditProject/EditProjectButton";
+
 
 const Project = () => {
   const navigate = useNavigate()
   const { projectId } = useParams();
+  console.log(projectId);
   const [projectData, setProjectData] = useState(null);
   const context = useContext(UserContext);
   const users = context.userList;
@@ -47,6 +50,8 @@ const Project = () => {
         Back
       </Button>
       <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
+        <EditProjectButton project = {projectData}
+          projectId={projectId}/>
         <Box sx={{ my: 2 }} style={{ display: "block" }}>
           <Avatar
             sx={{ width: 100, height: "auto", mx: 2 }}
