@@ -166,7 +166,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               onChange={handleInputChange}
             >
               {projectList.map((project) => {
-                return <MenuItem value={project.id}>{project.name}</MenuItem>;
+                return <MenuItem key={project.id} value={project.id}>{project.name}</MenuItem>;
               })}
             </Select>
           </FormControl>

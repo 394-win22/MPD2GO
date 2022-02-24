@@ -53,7 +53,7 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
               <img src={logo} alt='Hive Logo' style={{ height: '3em' }} onClick={() => { navigate('/') }} />
             </Button>
 
-            {isDesktopScreen && (
+            {isDesktopScreen && isLoggedIn && (
               <>
                 <MenuItem disabled={true}>
                   <EmailIcon />

@@ -183,8 +183,8 @@ const Profile = ({ user }) => {
             ))}
           </Stack>
           <Divider />
-          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
               <Stack direction="row" sx={{ marginBottom: 3, marginTop: 2 }} spacing={1}>
                 <EmailIcon sx={{ color: "#999999" }} />
                 <Typography>{userData.email}</Typography>
@@ -195,7 +195,7 @@ const Profile = ({ user }) => {
               </Stack>
             </Box>
           </Box>
-          {(!params.userID || params.userID === user.uid) && (
+          {(params.userID || params.userID === user.uid) && (
             <EditUserButton key={userData} user={userData} userID={user.uid} />
           )}
         </Box>
