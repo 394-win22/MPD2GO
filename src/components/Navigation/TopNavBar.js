@@ -25,7 +25,7 @@ import {
 import { signOut } from 'utilities/firebase'
 import logo from 'logo.png'
 
-const DesktopNavBar = ({ isLoggedIn }) => {
+const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState(null)
@@ -49,11 +49,11 @@ const DesktopNavBar = ({ isLoggedIn }) => {
       <Box sx={{ flexGrow: 1, paddingBottom: 3, }}>
         <AppBar sx={{ top: 0, position: "fixed" }}>
           <Toolbar>
-            <Button sx={{ flexGrow: 1, ml: 1, display: "flex", justifyContent: "flex-start", alignItems: "flex-start" }} onClick={() => { navigate('/') }}>
-              <img src={logo} alt='Hive Logo' style={{ height: '3em' }} />
+            <Button sx={{ flexGrow: 1, ml: 1, display: "flex", justifyContent: "flex-start", alignItems: "flex-start" }} >
+              <img src={logo} alt='Hive Logo' style={{ height: '3em' }} onClick={() => { navigate('/') }} />
             </Button>
 
-            {isLoggedIn && (
+            {isDesktopScreen && (
               <>
                 <MenuItem disabled={true}>
                   <EmailIcon />
@@ -66,41 +66,42 @@ const DesktopNavBar = ({ isLoggedIn }) => {
                 <MenuItem onClick={() => { navigate('/profile') }}>
                   <AccountCircleIcon />
                 </MenuItem>
+
+                <MenuItem onClick={handleDrawerOpen}>
+                  <MoreHorizIcon />
+                </MenuItem>
+                <Menu
+                  id='basic-menu'
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={isMenuOpen}
+                  onClose={handleDrawerClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <MenuItem onClick={signOut}>
+                    <ListItemIcon><LogoutIcon /></ListItemIcon>
+                    <ListItemText>Sign out</ListItemText>
+                  </MenuItem>
+                </Menu>
               </>
             )}
-            <MenuItem onClick={handleDrawerOpen}>
-              <MoreHorizIcon />
-            </MenuItem>
+
           </Toolbar>
         </AppBar>
-        
-        <Menu
-          id='basic-menu'
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={isMenuOpen}
-          onClose={handleDrawerClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-        >
-          <MenuItem onClick={signOut}>
-            <ListItemIcon><LogoutIcon /></ListItemIcon>
-            <ListItemText>Sign out</ListItemText>
-          </MenuItem>
-        </Menu>
 
         <Toolbar />
       </Box>
-    </ClickAwayListener>
+    </ClickAwayListener >
   )
 }
 
-export default DesktopNavBar
+export default TopNavBar

@@ -1,22 +1,22 @@
 import { useMediaQuery } from '@mui/material'
+import { useState } from 'react'
 
-import DesktopNavBar from './DesktopNavBar'
+import TopNavBar from './TopNavBar'
 import MobileBottomNavBar from './MobileBottomNavBar'
-import MobileTopNavBar from './MobileTopNavBar'
 
 const Navigation = ({ user }) => {
-  const isDesktopScreen = useMediaQuery('(min-width:600px)')
-  const isLoggedIn = user != null
+  const isDesktopScreen = useMediaQuery('(min-width:600px)');
+  const isLoggedIn = user != null;
 
-  if (isDesktopScreen) {
-    return <DesktopNavBar isLoggedIn={isLoggedIn} />
+  if (!isDesktopScreen) {
+    return (
+      <>
+        <TopNavBar isLoggedIn={isLoggedIn} isDesktopScreen={isDesktopScreen} />
+        <MobileBottomNavBar isLoggedIn={isLoggedIn} />
+      </>
+    )
   }
-  return (
-    <>
-      <MobileTopNavBar />{' '}
-      <MobileBottomNavBar isLoggedIn={isLoggedIn} />
-    </>
-  )
+  return <TopNavBar isLoggedIn={isLoggedIn} isDesktopScreen={isDesktopScreen} />
 }
 
 export default Navigation

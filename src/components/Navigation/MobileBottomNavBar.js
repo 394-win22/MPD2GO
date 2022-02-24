@@ -42,7 +42,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
+      <Box sx={{ flexGrow: 1 }}>
         <AppBar
           position='fixed'
           sx={{ top: 'auto', bottom: 0 }}
