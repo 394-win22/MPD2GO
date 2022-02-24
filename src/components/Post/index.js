@@ -9,15 +9,16 @@ import {
   CardContent,
   Avatar,
   Stack,
+  Box,
+  Chip
 } from "@mui/material";
 import moment from "moment";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import Chip from "@mui/material/Chip";
+
 import Thread from "./Thread";
 import { UserContext } from "components/LoggedIn";
 import ReplyTextField from "./ReplyTextField";
 import { DeletePostButton } from "./DeletePostButton";
-import Box from "@mui/material/Box";
 
 const PostWithThreads = () => {
   const navigate = useNavigate();

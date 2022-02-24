@@ -8,10 +8,17 @@ import { useUserState } from 'utilities/firebase.js'
 
 const useStyles = makeStyles({
   container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    padding: '40px 24px 40px 24px',
+  },
+  form: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    '& .MuiTextField-root': { my: 1, width: '100%' }
   },
 })
 
@@ -39,18 +46,11 @@ const CreatePost = () => {
 
   return (
 
-    <Box
-      alignItems='center'
-      justifyContent='center'
-      backgroundColor='white'
-      sx={{ px: 3, py: 5 }}>
+    <Box className={classes.container}>
       <Typography align='center' variant='h4' sx={{ mb: 3 }}>
         Create Post
       </Typography>
-      <Box
-        sx={{ '& .MuiTextField-root': { my: 1, width: '100%' } }}
-        className={classes.container}
-      >
+      <Box className={classes.form} >
         <TextField
           margin='normal'
           label='Title'

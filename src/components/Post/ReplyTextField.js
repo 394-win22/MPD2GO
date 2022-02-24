@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
 import { Box } from '@mui/system'
-import { Avatar, Divider, TextField, Button } from '@mui/material'
-import { Send as SendIcon } from '@mui/icons-material'
+import { TextField, Button } from '@mui/material'
 
 import { addCommentToPost } from '../../utilities/posts.js'
 
@@ -17,12 +15,9 @@ const ReplyTextField = ({ post, user }) => {
 	return (
 		<Box sx={{
 			alignItems: 'flex-start',
-			// width: '100%',
 			display: "flex",
 			flexDirection: "column",
 			fontSize: "12px",
-			// marginLeft: "30px",
-			// padding: "5px 50px 20px 50px",
 			color: "#6e6e6e",
 			paddingTop: "10px",
 			paddingLeft: "7%",
