@@ -4,26 +4,21 @@ import {
   Typography,
   Avatar,
   Box,
-  Paper,
   Divider,
   Button,
   Stack,
   Card,
+  Chip
 } from "@mui/material";
-import { EditUserButton } from "../EditProfile/EditUserButton";
-import { getUserFromUid } from "utilities/firebase";
-import {
-  AccountCircle as AccountCircleIcon,
-  Email as EmailIcon,
-  Home as HomeIcon,
-  MoreHoriz as MoreHorizIcon,
-  AddCircle as AddCircleIcon,
-} from "@mui/icons-material";
-import Chip from "@mui/material/Chip";
-import { getProjectFromUid } from "../../utilities/firebase";
+// icons
+import { Email as EmailIcon } from "@mui/icons-material";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
+// local files
+import { EditUserButton } from "../EditProfile/EditUserButton";
+import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
+
 
 const getStatus = (userData) => {
   if (!("year" in userData) || userData.year == "") {
@@ -113,7 +108,7 @@ const Profile = ({ user }) => {
           >
             {userData.bio ? userData.bio : "No Bio"}
           </Typography>
-          
+
           <Typography
             variant="body1"
             display="block"
@@ -134,15 +129,13 @@ const Profile = ({ user }) => {
 
           <Stack direction="row" justifyContent="center">
             <Typography
-            variant="body1"
-            style={{ color: "#7B7B7B" }}
-            sx={{  paddingLeft: 1 }}
-          >
-            {getStatus(userData)}
-            
+              variant="body1"
+              style={{ color: "#7B7B7B" }}
+              sx={{ paddingLeft: 1 }}
+            >
+              {getStatus(userData)}
+
             </Typography>
-
-
 
             {"teamId" in userData && (
               <Chip
@@ -166,10 +159,10 @@ const Profile = ({ user }) => {
               View Capstone Page
             </Button>
           )}
-          
+
           <Divider />
 
-          <Typography align="left" sx={{ marginBottom: 3, ml:1, color: "#7B7B7B" }}>
+          <Typography align="left" sx={{ marginBottom: 3, ml: 1, color: "#7B7B7B" }}>
             Expertise
           </Typography>
           <Stack direction="row" sx={{ marginBottom: 3 }}>

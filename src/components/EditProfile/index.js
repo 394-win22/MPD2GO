@@ -21,6 +21,7 @@ import Select from "@mui/material/Select";
 
 const useStyles = makeStyles({
   container: {
+    padding: "24px 10px",
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -30,17 +31,14 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-evenly",
-    padding: "10px",
     borderRadius: "10px",
     overflow: "auto",
-    height: "80%",
   },
   title: {
     textAlign: "center",
   },
   form: {
-    height: "100%",
+    textAlign: "center",
   },
 });
 
@@ -101,7 +99,6 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
       <Box className={classes.container}>
         <form
           onSubmit={handleSubmit}
-          style={{ textAlign: "center" }}
           className={classes.form}
         >
           <Typography
@@ -180,15 +177,14 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             label="bio"
             type="text"
             InputLabelProps={{ shrink: true }}
-          />{" "}
-          <Button variant="contained" endIcon={<SendIcon />} type="submit">
-            Edit
-          </Button>
-          <Button type="button" onClick={() => handleClose()}>
-            {" "}
-            Cancel{" "}
-          </Button>
+          />
         </form>
+        <Button variant="contained" endIcon={<SendIcon />} type="submit">
+          Edit
+        </Button>
+        <Button type="button" onClick={() => handleClose()}>
+          Cancel
+        </Button>
       </Box>
     </Modal>
   );
