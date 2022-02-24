@@ -195,7 +195,7 @@ const Profile = ({ user }) => {
               </Stack>
             </Box>
           </Box>
-          {(params.userID || params.userID === user.uid) && (
+          {(!params.userID || params.userID === user.uid) && (
             <EditUserButton key={userData} user={userData} userID={user.uid} />
           )}
         </Box>

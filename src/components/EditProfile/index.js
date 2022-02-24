@@ -148,7 +148,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             <Select
               labelId="status"
               name="status"
-              value={formValues.status}
+              value={formValues.status || ""}
               label="status"
               onChange={handleInputChange}
             >
