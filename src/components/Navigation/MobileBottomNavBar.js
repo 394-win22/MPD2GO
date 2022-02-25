@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import {
   AccountCircle as AccountCircleIcon,
-  Email as EmailIcon,
+  Notifications as NotificationsIcon,
   Home as HomeIcon,
   MoreHoriz as MoreHorizIcon,
   AddCircle as AddCircleIcon,
@@ -54,8 +54,8 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
 
           {isLoggedIn && (
             <>
-              <MenuItem disabled={true}>
-                <EmailIcon />
+              <MenuItem >
+                <NotificationsIcon />
               </MenuItem>
 
               <MenuItem onClick={() => navigate('/createPost')}>
