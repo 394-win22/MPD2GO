@@ -1,16 +1,17 @@
-import { useContext } from 'react'
-
-import PostList from './PostsList'
-import { UserContext } from 'components/LoggedIn'
-
+import { useContext, useState } from "react";
+import PostList from "./PostsList";
+import { UserContext } from "components/LoggedIn";
+import SearchBar from "components/SearchBar";
 const Main = () => {
-  const context = useContext(UserContext)
+  const [query, setQuery] = useState("");
+  const context = useContext(UserContext);
 
   return (
-    <div className='App'>
+    <div className="App">
+      <SearchBar setQuery={setQuery} />
       <PostList posts={context.postList} />
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;
