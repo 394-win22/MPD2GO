@@ -57,11 +57,9 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
               <MenuItem onClick={() => navigate('/notifications')}>
                 <NotificationsIcon />
               </MenuItem>
-
               <MenuItem onClick={() => navigate('/createPost')}>
                 <AddCircleIcon />
               </MenuItem>
-
               <MenuItem onClick={() => { navigate('/profile') }}>
                 <AccountCircleIcon />
               </MenuItem>
