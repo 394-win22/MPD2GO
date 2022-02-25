@@ -75,8 +75,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formValues);
+    e.preventDefault(); 
     formValues.photoURL = user.photoURL;
     const oldTeamId = user.teamId;
     const newTeamId = formValues.teamId;
@@ -98,7 +97,6 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
     >
       <Box className={classes.container}>
         <form
-          onSubmit={handleSubmit}
           className={classes.form}
         >
           <Typography
@@ -140,22 +138,9 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             value={formValues.year}
             onChange={handleInputChange}
             label="year"
-            type="text"
+            type="number"
             InputLabelProps={{ shrink: true }}
           />
-          <FormControl sx={{ m: 1, width: "25ch" }}>
-            <InputLabel id="Status">Status</InputLabel>
-            <Select
-              labelId="status"
-              name="status"
-              value={formValues.status || ""}
-              label="status"
-              onChange={handleInputChange}
-            >
-              <MenuItem value={"Current Student"}>Current Student</MenuItem>
-              <MenuItem value={"Alumni"}>Alumni</MenuItem>
-            </Select>
-          </FormControl>
           <FormControl sx={{ m: 1, width: "25ch" }}>
             <InputLabel id="team">Team</InputLabel>
             <Select
@@ -178,8 +163,16 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             type="text"
             InputLabelProps={{ shrink: true }}
           />
+          <TextField
+            name="linkedIn"
+            value={formValues.linkedIn}
+            onChange={handleInputChange}
+            label="linkedIn"
+            type="url"
+            InputLabelProps={{ shrink: true }}
+          />
         </form>
-        <Button variant="contained" endIcon={<SendIcon />} type="submit">
+        <Button variant="contained" endIcon={<SendIcon />} onClick={handleSubmit} type="submit">
           Edit
         </Button>
         <Button type="button" onClick={() => handleClose()}>
