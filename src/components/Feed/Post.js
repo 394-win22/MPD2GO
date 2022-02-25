@@ -2,19 +2,16 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
-  CardHeader,
   CardContent,
-  Avatar,
   Card,
   Box,
-  Stack,
+  Chip
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
-import moment from "moment";
-import Chip from "@mui/material/Chip";
 import { UserContext } from "components/LoggedIn";
+
 import { getUserDataFromUID } from "../../utilities/posts";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -57,34 +54,25 @@ const Post = ({ post }) => {
         navigate(`/post/${post.id}`);
       }}
     >
-      <CardHeader
-        align="left"
-        avatar={<Avatar src={user.photoURL} aria-label="avatar" />}
-        title={
-          <Stack direction="row">
-            <Typography>{user.displayName}</Typography>
-            {"teamId" in user && (
-              <Chip
-                icon={<InsertDriveFileIcon />}
-                size="small"
-                label="Capstone Page"
-                variant="outlined"
-                sx={{ mx: 1 }}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  navigate(`/project/${user.teamId}`);
-                }}
-              />
-            )}
-          </Stack>
-        }
-        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
-      />
+      <AvatarWithTag user={user} post={post}/>
+
       <CardContent sx={{ pt: 0 }}>
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
+
+        {"tags" in post && 
+          post.tags.map((tag, i) => 
+            <Chip sx={{mt:1, mb:0}}
+              label={tag}
+              key={i}
+              color="primary"
+              variant="outlined"
+              size="small"
+            />)          
+        }
       </CardContent>
+
       <Box sx={{ display: "flex", m: 1 }}>
         <Typography className={classes.comment} variant="body2">
           {getNumCommentsText(post)}
