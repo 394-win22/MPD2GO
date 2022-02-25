@@ -2,18 +2,13 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
-  CardHeader,
   CardContent,
-  Avatar,
   Card,
   Box,
-  Stack,
+  Chip
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
-import moment from "moment";
-import Chip from "@mui/material/Chip";
 import { UserContext } from "components/LoggedIn";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
 import { getUserDataFromUID } from "../../utilities/posts";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
@@ -65,8 +60,19 @@ const Post = ({ post }) => {
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
+
+        {"tags" in post && 
+          post.tags.map((tag, i) => 
+            <Chip sx={{mt:1, mb:0}}
+              label={tag}
+              key={i}
+              color="primary"
+              variant="outlined"
+              size="small"
+            />)          
+        }
       </CardContent>
-      
+
       <Box sx={{ display: "flex", m: 1 }}>
         <Typography className={classes.comment} variant="body2">
           {getNumCommentsText(post)}

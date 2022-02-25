@@ -2,18 +2,11 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Typography,
-  IconButton,
   Card,
   Button,
-  CardHeader,
   CardContent,
-  Avatar,
-  Stack,
   Box,
-  Chip,
 } from "@mui/material";
-import moment from "moment";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
 import Thread from "./Thread";
 import { UserContext } from "components/LoggedIn";
@@ -70,7 +63,7 @@ const PostWithThreads = () => {
         </CardContent>
 
         <ReplyTextField post={post} user={user} />
-        
+
         <CardContent sx={{ paddingLeft: "2%" }} align="left">
           {"threads" in post &&
             Object.values(post.threads).length > 0 &&
