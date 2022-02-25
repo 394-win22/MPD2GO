@@ -1,11 +1,5 @@
 import { useState } from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-/* For "Create" Button in Modal Box */
-import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import {
   setData,
@@ -13,11 +7,10 @@ import {
   addToProject,
   removeFromProject,
   getProjectFromId,
+  uploadPhotoToStorage,
 } from "../../utilities/firebase";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+
+import {Box, Typography, Modal, TextField, Button, InputLabel, MenuItem, FormControl, Select} from "@mui/material/";
 
 const useStyles = makeStyles({
   container: {
@@ -59,6 +52,8 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
   const classes = useStyles();
   const [projectList, projectListLoading] = useData("/project", getProjectList);
   const [formValues, setFormValues] = useState(user);
+  const [image, setImage] = useState(null);
+  let changeImg = false;
 
   if (projectListLoading) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
@@ -75,8 +70,13 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
-    formValues.photoURL = user.photoURL;
+    e.preventDefault();
+    if(!changeImg){
+      formValues.photoURL = user.photoURL;
+    }else{
+      const photoURL = await uploadPhotoToStorage(image);
+      formValues.photoURL = photoURL;
+    }
     const oldTeamId = user.teamId;
     const newTeamId = formValues.teamId;
     if (oldTeamId != newTeamId) {
@@ -85,6 +85,27 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
     }
     editUserInFirebase(user, userID, formValues);
     handleClose();
+  };
+
+  const onImageChange = (e) => {
+    const reader = new FileReader();
+    let file = e.target.files[0];
+    if (file) {
+      setFormValues({
+        ...formValues,
+        photoURL: file.name,
+      });
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImage(file);
+        }
+      };
+      reader.readAsDataURL(e.target.files[0]);
+      changeImg = true
+      // if there is no file, set image back to null
+    } else {
+      setImage(null);
+    }
   };
 
   return (
@@ -155,8 +176,19 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               })}
             </Select>
           </FormControl>
+          <Box sx={{ padding: 1 }}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                onImageChange(e);
+              }}
+            />
+          </Box>
           <TextField
             name="bio"
+            multiline
+            minRows={4}
             value={formValues.bio}
             onChange={handleInputChange}
             label="bio"
