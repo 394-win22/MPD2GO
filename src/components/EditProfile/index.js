@@ -76,7 +76,6 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formValues);
     formValues.photoURL = user.photoURL;
     const oldTeamId = user.teamId;
     const newTeamId = formValues.teamId;
@@ -97,10 +96,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
       sx={{ "& .MuiTextField-root": { m: 2, width: "25ch" } }}
     >
       <Box className={classes.container}>
-        <form
-          onSubmit={handleSubmit}
-          className={classes.form}
-        >
+        <form onSubmit={handleSubmit} className={classes.form}>
           <Typography
             variant="h5"
             component="h5"
@@ -166,7 +162,11 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               onChange={handleInputChange}
             >
               {projectList.map((project) => {
-                return <MenuItem key={project.id} value={project.id}>{project.name}</MenuItem>;
+                return (
+                  <MenuItem key={project.id} value={project.id}>
+                    {project.name}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormControl>

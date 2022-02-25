@@ -1,12 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Typography,
-  CardContent,
-  Card,
-  Box,
-  Chip
-} from "@mui/material/";
+import { Typography, CardContent, Card, Box, Chip } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
 import { UserContext } from "components/LoggedIn";
 
@@ -54,23 +48,24 @@ const Post = ({ post }) => {
         navigate(`/post/${post.id}`);
       }}
     >
-      <AvatarWithTag user={user} post={post}/>
+      <AvatarWithTag user={user} post={post} />
 
       <CardContent sx={{ pt: 0 }}>
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
 
-        {"tags" in post && 
-          post.tags.map((tag, i) => 
-            <Chip sx={{mt:1, mb:0}}
+        {"tags" in post &&
+          post.tags.map((tag, i) => (
+            <Chip
+              sx={{ mt: 1, mb: 0 }}
               label={tag}
               key={i}
               color="primary"
               variant="outlined"
               size="small"
-            />)          
-        }
+            />
+          ))}
       </CardContent>
 
       <Box sx={{ display: "flex", m: 1 }}>
