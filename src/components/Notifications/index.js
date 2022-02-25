@@ -41,11 +41,11 @@ const Notifications = () => {
         {Object.entries(userData.notifications).map(([id, notifObj]) => {
           switch (notifObj.type) {
             case "comment":
-              return <CommentNotification key={id} notifObj={notifObj} />
+              return <CommentNotification key={id} notifId={id} notifObj={notifObj} />
             case "reply":
               return <ListItem key={id} />
             default:
-              return <CommentNotification key={id} notifObj={notifObj} />
+              return <CommentNotification key={id} notifId={id} notifObj={notifObj} />
           }
         })}
       </List >

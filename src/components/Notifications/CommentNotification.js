@@ -16,7 +16,9 @@ import moment from "moment";
 import Chip from "@mui/material/Chip";
 import { UserContext } from "components/LoggedIn";
 
-const CommentNotification = ({ notifObj }) => {
+import { markNotificationAsRead } from "utilities/notifications"
+
+const CommentNotification = ({ notifId, notifObj }) => {
 	const navigate = useNavigate();
 	const context = useContext(UserContext);
 	const users = context.userList;
@@ -25,9 +27,14 @@ const CommentNotification = ({ notifObj }) => {
 
 	const title = `${authorData.displayName} commented on your post`;
 
+	const handleNotificationClicked = () => {
+		markNotificationAsRead(context.user.uid, notifId);
+		navigate(`/post/${notifObj.postId}`);
+	}
+
 	return (
 		<>
-			<ListItem component={ListItemButton} onClick={() => navigate(`/post/${notifObj.postId}`)} alignItems="flex-start" sx={{ height: "100%", width: "100%", padding: "18px" }}>
+			<ListItem component={ListItemButton} onClick={handleNotificationClicked} alignItems="flex-start" sx={{ height: "100%", width: "100%", padding: "18px" }}>
 				<ListItemAvatar>
 					<Avatar src={authorData.photoURL} />
 				</ListItemAvatar>

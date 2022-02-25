@@ -14,6 +14,7 @@ const theme = createTheme({
       contrastText: '#f3f3f3ff',
     },
     secondary: { main: '#3a5f95', contrastText: '#f3f3f3ff' },
+    notification: "#e04141"
   },
   typography: {
     fontFamily: font,

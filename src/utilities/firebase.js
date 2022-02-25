@@ -87,6 +87,8 @@ export const pushData = (path, value) => push(ref(database, path), value);
 
 export const updateData = (path, value) => update(ref(database, path), value);
 
+export const removeAtPath = (path) => remove(ref(database, path));
+
 /* authentication functions */
 export const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();

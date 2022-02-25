@@ -1,5 +1,5 @@
 import { getDatabase, ref, push, set, increment } from 'firebase/database'
-import { pushData, updateData } from './firebase.js'
+import { pushData, updateData, removeAtPath } from './firebase.js'
 
 
 
@@ -11,4 +11,9 @@ export const createCommentNotification = (postAuthorUid, commentAuthorUid, postI
 		time: Date.now(),
 		type: "comment"
 	})
+}
+
+
+export const markNotificationAsRead = (uid, notificationId) => {
+	removeAtPath(`users/${uid}/notifications/${notificationId}`);
 }
