@@ -54,7 +54,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
 
           {isLoggedIn && (
             <>
-              <MenuItem >
+              <MenuItem onClick={() => navigate('/notifications')}>
                 <NotificationsIcon />
               </MenuItem>
 

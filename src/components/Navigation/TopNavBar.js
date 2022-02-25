@@ -57,7 +57,7 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
                   <AddCircleIcon />
                 </MenuItem>
 
-                <MenuItem >
+                <MenuItem onClick={() => navigate('/notifications')}>
                   <NotificationsIcon />
                 </MenuItem>
 
