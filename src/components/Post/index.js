@@ -1,12 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Typography,
-  Card,
-  Button,
-  CardContent,
-  Box,
-} from "@mui/material";
+import { Typography, Card, Button, CardContent, Box, Chip } from "@mui/material";
 
 import Thread from "./Thread";
 import { UserContext } from "components/LoggedIn";
@@ -54,12 +48,24 @@ const PostWithThreads = () => {
         {post.author == user.uid && <DeletePostButton key={post} post={post} />}
       </Box>
       <Card sx={{ mx: 1, mb: 10 }}>
-        <AvatarWithTag user={postAuthor} post={post}/>
+        <AvatarWithTag user={postAuthor} post={post} />
 
         <CardContent>
           <Typography variant="body2" color="text.secondary" align="left">
             {post.description}
           </Typography>
+
+          {"tags" in post &&
+            post.tags.map((tag, i) => (
+              <Chip
+                sx={{ mt: 1, mb: 0 }}
+                label={tag}
+                key={i}
+                color="primary"
+                variant="outlined"
+                size="small"
+              />
+            ))}
         </CardContent>
 
         <ReplyTextField post={post} user={user} />
