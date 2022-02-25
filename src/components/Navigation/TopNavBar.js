@@ -14,10 +14,10 @@ import {
 } from '@mui/material'
 import {
   AccountCircle as AccountCircleIcon,
-  Email as EmailIcon,
   MoreHoriz as MoreHorizIcon,
   AddCircle as AddCircleIcon,
-  Logout as LogoutIcon
+  Logout as LogoutIcon,
+  Notifications as NotificationsIcon
 } from '@mui/icons-material'
 
 import { signOut } from 'utilities/firebase'
@@ -53,12 +53,12 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
 
             {isDesktopScreen && isLoggedIn && (
               <>
-                <MenuItem disabled={true}>
-                  <EmailIcon />
-                </MenuItem>
-
                 <MenuItem onClick={() => navigate('/createPost')}>
                   <AddCircleIcon />
+                </MenuItem>
+
+                <MenuItem onClick={() => navigate('/notifications')}>
+                  <NotificationsIcon />
                 </MenuItem>
 
                 <MenuItem onClick={() => { navigate('/profile') }}>
