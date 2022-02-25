@@ -22,7 +22,6 @@ const CommentNotification = ({ notifObj }) => {
 	const users = context.userList;
 
 	const authorData = users.find((x) => x.uid === notifObj.authorUid);
-	console.log(notifObj)
 
 	const title = `${authorData.displayName} commented on your post`;
 

@@ -8,7 +8,7 @@ const ReplyTextField = ({ post, user }) => {
 	const [comment, setComment] = useState('')
 
 	const submitComment = () => {
-		addCommentToPost(user.uid, post.id, comment)
+		addCommentToPost(post.author, user.uid, post.id, comment)
 		setComment('')
 	}
 
