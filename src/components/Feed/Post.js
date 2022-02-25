@@ -13,8 +13,10 @@ import { makeStyles, useTheme } from "@mui/styles";
 import moment from "moment";
 import Chip from "@mui/material/Chip";
 import { UserContext } from "components/LoggedIn";
-import { getUserDataFromUID } from "../../utilities/posts";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+
+import { getUserDataFromUID } from "../../utilities/posts";
+import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -57,34 +59,14 @@ const Post = ({ post }) => {
         navigate(`/post/${post.id}`);
       }}
     >
-      <CardHeader
-        align="left"
-        avatar={<Avatar src={user.photoURL} aria-label="avatar" />}
-        title={
-          <Stack direction="row">
-            <Typography>{user.displayName}</Typography>
-            {"teamId" in user && (
-              <Chip
-                icon={<InsertDriveFileIcon />}
-                size="small"
-                label="Capstone Page"
-                variant="outlined"
-                sx={{ mx: 1 }}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  navigate(`/project/${user.teamId}`);
-                }}
-              />
-            )}
-          </Stack>
-        }
-        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
-      />
+      <AvatarWithTag user={user} post={post}/>
+
       <CardContent sx={{ pt: 0 }}>
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
       </CardContent>
+      
       <Box sx={{ display: "flex", m: 1 }}>
         <Typography className={classes.comment} variant="body2">
           {getNumCommentsText(post)}
