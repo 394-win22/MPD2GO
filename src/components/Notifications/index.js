@@ -65,7 +65,7 @@ const Notifications = () => {
         Back
       </Button>
       <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
-        <CardHeader avatar={<Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}><NotificationsIcon /></Avatar>}
+        <CardHeader sx={{ padding: "10px 16px" }} avatar={<Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}><NotificationsIcon /></Avatar>}
           title="Notifications" titleTypographyProps={{ sx: { fontSize: "16px" } }} />
         {(hasNotifications) ?
           notificationsList

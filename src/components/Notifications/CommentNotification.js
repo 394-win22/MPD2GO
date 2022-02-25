@@ -28,7 +28,7 @@ const CommentNotification = ({ notifObj }) => {
 
 	return (
 		<>
-			<ListItem component={ListItemButton} onClick={() => navigate(notifObj.postId)} alignItems="flex-start" sx={{ height: "100%", width: "100%", padding: "15px" }}>
+			<ListItem component={ListItemButton} onClick={() => navigate(`/post/${notifObj.postId}`)} alignItems="flex-start" sx={{ height: "100%", width: "100%", padding: "18px" }}>
 				<ListItemAvatar>
 					<Avatar src={authorData.photoURL} />
 				</ListItemAvatar>
