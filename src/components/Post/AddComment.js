@@ -10,8 +10,6 @@ const useStyles = makeStyles({
 		marginLeft: "10px",
 		width: "100%"
 	},
-
-
 })
 
 

@@ -9,9 +9,6 @@ const Main = () => {
   return (
     <div className='App'>
       <PostList posts={context.postList} />
-      <br />
-      <br />
-      <br />
     </div>
   )
 }

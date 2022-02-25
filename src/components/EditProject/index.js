@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { setData } from "../../utilities/firebase";
 import { editProjectInFirebase } from "utilities/projects";
+import LinkList from '/';
 
 const useStyles = makeStyles({
   container: {
@@ -112,6 +113,7 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
             type="text"
             InputLabelProps={{ shrink: true }}
           />
+          {/*<LinkList/>*/}
           <Button variant="contained" endIcon={<SendIcon />} type="submit">
             Edit
           </Button>

@@ -7,10 +7,21 @@ import { makeStyles } from "@mui/styles";
 /* For "Create" Button in Modal Box */
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { setData } from "../../utilities/firebase";
+import {
+  setData,
+  useData,
+  addToProject,
+  removeFromProject,
+  getProjectFromId,
+} from "../../utilities/firebase";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const useStyles = makeStyles({
   container: {
+    padding: "24px 10px",
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -20,33 +31,42 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-evenly",
-    padding: "10px",
     borderRadius: "10px",
     overflow: "auto",
-    height: "80%",
-    overflowY: "scroll",
   },
   title: {
     textAlign: "center",
   },
   form: {
-    height: "100%",
-    overflowY: "scroll",
+    textAlign: "center",
   },
 });
+
 function editUserInFirebase(user, userID, formValues) {
   setData("users/" + userID, formValues);
 }
 
-const EditUserModal = ({ user, userID, open, handleClose }) => {
-  const classes = useStyles()
+const getProjectList = (project) => {
+  const listOfProject = Object.entries(project).map(
+    ([projectId, projectObj]) => {
+      return { ...projectObj, id: projectId };
+    }
+  );
+  return listOfProject;
+};
 
-  const [formValues, setFormValues] = useState(user)
+const EditUserModal = ({ user, userID, open, handleClose }) => {
+  const classes = useStyles();
+  const [projectList, projectListLoading] = useData("/project", getProjectList);
+  const [formValues, setFormValues] = useState(user);
+
+  if (projectListLoading) {
+    return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
+  }
 
   const handleInputChange = (e) => {
-    const name = e.target.name
-    const value = e.target.value
+    const name = e.target.name;
+    const value = e.target.value;
 
     setFormValues({
       ...formValues,
@@ -56,8 +76,14 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formValues);
     formValues.photoURL = user.photoURL;
+    const oldTeamId = user.teamId;
+    const newTeamId = formValues.teamId;
+    if (oldTeamId != newTeamId) {
+      addToProject(userID, getProjectFromId(newTeamId, projectList));
+      removeFromProject(userID, getProjectFromId(oldTeamId, projectList));
+    }
     editUserInFirebase(user, userID, formValues);
     handleClose();
   };
@@ -73,7 +99,6 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
       <Box className={classes.container}>
         <form
           onSubmit={handleSubmit}
-          style={{ textAlign: "center" }}
           className={classes.form}
         >
           <Typography
@@ -86,7 +111,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
           </Typography>
           <TextField
             required
-            name="Name"
+            name="displayName"
             value={formValues.displayName}
             onChange={handleInputChange}
             label="name"
@@ -103,10 +128,10 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             InputLabelProps={{ shrink: true }}
           />
           <TextField
-            name="bio"
-            value={formValues.bio}
+            name="location"
+            value={formValues.location}
             onChange={handleInputChange}
-            label="bio"
+            label="location"
             type="text"
             InputLabelProps={{ shrink: true }}
           />
@@ -115,17 +140,51 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             value={formValues.year}
             onChange={handleInputChange}
             label="year"
-            type="number"
+            type="text"
             InputLabelProps={{ shrink: true }}
-          />{" "}
-          <Button variant="contained" endIcon={<SendIcon />} type="submit">
-            Edit
-          </Button>
-          <Button type="button" onClick={() => handleClose()}>
-            {" "}
-            Cancel{" "}
-          </Button>
+          />
+          <FormControl sx={{ m: 1, width: "25ch" }}>
+            <InputLabel id="Status">Status</InputLabel>
+            <Select
+              labelId="status"
+              name="status"
+              value={formValues.status || ""}
+              label="status"
+              onChange={handleInputChange}
+            >
+              <MenuItem value={"Current Student"}>Current Student</MenuItem>
+              <MenuItem value={"Alumni"}>Alumni</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ m: 1, width: "25ch" }}>
+            <InputLabel id="team">Team</InputLabel>
+            <Select
+              labelId="team"
+              name="teamId"
+              value={formValues.teamId}
+              label="team"
+              onChange={handleInputChange}
+            >
+              {projectList.map((project) => {
+                return <MenuItem key={project.id} value={project.id}>{project.name}</MenuItem>;
+              })}
+            </Select>
+          </FormControl>
+          <TextField
+            name="bio"
+            value={formValues.bio}
+            onChange={handleInputChange}
+            label="bio"
+            type="text"
+            InputLabelProps={{ shrink: true }}
+          />
         </form>
+        <Button variant="contained" endIcon={<SendIcon />} type="submit">
+          Edit
+        </Button>
+        <Button type="button" onClick={() => handleClose()}>
+          Cancel
+        </Button>
       </Box>
     </Modal>
   );

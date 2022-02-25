@@ -2,18 +2,16 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
-  CardHeader,
   CardContent,
-  Avatar,
   Card,
   Box,
-  Button,
+  Chip
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
-import moment from "moment";
-
 import { UserContext } from "components/LoggedIn";
-import { getUserDataFromUID } from "../../utilities/posts"
+
+import { getUserDataFromUID } from "../../utilities/posts";
+import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -56,27 +54,24 @@ const Post = ({ post }) => {
         navigate(`/post/${post.id}`);
       }}
     >
-      <CardHeader
-        align="left"
-        avatar={<Avatar src={user.photoURL} aria-label="avatar" />}
-        title={user.displayName}
-        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
-      />
-      <CardContent>
+      <AvatarWithTag user={user} post={post}/>
+
+      <CardContent sx={{ pt: 0 }}>
         <Typography variant="body2" color="text.secondary" align="left">
           {post.description}
         </Typography>
+
+        {"tags" in post && 
+          post.tags.map((tag, i) => 
+            <Chip sx={{mt:1, mb:0}}
+              label={tag}
+              key={i}
+              color="primary"
+              variant="outlined"
+              size="small"
+            />)          
+        }
       </CardContent>
-      {"project" in post && (
-        <Button sx={{ marginLeft: "8px" }}
-          onClick={(event) => {
-            event.stopPropagation();
-            navigate(`/project/${post.project}`);
-          }}
-        >
-          Project Link
-        </Button>
-      )}
 
       <Box sx={{ display: "flex", m: 1 }}>
         <Typography className={classes.comment} variant="body2">

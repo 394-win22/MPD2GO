@@ -10,6 +10,9 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      {/*<Link to="/trypres">
+        <TryPres/>
+</Link>*/}
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

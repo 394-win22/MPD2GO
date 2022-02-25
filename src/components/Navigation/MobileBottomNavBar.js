@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   AppBar,
@@ -7,21 +7,24 @@ import {
   MenuItem,
   ClickAwayListener,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Badge
 } from '@mui/material'
 import {
   AccountCircle as AccountCircleIcon,
-  Email as EmailIcon,
+  Notifications as NotificationsIcon,
   Home as HomeIcon,
   MoreHoriz as MoreHorizIcon,
   AddCircle as AddCircleIcon,
   Logout as LogoutIcon
 } from '@mui/icons-material'
+import { UserContext } from "components/LoggedIn";
 
 import { signOut } from 'utilities/firebase'
 
 const MobileBottomNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate()
+  const context = useContext(UserContext);
 
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -38,10 +41,13 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
   const handleClickAway = () => {
     setAnchorEl(null)
   }
+  const userData = context.userList.find((x) => x.uid === context.user.uid);
+  let notificationsCount = 0;
+  if ("notifications" in userData) notificationsCount = Object.values(userData.notifications).length
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Box sx={{ flexGrow: 1, paddingBottom: 3 }}>
+      <Box sx={{ flexGrow: 1 }}>
         <AppBar
           position='fixed'
           sx={{ top: 'auto', bottom: 0 }}
@@ -54,14 +60,18 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
 
           {isLoggedIn && (
             <>
-              <MenuItem disabled={true}>
-                <EmailIcon />
+              <MenuItem onClick={() => navigate('/notifications')}>
+                <Badge badgeContent={notificationsCount} max={99} sx={{
+                  "& .MuiBadge-badge": {
+                    backgroundColor: "#e04141"
+                  }
+                }}>
+                  <NotificationsIcon />
+                </Badge>
               </MenuItem>
-
               <MenuItem onClick={() => navigate('/createPost')}>
                 <AddCircleIcon />
               </MenuItem>
-
               <MenuItem onClick={() => { navigate('/profile') }}>
                 <AccountCircleIcon />
               </MenuItem>

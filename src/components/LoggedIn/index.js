@@ -1,5 +1,7 @@
 import { createContext } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useData } from "utilities/firebase.js";
+
 import { Container } from "@mui/material";
 
 import CreatePost from "components/CreatePost";
@@ -7,9 +9,10 @@ import Profile from "components/Profile";
 import PostWithThreads from "components/Post/index.js";
 import Navigation from "components/Navigation";
 import Project from "components/Project";
+import Notifications from "components/Notifications";
 import NotFound from "components/NotFound";
 
-import { useData } from "utilities/firebase.js";
+
 import Main from "components/Feed";
 
 const getPostList = (posts) => {
@@ -49,6 +52,7 @@ const LoggedIn = ({ user }) => {
         <Routes>
           <Route exact path="/createPost" element={<CreatePost />} />
           <Route exact path="/profile" element={<Profile user={user} />} />
+          <Route exact path="/notifications" element={<Notifications />} />
           <Route
             exact
             path="/profile/:userID"
@@ -58,7 +62,7 @@ const LoggedIn = ({ user }) => {
           <Route path="/createPost" element={<CreatePost />} />
           <Route path="/post/:pageId" element={<PostWithThreads />}></Route>
           <Route path="/project/:projectId" element={<Project />}></Route>
-		      <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
     </UserContext.Provider>
