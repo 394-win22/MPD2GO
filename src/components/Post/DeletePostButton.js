@@ -32,7 +32,6 @@ export const DeletePostButton = ({ post }) => {
   };
 
   function deletePost(post) {
-    console.log(post)
     deleteData(`/posts/${post.id}`);
     navigate("/");
     handleClose();

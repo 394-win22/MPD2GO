@@ -73,7 +73,7 @@ const Project = () => {
           <Typography variant="h6" align="left">
             Team Members
           </Typography>
-          
+
           <Typography variant="h6" align="left">
             {Object.values(projectData.member).map((member) => {
               const user = getUserDataFromUID(member, users);
@@ -119,23 +119,23 @@ const Project = () => {
             showControls
             loop
           />
-          { projectData.resources !== undefined && Object.values(projectData.resources).length > 0 && 
-          <>
-            <Typography variant="h6" align="left" sx={{ my: 1 }}>
-              Additional Resources
-            </Typography>
-            {Object.values(projectData.resources).map((resource) => (
-              <>
-              <Button sx={{ marginLeft: '8px' }}
-                startIcon={(resource.url.includes('mural')) ? <img src={MuralLogo} style={{height: 20, width: 20}}/> : (
-                  (resource.url.includes('drive') ? <img src={DriveLogo} style={{height: '20px', width: '20px'}}/> : <LinkIcon />))}
-                onClick={() => {
-                  window.open(resource.url)
-                }}
-              >{resource.text}</Button>
-              </>
-            ))}
-          </>}
+          {projectData.resources !== undefined && Object.values(projectData.resources).length > 0 &&
+            <>
+              <Typography variant="h6" align="left" sx={{ my: 1 }}>
+                Additional Resources
+              </Typography>
+              {Object.values(projectData.resources).map((resource) => (
+                <>
+                  <Button sx={{ marginLeft: '8px' }}
+                    startIcon={(resource.url.includes('mural')) ? <img src={MuralLogo} alt="" style={{ height: 20, width: 20 }} /> : (
+                      (resource.url.includes('drive') ? <img src={DriveLogo} alt="" style={{ height: '20px', width: '20px' }} /> : <LinkIcon />))}
+                    onClick={() => {
+                      window.open(resource.url)
+                    }}
+                  >{resource.text}</Button>
+                </>
+              ))}
+            </>}
         </CardContent>
       </Card>
     </>

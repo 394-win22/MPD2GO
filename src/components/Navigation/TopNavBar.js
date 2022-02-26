@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -10,21 +10,24 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Badge
 } from '@mui/material'
 import {
   AccountCircle as AccountCircleIcon,
-  Email as EmailIcon,
   MoreHoriz as MoreHorizIcon,
   AddCircle as AddCircleIcon,
-  Logout as LogoutIcon
+  Logout as LogoutIcon,
+  Notifications as NotificationsIcon
 } from '@mui/icons-material'
 
 import { signOut } from 'utilities/firebase'
 import logo from 'logo.png'
+import { UserContext } from "components/LoggedIn";
 
 const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
   const navigate = useNavigate()
+  const context = useContext(UserContext);
 
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -42,6 +45,9 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
     setAnchorEl(null)
   }
 
+  const userData = context.userList.find((x) => x.uid === context.user.uid);
+  let notificationsCount = 0;
+  if ("notifications" in userData) notificationsCount = Object.values(userData.notifications).length
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box sx={{ flexGrow: 1, paddingBottom: 3, }}>
@@ -53,12 +59,18 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
 
             {isDesktopScreen && isLoggedIn && (
               <>
-                <MenuItem disabled={true}>
-                  <EmailIcon />
-                </MenuItem>
-
                 <MenuItem onClick={() => navigate('/createPost')}>
                   <AddCircleIcon />
+                </MenuItem>
+
+                <MenuItem onClick={() => navigate('/notifications')}>
+                  <Badge badgeContent={notificationsCount} max={99} sx={{
+                    "& .MuiBadge-badge": {
+                      backgroundColor: "#e04141"
+                    }
+                  }}>
+                    <NotificationsIcon />
+                  </Badge>
                 </MenuItem>
 
                 <MenuItem onClick={() => { navigate('/profile') }}>

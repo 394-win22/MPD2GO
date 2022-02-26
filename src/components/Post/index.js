@@ -1,24 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Typography,
-  IconButton,
-  Card,
-  Button,
-  CardHeader,
-  CardContent,
-  Avatar,
-  Stack,
-  Box,
-  Chip
-} from "@mui/material";
-import moment from "moment";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import { Typography, Card, Button, CardContent, Box, Chip } from "@mui/material";
 
 import Thread from "./Thread";
 import { UserContext } from "components/LoggedIn";
 import ReplyTextField from "./ReplyTextField";
 import { DeletePostButton } from "./DeletePostButton";
+import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 
 const PostWithThreads = () => {
   const navigate = useNavigate();
@@ -57,48 +45,31 @@ const PostWithThreads = () => {
         >
           Back
         </Button>
-        {post.author == user.uid &&
-          <DeletePostButton key={post} post={post} />}
+        {post.author == user.uid && <DeletePostButton key={post} post={post} />}
       </Box>
       <Card sx={{ mx: 1, mb: 10 }}>
-        <CardHeader
-          align="left"
-          avatar={
-            <IconButton
-              onClick={() => {
-                navigate(`/profile/${postAuthor.uid}`);
-              }}
-              aria-label="menu"
-            >
-              <Avatar src={postAuthor.photoURL} aria-label="avatar" />
-            </IconButton>
-          }
-          title={
-            <Stack direction="row">
-              <Typography>{postAuthor.displayName}</Typography>
-              {"teamId" in user && (
-                <Chip
-                  icon={<InsertDriveFileIcon />}
-                  size="small"
-                  label="Capstone Page"
-                  variant="outlined"
-                  sx={{ mx: 1 }}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    navigate(`/project/${user.teamId}`);
-                  }}
-                />
-              )}
-            </Stack>
-          }
-          subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
-        />
+        <AvatarWithTag user={postAuthor} post={post} />
+
         <CardContent>
           <Typography variant="body2" color="text.secondary" align="left">
             {post.description}
           </Typography>
+
+          {"tags" in post &&
+            post.tags.map((tag, i) => (
+              <Chip
+                sx={{ mt: 1, mb: 0 }}
+                label={tag}
+                key={i}
+                color="primary"
+                variant="outlined"
+                size="small"
+              />
+            ))}
         </CardContent>
+
         <ReplyTextField post={post} user={user} />
+
         <CardContent sx={{ paddingLeft: "2%" }} align="left">
           {"threads" in post &&
             Object.values(post.threads).length > 0 &&
