@@ -20,8 +20,8 @@ const ReplyTextField = ({ post, user }) => {
 			fontSize: "12px",
 			color: "#6e6e6e",
 			paddingTop: "10px",
-			paddingLeft: "7%",
-			paddingRight: "5%",
+			paddingLeft: "3%",
+			paddingRight: "3%",
 			paddingBottom: "20px"
 
 		}}
