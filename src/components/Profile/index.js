@@ -8,7 +8,7 @@ import {
   Button,
   Stack,
   Card,
-  Chip
+  Chip,
 } from "@mui/material";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
@@ -138,6 +138,7 @@ const Profile = ({ user }) => {
 
             {"teamId" in userData && (
               <Chip
+              key={projectData.name}
                 size="small"
                 label={projectData.name}
                 variant="outlined"
@@ -165,9 +166,10 @@ const Profile = ({ user }) => {
             Expertise
           </Typography>
           <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
-
-            {"expertise" in userData && Object.values(userData.expertise).map((x) => (
+            {"expertise" in userData && Object.values(userData.expertise).map((x,i) => (
+              
               <Chip
+              key={i}
                 color="secondary"
                 label={x}
               />

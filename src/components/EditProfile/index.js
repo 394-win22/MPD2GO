@@ -20,6 +20,9 @@ import {
   MenuItem,
   FormControl,
   Select,
+  Chip,
+  OutlinedInput,
+  Input,
 } from "@mui/material/";
 
 const useStyles = makeStyles({
@@ -45,6 +48,19 @@ const useStyles = makeStyles({
   },
 });
 
+const expertiseList = [
+  "Marketing",
+  "Industrial Design",
+  "Mechanical Engineering",
+  "Electrical Engineering",
+  "Software Development",
+  "Product Owner",
+  "UI/UX Design",
+  "Finance",
+  "Graphic Design",
+  "Project Management"
+];
+
 function editUserInFirebase(user, userID, formValues) {
   setData("users/" + userID, formValues);
 }
@@ -63,8 +79,8 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
   const [projectList, projectListLoading] = useData("/project", getProjectList);
   const [formValues, setFormValues] = useState(user);
   const [image, setImage] = useState(null);
+  const [expertise, setExpertise] = useState("");
   let changeImg = false;
-  let expertiseString = "";
 
   if (projectListLoading) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
@@ -89,6 +105,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
       const photoURL = await uploadPhotoToStorage(image);
       formValues.photoURL = photoURL;
     }
+    formValues.expertise = expertise;
     const oldTeamId = user.teamId;
     const newTeamId = formValues.teamId;
     if (oldTeamId !== newTeamId) {
@@ -120,6 +137,13 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
     } else {
       setImage(null);
     }
+  };
+
+  const handleTagChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setExpertise(typeof value === "string" ? value.split(",") : value);
   };
 
   return (
@@ -192,33 +216,46 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               })}
             </Select>
           </FormControl>
-          <Box sx={{ padding: 1 }}>
-            <input
-              type="file"
+          <label htmlFor="Avatar-File">
+            <Input
               accept="image/*"
+              id="Avatar-File"
+              type="file"
               onChange={(e) => {
                 onImageChange(e);
               }}
+              style={{display: "none"}}
             />
-          </Box>
+            <Button variant="contained" component="span" sx={{ m: 1, width: "25ch" }}>
+              Upload Avatar File
+            </Button>
+          </label>
           <FormControl sx={{ m: 1, width: "25ch" }}>
             <InputLabel id="expertise">Expertise</InputLabel>
             <Select
               labelId="expertise"
               name="Expertise"
-              value={formValues.expertise || ""}
+              value={expertise || formValues.expertise || []}
               label="expertise"
-              onChange={handleInputChange}
+              onChange={handleTagChange}
               multiple
+              renderValue={(selected) => (
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                {selected.map((value) => (
+                  <Chip key={value} label={value} />
+                ))}
+              </Box>
+            )}
             >
-              <MenuItem value="Marketing">
-                "Marketing"
-              </MenuItem>
-              <MenuItem value="Market Research">
-                "Market Research"
-              </MenuItem>
+              {expertiseList.map((expert) => (
+                <MenuItem key={expert} value={expert}>
+                  {expert}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
+
+
           <TextField
             name="bio"
             multiline
