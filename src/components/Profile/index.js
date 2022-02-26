@@ -80,12 +80,11 @@ const Profile = ({ user }) => {
           <Avatar
             alt={userData.displayName}
             src={userData.photoURL}
-            variant="rounded"
+            variant="circular"
             sx={{
-              height: 1 / 6,
-              width: 1 / 6,
+              height: "20vh",
+              width: "20vh",
               margin: "auto",
-              borderRadius: "50%",
               my: 1,
             }}
           />
@@ -165,21 +164,13 @@ const Profile = ({ user }) => {
           <Typography align="left" sx={{ marginBottom: 3, ml: 1, color: "#7B7B7B" }}>
             Expertise
           </Typography>
-          <Stack direction="row" sx={{ marginBottom: 3 }}>
+          <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
 
             {"expertise" in userData && Object.values(userData.expertise).map((x) => (
-              <Button
-                style={{
-                  borderRadius: 15,
-                  backgroundColor: "#B6B6B6",
-                  padding: "3px 6px",
-                  fontSize: "10px",
-                }}
-                key={x}
-                variant="contained"
-              >
-                {x}
-              </Button>
+              <Chip
+                color="secondary"
+                label={x}
+              />
             ))}
           </Stack>
           <Divider />

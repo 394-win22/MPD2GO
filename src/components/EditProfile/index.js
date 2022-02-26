@@ -10,7 +10,17 @@ import {
   uploadPhotoToStorage,
 } from "../../utilities/firebase";
 
-import {Box, Typography, Modal, TextField, Button, InputLabel, MenuItem, FormControl, Select} from "@mui/material/";
+import {
+  Box,
+  Typography,
+  Modal,
+  TextField,
+  Button,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from "@mui/material/";
 
 const useStyles = makeStyles({
   container: {
@@ -54,6 +64,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
   const [formValues, setFormValues] = useState(user);
   const [image, setImage] = useState(null);
   let changeImg = false;
+  let expertiseString = "";
 
   if (projectListLoading) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
@@ -71,17 +82,20 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!changeImg){
+    console.log(formValues);
+    if (!changeImg) {
       formValues.photoURL = user.photoURL;
-    }else{
+    } else {
       const photoURL = await uploadPhotoToStorage(image);
       formValues.photoURL = photoURL;
     }
     const oldTeamId = user.teamId;
     const newTeamId = formValues.teamId;
-    if (oldTeamId != newTeamId) {
+    if (oldTeamId !== newTeamId) {
       addToProject(userID, getProjectFromId(newTeamId, projectList));
-      removeFromProject(userID, getProjectFromId(oldTeamId, projectList));
+      if (oldTeamId) {
+        removeFromProject(userID, getProjectFromId(oldTeamId, projectList));
+      }
     }
     editUserInFirebase(user, userID, formValues);
     handleClose();
@@ -101,7 +115,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
         }
       };
       reader.readAsDataURL(e.target.files[0]);
-      changeImg = true
+      changeImg = true;
       // if there is no file, set image back to null
     } else {
       setImage(null);
@@ -117,9 +131,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
       sx={{ "& .MuiTextField-root": { m: 2, width: "25ch" } }}
     >
       <Box className={classes.container}>
-        <form
-          className={classes.form}
-        >
+        <form className={classes.form}>
           <Typography
             variant="h5"
             component="h5"
@@ -167,12 +179,16 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             <Select
               labelId="team"
               name="teamId"
-              value={formValues.teamId}
+              value={formValues.teamId || ""}
               label="team"
               onChange={handleInputChange}
             >
               {projectList.map((project) => {
-                return <MenuItem key={project.id} value={project.id}>{project.name}</MenuItem>;
+                return (
+                  <MenuItem key={project.id} value={project.id}>
+                    {project.name}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormControl>
@@ -185,6 +201,24 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               }}
             />
           </Box>
+          <FormControl sx={{ m: 1, width: "25ch" }}>
+            <InputLabel id="expertise">Expertise</InputLabel>
+            <Select
+              labelId="expertise"
+              name="Expertise"
+              value={formValues.expertise || ""}
+              label="expertise"
+              onChange={handleInputChange}
+              multiple
+            >
+              <MenuItem value="Marketing">
+                "Marketing"
+              </MenuItem>
+              <MenuItem value="Market Research">
+                "Market Research"
+              </MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             name="bio"
             multiline
@@ -204,7 +238,12 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             InputLabelProps={{ shrink: true }}
           />
         </form>
-        <Button variant="contained" endIcon={<SendIcon />} onClick={handleSubmit} type="submit">
+        <Button
+          variant="contained"
+          endIcon={<SendIcon />}
+          onClick={handleSubmit}
+          type="submit"
+        >
           Edit
         </Button>
         <Button type="button" onClick={() => handleClose()}>
