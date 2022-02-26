@@ -8,7 +8,7 @@ import {
   Button,
   Stack,
   Card,
-  Chip
+  Chip,
 } from "@mui/material";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
@@ -80,12 +80,11 @@ const Profile = ({ user }) => {
           <Avatar
             alt={userData.displayName}
             src={userData.photoURL}
-            variant="rounded"
+            variant="circular"
             sx={{
-              height: 1 / 6,
-              width: 1 / 6,
+              height: "20vh",
+              width: "20vh",
               margin: "auto",
-              borderRadius: "50%",
               my: 1,
             }}
           />
@@ -139,6 +138,7 @@ const Profile = ({ user }) => {
 
             {"teamId" in userData && (
               <Chip
+              key={projectData.name}
                 size="small"
                 label={projectData.name}
                 variant="outlined"
@@ -165,21 +165,14 @@ const Profile = ({ user }) => {
           <Typography align="left" sx={{ marginBottom: 3, ml: 1, color: "#7B7B7B" }}>
             Expertise
           </Typography>
-          <Stack direction="row" sx={{ marginBottom: 3 }}>
-
-            {"expertise" in userData && Object.values(userData.expertise).map((x) => (
-              <Button
-                style={{
-                  borderRadius: 15,
-                  backgroundColor: "#B6B6B6",
-                  padding: "3px 6px",
-                  fontSize: "10px",
-                }}
-                key={x}
-                variant="contained"
-              >
-                {x}
-              </Button>
+          <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
+            {"expertise" in userData && Object.values(userData.expertise).map((x,i) => (
+              
+              <Chip
+              key={i}
+                color="secondary"
+                label={x}
+              />
             ))}
           </Stack>
           <Divider />

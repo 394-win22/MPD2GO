@@ -35,10 +35,15 @@ const useStyles = makeStyles({
 });
 
 const postTagNames = [
-  "postTag1",
-  "postTag2",
-  "postTag3",
-  "postTag4",
+  "Ethnography",
+  "Market Research",
+  "Brainstorming",
+  "Idea Convergence",
+  "Prototyping",
+  "Engineering/Design",
+  "Materials Selection",
+  "Business Modeling",
+  "Story/Presentation"
 ];
 
 const CreatePost = () => {
