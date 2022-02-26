@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, CardContent, Card, Box, Chip } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
+import { RichTextEditor } from '@mantine/rte';
+
 import { UserContext } from "components/LoggedIn";
 
 import { getUserDataFromUID } from "../../utilities/posts";
@@ -51,9 +53,7 @@ const Post = ({ post }) => {
       <AvatarWithTag user={user} post={post} />
 
       <CardContent sx={{ pt: 0 }}>
-        <Typography variant="body2" color="text.secondary" align="left">
-          {post.description}
-        </Typography>
+        <RichTextEditor readOnly value={post.description} />
 
         {"tags" in post &&
           post.tags.map((tag, i) => (
