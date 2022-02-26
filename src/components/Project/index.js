@@ -17,13 +17,9 @@ import ReactGoogleSlides from "react-google-slides";
 import { getProjectFromUid } from "../../utilities/firebase";
 import { getUserDataFromUID } from "../../utilities/posts";
 import { UserContext } from "components/LoggedIn";
-<<<<<<< HEAD
 import EditProjectButton from "components/EditProject/EditProjectButton";
-
-=======
 import DriveLogo from 'google-drive.png'
 import MuralLogo from 'mural.png'
->>>>>>> a45a3d3b923083f9f99495c9600772840538be21
 
 const Project = () => {
   const navigate = useNavigate();

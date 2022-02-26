@@ -2,14 +2,55 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { TextField } from "@mui/material";
+import { TextField, Stack, Label } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 /* For "Create" Button in Modal Box */
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { setData } from "../../utilities/firebase";
+import { setData, deleteData, pushData } from "../../utilities/firebase";
 import { editProjectInFirebase } from "utilities/projects";
-import LinkList from '/';
+import { FixedSizeList } from 'react-window';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import DriveLogo from 'google-drive.png'
+import MuralLogo from 'mural.png'
+import LinkIcon from '@mui/icons-material/Link'
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
+import AddCircleIcon from '@mui/icons-material/AddCircle'
+
+const removeResource = (projectId, resource, rname) => {
+  return () => {
+    deleteData(`/project/${projectId}/resources/${rname}`);
+  }
+}
+
+const addResource = (projectId, text, url) => {
+  pushData(`/project/${projectId}/resources/`, {text: text, url: url});
+}
+
+const RenderRow = (projectId, resources, rnames) => {
+  console.log("resources:",resources);
+  return (({ index, style }) => {
+    console.log("resources[",index,"]:", resources[index]);
+    let resource = resources[index];
+    let rname = rnames[index];
+    return (
+    <ListItem style={style} key={index} component="div" disablePadding>
+        <Button sx={{ marginLeft: '8px' }}
+          startIcon={(resource.url.includes('mural')) ? <img src={MuralLogo} alt="" style={{ height: 20, width: 20 }} /> : (
+            (resource.url.includes('drive') ? <img src={DriveLogo} alt="" style={{ height: '20px', width: '20px' }} /> : <LinkIcon />))}
+          onClick={() => {
+            window.open(resource.url)
+          }}
+        >{resource.text}</Button>
+      <Button style={{alignSelf: "right"}} onClick={removeResource(projectId, resource, rname)}>
+          <RemoveCircleIcon/>
+      </Button>
+    </ListItem>
+    );
+  });
+}
 
 const useStyles = makeStyles({
   container: {
@@ -54,6 +95,21 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
     });
   };
 
+  const [newResourceText, setNewResourceText] = useState("");
+  const [newResourceURL, setNewResourceURL] = useState("");
+  const handleNewResourceText = (e) => {
+
+    setNewResourceText(e.target.value);
+  }
+
+  const handleNewResourceURL = (e) => {
+    setNewResourceURL(e.target.value);
+  }
+
+  const newResource = () => {
+    addResource(projectId, newResourceText, newResourceURL);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     //projectId = "projectID";
@@ -62,6 +118,9 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
     setProjectData(formValues);
     handleClose();
   };
+  
+  const resources = project.resources ? Object.values(project.resources) : [];
+  const rnames = project.resources ? Object.keys(project.resources) : [];
 
   return (
     <Modal
@@ -113,7 +172,47 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
             type="text"
             InputLabelProps={{ shrink: true }}
           />
-          {/*<LinkList/>*/}
+          <Box
+            sx={{ bgcolor: 'background.paper', borderColor: 'grey' }}
+          >
+          
+          {resources.length > 0 &&
+          <>
+            <Typography alignSelf="left" justifySelf="left" align="left" textAlign="left">Resources</Typography>
+            <FixedSizeList
+              height={100}
+              width={360}
+              itemSize={46}
+              itemCount={resources.length}
+              overscanCount={5}> 
+              {RenderRow(projectId, resources, rnames)}
+            </FixedSizeList>
+          </>}
+          <Typography>Add Resource</Typography>
+          <Stack direction="row">
+            <TextField
+              name="addResourceText"
+              label="Resource Text"
+              type="text"
+              minRows = {4}
+              InputLabelProps={{ shrink: true }}
+              style={{width: "40%"}}
+              onChange={handleNewResourceText}
+            />
+            <TextField
+              name="addResourceURL"
+              label="Resource URL"
+              type="text"
+              minRows = {4}
+              InputLabelProps={{ shrink: true }}
+              style={{width: "40%"}}
+              onChange={handleNewResourceURL}
+            />
+            <Button onClick={newResource}>
+              <AddCircleIcon/>
+            </Button>
+          </Stack>
+          </Box>
           <Button variant="contained" endIcon={<SendIcon />} type="submit">
             Edit
           </Button>
