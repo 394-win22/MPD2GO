@@ -165,9 +165,8 @@ const Profile = ({ user }) => {
           <Typography align="left" sx={{ marginBottom: 3, ml: 1, color: "#7B7B7B" }}>
             Expertise
           </Typography>
-          <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
+          <Stack direction="row" sx={{ marginBottom: 3, overflowX: "scroll"}} spacing={1}>
             {"expertise" in userData && Object.values(userData.expertise).map((x,i) => (
-              
               <Chip
               key={i}
                 color="secondary"
