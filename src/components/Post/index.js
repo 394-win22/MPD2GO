@@ -52,7 +52,7 @@ const PostWithThreads = () => {
       <Card sx={{ mx: 1, mb: 10 }}>
         <AvatarWithTag user={postAuthor} post={post} />
 
-        <CardContent>
+        <CardContent sx={{ px: 0, pt: 0 }}>
 
           <RichTextEditor readOnly value={post.description} />
 
