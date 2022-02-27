@@ -1,12 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Typography, Card, Button, CardContent, Box, Chip } from "@mui/material";
+import RichTextEditor from "@mantine/rte";
 
 import Thread from "./Thread";
 import { UserContext } from "components/LoggedIn";
 import ReplyTextField from "./ReplyTextField";
 import { DeletePostButton } from "./DeletePostButton";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
+
 
 const PostWithThreads = () => {
   const navigate = useNavigate();
@@ -51,9 +53,8 @@ const PostWithThreads = () => {
         <AvatarWithTag user={postAuthor} post={post} />
 
         <CardContent>
-          <Typography variant="body2" color="text.secondary" align="left">
-            {post.description}
-          </Typography>
+
+          <RichTextEditor readOnly value={post.description} />
 
           {"tags" in post &&
             post.tags.map((tag, i) => (

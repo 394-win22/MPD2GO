@@ -17,7 +17,7 @@ import { makeStyles } from "@mui/styles";
 import { RichTextEditor } from '@mantine/rte';
 
 import { createPostInFirebase } from "utilities/posts.js";
-import { useUserState } from "utilities/firebase.js";
+import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
 import { UserContext } from 'components/LoggedIn'
 
 const useStyles = makeStyles({
@@ -112,6 +112,8 @@ const CreatePost = () => {
     []
   );
 
+  const handleImageUpload = (file) => uploadPhotoToStorage(file);
+
 
   return (
     <Box className={classes.container}>
@@ -158,6 +160,7 @@ const CreatePost = () => {
           onChange={setDescription}
           placeholder="Type @ or # to see mentions autocomplete"
           mentions={mentions}
+          onImageUpload={handleImageUpload}
           style={{ marginTop: "12px", width: "100%" }}
         />
 
