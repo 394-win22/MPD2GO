@@ -18,18 +18,27 @@ import MuralLogo from 'mural.png'
 import LinkIcon from '@mui/icons-material/Link'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
+import { getProjectFromUid } from "../../utilities/firebase";
 
-const removeResource = (projectId, resource, rname) => {
+async function fetchData(projectId, setProjectData) {
+  const data = await getProjectFromUid(projectId);
+  if (!data) setProjectData("not found");
+  else setProjectData(data);
+}
+
+const removeResource = (projectId, resource, rname, setProjectData) => {
   return () => {
     deleteData(`/project/${projectId}/resources/${rname}`);
+    fetchData(projectId, setProjectData);
   }
 }
 
-const addResource = (projectId, text, url) => {
+const addResource = (projectId, text, url, setProjectData) => {
   pushData(`/project/${projectId}/resources/`, {text: text, url: url});
+  fetchData(projectId, setProjectData);
 }
 
-const RenderRow = (projectId, resources, rnames) => {
+const RenderRow = (projectId, resources, rnames, setProjectData) => {
   console.log("resources:",resources);
   return (({ index, style }) => {
     console.log("resources[",index,"]:", resources[index]);
@@ -44,7 +53,7 @@ const RenderRow = (projectId, resources, rnames) => {
             window.open(resource.url)
           }}
         >{resource.text}</Button>
-      <Button style={{alignSelf: "right"}} onClick={removeResource(projectId, resource, rname)}>
+      <Button style={{alignSelf: "right"}} onClick={removeResource(projectId, resource, rname, setProjectData)}>
           <RemoveCircleIcon/>
       </Button>
     </ListItem>
@@ -98,7 +107,6 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
   const [newResourceText, setNewResourceText] = useState("");
   const [newResourceURL, setNewResourceURL] = useState("");
   const handleNewResourceText = (e) => {
-
     setNewResourceText(e.target.value);
   }
 
@@ -107,7 +115,7 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
   }
 
   const newResource = () => {
-    addResource(projectId, newResourceText, newResourceURL);
+    addResource(projectId, newResourceText, newResourceURL, setProjectData);
   }
 
   const handleSubmit = async (e) => {
@@ -185,7 +193,7 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
               itemSize={46}
               itemCount={resources.length}
               overscanCount={5}> 
-              {RenderRow(projectId, resources, rnames)}
+              {RenderRow(projectId, resources, rnames, setProjectData)}
             </FixedSizeList>
           </>}
           <Typography>Add Resource</Typography>
