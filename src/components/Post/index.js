@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Typography, Card, Button, CardContent, Box, Chip } from "@mui/material";
 import RichTextEditor from "@mantine/rte";
+import { Typography, Card, Button, CardContent, Box, Chip,Stack } from "@mui/material";
 
 import Thread from "./Thread";
 import { UserContext } from "components/LoggedIn";
@@ -52,14 +52,14 @@ const PostWithThreads = () => {
       <Card sx={{ mx: 1, mb: 10 }}>
         <AvatarWithTag user={postAuthor} post={post} />
 
-        <CardContent sx={{ px: 0, pt: 0 }}>
 
+        <CardContent sx={{ px: 0, pt: 0 }}>
           <RichTextEditor readOnly value={post.description} />
+          <Stack direction="row" spacing={1} sx={{mt:2,overflowX: "scroll"}}>
 
           {"tags" in post &&
             post.tags.map((tag, i) => (
               <Chip
-                sx={{ mt: 1, mb: 0 }}
                 label={tag}
                 key={i}
                 color="primary"
@@ -67,6 +67,7 @@ const PostWithThreads = () => {
                 size="small"
               />
             ))}
+          </Stack>
         </CardContent>
 
         <ReplyTextField post={post} user={user} />

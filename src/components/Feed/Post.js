@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Typography, CardContent, Card, Box, Chip } from "@mui/material/";
+import { Typography, CardContent, Card, Box, Chip,Stack } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
 import { RichTextEditor } from '@mantine/rte';
 
@@ -55,10 +55,12 @@ const Post = ({ post }) => {
       <CardContent sx={{ pt: 0, px: 0 }}>
         <RichTextEditor readOnly value={post.description} />
 
+
+        <Stack direction="row" spacing={1} sx={{mt:2,overflowX: "scroll"}}>
+
         {"tags" in post &&
           post.tags.map((tag, i) => (
             <Chip
-              sx={{ mt: 1, mb: 0 }}
               label={tag}
               key={i}
               color="primary"
@@ -66,9 +68,10 @@ const Post = ({ post }) => {
               size="small"
             />
           ))}
+          </Stack>
       </CardContent>
 
-      <Box sx={{ display: "flex", m: 1 }}>
+      <Box sx={{ display: "flex", marginBottom: 2, mx: 2}}>
         <Typography className={classes.comment} variant="body2">
           {getNumCommentsText(post)}
         </Typography>

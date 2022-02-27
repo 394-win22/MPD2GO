@@ -165,6 +165,7 @@ export const saveUserToDb = (userObject) => {
     year: userObject.year || "",
     location: userObject.location || "",
   });
+  window.location.href = "/";
 };
 
 export const getUserFromUid = async (uid) => {

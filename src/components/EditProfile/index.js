@@ -34,11 +34,13 @@ const useStyles = makeStyles({
     transform: "translate(-50%, -50%)",
     background: "white",
     width: "350px",
+    height: "80%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     borderRadius: "10px",
-    overflow: "auto",
+    overflowY: "scroll",
+    overflowX: "hidden"
   },
   title: {
     textAlign: "center",
