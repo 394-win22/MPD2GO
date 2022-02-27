@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Stack,
@@ -14,9 +14,11 @@ import {
   MenuItem,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { RichTextEditor } from '@mantine/rte';
 
 import { createPostInFirebase } from "utilities/posts.js";
-import { useUserState } from "utilities/firebase.js";
+import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
+import { UserContext } from 'components/LoggedIn'
 
 const useStyles = makeStyles({
   container: {
@@ -46,14 +48,26 @@ const postTagNames = [
   "Story/Presentation"
 ];
 
+
+
+const topicTags = [
+  { id: 1, value: 'JavaScript' },
+  { id: 2, value: 'TypeScript' },
+  { id: 3, value: 'Ruby' },
+  { id: 4, value: 'Python' },
+];
+
+
 const CreatePost = () => {
   const navigate = useNavigate();
+  const context = useContext(UserContext)
 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>');
   const [postTags, setPostTags] = useState([]);
 
   const user = useUserState();
+
 
   const classes = useStyles();
 
@@ -66,6 +80,8 @@ const CreatePost = () => {
       typeof value === "string" ? value.split(",") : value
     );
   };
+
+  const people = context.userList.map((u, i) => { return { id: i, value: u.displayName }; });
 
   const handleSubmit = async (e) => {
     createPostInFirebase({
@@ -80,6 +96,24 @@ const CreatePost = () => {
     setDescription("");
     navigate("/");
   };
+
+  const mentions = useMemo(
+    () => ({
+      allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
+      mentionDenotationChars: ['@', '#'],
+      source: (searchTerm, renderList, mentionChar) => {
+        const list = mentionChar === '@' ? people : topicTags;
+        const includesSearchTerm = list.filter((item) =>
+          item.value.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        renderList(includesSearchTerm);
+      },
+    }),
+    []
+  );
+
+  const handleImageUpload = (file) => uploadPhotoToStorage(file);
+
 
   return (
     <Box className={classes.container}>
@@ -98,7 +132,7 @@ const CreatePost = () => {
           autoComplete="off"
         />
 
-        <FormControl sx={{  mt:1, width: "100%" }}>
+        <FormControl sx={{ mt: 1, width: "100%" }}>
           <InputLabel>Tags</InputLabel>
           <Select
             multiple
@@ -121,17 +155,15 @@ const CreatePost = () => {
           </Select>
         </FormControl>
 
-        <TextField
-          margin="normal"
-          label="Text (optional)"
-          multiline
-          minRows={4}
+        <RichTextEditor
           value={description}
-          autoComplete="off"
-          onChange={(event) => {
-            setDescription(event.target.value);
-          }}
+          onChange={setDescription}
+          placeholder="Type @ or # to see mentions autocomplete"
+          mentions={mentions}
+          onImageUpload={handleImageUpload}
+          style={{ marginTop: "12px", width: "100%" }}
         />
+
 
         <Stack spacing={2} direction="row" sx={{ mt: 3 }}>
           <Button

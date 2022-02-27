@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, CardContent, Card, Box, Chip,Stack } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
+import { RichTextEditor } from '@mantine/rte';
+
 import { UserContext } from "components/LoggedIn";
 
 import { getUserDataFromUID } from "../../utilities/posts";
@@ -43,18 +45,19 @@ const Post = ({ post }) => {
   return (
     <Card
       className={classes.card}
-      sx={{ mx: 1, mb: 3 }}
+      sx={{ mb: 3 }}
       onClick={() => {
         navigate(`/post/${post.id}`);
       }}
     >
       <AvatarWithTag user={user} post={post} />
 
-      <CardContent sx={{ pt: 0 }}>
-        <Typography variant="body2" color="text.secondary" align="left">
-          {post.description}
-        </Typography>
+      <CardContent sx={{ pt: 0, px: 0 }}>
+        <RichTextEditor readOnly value={post.description} />
+
+
         <Stack direction="row" spacing={1} sx={{mt:2,overflowX: "scroll"}}>
+
         {"tags" in post &&
           post.tags.map((tag, i) => (
             <Chip
