@@ -81,13 +81,32 @@ const CreatePost = () => {
     );
   };
 
-  const people = context.userList.map((u, i) => { return { id: i, value: u.displayName }; });
+  const people = context.userList.map((u) => { return { id: u.uid, value: u.displayName }; });
 
   const handleSubmit = async (e) => {
+    var el = document.createElement('html');
+    el.innerHTML = description;
+    var mentionSpans = el.getElementsByClassName("mention");
+    // for (var i = 0; i < mentionSpans.length; i++) {
+    //   console.log(mentionSpans[i].getAttribute("data-id"));
+
+    //   // elements[i].addEventListener('click', myFunction, false);
+    // }
+
+    Array.from(mentionSpans).forEach(function (mentionSpan) {
+      // mentionSpan.addEventListener('click', () => {});
+      mentionSpan.setAttribute('onClick', "javascript:location.href='google.com'");
+      // console.log(mentionSpan.getAttribute("data-id"));
+    });
+
+    console.log(el.querySelector("body").innerHTML);
+    setDescription(el.querySelector("body").innerHTML);
+    console.log(description);
+
     createPostInFirebase({
       title: title,
       tags: postTags,
-      description: description,
+      description: el.querySelector("body").innerHTML,
       time: Date.now(),
       author: user.uid,
       numComments: 0,
