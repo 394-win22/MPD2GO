@@ -1,6 +1,12 @@
 .App {
 	text-align: left;
+	-ms-overflow-style: none !important;
+	scrollbar-width: none !important;
 }
+
+::-webkit-scrollbar {
+	display: none !important;
+  }
 
 .App-logo {
 	height: 40vmin;
@@ -26,17 +32,4 @@
 
 .App-link {
 	color: #61dafb;
-}
-
-/* .ql-editor {
-	padding: 0 !important;
-} */
-
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
 }
