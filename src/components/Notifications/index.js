@@ -20,6 +20,7 @@ import Chip from "@mui/material/Chip";
 import { UserContext } from "components/LoggedIn";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import CommentNotification from "./CommentNotification";
+import CommentReplyNotification from "./CommentReplyNotification";
 import MentionNotification from "./MentionNotification";
 
 const Notifications = () => {
@@ -44,7 +45,7 @@ const Notifications = () => {
             case "comment":
               return <CommentNotification key={id} notifId={id} notifObj={notifObj} />;
             case "reply":
-              return <ListItem key={id} />;
+              return <CommentReplyNotification key={id} notifId ={id} notifObj={notifObj} />;
             case "mention":
               return <MentionNotification key={id} notifId={id} notifObj={notifObj} />;
             default:
