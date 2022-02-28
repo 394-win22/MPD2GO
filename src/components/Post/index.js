@@ -40,7 +40,7 @@ const PostWithThreads = () => {
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          sx={{ ml: 1, mb: 2, color: "white" }}
+          sx={{ mb: 2, color: "white" }}
           variant="contained"
           onClick={() => {
             navigate(-1);
@@ -50,11 +50,11 @@ const PostWithThreads = () => {
         </Button>
         {post.author == user.uid && <DeletePostButton key={post} post={post} />}
       </Box>
-      <Card sx={{ mx: 1, mb: 10 }}>
+      <Card sx={{  mb: 10 }}>
         <AvatarWithTag user={postAuthor} post={post} />
 
 
-        <CardContent sx={{ px: 2, pt: 0 }}>
+        <CardContent sx={{ px: 0, pt: 0 }}>
           <RichTextEditor readOnly value={post.description} />
           <Stack direction="row" spacing={1} sx={{ mt: 2, overflowX: "scroll" }}>
 
