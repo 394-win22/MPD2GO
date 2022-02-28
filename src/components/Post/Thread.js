@@ -15,6 +15,7 @@ const useStyles = makeStyles({
   // Comment
   container: {
     display: "flex",
+    marginTop: "10px",
     flexWrap: "nowrap",
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -46,7 +47,7 @@ const useStyles = makeStyles({
     width: "24px",
     height: "24px",
     display: 'inline',
-    float: 'left'
+    float: 'left',
   },
   contentContainer: {
     marginLeft: "10px",
