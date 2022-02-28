@@ -20,6 +20,7 @@ import Chip from "@mui/material/Chip";
 import { UserContext } from "components/LoggedIn";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import CommentNotification from "./CommentNotification";
+import MentionNotification from "./MentionNotification";
 
 const Notifications = () => {
   const navigate = useNavigate();
@@ -41,11 +42,13 @@ const Notifications = () => {
         {Object.entries(userData.notifications).map(([id, notifObj]) => {
           switch (notifObj.type) {
             case "comment":
-              return <CommentNotification key={id} notifId={id} notifObj={notifObj} />
+              return <CommentNotification key={id} notifId={id} notifObj={notifObj} />;
             case "reply":
-              return <ListItem key={id} />
+              return <ListItem key={id} />;
+            case "mention":
+              return <MentionNotification key={id} notifId={id} notifObj={notifObj} />;
             default:
-              return <CommentNotification key={id} notifId={id} notifObj={notifObj} />
+              return <CommentNotification key={id} notifId={id} notifObj={notifObj} />;
           }
         })}
       </List >

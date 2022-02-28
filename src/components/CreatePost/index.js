@@ -19,6 +19,7 @@ import { RichTextEditor } from '@mantine/rte';
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
 import { UserContext } from 'components/LoggedIn'
+import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
   container: {
@@ -52,9 +53,9 @@ const postTagNames = [
 
 const topicTags = [
   { id: 1, value: 'JavaScript' },
-  { id: 2, value: 'TypeScript' },
-  { id: 3, value: 'Ruby' },
-  { id: 4, value: 'Python' },
+  { id: 2, value: 'TypeScript'  },
+  { id: 3, value: 'Ruby'  },
+  { id: 4, value: 'Python'  },
 ];
 
 
@@ -84,33 +85,28 @@ const CreatePost = () => {
   const people = context.userList.map((u) => { return { id: u.uid, value: u.displayName }; });
 
   const handleSubmit = async (e) => {
-    var el = document.createElement('html');
-    el.innerHTML = description;
-    var mentionSpans = el.getElementsByClassName("mention");
-    // for (var i = 0; i < mentionSpans.length; i++) {
-    //   console.log(mentionSpans[i].getAttribute("data-id"));
-
-    //   // elements[i].addEventListener('click', myFunction, false);
-    // }
-
-    Array.from(mentionSpans).forEach(function (mentionSpan) {
-      // mentionSpan.addEventListener('click', () => {});
-      mentionSpan.setAttribute('onClick', "javascript:location.href='google.com'");
-      // console.log(mentionSpan.getAttribute("data-id"));
-    });
-
-    console.log(el.querySelector("body").innerHTML);
-    setDescription(el.querySelector("body").innerHTML);
-    console.log(description);
-
-    createPostInFirebase({
+    const postId = createPostInFirebase({
       title: title,
       tags: postTags,
-      description: el.querySelector("body").innerHTML,
+      description: description,
       time: Date.now(),
       author: user.uid,
       numComments: 0,
     });
+    
+
+    // add mentioned to notification
+    var el = document.createElement('html');
+    el.innerHTML = description;
+    var mentionSpans = el.getElementsByClassName("mention");
+
+    mentionSpans && Array.from(mentionSpans).forEach(function (mentionSpan) {
+      if (mentionSpan.getAttribute("data-denotation-char") === "@") {
+        createNotification(mentionSpan.getAttribute("data-id"), user.uid, postId, "click to check the post", "mention");
+        console.log("postId", postId);
+      }
+    });
+
     setTitle("");
     setDescription("");
     navigate("/");

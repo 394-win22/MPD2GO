@@ -3,15 +3,25 @@ import { pushData, updateData, removeAtPath } from './firebase.js'
 
 
 
-export const createCommentNotification = (postAuthorUid, commentAuthorUid, postId, comment) => {
-	pushData(`users/${postAuthorUid}/notifications`, {
-		authorUid: commentAuthorUid,
+export const createNotification = (receiverUid, senderUid, postId, content, type) => {
+	pushData(`users/${receiverUid}/notifications`, {
+		senderUid: senderUid,
 		postId: postId,
-		comment: comment,
+		content: content,
 		time: Date.now(),
-		type: "comment"
+		type: type
 	})
 }
+
+// export const createCommentNotification = (postAuthorUid, commentAuthorUid, postId, comment) => {
+// 	pushData(`users/${postAuthorUid}/notifications`, {
+// 		authorUid: commentAuthorUid,
+// 		postId: postId,
+// 		comment: comment,
+// 		time: Date.now(),
+// 		type: "mention"
+// 	})
+// }
 
 
 export const markNotificationAsRead = (uid, notificationId) => {

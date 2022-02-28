@@ -18,14 +18,14 @@ import { UserContext } from "components/LoggedIn";
 
 import { markNotificationAsRead } from "utilities/notifications"
 
-const CommentNotification = ({ notifId, notifObj }) => {
+const MentionNotification = ({ notifId, notifObj }) => {
 	const navigate = useNavigate();
 	const context = useContext(UserContext);
 	const users = context.userList;
 
 	const authorData = users.find((x) => x.uid === notifObj.senderUid);
 
-	const title = `${authorData.displayName} commented on your post`;
+	const title = `${authorData.displayName} mentioned you`;
 
 	const handleNotificationClicked = () => {
 		markNotificationAsRead(context.user.uid, notifId);
@@ -65,4 +65,4 @@ const CommentNotification = ({ notifId, notifObj }) => {
 	);
 };
 
-export default CommentNotification;
+export default MentionNotification;
