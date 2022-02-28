@@ -132,7 +132,7 @@ const Thread = ({ postId, ids, data, style }) => {
       path += id;
     });
     path += "/threads/";
-    replyToThread(user.uid, postId, path, comment);
+    replyToThread(user.uid, postAuthor.uid, postId, path, comment);
     setIsShowTextField(false);
   };
 
