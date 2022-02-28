@@ -15,6 +15,8 @@ const useStyles = makeStyles({
   // Comment
   container: {
     display: "flex",
+    marginTop: "10px",
+    flexWrap: "nowrap",
     flexDirection: "row",
     justifyContent: "flex-start",
     marginBottom: "15px",
@@ -26,8 +28,10 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
   rightContainer: {
-    display: "flex",
+    display: "inline",
+    float: 'left',
     flexDirection: "column",
+    marginLeft: '5px',
     alignItems: "flex-start",
     height: "100%",
     minWidth: "0px",
@@ -36,16 +40,14 @@ const useStyles = makeStyles({
   avatarButton: {
     width: "24px",
     height: "24px",
-    display: "flex",
-    marginTop: "4px",
-    marginRight: "1px",
-    marginLeft: "4px",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'inline',
+    float: 'left'
   },
   avatar: {
     width: "24px",
     height: "24px",
+    display: 'inline',
+    float: 'left',
   },
   contentContainer: {
     marginLeft: "10px",
@@ -157,10 +159,9 @@ const Thread = ({ postId, ids, data, style }) => {
   const haveChild = "threads" in data && Object.values(data.threads).length > 0;
   if (haveChild) sortedThreads = Object.entries(data.threads).sort().reverse();
   return (
-    <Box className={classes.container} style={style}>
+    <Box className={classes.container}>
       <Box className={classes.leftContainer}>
         <IconButton
-          sx={{ marginRight: -1 }}
           className={classes.avatarButton}
           onClick={() => {
             navigate(`/profile/${postAuthor.uid}`);
@@ -168,7 +169,6 @@ const Thread = ({ postId, ids, data, style }) => {
         >
           <Avatar className={classes.avatar} src={postAuthor.photoURL} />
         </IconButton>
-
         {isShowThreads && haveChild ? (
           <Box
             className={classes.collapseButton}
