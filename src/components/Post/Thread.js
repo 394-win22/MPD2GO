@@ -201,6 +201,7 @@ const Thread = ({ postId, ids, data, style }) => {
           <AddComment
             replyToComment={replyToComment}
             setIsShowTextField={setIsShowTextField}
+            postId={postId}
           />
         </Collapse>
 
