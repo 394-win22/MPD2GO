@@ -14,13 +14,30 @@ const expertises = [
   "Graphic Design",
   "Project Management",
 ];
-const SearchDropdown = ({ isDropped, setIsDropped }) => {
+const currentPhases = [
+  "Ethnography",
+  "Market Research",
+  "Brainstorming",
+  "Idea Convergence",
+  "Prototyping",
+  "Engineering/Design",
+  "Materials Selection",
+  "Business Modeling",
+  "Story/Presentation",
+];
+const SearchDropdown = ({ isDropped, setIsDropped, setQuery }) => {
   return (
     <>
       {isDropped && (
         <Card
-          sx={{ my: 0 }}
-          style={{ width: "100%", zIndex: 10, height: "100%", py: 1, textAlign:"left" }}
+          sx={{ my: 0, py: 1 }}
+          style={{
+            width: "100%",
+            zIndex: 10,
+            height: "100%",
+            textAlign: "left",
+            borderTop: "1px solid rgba(0, 0, 0, 0.6)",
+          }}
         >
           <IconButton
             sx={{
@@ -33,11 +50,18 @@ const SearchDropdown = ({ isDropped, setIsDropped }) => {
           >
             <CloseIcon />
           </IconButton>
-          <Typography variant="h7" sx={{left:0}}> Search By <span style={{fontWeight: 'bold'}}>Expertise</span></Typography>
-          <Box alignItems="left" sx={{ display:"flex", flexWrap:"wrap"}}>
-           
-            {expertises.map((expertise, i) => (
-              <Chip key={i} label={expertise} sx={{ mx: 1, my: 0.5 }} />
+          <Typography variant="h7" sx={{ left: 0, p: 2 }}>
+            {" "}
+            Search By <span style={{ fontWeight: "bold" }}>Current Phase</span>
+          </Typography>
+          <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
+            {currentPhases.map((phase, i) => (
+              <Chip
+                key={i}
+                label={phase}
+                sx={{ mx: 1, my: 0.5 }}
+                onClick={() => setQuery(phase)}
+              />
             ))}
           </Box>
         </Card>

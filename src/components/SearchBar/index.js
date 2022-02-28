@@ -1,4 +1,4 @@
-import InputBase from "@mui/material/InputBase";
+import { InputBase } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
@@ -7,15 +7,8 @@ import SearchDropdown from "./SearchDropdown";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  border: "1px solid #000000",
   backgroundColor: "#ffffff",
-  // marginRight: theme.spacing(2),
-  //   marginLeft: 0,
   width: "100%",
-  //   [theme.breakpoints.up("sm")]: {
-  //     marginLeft: theme.spacing(3),
-  //     width: "auto",
-  //   },
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -49,10 +42,15 @@ const SearchBar = ({ setQuery }) => {
           onClick={() => setIsDropped(true)}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search…"
+          style={{ width: "80%" }}
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
-      <SearchDropdown isDropped={isDropped} setIsDropped={setIsDropped} />
+      <SearchDropdown
+        isDropped={isDropped}
+        setIsDropped={setIsDropped}
+        setQuery={setQuery}
+      />
     </>
   );
 };

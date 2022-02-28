@@ -6,10 +6,21 @@ const Main = () => {
   const [query, setQuery] = useState("");
   const context = useContext(UserContext);
 
+  let filteredPosts = context.postList;
+
+  if (query != "") {
+    filteredPosts = context.postList.filter((e) => {
+      return (
+        (e.tags && e.tags.includes(query)) ||
+        e.description.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+  }
   return (
     <div className="App">
       <SearchBar setQuery={setQuery} />
-      <PostList posts={context.postList} />
+      {console.log(query)}
+      <PostList posts={filteredPosts} />
     </div>
   );
 };
