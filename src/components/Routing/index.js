@@ -11,7 +11,7 @@ import Navigation from "components/Navigation";
 import Project from "components/Project";
 import Notifications from "components/Notifications";
 import NotFound from "components/NotFound";
-
+import Directory from "components/Directory";
 
 import Main from "components/Feed";
 
@@ -53,7 +53,7 @@ const Routing = ({ user }) => {
           <Route exact path="/createPost" element={<CreatePost />} />
           <Route exact path="/profile" element={<Profile user={user} />} />
           <Route exact path="/notifications" element={<Notifications />} />
-          <Route exact path="/directory" element={<Notifications />} />
+          <Route exact path="/directory" element={<Directory/>} />
           <Route
             exact
             path="/profile/:userID"
