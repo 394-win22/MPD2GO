@@ -23,7 +23,7 @@ import {
 
 import { signOut } from 'utilities/firebase'
 import logo from 'logo.png'
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 
 const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
   const navigate = useNavigate()

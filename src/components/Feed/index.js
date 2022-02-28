@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import PostList from './PostsList'
-import { UserContext } from 'components/LoggedIn'
+import { UserContext } from 'components/Routing'
 
 const Main = () => {
   const context = useContext(UserContext)

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { ThemeProvider } from '@mui/material/styles'
 
 import theme from 'theme.js'
-import LoggedIn from 'components/LoggedIn'
+import Routing from 'components/Routing'
 import { useUserState, getUserFromUid, saveUserToDb } from 'utilities/firebase.js'
 import './App.css'
 import Login from 'components/Login/index'
@@ -24,7 +24,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       {(user === undefined || user == null) ?
-        <Login /> : <LoggedIn user={user} />
+        <Login /> : <Routing user={user} />
 
       }
 

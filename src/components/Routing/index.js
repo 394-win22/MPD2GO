@@ -30,7 +30,7 @@ const getUserList = (users) => {
 
 export const UserContext = createContext();
 
-const LoggedIn = ({ user }) => {
+const Routing = ({ user }) => {
   const [postList, postListLoading] = useData("/posts", getPostList);
 
   const [userList, userListLoading] = useData("/users", getUserList);
@@ -53,6 +53,7 @@ const LoggedIn = ({ user }) => {
           <Route exact path="/createPost" element={<CreatePost />} />
           <Route exact path="/profile" element={<Profile user={user} />} />
           <Route exact path="/notifications" element={<Notifications />} />
+          <Route exact path="/directory" element={<Notifications />} />
           <Route
             exact
             path="/profile/:userID"
@@ -69,4 +70,4 @@ const LoggedIn = ({ user }) => {
   );
 };
 
-export default LoggedIn;
+export default Routing;

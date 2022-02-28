@@ -4,7 +4,7 @@ import { Typography, CardContent, Card, Box, Chip,Stack } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
 import { RichTextEditor } from '@mantine/rte';
 
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 
 import { getUserDataFromUID } from "../../utilities/posts";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
