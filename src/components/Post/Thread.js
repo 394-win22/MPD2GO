@@ -191,7 +191,7 @@ const Thread = ({ postId, ids, data, style }) => {
             </Typography>
           </Box>
           <Typography sx={{ flexWrap: "wrap" }} variant="body2">
-            {data.comment} 
+            {data.comment}
           </Typography>
         </Box>
 
