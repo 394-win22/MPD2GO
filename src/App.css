@@ -19,6 +19,7 @@
 	}
 }
 
+
 .App-header {
 	background-color: #282c34;
 	min-height: 100vh;
@@ -32,4 +33,20 @@
 
 .App-link {
 	color: #61dafb;
+}
+
+.ql-mention-list-container {
+	z-index: 100;
+}
+/* .ql-editor {
+	padding: 0 !important;
+} */
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }

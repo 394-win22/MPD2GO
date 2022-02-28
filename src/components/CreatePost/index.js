@@ -19,6 +19,7 @@ import { RichTextEditor } from '@mantine/rte';
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
 import { UserContext } from 'components/LoggedIn'
+import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
   container: {
@@ -52,9 +53,9 @@ const postTagNames = [
 
 const topicTags = [
   { id: 1, value: 'JavaScript' },
-  { id: 2, value: 'TypeScript' },
-  { id: 3, value: 'Ruby' },
-  { id: 4, value: 'Python' },
+  { id: 2, value: 'TypeScript'  },
+  { id: 3, value: 'Ruby'  },
+  { id: 4, value: 'Python'  },
 ];
 
 
@@ -81,10 +82,10 @@ const CreatePost = () => {
     );
   };
 
-  const people = context.userList.map((u, i) => { return { id: i, value: u.displayName }; });
+  const people = context.userList.map((u) => { return { id: u.uid, value: u.displayName }; });
 
   const handleSubmit = async (e) => {
-    createPostInFirebase({
+    const postId = createPostInFirebase({
       title: title,
       tags: postTags,
       description: description,
@@ -92,6 +93,20 @@ const CreatePost = () => {
       author: user.uid,
       numComments: 0,
     });
+    
+
+    // add mentioned to notification
+    var el = document.createElement('html');
+    el.innerHTML = description;
+    var mentionSpans = el.getElementsByClassName("mention");
+
+    mentionSpans && Array.from(mentionSpans).forEach(function (mentionSpan) {
+      if (mentionSpan.getAttribute("data-denotation-char") === "@") {
+        createNotification(mentionSpan.getAttribute("data-id"), user.uid, postId, "click to check the post", "mention");
+        console.log("postId", postId);
+      }
+    });
+
     setTitle("");
     setDescription("");
     navigate("/");
@@ -106,13 +121,17 @@ const CreatePost = () => {
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        renderList(includesSearchTerm);
+        
+        // limit the items in list to 5
+        renderList(includesSearchTerm.slice(0, 5));
       },
     }),
     []
   );
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
+
+  
 
 
   return (

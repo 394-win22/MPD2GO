@@ -2,14 +2,16 @@ import { getDatabase, ref, push, set, increment } from 'firebase/database'
 
 import { pushData, updateData } from './firebase.js'
 
-import { createCommentNotification } from "./notifications";
+import { createNotification } from "./notifications";
 
 export const createPostInFirebase = (postObj) => {
   const db = getDatabase()
   const postListRef = ref(db, 'posts')
   const postId = push(postListRef)
 
-  set(postId, postObj)
+  set(postId, postObj);
+  return postId.key;
+  
 }
 
 export const addCommentToPost = (postAuthorUid, commentAuthorUid, postId, comment) => {
@@ -21,7 +23,7 @@ export const addCommentToPost = (postAuthorUid, commentAuthorUid, postId, commen
   updateData(`posts/${postId}`, {
     numComments: increment(1)
   })
-  createCommentNotification(postAuthorUid, commentAuthorUid, postId, comment);
+  createNotification(postAuthorUid, commentAuthorUid, postId, comment, "comment");
 }
 
 export const replyToThread = (uid, postId, path, comment) => {
