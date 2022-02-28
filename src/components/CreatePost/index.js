@@ -121,13 +121,17 @@ const CreatePost = () => {
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        renderList(includesSearchTerm);
+        
+        // limit the items in list to 5
+        renderList(includesSearchTerm.slice(0, 5));
       },
     }),
     []
   );
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
+
+  
 
 
   return (

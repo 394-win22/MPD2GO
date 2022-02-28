@@ -13,6 +13,7 @@
 	}
 }
 
+
 .App-header {
 	background-color: #282c34;
 	min-height: 100vh;
@@ -28,6 +29,9 @@
 	color: #61dafb;
 }
 
+.ql-mention-list-container {
+	z-index: 100;
+}
 /* .ql-editor {
 	padding: 0 !important;
 } */
