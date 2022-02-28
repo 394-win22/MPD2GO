@@ -35,6 +35,7 @@ export const replyToThread = (uid, postId, path, comment) => {
   updateData(`posts/${postId}`, {
     numComments: increment(1)
   })
+  createNotification(uid, comment.author.uid, postId, comment, "reply");
 }
 
 export const getUserDataFromUID = (uid, users) => {
