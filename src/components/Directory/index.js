@@ -22,6 +22,7 @@ import moment from "moment";
 import Chip from "@mui/material/Chip";
 import { UserContext } from "components/Routing";
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import DirectorySearchBar from 'components/DirectorySearchBar';
 
 const getStatus = (userData) => {
 	if (!("year" in userData) || userData.year == "") {
@@ -59,6 +60,7 @@ const Directory = () => {
 			>
 				Back
 			</Button>
+			<DirectorySearchBar></DirectorySearchBar>
 			<Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
 				<CardHeader sx={{ padding: "10px 16px" }} avatar={<Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}><PeopleAltIcon /></Avatar>}
 					title="Directory" titleTypographyProps={{ sx: { fontSize: "16px" } }} />
