@@ -2,23 +2,23 @@ import { useState, useMemo, useContext } from 'react'
 import { Box } from '@mui/system'
 import { Button } from '@mui/material'
 import { RichTextEditor } from "@mantine/rte";
-import { UserContext } from 'components/LoggedIn/index.js';
+import { UserContext } from 'components/Routing/index.js';
 
 import { addCommentToPost } from '../../utilities/posts.js'
 
 const topicTags = [
-  { id: 1, value: "JavaScript" },
-  { id: 2, value: "TypeScript" },
-  { id: 3, value: "Ruby" },
-  { id: 4, value: "Python" },
+	{ id: 1, value: "JavaScript" },
+	{ id: 2, value: "TypeScript" },
+	{ id: 3, value: "Ruby" },
+	{ id: 4, value: "Python" },
 ];
 
 const ReplyTextField = ({ post, user }) => {
 	const context = useContext(UserContext);
 	const [comment, setComment] = useState('')
-  const people = context.userList.map((u) => {
-    return { id: u.uid, value: u.displayName };
-  });
+	const people = context.userList.map((u) => {
+		return { id: u.uid, value: u.displayName };
+	});
 
 	const mentions = useMemo(
 		() => ({
@@ -29,7 +29,7 @@ const ReplyTextField = ({ post, user }) => {
 				const includesSearchTerm = list.filter((item) =>
 					item.value.toLowerCase().includes(searchTerm.toLowerCase())
 				);
-	
+
 				// limit the items in list to 5
 				renderList(includesSearchTerm.slice(0, 5));
 			},
@@ -66,17 +66,17 @@ const ReplyTextField = ({ post, user }) => {
 						['sup', 'sub'],
 						['alignLeft', 'alignCenter', 'alignRight'],
 					]}
-					onImageUpload={() => {return new Promise((_, reject) => {reject('Image uploading not allowed.')})}}
+					onImageUpload={() => { return new Promise((_, reject) => { reject('Image uploading not allowed.') }) }}
 					value={comment}
 					onChange={setComment}
 					placeholder="Type @ or # to see mentions autocomplete"
 					mentions={mentions}
 					style={{ marginTop: "12px", width: "100%" }}
-					onDragStart={() => {return false}}
-					onDrop={() => {return false}}
+					onDragStart={() => { return false }}
+					onDrop={() => { return false }}
 				/>
 				<Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", paddingTop: "10px" }}>
-					<Button variant='contained' onClick={() => {if (comment != '<p><br></p>') submitComment()}}>Send</Button>
+					<Button variant='contained' onClick={() => { if (comment != '<p><br></p>') submitComment() }}>Send</Button>
 				</Box>
 			</Box >
 		</Box >
