@@ -40,3 +40,31 @@ export const replyToThread = (uid, postId, path, comment) => {
 export const getUserDataFromUID = (uid, users) => {
   return users.find((user) => user.uid === uid);
 };
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
+const colourIsLight = function (hex) {
+  const r = hexToRgb(hex).r
+  const g = hexToRgb(hex).g
+  const b = hexToRgb(hex).b
+  // Counting the perceptive luminance
+  // human eye favors green color... 
+  var a = 1 - (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  console.log(a);
+  return (a < 0.5);
+}
+
+export const textColor = function(hex) {
+  if(colourIsLight(hex)){
+    return "black"
+  }else{
+    return "white"
+  }
+}

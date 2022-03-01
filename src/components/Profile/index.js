@@ -142,7 +142,7 @@ const Profile = ({ user }) => {
                 size="small"
                 label={projectData.name}
                 variant="outlined"
-                sx={{ mx: 1 }}
+                sx={{ mx: 1, border:`1px solid ${projectData.teamColor}`, color:projectData.teamColor, textBlendMode: "exclusion"}}
               />
             )}
           </Stack>
@@ -153,7 +153,7 @@ const Profile = ({ user }) => {
               onClick={() => {
                 navigate(`/project/${userData.teamId}`);
               }}
-              sx={{ m: 1 }}
+              sx={{ m: 1, backgroundColor:projectData.teamColor, textBlendMode: "exclusion" }}
             >
               <InsertDriveFileIcon />
               View Capstone Page
