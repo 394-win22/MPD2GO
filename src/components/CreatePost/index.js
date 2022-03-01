@@ -18,7 +18,7 @@ import { RichTextEditor } from '@mantine/rte';
 
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
-import { UserContext } from 'components/LoggedIn'
+import { UserContext } from 'components/Routing'
 import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
@@ -93,7 +93,7 @@ const CreatePost = () => {
       author: user.uid,
       numComments: 0,
     });
-    
+
 
     // add mentioned to notification
     var el = document.createElement('html');
@@ -121,7 +121,7 @@ const CreatePost = () => {
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        
+
         // limit the items in list to 5
         renderList(includesSearchTerm.slice(0, 5));
       },
@@ -131,7 +131,7 @@ const CreatePost = () => {
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
 
-  
+
 
 
   return (

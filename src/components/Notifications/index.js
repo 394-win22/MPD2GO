@@ -17,7 +17,7 @@ import {
 import LinkIcon from '@mui/icons-material/Link'
 import moment from "moment";
 import Chip from "@mui/material/Chip";
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import CommentNotification from "./CommentNotification";
 import MentionNotification from "./MentionNotification";

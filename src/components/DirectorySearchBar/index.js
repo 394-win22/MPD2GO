@@ -30,7 +30,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter }) => {
+const DirectorySearchBar = ({ setQuery, expertiseFilter, setExpertiseFilter }) => {
   const [isDropped, setIsDropped] = useState(false);
   return (
     <>
@@ -50,11 +50,11 @@ const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter }) => {
         isDropped={isDropped}
         setIsDropped={setIsDropped}
         setQuery={setQuery}
-        setPhaseFilter={setPhaseFilter}
-        phaseFilter={phaseFilter}
+        setExpertiseFilter={setExpertiseFilter}
+        expertiseFilter={expertiseFilter}
       />
     </>
   );
 };
 
-export default SearchBar;
+export default DirectorySearchBar;

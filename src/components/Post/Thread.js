@@ -2,7 +2,7 @@ import { useState, useContext, memo } from "react";
 import { useNavigate } from "react-router";
 import { Box, Collapse, Button } from "@mui/material";
 import { Message as MessageIcon } from "@mui/icons-material";
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 import { makeStyles } from "@mui/styles";
 import { Avatar, Typography, IconButton } from "@mui/material";
 import moment from "moment";

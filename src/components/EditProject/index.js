@@ -186,7 +186,9 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
           
           {resources.length > 0 &&
           <>
-            <Typography alignSelf="left" justifySelf="left" align="left" textAlign="left">Resources</Typography>
+            <Typography alignSelf="left" justifySelf="left" align="left" textAlign="left">
+              Resources (Scroll to See All)
+            </Typography>
             <FixedSizeList
               height={100}
               width={360}
