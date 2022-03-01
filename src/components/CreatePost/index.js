@@ -18,7 +18,11 @@ import { RichTextEditor } from "@mantine/rte";
 
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
+<<<<<<< HEAD
+import { UserContext } from 'components/Routing'
+=======
 import { UserContext } from "components/LoggedIn";
+>>>>>>> development
 import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
@@ -114,6 +118,10 @@ const CreatePost = () => {
       author: user.uid,
       numComments: 0,
     });
+<<<<<<< HEAD
+
+=======
+>>>>>>> development
 
     // add mentioned to notification
     mentionSpans &&
@@ -153,6 +161,12 @@ const CreatePost = () => {
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
 
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> development
   return (
     <Box className={classes.container}>
       <Typography align="center" variant="h4" sx={{ mb: 3 }}>

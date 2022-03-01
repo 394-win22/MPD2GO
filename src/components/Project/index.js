@@ -16,7 +16,7 @@ import Chip from "@mui/material/Chip";
 import ReactGoogleSlides from "react-google-slides";
 import { getProjectFromUid } from "../../utilities/firebase";
 import { getUserDataFromUID } from "../../utilities/posts";
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 import EditProjectButton from "components/EditProject/EditProjectButton";
 import DriveLogo from 'google-drive.png'
 import MuralLogo from 'mural.png'

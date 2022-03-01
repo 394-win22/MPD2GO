@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 
 import Thread from "./Thread";
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 import ReplyTextField from "./ReplyTextField";
 import { DeletePostButton } from "./DeletePostButton";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
