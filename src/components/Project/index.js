@@ -5,20 +5,26 @@ import {
   Card,
   CardHeader,
   CardContent,
+  CardMedia,
   Avatar,
   Box,
   Button
 } from "@mui/material";
+import LinkIcon from '@mui/icons-material/Link'
 import moment from "moment";
 import Chip from "@mui/material/Chip";
 import ReactGoogleSlides from "react-google-slides";
 import { getProjectFromUid } from "../../utilities/firebase";
-import { getUserDataFromUID } from "../../utilities/posts"
-import { UserContext } from "components/LoggedIn";
+import { getUserDataFromUID } from "../../utilities/posts";
+import { UserContext } from "components/Routing";
+import EditProjectButton from "components/EditProject/EditProjectButton";
+import DriveLogo from 'google-drive.png'
+import MuralLogo from 'mural.png'
 
 const Project = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { projectId } = useParams();
+  console.log(projectId);
   const [projectData, setProjectData] = useState(null);
   const context = useContext(UserContext);
   const users = context.userList;
@@ -35,10 +41,11 @@ const Project = () => {
   if (!projectData) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
   }
+
   return (
     <>
       <Button
-        sx={{ ml: 1, mb: 2, color: 'white' }}
+        sx={{ mb: 2, color: 'white' }}
         variant='contained'
         onClick={() => {
           navigate(-1);
@@ -46,7 +53,10 @@ const Project = () => {
       >
         Back
       </Button>
-      <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
+      <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+        <EditProjectButton project = {projectData}
+          projectId={projectId}
+          setProjectData={setProjectData}/>
         <Box sx={{ my: 2 }} style={{ display: "block" }}>
           <Avatar
             sx={{ width: 100, height: "auto", mx: 2 }}
@@ -68,6 +78,7 @@ const Project = () => {
           <Typography variant="h6" align="left">
             Team Members
           </Typography>
+
           <Typography variant="h6" align="left">
             {Object.values(projectData.member).map((member) => {
               const user = getUserDataFromUID(member, users);
@@ -76,15 +87,17 @@ const Project = () => {
                   avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
                   label={user.displayName}
                   variant="outlined"
-                  key={user.uid}
                   sx={{ mx: 1 }}
                   onClick={() => {
                     navigate(`/profile/${user.uid}`);
                   }}
+                  key={member}
                   clickable
-                />)
-            })}</Typography>
-          <hr></hr>
+                />
+              );
+            })}
+          </Typography>
+          <hr />
           <Typography variant="h6" align="left" sx={{ my: 1 }}>
             Current Phase&emsp;
             <Chip
@@ -111,6 +124,23 @@ const Project = () => {
             showControls
             loop
           />
+          {projectData.resources !== undefined && Object.values(projectData.resources).length > 0 &&
+            <>
+              <Typography variant="h6" align="left" sx={{ my: 1 }}>
+                Additional Resources
+              </Typography>
+              {Object.values(projectData.resources).map((resource) => (
+                <>
+                  <Button sx={{ marginLeft: '8px' }}
+                    startIcon={(resource.url.includes('mural')) ? <img src={MuralLogo} alt="" style={{ height: 20, width: 20 }} /> : (
+                      (resource.url.includes('drive') ? <img src={DriveLogo} alt="" style={{ height: '20px', width: '20px' }} /> : <LinkIcon />))}
+                    onClick={() => {
+                      window.open(resource.url)
+                    }}
+                  >{resource.text}</Button>
+                </>
+              ))}
+            </>}
         </CardContent>
       </Card>
     </>

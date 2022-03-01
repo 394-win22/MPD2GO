@@ -2,18 +2,19 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
-  CardHeader,
   CardContent,
-  Avatar,
   Card,
   Box,
-  Button,
+  Chip,
+  Stack,
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
-import moment from "moment";
+import { RichTextEditor } from "@mantine/rte";
 
-import { UserContext } from "components/LoggedIn";
-import { getUserDataFromUID } from "../../utilities/posts"
+import { UserContext } from "components/Routing";
+
+import { getUserDataFromUID } from "../../utilities/posts";
+import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -51,34 +52,33 @@ const Post = ({ post }) => {
   return (
     <Card
       className={classes.card}
-      sx={{ mx: 1, mb: 3 }}
+      sx={{ mb: 3 }}
       onClick={() => {
         navigate(`/post/${post.id}`);
       }}
     >
-      <CardHeader
-        align="left"
-        avatar={<Avatar src={user.photoURL} aria-label="avatar" />}
-        title={user.displayName}
-        subheader={moment(post.time).format("MMMM Do YYYY, h:mm a")}
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary" align="left">
-          {post.description}
-        </Typography>
-      </CardContent>
-      {"project" in post && (
-        <Button sx={{ marginLeft: "8px" }}
-          onClick={(event) => {
-            event.stopPropagation();
-            navigate(`/project/${post.project}`);
-          }}
-        >
-          Project Link
-        </Button>
-      )}
+      <AvatarWithTag user={user} post={post} />
 
-      <Box sx={{ display: "flex", m: 1 }}>
+      <CardContent sx={{ pt: 0, px: 0 }}>
+        <RichTextEditor readOnly value={post.description} style={{border: 'none', marginBottom: -15}}/>
+
+
+        <Stack direction="row" spacing={1} sx={{mt:2,overflowX: "scroll", paddingLeft: 2}}>
+
+        {"tags" in post &&
+          post.tags.map((tag, i) => (
+            <Chip
+              label={tag}
+              key={i}
+              color="primary"
+              variant="outlined"
+              size="small"
+            />
+          ))}
+          </Stack>
+      </CardContent>
+
+      <Box sx={{ display: "flex", marginBottom: 2, mx: 2 }}>
         <Typography className={classes.comment} variant="body2">
           {getNumCommentsText(post)}
         </Typography>

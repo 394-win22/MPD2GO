@@ -1,92 +1,232 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Stack, Box, Typography, TextField, Button } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { useState, useMemo, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Stack,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  Chip,
+  MenuItem,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { RichTextEditor } from "@mantine/rte";
 
-import { createPostInFirebase } from 'utilities/posts.js'
-import { useUserState } from 'utilities/firebase.js'
+import { createPostInFirebase } from "utilities/posts.js";
+import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
+
+import { UserContext } from 'components/Routing'
+
+
+import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    padding: "40px 24px 40px 24px",
   },
-})
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    "& .MuiTextField-root": { my: 1, width: "100%" },
+  },
+});
+
+const postTagNames = [
+  "Ethnography",
+  "Market Research",
+  "Brainstorming",
+  "Idea Convergence",
+  "Prototyping",
+  "Engineering/Design",
+  "Materials Selection",
+  "Business Modeling",
+  "Story/Presentation",
+];
+
+const topicTags = [
+  { id: 1, value: "JavaScript" },
+  { id: 2, value: "TypeScript" },
+  { id: 3, value: "Ruby" },
+  { id: 4, value: "Python" },
+];
+
 
 const CreatePost = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const context = useContext(UserContext);
 
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState(
+    "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>"
+  );
+  const [postTags, setPostTags] = useState([]);
 
-  const user = useUserState()
+  const user = useUserState();
 
-  const classes = useStyles()
+  const classes = useStyles();
+
+  const handlePostTagsChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPostTags(
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
+  const handleDescriptionClick = () => {
+    if (description == "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>")
+      setDescription("")
+  }
+
+  const people = context.userList.map((u) => {
+    return { id: u.uid, value: u.displayName };
+  });
+
   const handleSubmit = async (e) => {
-    createPostInFirebase({
+    // check if there any mentions
+    var el = document.createElement("html");
+    el.innerHTML = description;
+    var mentionSpans = el.getElementsByClassName("mention");
+
+    // add link to mention spans
+    mentionSpans &&
+      Array.from(mentionSpans).forEach(function (mentionSpan) {
+        if (mentionSpan.getAttribute("data-denotation-char") === "@") {
+          var mentionWithLink = document.createElement("p");
+          const uid = mentionSpan.getAttribute("data-id");
+          mentionWithLink.innerHTML = `<a href="/profile/${uid}" rel="noopener noreferrer" target="_blank">  ${mentionSpan.outerHTML}  </a>`;
+          mentionSpan.outerHTML = mentionWithLink.innerHTML;
+        }
+      });
+
+    const postId = createPostInFirebase({
       title: title,
-      description: description,
+      tags: postTags,
+      description: el.querySelector('body').innerHTML,
       time: Date.now(),
       author: user.uid,
       numComments: 0,
-    })
-    setTitle('')
-    setDescription('')
-    navigate('/')
-  }
+    });
+
+
+    // add mentioned to notification
+    mentionSpans &&
+      Array.from(mentionSpans).forEach(function (mentionSpan) {
+        if (mentionSpan.getAttribute("data-denotation-char") === "@") {
+          createNotification(
+            mentionSpan.getAttribute("data-id"),
+            user.uid,
+            postId,
+            el.querySelector('body').innerHTML,
+            "mention"
+          );
+        }
+      });
+
+    setTitle("");
+    setDescription("");
+    navigate("/");
+  };
+
+  const mentions = useMemo(
+    () => ({
+      allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
+      mentionDenotationChars: ["@", "#"],
+      source: (searchTerm, renderList, mentionChar) => {
+        const list = mentionChar === "@" ? people : topicTags;
+        const includesSearchTerm = list.filter((item) =>
+          item.value.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        // limit the items in list to 5
+        renderList(includesSearchTerm.slice(0, 5));
+      },
+    }),
+    []
+  );
+
+  const handleImageUpload = (file) => uploadPhotoToStorage(file);
+
+
+
 
   return (
-
-    <Box
-      alignItems='center'
-      justifyContent='center'
-      backgroundColor='white'
-      sx={{ px: 3, py: 5 }}>
-      <Typography align='center' variant='h4' sx={{ mb: 3 }}>
+    <Box className={classes.container}>
+      <Typography align="center" variant="h4" sx={{ mb: 3 }}>
         Create Post
       </Typography>
-      <Box
-        sx={{ '& .MuiTextField-root': { my: 1, width: '100%' } }}
-        className={classes.container}
-      >
+      <Box className={classes.form}>
         <TextField
-          margin='normal'
-          label='Title'
+          margin="normal"
+          label="Title"
           value={title}
-          variant='outlined'
+          variant="outlined"
           onChange={(event) => {
-            setTitle(event.target.value)
+            setTitle(event.target.value);
           }}
-          autoComplete='off'
+          autoComplete="off"
         />
-        <TextField
-          margin='normal'
-          label='Text (optional)'
-          multiline
-          minRows={4}
+
+        <FormControl sx={{ mt: 1, width: "100%" }}>
+          <InputLabel>Tags</InputLabel>
+          <Select
+            multiple
+            value={postTags}
+            onChange={handlePostTagsChange}
+            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            renderValue={(selected) => (
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                {selected.map((value) => (
+                  <Chip key={value} label={value} />
+                ))}
+              </Box>
+            )}
+          >
+            {postTagNames.map((tags) => (
+              <MenuItem key={tags} value={tags}>
+                {tags}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+
+        <RichTextEditor
           value={description}
-          autoComplete='off'
-          onChange={(event) => {
-            setDescription(event.target.value)
-          }}
+          onClick={handleDescriptionClick}
+          onChange={setDescription}
+          placeholder="Type @ or # to see mentions autocomplete"
+          mentions={mentions}
+          onImageUpload={handleImageUpload}
+          style={{ width: "100%", marginTop: "16px" }}
         />
-        <Stack spacing={2} direction='row' sx={{ mt: 3 }}>
+
+
+        <Stack spacing={2} direction="row" sx={{ mt: 3 }}>
           <Button
-            variant='contained'
-            style={{ backgroundColor: '#808080' }}
+            variant="contained"
+            style={{ backgroundColor: "#808080" }}
             onClick={() => navigate(-1)}
           >
             Cancel
           </Button>
-          <Button variant='contained' type='submit' onClick={handleSubmit}>
+          <Button variant="contained" type="submit" onClick={() => { if (description != '<p><br></p>') handleSubmit() }}>
             Post
           </Button>
         </Stack>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default CreatePost
+export default CreatePost;
