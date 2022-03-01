@@ -5,6 +5,7 @@ import { RichTextEditor } from "@mantine/rte";
 import { UserContext } from 'components/Routing/index.js';
 
 import { addCommentToPost } from '../../utilities/posts.js'
+import { createNotification } from 'utilities/notifications.js';
 
 const topicTags = [
 	{ id: 1, value: "JavaScript" },
@@ -38,7 +39,40 @@ const ReplyTextField = ({ post, user }) => {
 	);
 
 	const submitComment = () => {
-		addCommentToPost(post.author, user.uid, post.id, comment)
+		// check if there any mentions
+		var el = document.createElement("html");
+		el.innerHTML = comment;
+		var mentionSpans = el.getElementsByClassName("mention");
+
+		// add link to mention spans
+		mentionSpans &&
+			Array.from(mentionSpans).forEach(function (mentionSpan) {
+				if (mentionSpan.getAttribute("data-denotation-char") === "@") {
+					var mentionWithLink = document.createElement("p");
+					const uid = mentionSpan.getAttribute("data-id");
+					mentionWithLink.innerHTML = `<a href="/profile/${uid}" rel="noopener noreferrer" target="_self">  ${mentionSpan.outerHTML}  </a>`;
+					mentionSpan.outerHTML = mentionWithLink.innerHTML;
+				}
+			});
+
+		const modifiedContent = el.querySelector('body').innerHTML;
+
+		addCommentToPost(post.author, user.uid, post.id, modifiedContent)
+
+		// add mentioned to notification
+		mentionSpans &&
+			Array.from(mentionSpans).forEach(function (mentionSpan) {
+				if (mentionSpan.getAttribute("data-denotation-char") === "@") {
+					createNotification(
+						mentionSpan.getAttribute("data-id"),
+						user.uid,
+						post.id,
+						modifiedContent,
+						"mention"
+					);
+				}
+			});
+
 		setComment('')
 	}
 
