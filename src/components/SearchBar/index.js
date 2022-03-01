@@ -30,7 +30,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchBar = ({ setQuery }) => {
+const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter }) => {
   const [isDropped, setIsDropped] = useState(false);
   return (
     <>
@@ -50,6 +50,8 @@ const SearchBar = ({ setQuery }) => {
         isDropped={isDropped}
         setIsDropped={setIsDropped}
         setQuery={setQuery}
+        setPhaseFilter={setPhaseFilter}
+        phaseFilter={phaseFilter}
       />
     </>
   );

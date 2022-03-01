@@ -5,21 +5,26 @@ import SearchBar from "components/SearchBar";
 const Main = () => {
   const [query, setQuery] = useState("");
   const context = useContext(UserContext);
-
+  const [phaseFilter, setPhaseFilter] = useState([]);
+  console.log(phaseFilter);
   let filteredPosts = context.postList;
 
-  if (query != "") {
+  if (query != "" || phaseFilter.length > 0) {
     filteredPosts = context.postList.filter((e) => {
       return (
-        (e.tags && e.tags.includes(query)) ||
+        e.tags &&
+        e.tags.some((r) => phaseFilter.includes(r)) &&
         e.description.toLowerCase().includes(query.toLowerCase())
       );
     });
   }
   return (
     <div className="App">
-      <SearchBar setQuery={setQuery} />
-      {console.log(query)}
+      <SearchBar
+        setQuery={setQuery}
+        setPhaseFilter={setPhaseFilter}
+        phaseFilter={phaseFilter}
+      />
       <PostList posts={filteredPosts} />
     </div>
   );

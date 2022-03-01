@@ -25,7 +25,12 @@ const currentPhases = [
   "Business Modeling",
   "Story/Presentation",
 ];
-const SearchDropdown = ({ isDropped, setIsDropped, setQuery }) => {
+const SearchDropdown = ({
+  isDropped,
+  setIsDropped,
+  setPhaseFilter,
+  phaseFilter,
+}) => {
   return (
     <>
       {isDropped && (
@@ -58,9 +63,16 @@ const SearchDropdown = ({ isDropped, setIsDropped, setQuery }) => {
             {currentPhases.map((phase, i) => (
               <Chip
                 key={i}
+                style={{
+                  backgroundColor: phaseFilter.includes(phase) && "#f1b844",
+                }}
                 label={phase}
                 sx={{ mx: 1, my: 0.5 }}
-                onClick={() => setQuery(phase)}
+                onClick={() => {
+                  phaseFilter.includes(phase)
+                    ? setPhaseFilter(phaseFilter.filter((p) => p !== phase))
+                    : setPhaseFilter([...phaseFilter, phase]);
+                }}
               />
             ))}
           </Box>
