@@ -28,9 +28,13 @@ const currentPhases = [
 const SearchDropdown = ({
   isDropped,
   setIsDropped,
-  setUserFilter,
-  userFilter,
+  setExpertiseFilter,
+  expertiseFilter,
 }) => {
+  // console.log("searchDropdown", isDropped,
+  //   setIsDropped,
+  //   setexpertiseFilter,
+  //   expertiseFilter);
   return (
     <>
       {isDropped && (
@@ -57,24 +61,27 @@ const SearchDropdown = ({
           </IconButton>
           <Typography variant="h7" sx={{ left: 0, p: 2 }}>
             {" "}
-            Search By <span style={{ fontWeight: "bold" }}>Current Phase</span>
+            Search By <span style={{ fontWeight: "bold" }}>Expertise</span>
           </Typography>
           <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
-            {expertises.map((expertise, i) => (
-              <Chip
-                key={i}
-                style={{
-                  backgroundColor: userFilter.includes(expertise) && "#f1b844",
-                }}
-                label={expertise}
-                sx={{ mx: 1, my: 0.5 }}
-                onClick={() => {
-                  userFilter.includes(expertise)
-                    ? setUserFilter(userFilter.filter((p) => p !== expertise))
-                    : setUserFilter([...userFilter, expertise]);
-                }}
-              />
-            ))}
+            {expertises.map((expertise, i) => {
+              console.log(expertise, i);
+              return (
+                <Chip
+                  key={i}
+                  style={{
+                    backgroundColor: expertiseFilter.includes(expertise) && "#f1b844",
+                  }}
+                  label={expertise}
+                  sx={{ mx: 1, my: 0.5 }}
+                  onClick={() => {
+                    expertiseFilter.includes(expertise)
+                      ? setExpertiseFilter(expertiseFilter.filter((p) => p !== expertise))
+                      : setExpertiseFilter([...expertiseFilter, expertise]);
+                  }}
+                />
+              )
+            })}
           </Box>
         </Card>
       )}

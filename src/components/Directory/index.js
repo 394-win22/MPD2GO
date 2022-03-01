@@ -40,13 +40,19 @@ const Directory = () => {
 	const navigate = useNavigate();
 	const context = useContext(UserContext);
 	const users = context.userList;
-	const userData = users.find((x) => x.uid === context.user.uid);
-	const hasDirectory = "Directory" in userData && Object.values(userData.Directory).length > 0;
+
+	const [expertiseFilter, setExpertiseFilter] = useState([]);
+
+	const [filteredUsers, setFilteredUsers] = useState(users);
+
 
 
 	useEffect(() => {
+		if (expertiseFilter.length > 0) {
+			setFilteredUsers(users.filter((user) => user.expertise.some((x) => expertiseFilter.includes(x))));
+		}
 
-	}, []);
+	}, [expertiseFilter, users]);
 
 	// const isYear = (("year" in userData) && userData.year !== "")
 	return (
@@ -60,14 +66,16 @@ const Directory = () => {
 			>
 				Back
 			</Button>
-			<DirectorySearchBar></DirectorySearchBar>
+			<DirectorySearchBar
+				expertiseFilter={expertiseFilter}
+				setExpertiseFilter={setExpertiseFilter} />
 			<Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
 				<CardHeader sx={{ padding: "10px 16px" }} avatar={<Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}><PeopleAltIcon /></Avatar>}
 					title="Directory" titleTypographyProps={{ sx: { fontSize: "16px" } }} />
 
 
 				<List>
-					{users.map(user => (
+					{filteredUsers.map(user => (
 						<ListItem component={ListItemButton} onClick={() => navigate(`/profile/${user.uid}`)} key={user.uid}>
 							<ListItemAvatar>
 								<Avatar alt={user.displayName} src={user.photoURL} />
