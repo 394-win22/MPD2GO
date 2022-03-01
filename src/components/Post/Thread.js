@@ -232,7 +232,7 @@ const Thread = ({ postId, ids, data, style }) => {
               />
             </Button>
           )}
-          {data.author == user.uid && (
+          {data.author == user.uid && !isShowTextField && (
             <Button
               className={classes.deleteButton}
               color="primary"
