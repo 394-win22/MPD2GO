@@ -25,11 +25,15 @@ const currentPhases = [
   "Business Modeling",
   "Story/Presentation",
 ];
+
+const teams = [];
 const SearchDropdown = ({
   isDropped,
   setIsDropped,
   setPhaseFilter,
   phaseFilter,
+  setTeamFilter,
+  teamFilter
 }) => {
   return (
     <>
@@ -72,6 +76,24 @@ const SearchDropdown = ({
                   phaseFilter.includes(phase)
                     ? setPhaseFilter(phaseFilter.filter((p) => p !== phase))
                     : setPhaseFilter([...phaseFilter, phase]);
+                }}
+              />
+            ))}
+          </Box>
+
+          <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
+            {teams.map((team, i) => (
+              <Chip
+                key={i}
+                style={{
+                  backgroundColor: teamFilter.includes(team) && "#f1b844",
+                }}
+                label={team}
+                sx={{ mx: 1, my: 0.5 }}
+                onClick={() => {
+                  phaseFilter.includes(team)
+                    ? setPhaseFilter(teamFilter.filter((t) => t !== team))
+                    : setPhaseFilter([...teamFilter, team]);
                 }}
               />
             ))}
