@@ -15,6 +15,7 @@ import LinkIcon from '@mui/icons-material/Link'
 import moment from "moment";
 import Chip from "@mui/material/Chip";
 import { UserContext } from "components/LoggedIn";
+import RichTextEditor from "@mantine/rte";
 
 import { markNotificationAsRead } from "utilities/notifications"
 
@@ -41,14 +42,11 @@ const MentionNotification = ({ notifId, notifObj }) => {
 				<ListItemText sx={{ margin: "0px" }} primary={title}
 					secondary={
 						<React.Fragment>
-							<Typography
-								sx={{ display: 'inline-block' }}
-								component="span"
-								variant="body2"
-								color="text.primary"
-							>
-								"{notifObj.content}"
-							</Typography>
+							<RichTextEditor
+                readOnly
+                value={notifObj.content}
+                sx={{ border: "none" }}
+              />
 							<Typography
 								sx={{ display: 'inline-block' }}
 								component="span"

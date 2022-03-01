@@ -118,7 +118,7 @@ const CreatePost = () => {
             mentionSpan.getAttribute("data-id"),
             user.uid,
             postId,
-            "click to check the post",
+            el.querySelector('body').innerHTML,
             "mention"
           );
         }
@@ -195,7 +195,7 @@ const CreatePost = () => {
           placeholder="Type @ or # to see mentions autocomplete"
           mentions={mentions}
           onImageUpload={handleImageUpload}
-          style={{ width: "100%" }}
+          style={{ width: "100%", marginTop: "16px" }}
         />
 
 
