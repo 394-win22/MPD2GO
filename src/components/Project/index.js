@@ -45,7 +45,7 @@ const Project = () => {
   return (
     <>
       <Button
-        sx={{ ml: 1, mb: 2, color: 'white' }}
+        sx={{ mb: 2, color: 'white' }}
         variant='contained'
         onClick={() => {
           navigate(-1);
@@ -53,7 +53,7 @@ const Project = () => {
       >
         Back
       </Button>
-      <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
+      <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
         <EditProjectButton project = {projectData}
           projectId={projectId}
           setProjectData={setProjectData}/>

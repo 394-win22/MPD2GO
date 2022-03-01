@@ -6,6 +6,7 @@ import { UserContext } from "components/Routing";
 import { makeStyles } from "@mui/styles";
 import { Avatar, Typography, IconButton } from "@mui/material";
 import moment from "moment";
+import { RichTextEditor } from "@mantine/rte";
 
 import { deleteData } from "../../utilities/firebase";
 import { replyToThread } from "utilities/posts";
@@ -191,9 +192,7 @@ const Thread = ({ postId, ids, data, style }) => {
               {moment(data.time).format("MMMM Do YYYY, h:mm a")}
             </Typography>
           </Box>
-          <Typography sx={{ flexWrap: "wrap" }} variant="body2">
-            {data.comment}
-          </Typography>
+          <RichTextEditor readOnly value={data.comment} style={{marginLeft: -17, marginBottom: -20, border: 'none'}}/>
         </Box>
 
         {/* Box to add comment */}
@@ -201,6 +200,7 @@ const Thread = ({ postId, ids, data, style }) => {
           <AddComment
             replyToComment={replyToComment}
             setIsShowTextField={setIsShowTextField}
+            postId={postId}
           />
         </Collapse>
 
@@ -232,7 +232,7 @@ const Thread = ({ postId, ids, data, style }) => {
               />
             </Button>
           )}
-          {data.author == user.uid && (
+          {data.author == user.uid && !isShowTextField && (
             <Button
               className={classes.deleteButton}
               color="primary"

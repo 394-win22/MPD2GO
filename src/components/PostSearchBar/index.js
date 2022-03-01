@@ -42,7 +42,7 @@ const PostSearchBar = ({ setQuery, setPhaseFilter, phaseFilter }) => {
           onClick={() => setIsDropped(true)}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search…"
-          style={{ width: "80%" }}
+          style={{ paddingLeft: 50 }}
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
