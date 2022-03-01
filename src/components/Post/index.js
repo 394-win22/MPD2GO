@@ -59,7 +59,7 @@ const PostWithThreads = () => {
       <Card sx={{ mb: 10 }}>
         <AvatarWithTag user={postAuthor} post={post} />
 
-        <CardContent sx={{ px: 2, pt: 0 }}>
+        <CardContent sx={{ px: 0, pt: 0 }}>
           <RichTextEditor readOnly value={post.description} style={{border: 'none'}} />
           <Stack direction="row" spacing={1} sx={{ mt: 2, overflowX: "scroll" }}>
 
