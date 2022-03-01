@@ -14,11 +14,11 @@ import {
   MenuItem,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { RichTextEditor } from '@mantine/rte';
+import { RichTextEditor } from "@mantine/rte";
 
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
-import { UserContext } from 'components/LoggedIn'
+import { UserContext } from "components/LoggedIn";
 import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
@@ -46,29 +46,28 @@ const postTagNames = [
   "Engineering/Design",
   "Materials Selection",
   "Business Modeling",
-  "Story/Presentation"
+  "Story/Presentation",
 ];
 
-
-
 const topicTags = [
-  { id: 1, value: 'JavaScript' },
-  { id: 2, value: 'TypeScript'  },
-  { id: 3, value: 'Ruby'  },
-  { id: 4, value: 'Python'  },
+  { id: 1, value: "JavaScript" },
+  { id: 2, value: "TypeScript" },
+  { id: 3, value: "Ruby" },
+  { id: 4, value: "Python" },
 ];
 
 
 const CreatePost = () => {
   const navigate = useNavigate();
-  const context = useContext(UserContext)
+  const context = useContext(UserContext);
 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState('<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>');
+  const [description, setDescription] = useState(
+    "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>"
+  );
   const [postTags, setPostTags] = useState([]);
 
   const user = useUserState();
-
 
   const classes = useStyles();
 
@@ -77,35 +76,58 @@ const CreatePost = () => {
       target: { value },
     } = event;
     setPostTags(
-      // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
   };
 
-  const people = context.userList.map((u) => { return { id: u.uid, value: u.displayName }; });
+  const handleDescriptionClick = () => {
+    if(description == "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>")
+      setDescription("")
+  }
+
+  const people = context.userList.map((u) => {
+    return { id: u.uid, value: u.displayName };
+  });
 
   const handleSubmit = async (e) => {
+    // check if there any mentions
+    var el = document.createElement("html");
+    el.innerHTML = description;
+    var mentionSpans = el.getElementsByClassName("mention");
+
+    // add link to mention spans
+    mentionSpans &&
+      Array.from(mentionSpans).forEach(function (mentionSpan) {
+        if (mentionSpan.getAttribute("data-denotation-char") === "@") {
+          var mentionWithLink = document.createElement("p");
+          const uid = mentionSpan.getAttribute("data-id");
+          mentionWithLink.innerHTML = `<a href="/profile/${uid}" rel="noopener noreferrer" target="_blank">  ${mentionSpan.outerHTML}  </a>`;
+          mentionSpan.outerHTML = mentionWithLink.innerHTML;
+        }
+      });
+
     const postId = createPostInFirebase({
       title: title,
       tags: postTags,
-      description: description,
+      description: el.querySelector('body').innerHTML,
       time: Date.now(),
       author: user.uid,
       numComments: 0,
     });
-    
 
     // add mentioned to notification
-    var el = document.createElement('html');
-    el.innerHTML = description;
-    var mentionSpans = el.getElementsByClassName("mention");
-
-    mentionSpans && Array.from(mentionSpans).forEach(function (mentionSpan) {
-      if (mentionSpan.getAttribute("data-denotation-char") === "@") {
-        createNotification(mentionSpan.getAttribute("data-id"), user.uid, postId, "click to check the post", "mention");
-        console.log("postId", postId);
-      }
-    });
+    mentionSpans &&
+      Array.from(mentionSpans).forEach(function (mentionSpan) {
+        if (mentionSpan.getAttribute("data-denotation-char") === "@") {
+          createNotification(
+            mentionSpan.getAttribute("data-id"),
+            user.uid,
+            postId,
+            el.querySelector('body').innerHTML,
+            "mention"
+          );
+        }
+      });
 
     setTitle("");
     setDescription("");
@@ -115,13 +137,13 @@ const CreatePost = () => {
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-      mentionDenotationChars: ['@', '#'],
+      mentionDenotationChars: ["@", "#"],
       source: (searchTerm, renderList, mentionChar) => {
-        const list = mentionChar === '@' ? people : topicTags;
+        const list = mentionChar === "@" ? people : topicTags;
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        
+
         // limit the items in list to 5
         renderList(includesSearchTerm.slice(0, 5));
       },
@@ -130,9 +152,6 @@ const CreatePost = () => {
   );
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
-
-  
-
 
   return (
     <Box className={classes.container}>
@@ -174,13 +193,15 @@ const CreatePost = () => {
           </Select>
         </FormControl>
 
+
         <RichTextEditor
           value={description}
+          onClick={handleDescriptionClick}
           onChange={setDescription}
           placeholder="Type @ or # to see mentions autocomplete"
           mentions={mentions}
           onImageUpload={handleImageUpload}
-          style={{ marginTop: "12px", width: "100%" }}
+          style={{ width: "100%", marginTop: "16px" }}
         />
 
 
@@ -192,7 +213,7 @@ const CreatePost = () => {
           >
             Cancel
           </Button>
-          <Button variant="contained" type="submit" onClick={handleSubmit}>
+          <Button variant="contained" type="submit" onClick={() => {if (description != '<p><br></p>') handleSubmit()}}>
             Post
           </Button>
         </Stack>

@@ -67,7 +67,7 @@ const Profile = ({ user }) => {
   return (
     <>
       <Button
-        sx={{ ml: 1, mb: 2, color: "white" }}
+        sx={{ mb: 2, color: "white" }}
         variant="contained"
         onClick={() => {
           navigate(-1);
