@@ -13,7 +13,8 @@ import {
 	ListItem,
 	ListItemAvatar,
 	ListItemText,
-	Divider
+	Divider,
+	ListItemButton
 
 } from "@mui/material";
 import LinkIcon from '@mui/icons-material/Link'
@@ -24,13 +25,13 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 const getStatus = (userData) => {
 	if (!("year" in userData) || userData.year == "") {
-	  return "Unknown Status";
+		return "";
 	}
 	if (userData.year < new Date().getFullYear()) {
-	  return "Alumni";
+		return `Alumni`;
 	}
 	else {
-	  return "Current Student";
+		return `Current Student`;
 	}
 }
 
@@ -46,7 +47,7 @@ const Directory = () => {
 
 	}, []);
 
-
+	// const isYear = (("year" in userData) && userData.year !== "")
 	return (
 		<>
 			<Button
@@ -62,32 +63,39 @@ const Directory = () => {
 				<CardHeader sx={{ padding: "10px 16px" }} avatar={<Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}><PeopleAltIcon /></Avatar>}
 					title="Directory" titleTypographyProps={{ sx: { fontSize: "16px" } }} />
 
-			
-			<List>
-				{users.map(user => (
-					<ListItem alignItems="flex-start">
-						<ListItemAvatar>
-						<Avatar alt={user.displayName} src={user.photoURL} />
-						</ListItemAvatar>
-						<ListItemText
-						primary={user.displayName}
-						secondary={
-							<React.Fragment>
-							<Typography
-								sx={{ display: 'inline' }}
-								component="span"
-								variant="body2"
-								color="text.primary"
-							>
-								Ali Connors
-							</Typography>
-							{getStatus(user)}
-							</React.Fragment>
-						}
-						/>
-					</ListItem>
-				))}
-			</List>
+
+				<List>
+					{users.map(user => (
+						<ListItem component={ListItemButton} onClick={() => navigate(`/profile/${user.uid}`)} key={user.uid}>
+							<ListItemAvatar>
+								<Avatar alt={user.displayName} src={user.photoURL} />
+							</ListItemAvatar>
+							{(("year" in user) && user.year !== "") ?
+								<ListItemText
+									primary={user.displayName}
+									secondary={
+										<React.Fragment>
+											<Typography
+												sx={{ display: 'inline' }}
+												component="span"
+												variant="body2"
+												color="text.primary"
+											>
+												{getStatus(user)}
+											</Typography>
+											{` - Class of ${user.year}`}
+										</React.Fragment>
+									}
+								/>
+								:
+								<ListItemText
+									primary={user.displayName}
+								/>
+							}
+						</ListItem>
+					))}
+
+				</List>
 			</Card>
 		</>
 	);
