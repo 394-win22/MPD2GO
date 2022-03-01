@@ -6,7 +6,6 @@ const Main = () => {
   const [query, setQuery] = useState("");
   const context = useContext(UserContext);
   const [phaseFilter, setPhaseFilter] = useState([]);
-  console.log(phaseFilter);
   let filteredPosts = context.postList;
 
   if (query != "" || phaseFilter.length > 0) {

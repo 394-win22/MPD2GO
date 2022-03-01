@@ -207,7 +207,7 @@ const CreatePost = () => {
           >
             Cancel
           </Button>
-          <Button variant="contained" type="submit" onClick={handleSubmit}>
+          <Button variant="contained" type="submit" onClick={() => {if (description != '<p><br></p>') handleSubmit()}}>
             Post
           </Button>
         </Stack>
