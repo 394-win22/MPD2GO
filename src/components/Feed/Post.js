@@ -60,24 +60,22 @@ const Post = ({ post }) => {
       <AvatarWithTag user={user} post={post} />
 
       <CardContent sx={{ pt: 0, px: 0 }}>
-        <RichTextEditor
-          readOnly
-          value={post.description}
-          sx={{ border: "none" }}
-        />
+        <RichTextEditor readOnly value={post.description} style={{border: 'none', marginBottom: -15}}/>
 
-        <Stack direction="row" spacing={1} sx={{ mt: 2, overflowX: "scroll" }}>
-          {"tags" in post &&
-            post.tags.map((tag, i) => (
-              <Chip
-                label={tag}
-                key={i}
-                color="primary"
-                variant="outlined"
-                size="small"
-              />
-            ))}
-        </Stack>
+
+        <Stack direction="row" spacing={1} sx={{mt:2,overflowX: "scroll", paddingLeft: 2}}>
+
+        {"tags" in post &&
+          post.tags.map((tag, i) => (
+            <Chip
+              label={tag}
+              key={i}
+              color="primary"
+              variant="outlined"
+              size="small"
+            />
+          ))}
+          </Stack>
       </CardContent>
 
       <Box sx={{ display: "flex", marginBottom: 2, mx: 2 }}>
