@@ -55,7 +55,7 @@ const PostWithThreads = () => {
 
 
         <CardContent sx={{ px: 2, pt: 0 }}>
-          <RichTextEditor readOnly value={post.description} />
+          <RichTextEditor readOnly value={post.description} style={{border: 'none'}} />
           <Stack direction="row" spacing={1} sx={{ mt: 2, overflowX: "scroll" }}>
 
             {"tags" in post &&

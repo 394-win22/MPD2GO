@@ -53,7 +53,7 @@ const Post = ({ post }) => {
       <AvatarWithTag user={user} post={post} />
 
       <CardContent sx={{ pt: 0, px: 0 }}>
-        <RichTextEditor readOnly value={post.description} />
+        <RichTextEditor readOnly value={post.description} style={{border: 'none'}}/>
 
 
         <Stack direction="row" spacing={1} sx={{mt:2,overflowX: "scroll"}}>
