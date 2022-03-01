@@ -80,6 +80,11 @@ const CreatePost = () => {
     );
   };
 
+  const handleDescriptionClick = () => {
+    if(description == "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>")
+      setDescription("")
+  }
+
   const people = context.userList.map((u) => {
     return { id: u.uid, value: u.displayName };
   });
@@ -191,6 +196,7 @@ const CreatePost = () => {
 
         <RichTextEditor
           value={description}
+          onClick={handleDescriptionClick}
           onChange={setDescription}
           placeholder="Type @ or # to see mentions autocomplete"
           mentions={mentions}
