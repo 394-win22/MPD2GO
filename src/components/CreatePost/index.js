@@ -12,7 +12,6 @@ import {
   OutlinedInput,
   Chip,
   MenuItem,
-  Alert,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
@@ -67,7 +66,6 @@ const CreatePost = () => {
     "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>"
   );
   const [postTags, setPostTags] = useState([]);
-  const [isAlertOpen, setIsAlertOpen] = useState(true);
 
   const user = useUserState();
 
@@ -190,16 +188,7 @@ const CreatePost = () => {
           </Select>
         </FormControl>
 
-        {isAlertOpen && (
-          <Alert
-            onClose={() => {
-              setIsAlertOpen(false);
-            }}
-            sx={{ mt: "12px", width: "100%", p: 0 }}
-          >
-            This is a success alert — check it out!
-          </Alert>
-        )}
+
         <RichTextEditor
           value={description}
           onChange={setDescription}
