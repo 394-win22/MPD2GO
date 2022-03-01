@@ -18,11 +18,10 @@ import { RichTextEditor } from "@mantine/rte";
 
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
-<<<<<<< HEAD
+
 import { UserContext } from 'components/Routing'
-=======
-import { UserContext } from "components/LoggedIn";
->>>>>>> development
+
+
 import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
@@ -85,7 +84,7 @@ const CreatePost = () => {
   };
 
   const handleDescriptionClick = () => {
-    if(description == "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>")
+    if (description == "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>")
       setDescription("")
   }
 
@@ -118,10 +117,7 @@ const CreatePost = () => {
       author: user.uid,
       numComments: 0,
     });
-<<<<<<< HEAD
 
-=======
->>>>>>> development
 
     // add mentioned to notification
     mentionSpans &&
@@ -161,12 +157,9 @@ const CreatePost = () => {
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> development
   return (
     <Box className={classes.container}>
       <Typography align="center" variant="h4" sx={{ mb: 3 }}>
@@ -227,7 +220,7 @@ const CreatePost = () => {
           >
             Cancel
           </Button>
-          <Button variant="contained" type="submit" onClick={() => {if (description != '<p><br></p>') handleSubmit()}}>
+          <Button variant="contained" type="submit" onClick={() => { if (description != '<p><br></p>') handleSubmit() }}>
             Post
           </Button>
         </Stack>
