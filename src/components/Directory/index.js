@@ -49,7 +49,7 @@ const Directory = () => {
 
 	useEffect(() => {
 		if (expertiseFilter.length > 0) {
-			setFilteredUsers(users.filter((user) => user.expertise.some((x) => expertiseFilter.includes(x))));
+			setFilteredUsers(users.filter((user) => "expertise" in user && Object.values(user.expertise).some((x) => expertiseFilter.includes(x))));
 		}
 
 	}, [expertiseFilter, users]);
