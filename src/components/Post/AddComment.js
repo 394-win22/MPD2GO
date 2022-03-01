@@ -21,14 +21,27 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
   });
 
   const handleSubmit = async () => {
-    replyToComment(comment)
-
-    // add mentioned to notification
+    // check if there any mentions
     var el = document.createElement("html");
     el.innerHTML = comment;
     var mentionSpans = el.getElementsByClassName("mention");
 
-    // Creating the notification
+    // add link to mention spans
+    mentionSpans &&
+      Array.from(mentionSpans).forEach(function (mentionSpan) {
+        if (mentionSpan.getAttribute("data-denotation-char") === "@") {
+          var mentionWithLink = document.createElement("p");
+          const uid = mentionSpan.getAttribute("data-id");
+          mentionWithLink.innerHTML = `<a href="/profile/${uid}" rel="noopener noreferrer" target="_self">  ${mentionSpan.outerHTML}  </a>`;
+          mentionSpan.outerHTML = mentionWithLink.innerHTML;
+        }
+      });
+
+    const modifiedContent = el.querySelector('body').innerHTML;
+
+    replyToComment(modifiedContent);
+
+    // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
         if (mentionSpan.getAttribute("data-denotation-char") === "@") {
@@ -36,11 +49,12 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
             mentionSpan.getAttribute("data-id"),
             user.uid,
             postId,
-            "click to check the post",
+            modifiedContent,
             "mention"
           );
         }
       });
+
 
     setComment("");
     setIsShowTextField(false);
