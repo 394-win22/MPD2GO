@@ -63,9 +63,7 @@ const Post = ({ post }) => {
         <RichTextEditor
           readOnly
           value={post.description}
-          sx={() => ({
-            border: "none",
-          })}
+          sx={{ border: "none" }}
         />
 
         <Stack direction="row" spacing={1} sx={{ mt: 2, overflowX: "scroll" }}>
