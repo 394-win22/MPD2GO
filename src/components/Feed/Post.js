@@ -1,8 +1,15 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Typography, CardContent, Card, Box, Chip,Stack } from "@mui/material/";
+import {
+  Typography,
+  CardContent,
+  Card,
+  Box,
+  Chip,
+  Stack,
+} from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
-import { RichTextEditor } from '@mantine/rte';
+import { RichTextEditor } from "@mantine/rte";
 
 import { UserContext } from "components/LoggedIn";
 
@@ -71,7 +78,7 @@ const Post = ({ post }) => {
           </Stack>
       </CardContent>
 
-      <Box sx={{ display: "flex", marginBottom: 2, mx: 2}}>
+      <Box sx={{ display: "flex", marginBottom: 2, mx: 2 }}>
         <Typography className={classes.comment} variant="body2">
           {getNumCommentsText(post)}
         </Typography>

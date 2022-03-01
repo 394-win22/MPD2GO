@@ -46,7 +46,6 @@ export const DeletePostButton = ({ post }) => {
           color="primary"
           sx={{
             mb: 2,
-            mr: 1,
             color: "white",
           }}
         >

@@ -20,7 +20,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
     return { id: u.uid, value: u.displayName };
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
 		replyToComment(comment)
 
     // add mentioned to notification
@@ -99,7 +99,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         >
           Cancel
         </Button>
-        <Button variant="contained" type="submit" onClick={handleSubmit}>
+        <Button variant="contained" type="submit" onClick={() => {if (comment != '<p><br></p>') handleSubmit()}}>
           Send
         </Button>
       </Box>

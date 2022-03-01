@@ -76,7 +76,7 @@ const ReplyTextField = ({ post, user }) => {
 					onDrop={() => {return false}}
 				/>
 				<Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", paddingTop: "10px" }}>
-					<Button variant='contained' onClick={submitComment}>Send</Button>
+					<Button variant='contained' onClick={() => {if (comment != '<p><br></p>') submitComment()}}>Send</Button>
 				</Box>
 			</Box >
 		</Box >
