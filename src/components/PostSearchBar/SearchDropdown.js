@@ -1,6 +1,7 @@
 import { Card, Button, IconButton, Typography, Chip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
+import { getProjectFromId, useData } from "utilities/firebase";
 
 const expertises = [
   "Marketing",
@@ -25,12 +26,29 @@ const currentPhases = [
   "Business Modeling",
   "Story/Presentation",
 ];
+
+const getProjectList = (project) => {
+  const listOfProject = Object.entries(project).map(
+    ([projectId, projectObj]) => {
+      return { ...projectObj, id: projectId };
+    }
+  );
+  return listOfProject;
+};
+
+
+
 const SearchDropdown = ({
   isDropped,
   setIsDropped,
   setPhaseFilter,
   phaseFilter,
+  setTeamFilter,
+  teamFilter,
 }) => {
+  const [teams, teamsLoading] = useData("/project",getProjectList);
+
+
   return (
     <>
       {isDropped && (
@@ -76,6 +94,30 @@ const SearchDropdown = ({
               />
             ))}
           </Box>
+
+          <Typography variant="h7" sx={{ left: 0, p: 2 }}>
+            {" "}
+            Search By <span style={{ fontWeight: "bold" }}>Team</span>
+          </Typography>
+
+          <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
+            {teams.map((team, i) => (
+              <Chip
+                key={i}
+                style={{
+                  backgroundColor: teamFilter.includes(team.id) && "#f1b844",
+                }}
+                label={team.name}
+                sx={{ mx: 1, my: 0.5 }}
+                onClick={() => {
+                  teamFilter.includes(team.id)
+                    ? setTeamFilter(teamFilter.filter((t) => t !== team.id))
+                    : setTeamFilter([...teamFilter, team.id]);
+
+                }}
+              />
+            ))}
+          </Box> 
         </Card>
       )}
     </>

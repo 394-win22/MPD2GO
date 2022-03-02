@@ -7,23 +7,46 @@ const Main = () => {
   const [query, setQuery] = useState("");
   const context = useContext(UserContext);
   const [phaseFilter, setPhaseFilter] = useState([]);
+  const [teamFilter, setTeamFilter] = useState([]);
   let filteredPosts = context.postList;
 
-  if (query != "" || phaseFilter.length > 0) {
+  function filtering(e){
+    let x = true;
+    if (!(e.tags)&& phaseFilter.length > 0 || !(((context.userList.filter((u)=> u.uid === e.author))[0]).teamId) && teamFilter.length>0 ){
+      return false;
+    }
+    if(e.tags && phaseFilter.length > 0){
+      x = x && e.tags.some((r) => phaseFilter.includes(r));
+    }
+    if(query) {
+      x = x && e.description.toLowerCase().includes(query.toLowerCase());
+    }
+    if(((context.userList.filter((u)=> u.uid === e.author))[0]).teamId && teamFilter.length>0){
+      x= x && teamFilter.includes(String(((context.userList.filter((u)=> u.uid === e.author))[0]).teamId));
+    }
+    return x;
+    
+  }
+
+  if (query != "" || phaseFilter.length > 0 || teamFilter.length>0) {
     filteredPosts = context.postList.filter((e) => {
+      //console.log(filtering(e));
       return (
-        e.tags &&
-        e.tags.some((r) => phaseFilter.includes(r)) &&
-        e.description.toLowerCase().includes(query.toLowerCase())
+        filtering(e)
       );
     });
+    
   }
+
+
   return (
     <div className="App">
       <PostSearchBar
         setQuery={setQuery}
         setPhaseFilter={setPhaseFilter}
+        setTeamFilter= {setTeamFilter}
         phaseFilter={phaseFilter}
+        teamFilter= {teamFilter}
       />
       <PostList posts={filteredPosts} />
     </div>
