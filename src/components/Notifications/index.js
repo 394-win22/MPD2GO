@@ -17,7 +17,7 @@ import {
 import LinkIcon from '@mui/icons-material/Link'
 import moment from "moment";
 import Chip from "@mui/material/Chip";
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import CommentNotification from "./CommentNotification";
 import MentionNotification from "./MentionNotification";
@@ -59,7 +59,7 @@ const Notifications = () => {
   return (
     <>
       <Button
-        sx={{ ml: 1, mb: 2, color: 'white' }}
+        sx={{ mb: 2, color: 'white' }}
         variant='contained'
         onClick={() => {
           navigate(-1);
@@ -67,7 +67,7 @@ const Notifications = () => {
       >
         Back
       </Button>
-      <Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
+      <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
         <CardHeader sx={{ padding: "10px 16px" }} avatar={<Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}><NotificationsIcon /></Avatar>}
           title="Notifications" titleTypographyProps={{ sx: { fontSize: "16px" } }} />
         {(hasNotifications) ?

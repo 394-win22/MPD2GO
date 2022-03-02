@@ -1,9 +1,7 @@
 import { useContext, useState } from "react";
 import PostList from "./PostsList";
-import { UserContext } from "components/LoggedIn";
-import SearchBar from "components/SearchBar";
-
-
+import { UserContext } from "components/Routing";
+import PostSearchBar from "components/PostSearchBar";
 
 const Main = () => {
   const [query, setQuery] = useState("");
@@ -43,7 +41,7 @@ const Main = () => {
 
   return (
     <div className="App">
-      <SearchBar
+      <PostSearchBar
         setQuery={setQuery}
         setPhaseFilter={setPhaseFilter}
         setTeamFilter= {setTeamFilter}

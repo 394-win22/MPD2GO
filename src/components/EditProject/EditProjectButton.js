@@ -2,9 +2,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import EditProject from "/";
 
-const EditProjectButton = ({ project, projectId, setProjectData }) => {
-  console.log("EditProjectButton: project: " + project + ", projectId: " + projectId);
-  
+const EditProjectButton = ({ project, projectId, setProjectData }) => {  
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

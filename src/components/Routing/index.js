@@ -11,7 +11,7 @@ import Navigation from "components/Navigation";
 import Project from "components/Project";
 import Notifications from "components/Notifications";
 import NotFound from "components/NotFound";
-
+import Directory from "components/Directory";
 
 import Main from "components/Feed";
 
@@ -28,14 +28,22 @@ const getUserList = (users) => {
   });
 };
 
+const getProjectList = (project) => {
+  return Object.entries(project).map(([uid, projectObj]) => {
+    return { ...projectObj, uid: uid };
+  });
+};
+
 export const UserContext = createContext();
 
-const LoggedIn = ({ user }) => {
+const Routing = ({ user }) => {
   const [postList, postListLoading] = useData("/posts", getPostList);
 
   const [userList, userListLoading] = useData("/users", getUserList);
 
-  if (postListLoading || userListLoading) {
+  const [projectList, projectListLoading] = useData("/project", getProjectList);
+
+  if (postListLoading || userListLoading || projectListLoading) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
   }
 
@@ -45,6 +53,7 @@ const LoggedIn = ({ user }) => {
         user: user,
         postList: postList,
         userList: userList,
+        projectList: projectList,
       }}
     >
       <Navigation user={user} />
@@ -53,6 +62,7 @@ const LoggedIn = ({ user }) => {
           <Route exact path="/createPost" element={<CreatePost />} />
           <Route exact path="/profile" element={<Profile user={user} />} />
           <Route exact path="/notifications" element={<Notifications />} />
+          <Route exact path="/directory" element={<Directory/>} />
           <Route
             exact
             path="/profile/:userID"
@@ -61,7 +71,7 @@ const LoggedIn = ({ user }) => {
           <Route exact path="/" element={<Main />} />
           <Route path="/createPost" element={<CreatePost />} />
           <Route path="/post/:pageId" element={<PostWithThreads />}></Route>
-          <Route path="/project/:projectId" element={<Project />}></Route>
+          <Route path="/project/:projectId" element={<Project user={user} />}></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
@@ -69,4 +79,4 @@ const LoggedIn = ({ user }) => {
   );
 };
 
-export default LoggedIn;
+export default Routing;

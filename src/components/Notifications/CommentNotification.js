@@ -9,14 +9,18 @@ import {
 	Box,
 	Button,
 	ListItemButton,
-	Divider
+	Divider,
 } from "@mui/material";
-import LinkIcon from '@mui/icons-material/Link'
+import LinkIcon from "@mui/icons-material/Link";
 import moment from "moment";
-import Chip from "@mui/material/Chip";
-import { UserContext } from "components/LoggedIn";
 
-import { markNotificationAsRead } from "utilities/notifications"
+import Chip from "@mui/material/Chip";
+import { UserContext } from "components/Routing";
+
+import RichTextEditor from "@mantine/rte";
+
+
+import { markNotificationAsRead } from "utilities/notifications";
 
 const CommentNotification = ({ notifId, notifObj }) => {
 	const navigate = useNavigate();
@@ -30,38 +34,43 @@ const CommentNotification = ({ notifId, notifObj }) => {
 	const handleNotificationClicked = () => {
 		markNotificationAsRead(context.user.uid, notifId);
 		navigate(`/post/${notifObj.postId}`);
-	}
+	};
 
 	return (
 		<>
-			<ListItem component={ListItemButton} onClick={handleNotificationClicked} alignItems="flex-start" sx={{ height: "100%", width: "100%", padding: "18px" }}>
+			<ListItem
+				component={ListItemButton}
+				onClick={handleNotificationClicked}
+				alignItems="flex-start"
+				sx={{ height: "100%", width: "100%", padding: "18px" }}
+			>
 				<ListItemAvatar>
 					<Avatar src={authorData.photoURL} />
 				</ListItemAvatar>
-				<ListItemText sx={{ margin: "0px" }} primary={title}
+				<ListItemText
+					sx={{ margin: "0px" }}
+					primary={title}
 					secondary={
 						<React.Fragment>
+							<RichTextEditor
+								readOnly
+								value={notifObj.content}
+								sx={{ border: "none" }}
+							/>
 							<Typography
-								sx={{ display: 'inline-block' }}
-								component="span"
-								variant="body2"
-								color="text.primary"
-							>
-								"{notifObj.content}"
-							</Typography>
-							<Typography
-								sx={{ display: 'inline-block' }}
+								sx={{ display: "inline-block" }}
 								component="span"
 								variant="body3"
 								color="text.secondary"
-							>{moment(notifObj.time).format("MMMM Do YYYY, h:mm a")}
+							>
+								{moment(notifObj.time).format("MMMM Do YYYY, h:mm a")}
 							</Typography>
 						</React.Fragment>
-					} />
-			</ListItem >
+					}
+				/>
+			</ListItem>
 			<Divider component="li" />
 		</>
-
 	);
 };
 

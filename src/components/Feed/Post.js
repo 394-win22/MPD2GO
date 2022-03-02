@@ -1,10 +1,17 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Typography, CardContent, Card, Box, Chip,Stack } from "@mui/material/";
+import {
+  Typography,
+  CardContent,
+  Card,
+  Box,
+  Chip,
+  Stack,
+} from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
-import { RichTextEditor } from '@mantine/rte';
+import { RichTextEditor } from "@mantine/rte";
 
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 
 import { getUserDataFromUID } from "../../utilities/posts";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
@@ -53,10 +60,10 @@ const Post = ({ post }) => {
       <AvatarWithTag user={user} post={post} />
 
       <CardContent sx={{ pt: 0, px: 0 }}>
-        <RichTextEditor readOnly value={post.description} />
+        <RichTextEditor readOnly value={post.description} style={{border: 'none', marginBottom: -15}}/>
 
 
-        <Stack direction="row" spacing={1} sx={{mt:2,overflowX: "scroll"}}>
+        <Stack direction="row" spacing={1} sx={{mt:2,overflowX: "scroll", paddingLeft: 2}}>
 
         {"tags" in post &&
           post.tags.map((tag, i) => (
@@ -71,7 +78,7 @@ const Post = ({ post }) => {
           </Stack>
       </CardContent>
 
-      <Box sx={{ display: "flex", marginBottom: 2, mx: 2}}>
+      <Box sx={{ display: "flex", marginBottom: 2, mx: 2 }}>
         <Typography className={classes.comment} variant="body2">
           {getNumCommentsText(post)}
         </Typography>

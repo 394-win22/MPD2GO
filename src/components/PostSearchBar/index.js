@@ -42,7 +42,7 @@ const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter, setTeamFilter, teamF
           onClick={() => setIsDropped(true)}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search…"
-          style={{ width: "80%" }}
+          style={{ paddingLeft: 50 }}
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
@@ -61,4 +61,4 @@ const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter, setTeamFilter, teamF
   );
 };
 
-export default SearchBar;
+export default PostSearchBar;

@@ -1,14 +1,21 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import RichTextEditor from "@mantine/rte";
-import { Typography, Card, Button, CardContent, Box, Chip, Stack } from "@mui/material";
+import {
+  Typography,
+  Card,
+  Button,
+  CardContent,
+  Box,
+  Chip,
+  Stack,
+} from "@mui/material";
 
 import Thread from "./Thread";
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 import ReplyTextField from "./ReplyTextField";
 import { DeletePostButton } from "./DeletePostButton";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
-
 
 const PostWithThreads = () => {
   const navigate = useNavigate();
@@ -35,12 +42,11 @@ const PostWithThreads = () => {
 
   if (haveChild) sortedThreads = Object.entries(post.threads).sort().reverse();
 
-
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          sx={{ ml: 1, mb: 2, color: "white" }}
+          sx={{ mb: 2, color: "white" }}
           variant="contained"
           onClick={() => {
             navigate(-1);
@@ -50,12 +56,11 @@ const PostWithThreads = () => {
         </Button>
         {post.author == user.uid && <DeletePostButton key={post} post={post} />}
       </Box>
-      <Card sx={{ mx: 1, mb: 10 }}>
+      <Card sx={{ mb: 10 }}>
         <AvatarWithTag user={postAuthor} post={post} />
 
-
-        <CardContent sx={{ px: 2, pt: 0 }}>
-          <RichTextEditor readOnly value={post.description} />
+        <CardContent sx={{ px: 0, pt: 0 }}>
+          <RichTextEditor readOnly value={post.description} style={{border: 'none'}} />
           <Stack direction="row" spacing={1} sx={{ mt: 2, overflowX: "scroll" }}>
 
             {"tags" in post &&
