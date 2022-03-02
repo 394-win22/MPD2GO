@@ -100,7 +100,6 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formValues);
     if (!changeImg) {
       formValues.photoURL = user.photoURL;
     } else {

@@ -41,9 +41,7 @@ const addResource = (projectId, text, url, setProjectData) => {
 };
 
 const RenderRow = (projectId, resources, rnames, setProjectData) => {
-  console.log("resources:", resources);
   return ({ index, style }) => {
-    console.log("resources[", index, "]:", resources[index]);
     let resource = resources[index];
     let rname = rnames[index];
     return (
@@ -119,7 +117,6 @@ const EditProject = ({
   const [formValues, setFormValues] = useState(project);
 
   const handleInputChange = (e) => {
-    console.log(e.target.value);
     const name = e.target.name;
     const value = e.target.value;
 

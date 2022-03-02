@@ -31,10 +31,6 @@ const SearchDropdown = ({
   setExpertiseFilter,
   expertiseFilter,
 }) => {
-  // console.log("searchDropdown", isDropped,
-  //   setIsDropped,
-  //   setexpertiseFilter,
-  //   expertiseFilter);
   return (
     <>
       {isDropped && (
@@ -65,7 +61,6 @@ const SearchDropdown = ({
           </Typography>
           <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
             {expertises.map((expertise, i) => {
-              console.log(expertise, i);
               return (
                 <Chip
                   key={i}
