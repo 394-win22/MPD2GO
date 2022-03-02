@@ -71,7 +71,7 @@ const Routing = ({ user }) => {
           <Route exact path="/" element={<Main />} />
           <Route path="/createPost" element={<CreatePost />} />
           <Route path="/post/:pageId" element={<PostWithThreads />}></Route>
-          <Route path="/project/:projectId" element={<Project />}></Route>
+          <Route path="/project/:projectId" element={<Project user={user} />}></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
