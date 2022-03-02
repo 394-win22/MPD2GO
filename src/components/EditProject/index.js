@@ -9,16 +9,18 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { setData, deleteData, pushData } from "../../utilities/firebase";
 import { editProjectInFirebase } from "utilities/projects";
-import { FixedSizeList } from 'react-window';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import DriveLogo from 'google-drive.png'
-import MuralLogo from 'mural.png'
-import LinkIcon from '@mui/icons-material/Link'
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
+import { FixedSizeList } from "react-window";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import DriveLogo from "google-drive.png";
+import MuralLogo from "mural.png";
+import LinkIcon from "@mui/icons-material/Link";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { getProjectFromUid } from "../../utilities/firebase";
+import { ColorButton } from "mui-color";
+import {textColor} from "../../utilities/posts"
 
 async function fetchData(projectId, setProjectData) {
   const data = await getProjectFromUid(projectId);
@@ -30,36 +32,53 @@ const removeResource = (projectId, resource, rname, setProjectData) => {
   return () => {
     deleteData(`/project/${projectId}/resources/${rname}`);
     fetchData(projectId, setProjectData);
-  }
-}
+  };
+};
 
 const addResource = (projectId, text, url, setProjectData) => {
-  pushData(`/project/${projectId}/resources/`, {text: text, url: url});
+  pushData(`/project/${projectId}/resources/`, { text: text, url: url });
   fetchData(projectId, setProjectData);
-}
+};
 
 const RenderRow = (projectId, resources, rnames, setProjectData) => {
-  console.log("resources:",resources);
-  return (({ index, style }) => {
-    console.log("resources[",index,"]:", resources[index]);
+  console.log("resources:", resources);
+  return ({ index, style }) => {
+    console.log("resources[", index, "]:", resources[index]);
     let resource = resources[index];
     let rname = rnames[index];
     return (
-    <ListItem style={style} key={index} component="div" disablePadding>
-        <Button sx={{ marginLeft: '8px' }}
-          startIcon={(resource.url.includes('mural')) ? <img src={MuralLogo} alt="" style={{ height: 20, width: 20 }} /> : (
-            (resource.url.includes('drive') ? <img src={DriveLogo} alt="" style={{ height: '20px', width: '20px' }} /> : <LinkIcon />))}
+      <ListItem style={style} key={index} component="div" disablePadding>
+        <Button
+          sx={{ marginLeft: "8px" }}
+          startIcon={
+            resource.url.includes("mural") ? (
+              <img src={MuralLogo} alt="" style={{ height: 20, width: 20 }} />
+            ) : resource.url.includes("drive") ? (
+              <img
+                src={DriveLogo}
+                alt=""
+                style={{ height: "20px", width: "20px" }}
+              />
+            ) : (
+              <LinkIcon />
+            )
+          }
           onClick={() => {
-            window.open(resource.url)
+            window.open(resource.url);
           }}
-        >{resource.text}</Button>
-      <Button style={{alignSelf: "right"}} onClick={removeResource(projectId, resource, rname, setProjectData)}>
-          <RemoveCircleIcon/>
-      </Button>
-    </ListItem>
+        >
+          {resource.text}
+        </Button>
+        <Button
+          style={{ alignSelf: "right" }}
+          onClick={removeResource(projectId, resource, rname, setProjectData)}
+        >
+          <RemoveCircleIcon />
+        </Button>
+      </ListItem>
     );
-  });
-}
+  };
+};
 
 const useStyles = makeStyles({
   container: {
@@ -88,15 +107,21 @@ const useStyles = makeStyles({
   },
 });
 
-const EditProject = ({ project, projectId, open, handleClose, setProjectData }) => {
-  const classes = useStyles()
+const EditProject = ({
+  project,
+  projectId,
+  open,
+  handleClose,
+  setProjectData,
+}) => {
+  const classes = useStyles();
 
-  const [formValues, setFormValues] = useState(project)
+  const [formValues, setFormValues] = useState(project);
 
   const handleInputChange = (e) => {
     console.log(e.target.value);
-    const name = e.target.name
-    const value = e.target.value
+    const name = e.target.name;
+    const value = e.target.value;
 
     setFormValues({
       ...formValues,
@@ -108,25 +133,26 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
   const [newResourceURL, setNewResourceURL] = useState("");
   const handleNewResourceText = (e) => {
     setNewResourceText(e.target.value);
-  }
+  };
 
   const handleNewResourceURL = (e) => {
     setNewResourceURL(e.target.value);
-  }
+  };
 
   const newResource = () => {
     addResource(projectId, newResourceText, newResourceURL, setProjectData);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    formValues.textColor = textColor(formValues.teamColor);
     //projectId = "projectID";
-    editProjectInFirebase(projectId, formValues);   
-    // re-render 
+    editProjectInFirebase(projectId, formValues);
+    // re-render
     setProjectData(formValues);
     handleClose();
   };
-  
+
   const resources = project.resources ? Object.values(project.resources) : [];
   const rnames = project.resources ? Object.keys(project.resources) : [];
 
@@ -154,13 +180,22 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
           </Typography>
           <TextField
             required
+            name="name"
+            value={formValues.name}
+            onChange={handleInputChange}
+            label="Team Name"
+            type="text"
+            InputLabelProps={{ shrink: true }}
+          />
+          <TextField
+            required
             name="description"
             value={formValues.description}
             onChange={handleInputChange}
             label="description"
             type="text"
             multiline
-            minRows = {4}
+            minRows={4}
             InputLabelProps={{ shrink: true }}
           />
           <TextField
@@ -178,6 +213,14 @@ const EditProject = ({ project, projectId, open, handleClose, setProjectData }) 
             onChange={handleInputChange}
             label="Project Phase"
             type="text"
+            InputLabelProps={{ shrink: true }}
+          />
+            <TextField
+            name="teamColor"
+            value={formValues.teamColor}
+            onChange={handleInputChange}
+            label="team color"
+            type="color"
             InputLabelProps={{ shrink: true }}
           />
           <Box

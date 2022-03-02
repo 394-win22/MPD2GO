@@ -28,6 +28,12 @@ const getUserList = (users) => {
   });
 };
 
+const getProjectList = (project) => {
+  return Object.entries(project).map(([uid, projectObj]) => {
+    return { ...projectObj, uid: uid };
+  });
+};
+
 export const UserContext = createContext();
 
 const Routing = ({ user }) => {
@@ -35,7 +41,9 @@ const Routing = ({ user }) => {
 
   const [userList, userListLoading] = useData("/users", getUserList);
 
-  if (postListLoading || userListLoading) {
+  const [projectList, projectListLoading] = useData("/project", getProjectList);
+
+  if (postListLoading || userListLoading || projectListLoading) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
   }
 
@@ -45,6 +53,7 @@ const Routing = ({ user }) => {
         user: user,
         postList: postList,
         userList: userList,
+        projectList: projectList,
       }}
     >
       <Navigation user={user} />
