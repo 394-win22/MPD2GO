@@ -8,8 +8,9 @@ import { Avatar, Typography, IconButton } from "@mui/material";
 import moment from "moment";
 import { RichTextEditor } from "@mantine/rte";
 
-import { deleteData } from "../../utilities/firebase";
 import { replyToThread } from "utilities/posts";
+import { deleteData, updateData } from "../../utilities/firebase";
+import { increment } from "firebase/database";
 import AddComment from "./AddComment";
 
 const useStyles = makeStyles({
@@ -125,6 +126,7 @@ const Thread = ({ postId, ids, data, style }) => {
   const [isShowTextField, setIsShowTextField] = useState(false);
   const [isShowThreads, setIsShowThreads] = useState(true);
 
+
   const replyToComment = (comment) => {
     // GENERATE A PATH TO PUSH TO IN DATABASE
     let path = `${postId}`;
@@ -137,6 +139,38 @@ const Thread = ({ postId, ids, data, style }) => {
     setIsShowTextField(false);
   };
 
+  const totalCommentsInThread = () => {
+    let total = 1;
+
+    console.log("TOTAL COMMENTS IN THREAD");
+    const haveChild =
+      "threads" in data && Object.values(data.threads).length > 0;
+
+    if (haveChild) {
+      total += totalCommentsInChildren(Object.values(data.threads));
+    }
+
+    console.log(total);
+
+    return total;
+  };
+
+  const totalCommentsInChildren = (childrenArr) => {
+    let childrenTotal = 0;
+    console.log("TOTAL COMMENTS IN CHILD");
+
+    childrenArr.forEach((child) => {
+      childrenTotal++;
+      const haveChild =
+        "threads" in child && Object.values(child.threads).length > 0;
+      if (haveChild) {
+        childrenTotal += totalCommentsInChildren(Object.values(child.threads));
+      }
+    });
+    console.log(childrenTotal);
+    return childrenTotal;
+  };
+
   const deleteThread = () => {
     let path = `${postId}`;
     ids.forEach((id) => {
@@ -144,7 +178,11 @@ const Thread = ({ postId, ids, data, style }) => {
       path += id;
     });
     if (window.confirm("Are you sure you want to delete this comment")) {
+      const totalComments = totalCommentsInThread();
       deleteData(`/posts/${path}`);
+      updateData(`posts/${postId}`, {
+        numComments: increment(-1 * totalComments),
+      });
     }
   };
 
