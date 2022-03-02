@@ -40,11 +40,18 @@ const Directory = () => {
 	const navigate = useNavigate();
 	const context = useContext(UserContext);
 	const users = context.userList;
-
+	const [query, setQuery] = useState("");
 	const [expertiseFilter, setExpertiseFilter] = useState([]);
-
 	const [filteredUsers, setFilteredUsers] = useState(users);
 
+    if (query !== '') {
+		const results = users.filter((user) => {
+		  return user.displayName.toLowerCase().startsWith(query.toLowerCase());
+		});
+		setFilteredUsers(results);
+	  } else {
+		setFilteredUsers(users);
+	  }
 
 
 	useEffect(() => {
@@ -67,6 +74,7 @@ const Directory = () => {
 				Back
 			</Button>
 			<DirectorySearchBar
+				setQuery={setQuery}
 				expertiseFilter={expertiseFilter}
 				setExpertiseFilter={setExpertiseFilter} />
 			<Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
