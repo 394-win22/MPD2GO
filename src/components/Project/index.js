@@ -21,10 +21,9 @@ import EditProjectButton from "components/EditProject/EditProjectButton";
 import DriveLogo from 'google-drive.png'
 import MuralLogo from 'mural.png'
 
-const Project = () => {
+const Project = (user) => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  console.log(projectId);
   const [projectData, setProjectData] = useState(null);
   const context = useContext(UserContext);
   const users = context.userList;
@@ -54,9 +53,11 @@ const Project = () => {
         Back
       </Button>
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+        {Object.values(projectData.member).includes(user.user.uid) &&
         <EditProjectButton project = {projectData}
           projectId={projectId}
           setProjectData={setProjectData}/>
+        }
         <Box sx={{ my: 2 }} style={{ display: "block" }}>
           <Avatar
             sx={{ width: 100, height: "auto", mx: 2 }}
