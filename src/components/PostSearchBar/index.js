@@ -61,4 +61,4 @@ const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter, setTeamFilter, teamF
   );
 };
 
-export default PostSearchBar;
+export default SearchBar;
