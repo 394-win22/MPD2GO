@@ -14,22 +14,22 @@ const expertises = [
   "Graphic Design",
   "Project Management",
 ];
-const currentPhases = [
-  "Ethnography",
-  "Market Research",
-  "Brainstorming",
-  "Idea Convergence",
-  "Prototyping",
-  "Engineering/Design",
-  "Materials Selection",
-  "Business Modeling",
-  "Story/Presentation",
-];
+
+const types = [
+  'Current Student',
+  'Alumni'
+]
+
+const filter = {
+  expertise: [],
+  type: []
+}
+
 const SearchDropdown = ({
   isDropped,
   setIsDropped,
-  setExpertiseFilter,
-  expertiseFilter,
+  setFilter,
+  filter
 }) => {
   return (
     <>
@@ -65,14 +65,44 @@ const SearchDropdown = ({
                 <Chip
                   key={i}
                   style={{
-                    backgroundColor: expertiseFilter.includes(expertise) && "#f1b844",
+                    backgroundColor: filter.expertise.includes(expertise) && "#f1b844",
                   }}
                   label={expertise}
                   sx={{ mx: 1, my: 0.5 }}
                   onClick={() => {
-                    expertiseFilter.includes(expertise)
-                      ? setExpertiseFilter(expertiseFilter.filter((p) => p !== expertise))
-                      : setExpertiseFilter([...expertiseFilter, expertise]);
+                    const newExpertise = filter.expertise.filter((p) => p !== expertise)
+                    filter.expertise.includes(expertise)
+                      ? setFilter({
+                        expertise: newExpertise,
+                        ...filter.type
+                      })
+                      : setFilter({
+                        expertise: [...filter.expertise, expertise],
+                        ...filter.type
+                      });
+                  }}
+                />
+              )
+            })}
+          </Box>
+          <Typography variant="h7" sx={{ left: 0, p: 2 }}>
+            {" "}
+            Search By <span style={{ fontWeight: "bold" }}>Profile Type</span>
+          </Typography>
+          <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
+            {types.map((type, i) => {
+              return (
+                <Chip
+                  key={i}
+                  style={{
+                    backgroundColor: filter.expertise.includes(type) && "#f1b844",
+                  }}
+                  label={type}
+                  sx={{ mx: 1, my: 0.5 }}
+                  onClick={() => {
+                    filter.expertise.includes(type)
+                      ? setFilter.expertise(filter.expertise.filter((p) => p !== type))
+                      : setFilter.expertise([...filter.expertise, type]);
                   }}
                 />
               )

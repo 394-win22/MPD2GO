@@ -41,18 +41,21 @@ const Directory = () => {
 	const context = useContext(UserContext);
 	const users = context.userList;
 
-	const [expertiseFilter, setExpertiseFilter] = useState([]);
-
+	const [filter, setFilter] = useState({
+		expertise: [],
+		type: []
+	});
 	const [filteredUsers, setFilteredUsers] = useState(users);
 
-
-
 	useEffect(() => {
-		if (expertiseFilter.length > 0) {
-			setFilteredUsers(users.filter((user) => "expertise" in user && Object.values(user.expertise).some((x) => expertiseFilter.includes(x))));
+		if (filter.expertise.length > 0) {
+			console.log(filter)
+			setFilteredUsers(users.filter((user) => "expertise" in user && Object.values(user.expertise).some((x) => filter.expertise.includes(x))));
+		} else {
+			setFilteredUsers(users)
 		}
 
-	}, [expertiseFilter, users]);
+	}, [filter, users]);
 
 	// const isYear = (("year" in userData) && userData.year !== "")
 	return (
@@ -67,8 +70,8 @@ const Directory = () => {
 				Back
 			</Button>
 			<DirectorySearchBar
-				expertiseFilter={expertiseFilter}
-				setExpertiseFilter={setExpertiseFilter} />
+				filter={filter}
+				setFilter={setFilter} />
 			<Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
 				<CardHeader sx={{ padding: "10px 16px" }} avatar={<Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}><PeopleAltIcon /></Avatar>}
 					title="Directory" titleTypographyProps={{ sx: { fontSize: "16px" } }} />
