@@ -94,12 +94,13 @@ const SearchDropdown = ({
               />
             ))}
           </Box>
+
           <Typography variant="h7" sx={{ left: 0, p: 2 }}>
             {" "}
             Search By <span style={{ fontWeight: "bold" }}>Team</span>
           </Typography>
 
-          {<Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
+          <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
             {teams.map((team, i) => (
               <Chip
                 key={i}
@@ -116,7 +117,7 @@ const SearchDropdown = ({
                 }}
               />
             ))}
-          </Box> }
+          </Box> 
         </Card>
       )}
     </>

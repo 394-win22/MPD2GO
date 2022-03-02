@@ -67,7 +67,7 @@ function editUserInFirebase(user, userID, formValues) {
   setData("users/" + userID, formValues);
 }
 
-const getProjectList = (project) => {
+export const getProjectList = (project) => {
   const listOfProject = Object.entries(project).map(
     ([projectId, projectObj]) => {
       return { ...projectObj, id: projectId };
