@@ -6,7 +6,7 @@
 
 ::-webkit-scrollbar {
 	display: none !important;
-  }
+}
 
 .App-logo {
 	height: 40vmin;
@@ -18,7 +18,6 @@
 		animation: App-logo-spin infinite 20s linear;
 	}
 }
-
 
 .App-header {
 	background-color: #282c34;
@@ -39,9 +38,9 @@
 	z-index: 100;
 }
 
-/* .ql-editor {
-	padding: 0 !important;
-} */
+.ql-editing {
+	z-index: 100;
+}
 
 @keyframes App-logo-spin {
 	from {

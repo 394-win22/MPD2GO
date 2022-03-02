@@ -18,12 +18,13 @@ import {
   MoreHoriz as MoreHorizIcon,
   AddCircle as AddCircleIcon,
   Logout as LogoutIcon,
-  Notifications as NotificationsIcon
+  Notifications as NotificationsIcon,
+  PeopleAlt as PeopleAltIcon,
 } from '@mui/icons-material'
 
 import { signOut } from 'utilities/firebase'
 import logo from 'logo.png'
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 
 const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
   const navigate = useNavigate()
@@ -73,35 +74,14 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
                   </Badge>
                 </MenuItem>
 
+                <MenuItem onClick={() => { navigate('/directory') }}>
+                  <PeopleAltIcon />
+                </MenuItem>
+
                 <MenuItem onClick={() => { navigate('/profile') }}>
                   <AccountCircleIcon />
                 </MenuItem>
-
-                <MenuItem onClick={handleDrawerOpen}>
-                  <MoreHorizIcon />
-                </MenuItem>
-                <Menu
-                  id='basic-menu'
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={isMenuOpen}
-                  onClose={handleDrawerClose}
-                  MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                  }}
-                >
-                  <MenuItem onClick={signOut}>
-                    <ListItemIcon><LogoutIcon /></ListItemIcon>
-                    <ListItemText>Sign out</ListItemText>
-                  </MenuItem>
-                </Menu>
+                
               </>
             )}
 

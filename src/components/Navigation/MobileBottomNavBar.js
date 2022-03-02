@@ -16,9 +16,10 @@ import {
   Home as HomeIcon,
   MoreHoriz as MoreHorizIcon,
   AddCircle as AddCircleIcon,
-  Logout as LogoutIcon
+  Logout as LogoutIcon,
+  PeopleAlt as Directory
 } from '@mui/icons-material'
-import { UserContext } from "components/LoggedIn";
+import { UserContext } from "components/Routing";
 
 import { signOut } from 'utilities/firebase'
 
@@ -72,39 +73,18 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
               <MenuItem onClick={() => navigate('/createPost')}>
                 <AddCircleIcon />
               </MenuItem>
+              <MenuItem onClick={() => { navigate('/directory') }}>
+                <Directory />
+              </MenuItem>
               <MenuItem onClick={() => { navigate('/profile') }}>
                 <AccountCircleIcon />
               </MenuItem>
             </>
           )}
-          <MenuItem onClick={handleDrawerOpen}>
-            <MoreHorizIcon />
-          </MenuItem>
+
         </AppBar>
 
-        <Menu
-          id='basic-menu'
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          open={isMenuOpen}
-          onClose={handleDrawerClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-        >
 
-          <MenuItem onClick={signOut}>
-            <ListItemIcon><LogoutIcon /></ListItemIcon>
-            <ListItemText>Sign out</ListItemText>
-          </MenuItem>
-        </Menu>
 
       </Box>
     </ClickAwayListener >

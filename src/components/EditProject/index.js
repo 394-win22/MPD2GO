@@ -215,7 +215,7 @@ const EditProject = ({
             type="text"
             InputLabelProps={{ shrink: true }}
           />
-          <TextField
+            <TextField
             name="teamColor"
             value={formValues.teamColor}
             onChange={handleInputChange}
@@ -223,52 +223,48 @@ const EditProject = ({
             type="color"
             InputLabelProps={{ shrink: true }}
           />
-          <Box sx={{ bgcolor: "background.paper", borderColor: "grey" }}>
-            {resources.length > 0 && (
-              <>
-                <Typography
-                  alignSelf="left"
-                  justifySelf="left"
-                  align="left"
-                  textAlign="left"
-                >
-                  Resources
-                </Typography>
-                <FixedSizeList
-                  height={100}
-                  width={360}
-                  itemSize={46}
-                  itemCount={resources.length}
-                  overscanCount={5}
-                >
-                  {RenderRow(projectId, resources, rnames, setProjectData)}
-                </FixedSizeList>
-              </>
-            )}
-            <Typography>Add Resource</Typography>
-            <Stack direction="row">
-              <TextField
-                name="addResourceText"
-                label="Resource Text"
-                type="text"
-                minRows={4}
-                InputLabelProps={{ shrink: true }}
-                style={{ width: "40%" }}
-                onChange={handleNewResourceText}
-              />
-              <TextField
-                name="addResourceURL"
-                label="Resource URL"
-                type="text"
-                minRows={4}
-                InputLabelProps={{ shrink: true }}
-                style={{ width: "40%" }}
-                onChange={handleNewResourceURL}
-              />
-              <Button onClick={newResource}>
-                <AddCircleIcon />
-              </Button>
-            </Stack>
+          <Box
+            sx={{ bgcolor: 'background.paper', borderColor: 'grey' }}
+          >
+          
+          {resources.length > 0 &&
+          <>
+            <Typography alignSelf="left" justifySelf="left" align="left" textAlign="left">
+              Resources (Scroll to See All)
+            </Typography>
+            <FixedSizeList
+              height={100}
+              width={360}
+              itemSize={46}
+              itemCount={resources.length}
+              overscanCount={5}> 
+              {RenderRow(projectId, resources, rnames, setProjectData)}
+            </FixedSizeList>
+          </>}
+          <Typography>Add Resource</Typography>
+          <Stack direction="row">
+            <TextField
+              name="addResourceText"
+              label="Resource Text"
+              type="text"
+              minRows = {4}
+              InputLabelProps={{ shrink: true }}
+              style={{width: "40%"}}
+              onChange={handleNewResourceText}
+            />
+            <TextField
+              name="addResourceURL"
+              label="Resource URL"
+              type="text"
+              minRows = {4}
+              InputLabelProps={{ shrink: true }}
+              style={{width: "40%"}}
+              onChange={handleNewResourceURL}
+            />
+            <Button onClick={newResource}>
+              <AddCircleIcon/>
+            </Button>
+          </Stack>
           </Box>
           <Button variant="contained" endIcon={<SendIcon />} type="submit">
             Edit

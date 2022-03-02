@@ -18,7 +18,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 // local files
 import { EditUserButton } from "../EditProfile/EditUserButton";
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
-
+import { signOut } from 'utilities/firebase'
 
 const getStatus = (userData) => {
   if (!("year" in userData) || userData.year == "") {
@@ -138,11 +138,11 @@ const Profile = ({ user }) => {
 
             {"teamId" in userData && (
               <Chip
-              key={projectData.name}
+                key={projectData.name}
                 size="small"
                 label={projectData.name}
                 variant="outlined"
-                sx={{ mx: 1, border:`1px solid ${projectData.teamColor}`, color:projectData.teamColor, textBlendMode: "exclusion"}}
+                sx={{ mx: 1, border:`1px solid ${projectData.teamColor}`, textBlendMode: "exclusion"}}
               />
             )}
           </Stack>
@@ -153,7 +153,7 @@ const Profile = ({ user }) => {
               onClick={() => {
                 navigate(`/project/${userData.teamId}`);
               }}
-              sx={{ m: 1, backgroundColor:projectData.teamColor, textBlendMode: "exclusion" }}
+              sx={{ m: 1, backgroundColor:projectData.teamColor, color: projectData.textColor, textBlendMode: "exclusion" }}
             >
               <InsertDriveFileIcon />
               View Capstone Page
@@ -165,10 +165,10 @@ const Profile = ({ user }) => {
           <Typography align="left" sx={{ marginBottom: 3, ml: 1, color: "#7B7B7B" }}>
             Expertise
           </Typography>
-          <Stack direction="row" sx={{ marginBottom: 3, overflowX: "scroll"}} spacing={1}>
-            {"expertise" in userData && Object.values(userData.expertise).map((x,i) => (
+          <Stack direction="row" sx={{ marginBottom: 3, overflowX: "scroll" }} spacing={1}>
+            {"expertise" in userData && Object.values(userData.expertise).map((x, i) => (
               <Chip
-              key={i}
+                key={i}
                 color="secondary"
                 label={x}
               />
@@ -188,7 +188,10 @@ const Profile = ({ user }) => {
             </Box>
           </Box>
           {(!params.userID || params.userID === user.uid) && (
-            <EditUserButton key={userData} user={userData} userID={user.uid} />
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <EditUserButton key={userData} user={userData} userID={user.uid} />
+              <Button sx={{ width: "150px", marginTop: "10px" }} variant="contained" onClick={signOut}>Sign out </Button>
+            </Box>
           )}
         </Box>
       </Card>

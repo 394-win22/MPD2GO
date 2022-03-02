@@ -18,7 +18,10 @@ import { RichTextEditor } from "@mantine/rte";
 
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
-import { UserContext } from "components/LoggedIn";
+
+import { UserContext } from 'components/Routing'
+
+
 import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
@@ -61,10 +64,9 @@ const CreatePost = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
 
+  const postDescriptionPlaceHolder = "<p>Enter post detail here. Type @ or # to see mentions autocomplete. When inserting links, make sure url start with http:// or https://</p>"
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState(
-    "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>"
-  );
+  const [description, setDescription] = useState(postDescriptionPlaceHolder);
   const [postTags, setPostTags] = useState([]);
 
   const user = useUserState();
@@ -81,8 +83,8 @@ const CreatePost = () => {
   };
 
   const handleDescriptionClick = () => {
-    if(description == "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>")
-      setDescription("")
+    if (description == postDescriptionPlaceHolder)
+      setDescription("");
   }
 
   const people = context.userList.map((u) => {
@@ -101,19 +103,22 @@ const CreatePost = () => {
         if (mentionSpan.getAttribute("data-denotation-char") === "@") {
           var mentionWithLink = document.createElement("p");
           const uid = mentionSpan.getAttribute("data-id");
-          mentionWithLink.innerHTML = `<a href="/profile/${uid}" rel="noopener noreferrer" target="_blank">  ${mentionSpan.outerHTML}  </a>`;
+          mentionWithLink.innerHTML = `<a href="/profile/${uid}" rel="noopener noreferrer" target="_self">  ${mentionSpan.outerHTML}  </a>`;
           mentionSpan.outerHTML = mentionWithLink.innerHTML;
         }
       });
 
+    const modifiedContent = el.querySelector('body').innerHTML;
+
     const postId = createPostInFirebase({
       title: title,
       tags: postTags,
-      description: el.querySelector('body').innerHTML,
+      description: modifiedContent,
       time: Date.now(),
       author: user.uid,
       numComments: 0,
     });
+
 
     // add mentioned to notification
     mentionSpans &&
@@ -123,7 +128,7 @@ const CreatePost = () => {
             mentionSpan.getAttribute("data-id"),
             user.uid,
             postId,
-            el.querySelector('body').innerHTML,
+            modifiedContent,
             "mention"
           );
         }
@@ -152,6 +157,9 @@ const CreatePost = () => {
   );
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
+
+
+
 
   return (
     <Box className={classes.container}>
@@ -213,7 +221,7 @@ const CreatePost = () => {
           >
             Cancel
           </Button>
-          <Button variant="contained" type="submit" onClick={() => {if (description != '<p><br></p>') handleSubmit()}}>
+          <Button variant="contained" type="submit" onClick={() => { if (description != '<p><br></p>') handleSubmit() }}>
             Post
           </Button>
         </Stack>
