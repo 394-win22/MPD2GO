@@ -69,12 +69,12 @@ const SearchDropdown = ({
                     const newExpertise = filter.expertise.filter((p) => p !== expertise)
                     filter.expertise.includes(expertise)
                       ? setFilter({
-                        expertise: newExpertise,
-                        ...filter.type
+                        ...filter,
+                        expertise: newExpertise
                       })
                       : setFilter({
-                        expertise: [...filter.expertise, expertise],
-                        ...filter.type
+                        ...filter,
+                        expertise: [...filter.expertise, expertise]
                       });
                   }}
                 />
@@ -99,12 +99,12 @@ const SearchDropdown = ({
                     const newType = filter.type.filter((p) => p !== type)
                     filter.type.includes(type)
                       ? setFilter({
-                       type: newType,
-                        ...filter.expertise
+                        ...filter,
+                        type: newType
                       })
                       : setFilter({
-                        type: [...filter.type, type],
-                        ...filter.expertise
+                        ...filter,
+                        type: [...filter.type, type]
                       });
                   }}
                 />
