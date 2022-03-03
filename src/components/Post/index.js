@@ -61,7 +61,7 @@ const PostWithThreads = () => {
 
         <CardContent sx={{ px: 0, pt: 0 }}>
           <RichTextEditor readOnly value={post.description} style={{border: 'none'}} />
-          <Stack direction="row" spacing={1} sx={{ mt: 2, overflowX: "scroll" }}>
+          <Stack direction="row" spacing={1} sx={{ mt: 2, overflowX: "scroll", paddingLeft:2 }}>
 
             {"tags" in post &&
               post.tags.map((tag, i) => (
