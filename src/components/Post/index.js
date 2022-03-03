@@ -15,7 +15,9 @@ import Thread from "./Thread";
 import { UserContext } from "components/Routing";
 import ReplyTextField from "./ReplyTextField";
 import { DeletePostButton } from "./DeletePostButton";
+import { EditPostButton } from "./EditPostButton";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
+import { updateData } from "utilities/firebase";
 
 const PostWithThreads = () => {
   const navigate = useNavigate();
@@ -23,6 +25,10 @@ const PostWithThreads = () => {
   const { pageId } = useParams();
   const [post, setPost] = useState({});
   const [postAuthor, setPostAuthor] = useState({});
+  const [isEdit, setIsEdit] = useState(false);
+  const [postContent, setPostContent] = useState(post.description);
+  
+
   const user = context.user;
   const userList = context.userList;
   const postList = context.postList;
@@ -35,6 +41,7 @@ const PostWithThreads = () => {
       setPost(post);
       const postAuthor = userList.find((obj) => obj.uid === post.author);
       setPostAuthor(postAuthor);
+      setPostContent(post.description);
     }
   }, [pageId, postList, userList]);
   let sortedThreads = [];
@@ -42,27 +49,75 @@ const PostWithThreads = () => {
 
   if (haveChild) sortedThreads = Object.entries(post.threads).sort().reverse();
 
+  const handleSubmit = () => {
+    updateData(`/posts/${post.id}`, {description: postContent});
+    setIsEdit(false);
+  };
+
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Button
-          sx={{ mb: 2, color: "white" }}
-          variant="contained"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Back
-        </Button>
+        <Box sx={{ flexGrow: "1" }}>
+          <Button
+            sx={{ mb: 2, color: "white" }}
+            variant="contained"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Back
+          </Button>
+        </Box>
+
+        {post.author == user.uid && (
+          <EditPostButton
+            key={post}
+            post={post}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
+          />
+        )}
         {post.author == user.uid && <DeletePostButton key={post} post={post} />}
       </Box>
       <Card sx={{ mb: 10 }}>
         <AvatarWithTag user={postAuthor} post={post} />
 
         <CardContent sx={{ px: 0, pt: 0 }}>
-          <RichTextEditor readOnly value={post.description} style={{border: 'none'}} />
-          <Stack direction="row" spacing={1} sx={{ mt: 2, mx: 2, overflowX: "scroll" }}>
+          
+          {isEdit ? (
+            <>
+              <RichTextEditor
+                value={postContent}
+                onChange={setPostContent}
+              />
+              <Box alignItems="right">
+                <Button
+                  onClick={handleSubmit}
+                  variant="contained"
+                  color="secondary"
+                  sx={{
+                    color: "white",
+                    mt: 1,
+                  }}
+                >
+                  submit
+                </Button>
+              </Box>
+              
+            </>
+          ) : (
+            <RichTextEditor
+              readOnly
+              value={postContent}
+              style={{ border: "none" }}
+            />
+          )}
 
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{ mt: 2, mx: 2, overflowX: "scroll" }}
+          >
             {"tags" in post &&
               post.tags.map((tag, i) => (
                 <Chip

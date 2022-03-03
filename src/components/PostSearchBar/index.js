@@ -30,7 +30,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const PostSearchBar = ({ setQuery, setPhaseFilter, phaseFilter }) => {
+const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter, setTeamFilter, teamFilter }) => {
   const [isDropped, setIsDropped] = useState(false);
   return (
     <>
@@ -52,9 +52,13 @@ const PostSearchBar = ({ setQuery, setPhaseFilter, phaseFilter }) => {
         setQuery={setQuery}
         setPhaseFilter={setPhaseFilter}
         phaseFilter={phaseFilter}
+        setTeamFilter={setTeamFilter}
+        teamFilter={teamFilter}
+      
       />
+
     </>
   );
 };
 
-export default PostSearchBar;
+export default SearchBar;
