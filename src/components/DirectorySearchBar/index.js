@@ -30,7 +30,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const DirectorySearchBar = ({ setQuery, expertiseFilter, setExpertiseFilter }) => {
+const DirectorySearchBar = ({
+  setQuery,
+  expertiseFilter,
+  setExpertiseFilter,
+}) => {
   const [isDropped, setIsDropped] = useState(false);
   return (
     <>
@@ -42,7 +46,7 @@ const DirectorySearchBar = ({ setQuery, expertiseFilter, setExpertiseFilter }) =
           onClick={() => setIsDropped(true)}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search…"
-          style={{ paddingLeft: "50px", width: "80%" }}
+          style={{ paddingLeft: "50px", width: "100%" }}
           inputProps={{ "aria-label": "search" }}
         />
       </Search>

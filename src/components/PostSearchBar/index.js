@@ -30,7 +30,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter, setTeamFilter, teamFilter }) => {
+const SearchBar = ({
+  setQuery,
+  setPhaseFilter,
+  phaseFilter,
+  setTeamFilter,
+  teamFilter,
+}) => {
   const [isDropped, setIsDropped] = useState(false);
   return (
     <>
@@ -42,7 +48,7 @@ const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter, setTeamFilter, teamF
           onClick={() => setIsDropped(true)}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search…"
-          style={{ paddingLeft: 50 }}
+          style={{ paddingLeft: 50, width: "100%" }}
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
@@ -54,9 +60,7 @@ const SearchBar = ({ setQuery, setPhaseFilter, phaseFilter, setTeamFilter, teamF
         phaseFilter={phaseFilter}
         setTeamFilter={setTeamFilter}
         teamFilter={teamFilter}
-      
       />
-
     </>
   );
 };
