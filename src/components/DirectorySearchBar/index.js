@@ -42,7 +42,7 @@ const DirectorySearchBar = ({ filter, setQuery, expertiseFilter, setExpertiseFil
           onClick={() => setIsDropped(true)}
           onChange={filter}
           placeholder="Search…"
-          style={{ width: "80%" }}
+          style={{ paddingLeft: "50px", width: "80%" }}
           inputProps={{ "aria-label": "search" }}
         />
       </Search>

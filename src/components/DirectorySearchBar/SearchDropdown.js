@@ -41,7 +41,7 @@ const SearchDropdown = ({
             zIndex: 10,
             height: "100%",
             textAlign: "left",
-            borderTop: "1px solid rgba(0, 0, 0, 0.6)",
+            borderTop: "1px solid rgba(0, 0, 0, 0.6)"
           }}
         >
           <IconButton

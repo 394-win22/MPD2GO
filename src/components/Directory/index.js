@@ -80,7 +80,7 @@ const Directory = () => {
 				filter={filter}
 				expertiseFilter={expertiseFilter}
 				setExpertiseFilter={setExpertiseFilter} />
-			<Card sx={{ mx: 1, mb: 10 }} style={{ borderRadius: 10 }}>
+			<Card sx={{ mb: 10, mt: 2 }} style={{ borderRadius: 10 }}>
 				<CardHeader sx={{ padding: "10px 16px" }} avatar={<Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}><PeopleAltIcon /></Avatar>}
 					title="Directory" titleTypographyProps={{ sx: { fontSize: "16px" } }} />
 

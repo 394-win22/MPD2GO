@@ -83,6 +83,7 @@ const PostWithThreads = () => {
         <AvatarWithTag user={postAuthor} post={post} />
 
         <CardContent sx={{ px: 0, pt: 0 }}>
+          
           {isEdit ? (
             <>
               <RichTextEditor
