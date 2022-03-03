@@ -20,10 +20,6 @@ const types = [
   'Alumni'
 ]
 
-const filter = {
-  expertise: [],
-  type: []
-}
 
 const SearchDropdown = ({
   isDropped,
@@ -95,14 +91,21 @@ const SearchDropdown = ({
                 <Chip
                   key={i}
                   style={{
-                    backgroundColor: filter.expertise.includes(type) && "#f1b844",
+                    backgroundColor: filter.type.includes(type) && "#f1b844",
                   }}
                   label={type}
                   sx={{ mx: 1, my: 0.5 }}
                   onClick={() => {
-                    filter.expertise.includes(type)
-                      ? setFilter.expertise(filter.expertise.filter((p) => p !== type))
-                      : setFilter.expertise([...filter.expertise, type]);
+                    const newType = filter.type.filter((p) => p !== type)
+                    filter.type.includes(type)
+                      ? setFilter({
+                       type: newType,
+                        ...filter.expertise
+                      })
+                      : setFilter({
+                        type: [...filter.type, type],
+                        ...filter.expertise
+                      });
                   }}
                 />
               )

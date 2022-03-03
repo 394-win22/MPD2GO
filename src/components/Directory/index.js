@@ -26,15 +26,16 @@ import DirectorySearchBar from 'components/DirectorySearchBar';
 
 const getStatus = (userData) => {
 	if (!("year" in userData) || userData.year == "") {
-		return "";
+	  return "Unknown Status";
 	}
 	if (userData.year < new Date().getFullYear()) {
-		return `Alumni`;
+	  return "Alumni";
 	}
 	else {
-		return `Current Student`;
+	  return "Current Student";
 	}
-}
+  }
+
 
 const Directory = () => {
 	const navigate = useNavigate();
@@ -50,7 +51,9 @@ const Directory = () => {
 	useEffect(() => {
 		if (filter.expertise.length > 0) {
 			console.log(filter)
-			setFilteredUsers(users.filter((user) => "expertise" in user && Object.values(user.expertise).some((x) => filter.expertise.includes(x))));
+			setFilteredUsers(users.filter((user) => "expertise" in user && 
+				filter.expertise.every(x=>Object.values(user.expertise).includes(x)) &&
+					filter.type.every(x=>Object.values(getStatus(user)).includes(x))));
 		} else {
 			setFilteredUsers(users)
 		}
