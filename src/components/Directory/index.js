@@ -49,7 +49,7 @@ const Directory = () => {
 		if (keyword !== '') {
 			const lowQuery = keyword.toLowerCase()
 			const results = users.filter((user) => {
-			return user.displayName.toLowerCase().startsWith(lowQuery);
+			return user.displayName.toLowerCase().includes(lowQuery);
 			});
 			setFilteredUsers(results);
 		}else{
