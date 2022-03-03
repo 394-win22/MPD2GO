@@ -116,7 +116,7 @@ const PostWithThreads = () => {
           <Stack
             direction="row"
             spacing={1}
-            sx={{ mt: 2, mx: 2, overflowX: "scroll" }}
+            sx={{ mt: 2, overflowX: "scroll", paddingLeft: 2}}
           >
             {"tags" in post &&
               post.tags.map((tag, i) => (

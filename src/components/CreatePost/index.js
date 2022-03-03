@@ -52,6 +52,19 @@ const postTagNames = [
   "Story/Presentation",
 ];
 
+const expertises = [
+  "Marketing",
+  "Industrial Design",
+  "Mechanical Engineering",
+  "Electrical Engineering",
+  "Software Development",
+  "Product Owner",
+  "UI/UX Design",
+  "Finance",
+  "Graphic Design",
+  "Project Management",
+];
+
 const topicTags = [
   { id: 1, value: "JavaScript" },
   { id: 2, value: "TypeScript" },
@@ -193,7 +206,7 @@ const CreatePost = () => {
               </Box>
             )}
           >
-            {postTagNames.map((tags) => (
+            {expertises.map((tags) => (
               <MenuItem key={tags} value={tags}>
                 {tags}
               </MenuItem>
