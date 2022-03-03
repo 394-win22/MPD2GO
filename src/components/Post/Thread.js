@@ -12,6 +12,7 @@ import { replyToThread } from "utilities/posts";
 import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
+import {red} from '@mui/material/colors';
 
 const useStyles = makeStyles({
   // Comment
@@ -198,8 +199,8 @@ const Thread = ({ postId, ids, data, style }) => {
   const haveChild = "threads" in data && Object.values(data.threads).length > 0;
   if (haveChild) sortedThreads = Object.entries(data.threads).sort().reverse();
   return (
-    <Box className={classes.container}>
-      <Box className={classes.leftContainer}>
+    <Box className={classes.container} >
+      <Box className={classes.leftContainer} sx={{ml: 1 }}>
         <IconButton
           className={classes.avatarButton}
           onClick={() => {
@@ -246,7 +247,7 @@ const Thread = ({ postId, ids, data, style }) => {
         <Box className={classes.buttonContainer}>
           {!isShowThreads && haveChild && (
             <Button
-              color="primary"
+              color={red[500]}
               className={classes.showReplies}
               onClick={() => {
                 setIsShowThreads(true);
