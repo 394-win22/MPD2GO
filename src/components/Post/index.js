@@ -83,6 +83,7 @@ const PostWithThreads = () => {
         <AvatarWithTag user={postAuthor} post={post} />
 
         <CardContent sx={{ px: 0, pt: 0 }}>
+          
           {isEdit ? (
             <>
               <RichTextEditor
@@ -115,7 +116,7 @@ const PostWithThreads = () => {
           <Stack
             direction="row"
             spacing={1}
-            sx={{ mt: 2, overflowX: "scroll" }}
+            sx={{ mt: 2, mx: 2, overflowX: "scroll" }}
           >
             {"tags" in post &&
               post.tags.map((tag, i) => (
