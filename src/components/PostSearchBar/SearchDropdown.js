@@ -75,10 +75,10 @@ const SearchDropdown = ({
           </IconButton>
           <Typography variant="h7" sx={{ left: 0, p: 2 }}>
             {" "}
-            Search By <span style={{ fontWeight: "bold" }}>Current Phase</span>
+            Search By <span style={{ fontWeight: "bold" }}>Expertise</span>
           </Typography>
           <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
-            {currentPhases.map((phase, i) => (
+            {expertises.map((phase, i) => (
               <Chip
                 key={i}
                 style={{
