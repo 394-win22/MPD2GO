@@ -17,7 +17,7 @@ import ReplyTextField from "./ReplyTextField";
 import { DeletePostButton } from "./DeletePostButton";
 import { EditPostButton } from "./EditPostButton";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
-import { setData } from "utilities/firebase";
+import { updateData } from "utilities/firebase";
 
 const PostWithThreads = () => {
   const navigate = useNavigate();
@@ -50,9 +50,7 @@ const PostWithThreads = () => {
   if (haveChild) sortedThreads = Object.entries(post.threads).sort().reverse();
 
   const handleSubmit = () => {
-    const newPost = post;
-    newPost.description = postContent;
-    setData(`/posts/${post.id}`, newPost);
+    updateData(`/posts/${post.id}`, {description: postContent});
     setIsEdit(false);
   };
 
