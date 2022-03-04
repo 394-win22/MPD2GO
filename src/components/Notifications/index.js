@@ -13,6 +13,7 @@ import {
 import { UserContext } from "components/Routing";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CommentNotification from "./CommentNotification";
+import CommentReplyNotification from "./CommentReplyNotification";
 import MentionNotification from "./MentionNotification";
 
 const Notifications = () => {
@@ -42,7 +43,7 @@ const Notifications = () => {
                 />
               );
             case "reply":
-              return <ListItem key={id} />;
+              return <CommentReplyNotification key={id} notifId ={id} notifObj={notifObj} />;
             case "mention":
               return (
                 <MentionNotification
