@@ -65,7 +65,6 @@ const CreatePost = () => {
 
   const postDescriptionPlaceHolder =
     "<p>Enter post detail here. Type @ or # to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://</p>";
-  const [title, setTitle] = useState("");
   const [description, setDescription] = useState(postDescriptionPlaceHolder);
   const [postTags, setPostTags] = useState([]);
 
@@ -108,7 +107,6 @@ const CreatePost = () => {
     const modifiedContent = el.querySelector("body").innerHTML;
 
     const postId = createPostInFirebase({
-      title: title,
       tags: postTags,
       description: modifiedContent,
       time: Date.now(),
@@ -130,7 +128,6 @@ const CreatePost = () => {
         }
       });
 
-    setTitle("");
     setDescription("");
     navigate("/");
   };
@@ -161,16 +158,6 @@ const CreatePost = () => {
         Create Post
       </Typography>
       <Box className={classes.form}>
-        <TextField
-          margin="normal"
-          label="Title"
-          value={title}
-          variant="outlined"
-          onChange={(event) => {
-            setTitle(event.target.value);
-          }}
-          autoComplete="off"
-        />
 
         <FormControl sx={{ mt: 1, width: "100%" }}>
           <InputLabel>Tags</InputLabel>
