@@ -18,6 +18,7 @@ import { replyToThread } from "utilities/posts";
 import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
+import DeleteThread from "./DeleteThread";
 
 const useStyles = makeStyles({
   // Comment
@@ -113,9 +114,9 @@ const useStyles = makeStyles({
     padding: "8px 14px 8px 14px",
   },
   deleteButton: {
-    color: "red",
     fontSize: "13px",
-    padding: "8px 14px 8px 14px",
+    padding: "80px 14px 8px 14px",
+    marginLeft: "80px"
   },
   showReplies: {
     fontSize: "13px",
@@ -279,15 +280,7 @@ const Thread = ({ postId, ids, data, style }) => {
             </Button>
           )}
           {data.author === user.uid && !isShowTextField && (
-            <Button
-              className={classes.deleteButton}
-              color="error"
-              onClick={() => {
-                deleteThread();
-              }}
-            >
-              Delete
-            </Button>
+            <DeleteThread deleteThread={deleteThread} classes={classes}/>
           )}
         </Box>
 
