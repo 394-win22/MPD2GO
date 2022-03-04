@@ -14,8 +14,6 @@ import {
 import Thread from "./Thread";
 import { UserContext } from "components/Routing";
 import ReplyTextField from "./ReplyTextField";
-import { DeletePostButton } from "./DeletePostButton";
-import { EditPostButton } from "./EditPostButton";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 import { updateData } from "utilities/firebase";
 import EditPostMenu from "./EditPostMenu";
