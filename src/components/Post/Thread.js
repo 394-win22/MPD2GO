@@ -52,8 +52,8 @@ const useStyles = makeStyles({
     float: "left",
   },
   avatar: {
-    width: "24px",
-    height: "24px",
+    width: "24px !important",
+    height: "24px !important",
     display: "inline",
     float: "left",
   },
@@ -78,7 +78,7 @@ const useStyles = makeStyles({
   },
   time: {
     color: "#888888",
-    fontSize: "13px",
+    fontSize: "13px !important",
   },
   collapseButton: {
     display: "flex",
@@ -105,6 +105,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    marginTop: "5px",
     marginBottom: "5px",
   },
 
@@ -146,23 +147,18 @@ const Thread = ({ postId, ids, data, style }) => {
 
   const totalCommentsInThread = () => {
     let total = 1;
-
-    console.log("TOTAL COMMENTS IN THREAD");
     const haveChild =
       "threads" in data && Object.values(data.threads).length > 0;
 
     if (haveChild) {
       total += totalCommentsInChildren(Object.values(data.threads));
     }
-
-    console.log(total);
-
     return total;
   };
 
   const totalCommentsInChildren = (childrenArr) => {
     let childrenTotal = 0;
-    console.log("TOTAL COMMENTS IN CHILD");
+    // console.log("TOTAL COMMENTS IN CHILD");
 
     childrenArr.forEach((child) => {
       childrenTotal++;
@@ -172,7 +168,7 @@ const Thread = ({ postId, ids, data, style }) => {
         childrenTotal += totalCommentsInChildren(Object.values(child.threads));
       }
     });
-    console.log(childrenTotal);
+    // console.log(childrenTotal);
     return childrenTotal;
   };
 
@@ -238,7 +234,7 @@ const Thread = ({ postId, ids, data, style }) => {
           <RichTextEditor
             readOnly
             value={data.comment}
-            style={{ marginLeft: -17, marginBottom: -20, border: "none" }}
+            style={{ marginLeft: -17, marginBottom: -20, border: "none", padding: "0" }}
           />
         </Box>
 
