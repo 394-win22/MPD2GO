@@ -1,26 +1,26 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme } from "@mui/material/styles";
 
-const font = "'Helvetica Neue', sans-serif"
+const font = "'Helvetica Neue', sans-serif";
 
 const theme = createTheme({
   root: {
-    color: '#f0f2f5',
-    backgroundColor: '#f1b844',
+    color: "#f0f2f5",
+    backgroundColor: "#f1b844",
   },
   palette: {
-    foreground: '#ffffff',
+    foreground: "#ffffff",
     primary: {
-      main: '#f1b844',
-      contrastText: '#f3f3f3ff',
+      main: "#f1b844",
+      contrastText: "#f3f3f3ff",
     },
-    secondary: { main: '#3a5f95', contrastText: '#f3f3f3ff' },
-    notification: "#e04141"
+    secondary: { main: "#3a5f95", contrastText: "#f3f3f3ff" },
+    notification: "#e04141",
   },
   typography: {
     fontFamily: font,
     fontSize: 14,
     button: {
-      textTransform: 'none',
+      textTransform: "none",
     },
   },
   breakpoints: {
@@ -34,11 +34,11 @@ const theme = createTheme({
   },
   overrides: {
     MuiCssBaseline: {
-      '@global': {
+      "@global": {
         // '@font-face': [productSans],
       },
     },
   },
-})
+});
 
-export default theme
+export default theme;

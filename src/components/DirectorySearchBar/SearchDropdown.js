@@ -1,4 +1,4 @@
-import { Card, Button, IconButton, Typography, Chip } from "@mui/material";
+import { Card, IconButton, Typography, Chip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
 
@@ -13,17 +13,6 @@ const expertises = [
   "Finance",
   "Graphic Design",
   "Project Management",
-];
-const currentPhases = [
-  "Ethnography",
-  "Market Research",
-  "Brainstorming",
-  "Idea Convergence",
-  "Prototyping",
-  "Engineering/Design",
-  "Materials Selection",
-  "Business Modeling",
-  "Story/Presentation",
 ];
 const SearchDropdown = ({
   isDropped,
@@ -41,7 +30,7 @@ const SearchDropdown = ({
             zIndex: 10,
             height: "100%",
             textAlign: "left",
-            borderTop: "1px solid rgba(0, 0, 0, 0.6)"
+            borderTop: "1px solid rgba(0, 0, 0, 0.6)",
           }}
         >
           <IconButton
@@ -65,17 +54,20 @@ const SearchDropdown = ({
                 <Chip
                   key={i}
                   style={{
-                    backgroundColor: expertiseFilter.includes(expertise) && "#f1b844",
+                    backgroundColor:
+                      expertiseFilter.includes(expertise) && "#f1b844",
                   }}
                   label={expertise}
                   sx={{ mx: 1, my: 0.5 }}
                   onClick={() => {
                     expertiseFilter.includes(expertise)
-                      ? setExpertiseFilter(expertiseFilter.filter((p) => p !== expertise))
+                      ? setExpertiseFilter(
+                          expertiseFilter.filter((p) => p !== expertise)
+                        )
                       : setExpertiseFilter([...expertiseFilter, expertise]);
                   }}
                 />
-              )
+              );
             })}
           </Box>
         </Card>

@@ -1,26 +1,26 @@
 import { useState } from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { TextField, Stack, Label } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-/* For "Create" Button in Modal Box */
-import Button from "@mui/material/Button";
+import {
+  TextField,
+  Stack,
+  Box,
+  Typography,
+  Modal,
+  Button,
+  ListItem,
+} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { setData, deleteData, pushData } from "../../utilities/firebase";
-import { editProjectInFirebase } from "utilities/projects";
-import { FixedSizeList } from "react-window";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import DriveLogo from "google-drive.png";
-import MuralLogo from "mural.png";
-import LinkIcon from "@mui/icons-material/Link";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import LinkIcon from "@mui/icons-material/Link";
+import { makeStyles } from "@mui/styles";
+import { deleteData, pushData } from "../../utilities/firebase";
+import { editProjectInFirebase } from "utilities/projects";
+import { FixedSizeList } from "react-window";
+
+import DriveLogo from "google-drive.png";
+import MuralLogo from "mural.png";
 import { getProjectFromUid } from "../../utilities/firebase";
-import { ColorButton } from "mui-color";
-import {textColor} from "../../utilities/posts"
+import { textColor } from "../../utilities/posts";
 
 async function fetchData(projectId, setProjectData) {
   const data = await getProjectFromUid(projectId);
@@ -28,7 +28,7 @@ async function fetchData(projectId, setProjectData) {
   else setProjectData(data);
 }
 
-const removeResource = (projectId, resource, rname, setProjectData) => {
+const removeResource = (projectId, rname, setProjectData) => {
   return () => {
     deleteData(`/project/${projectId}/resources/${rname}`);
     fetchData(projectId, setProjectData);
@@ -143,9 +143,7 @@ const EditProject = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     formValues.textColor = textColor(formValues.teamColor);
-    //projectId = "projectID";
     editProjectInFirebase(projectId, formValues);
-    // re-render
     setProjectData(formValues);
     handleClose();
   };
@@ -212,7 +210,7 @@ const EditProject = ({
             type="text"
             InputLabelProps={{ shrink: true }}
           />
-            <TextField
+          <TextField
             name="teamColor"
             value={formValues.teamColor}
             onChange={handleInputChange}
@@ -220,48 +218,52 @@ const EditProject = ({
             type="color"
             InputLabelProps={{ shrink: true }}
           />
-          <Box
-            sx={{ bgcolor: 'background.paper', borderColor: 'grey' }}
-          >
-          
-          {resources.length > 0 &&
-          <>
-            <Typography alignSelf="left" justifySelf="left" align="left" textAlign="left">
-              Resources (Scroll to See All)
-            </Typography>
-            <FixedSizeList
-              height={100}
-              width={360}
-              itemSize={46}
-              itemCount={resources.length}
-              overscanCount={5}> 
-              {RenderRow(projectId, resources, rnames, setProjectData)}
-            </FixedSizeList>
-          </>}
-          <Typography>Add Resource</Typography>
-          <Stack direction="row">
-            <TextField
-              name="addResourceText"
-              label="Resource Text"
-              type="text"
-              minRows = {4}
-              InputLabelProps={{ shrink: true }}
-              style={{width: "40%"}}
-              onChange={handleNewResourceText}
-            />
-            <TextField
-              name="addResourceURL"
-              label="Resource URL"
-              type="text"
-              minRows = {4}
-              InputLabelProps={{ shrink: true }}
-              style={{width: "40%"}}
-              onChange={handleNewResourceURL}
-            />
-            <Button onClick={newResource}>
-              <AddCircleIcon/>
-            </Button>
-          </Stack>
+          <Box sx={{ bgcolor: "background.paper", borderColor: "grey" }}>
+            {resources.length > 0 && (
+              <>
+                <Typography
+                  alignSelf="left"
+                  justifySelf="left"
+                  align="left"
+                  textAlign="left"
+                >
+                  Resources (Scroll to See All)
+                </Typography>
+                <FixedSizeList
+                  height={100}
+                  width={360}
+                  itemSize={46}
+                  itemCount={resources.length}
+                  overscanCount={5}
+                >
+                  {RenderRow(projectId, resources, rnames, setProjectData)}
+                </FixedSizeList>
+              </>
+            )}
+            <Typography>Add Resource</Typography>
+            <Stack direction="row">
+              <TextField
+                name="addResourceText"
+                label="Resource Text"
+                type="text"
+                minRows={4}
+                InputLabelProps={{ shrink: true }}
+                style={{ width: "40%" }}
+                onChange={handleNewResourceText}
+              />
+              <TextField
+                name="addResourceURL"
+                label="Resource URL"
+                type="text"
+                minRows={4}
+                InputLabelProps={{ shrink: true }}
+                style={{ width: "40%" }}
+                onChange={handleNewResourceURL}
+              />
+              <Button onClick={newResource}>
+                <AddCircleIcon />
+              </Button>
+            </Stack>
           </Box>
           <Button variant="contained" endIcon={<SendIcon />} type="submit">
             Edit

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid, Box, Paper, Typography, TextField, Button, Link } from "@mui/material";
+import { Grid, Box, Paper, Typography, Link } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
 
@@ -30,13 +30,7 @@ const Login = () => {
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        className={classes.leftImg}
-      />
+      <Grid item xs={false} sm={4} md={7} className={classes.leftImg} />
       <Grid
         backgroundColor="#f1b844"
         item
@@ -50,18 +44,19 @@ const Login = () => {
         <Box className={classes.rightPanel}>
           <img src={logo} alt="Hive Logo" style={{ height: "10em" }} />
 
-          {(!isSignUp) ? <LogIn /> : <SignUp />}
+          {!isSignUp ? <LogIn /> : <SignUp />}
 
           <Link
             variant="body2"
-            sx={{ color: 'white' }}
+            sx={{ color: "white" }}
             onClick={() => setIsSignUp(!isSignUp)}
           >
-            <Typography color='rgb(240, 242, 245)'>
-              {isSignUp ? "Already have an account? Sign in" : "Don't have an account? Sign Up"}
+            <Typography color="rgb(240, 242, 245)">
+              {isSignUp
+                ? "Already have an account? Sign in"
+                : "Don't have an account? Sign Up"}
             </Typography>
           </Link>
-
         </Box>
       </Grid>
     </Grid>

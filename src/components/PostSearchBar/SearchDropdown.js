@@ -1,7 +1,7 @@
-import { Card, Button, IconButton, Typography, Chip } from "@mui/material";
+import { Card, IconButton, Typography, Chip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
-import { getProjectFromId, useData } from "utilities/firebase";
+import { useData } from "utilities/firebase";
 
 const expertises = [
   "Marketing",
@@ -15,17 +15,6 @@ const expertises = [
   "Graphic Design",
   "Project Management",
 ];
-const currentPhases = [
-  "Ethnography",
-  "Market Research",
-  "Brainstorming",
-  "Idea Convergence",
-  "Prototyping",
-  "Engineering/Design",
-  "Materials Selection",
-  "Business Modeling",
-  "Story/Presentation",
-];
 
 const getProjectList = (project) => {
   const listOfProject = Object.entries(project).map(
@@ -36,8 +25,6 @@ const getProjectList = (project) => {
   return listOfProject;
 };
 
-
-
 const SearchDropdown = ({
   isDropped,
   setIsDropped,
@@ -46,8 +33,7 @@ const SearchDropdown = ({
   setTeamFilter,
   teamFilter,
 }) => {
-  const [teams, teamsLoading] = useData("/project",getProjectList);
-
+  const [teams] = useData("/project", getProjectList);
 
   return (
     <>
@@ -113,11 +99,10 @@ const SearchDropdown = ({
                   teamFilter.includes(team.id)
                     ? setTeamFilter(teamFilter.filter((t) => t !== team.id))
                     : setTeamFilter([...teamFilter, team.id]);
-
                 }}
               />
             ))}
-          </Box> 
+          </Box>
         </Card>
       )}
     </>
