@@ -5,11 +5,11 @@ import moment from "moment";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import { UserContext } from "components/Routing";
 
-const AvatarWithTag = ({ user, post }) => {
+const AvatarWithTag = ({ user, post, menu }) => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const projectList = context.projectList;
-  let teamData;
+  let teamData
   if ("teamId" in user) {
     teamData = projectList.find((obj) => obj.uid === user.teamId);
   }
@@ -27,22 +27,19 @@ const AvatarWithTag = ({ user, post }) => {
           }}
         />
       }
+      action={
+        menu
+      }
       title={
         <Stack direction="row">
           <Typography>{user.displayName}</Typography>
           {"teamId" in user && (
             <Chip
-              icon={
-                <InsertDriveFileIcon style={{ color: teamData.textColor }} />
-              }
+              icon={<InsertDriveFileIcon style={{ color: teamData.textColor }} />}
               size="small"
               label="Capstone Page"
               variant="outlined"
-              sx={{
-                mx: 1,
-                backgroundColor: teamData.teamColor,
-                color: teamData.textColor,
-              }}
+              sx={{ mx: 1, backgroundColor: teamData.teamColor, color: teamData.textColor }}
               onClick={(event) => {
                 event.stopPropagation();
                 navigate(`/project/${user.teamId}`);
