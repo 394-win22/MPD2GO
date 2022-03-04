@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import RichTextEditor from "@mantine/rte";
 import { Card, Button, CardContent, Box, Chip, Stack } from "@mui/material";
-import BackButton from "../Navigation/BackButton"
 
 import Thread from "./Thread";
 import { UserContext } from "components/Routing";
@@ -48,6 +47,7 @@ const PostWithThreads = () => {
 
   return (
     <>
+
       <Button
         sx={{ mb: 2, color: "white" }}
         variant="contained"

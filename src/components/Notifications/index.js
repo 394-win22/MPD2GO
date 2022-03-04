@@ -7,19 +7,14 @@ import {
   Avatar,
   Box,
   Button,
-  ListItem,
-  Divider,
-  Stack,
-  Divider,
+    Divider,
 } from "@mui/material";
 import { UserContext } from "components/Routing";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CommentNotification from "./CommentNotification";
 import CommentReplyNotification from "./CommentReplyNotification";
 import MentionNotification from "./MentionNotification";
-import BackButton from "../Navigation/BackButton";
 import {ClearAllNotification} from "./ClearAllNotificationButton";
-
 
 const Notifications = () => {
   const navigate = useNavigate();
@@ -79,20 +74,33 @@ const Notifications = () => {
 
   return (
     <>
-      <ClearAllNotification uid={userData.uid}/>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ flexGrow: "1" }}>
+          <Button
+            sx={{ mb: 2, color: "white" }}
+            variant="contained"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Back
+          </Button>
+        </Box>
+
+            <ClearAllNotification uid={userData.uid}/>
+      </Box>
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
         <CardHeader
+          sx={{ padding: "10px 16px" }}
           avatar={
-            <BackButton />
+            <Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}>
+              <NotificationsIcon />
+            </Avatar>
           }
           title="Notifications"
-          titleTypographyProps={{ sx: { fontSize: "16x" } ,variant:"h6" }}
+          titleTypographyProps={{ sx: { fontSize: "16px" } }}
         />
-        {hasNotifications ? (
-          notificationsList
-        ) : (
-          <Box sx={{ margin: 2, paddingLeft: 1 }}>No New Notifications</Box>
-        )}
+        {hasNotifications ? notificationsList : <Box>No New Notifications</Box>}
       </Card>
     </>
   );
