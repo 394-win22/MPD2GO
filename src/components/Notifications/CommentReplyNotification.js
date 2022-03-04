@@ -12,12 +12,12 @@ import {
 import moment from "moment";
 import { UserContext } from "components/Routing";
 
-import RichTextEditor from "@mantine/rte";
-
 import { markNotificationAsRead } from "utilities/notifications";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import IconButton from "@mui/material/IconButton";
-const CommentNotification = ({ notifId, notifObj }) => {
+import RichTextEditor from "@mantine/rte";
+
+const CommentReplyNotification = ({ notifId, notifObj }) => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const users = context.userList;
@@ -81,4 +81,4 @@ const CommentNotification = ({ notifId, notifObj }) => {
   );
 };
 
-export default CommentNotification;
+export default CommentReplyNotification;

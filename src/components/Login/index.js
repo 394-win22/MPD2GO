@@ -3,7 +3,7 @@ import { Grid, Box, Paper, Typography, Link } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
 
-import logo from "logo.png";
+import logo from "resources/logo.png";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 

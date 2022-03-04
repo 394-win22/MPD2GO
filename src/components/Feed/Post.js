@@ -12,9 +12,7 @@ import { makeStyles, useTheme } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
 
 import { UserContext } from "components/Routing";
-
 import { getUserDataFromUID } from "utilities/posts";
-
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.foreground,
   },
   comment: {
-    marginLeft: "10px",
+    marginLeft: "6px !important",
     fontsize: "12px",
     color: "grey",
   },
@@ -78,8 +76,9 @@ const Post = ({ post }) => {
                 label={tag}
                 key={i}
                 color="primary"
-                variant="outlined"
+                variant="contained"
                 size="small"
+                sx={{ backgroundColor: "#c0c0c0", color: "#ffffff" }}
               />
             ))}
         </Stack>

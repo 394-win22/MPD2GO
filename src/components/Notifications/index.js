@@ -10,12 +10,16 @@ import {
   ListItem,
   Divider,
   Stack,
+  Divider,
 } from "@mui/material";
 import { UserContext } from "components/Routing";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CommentNotification from "./CommentNotification";
+import CommentReplyNotification from "./CommentReplyNotification";
 import MentionNotification from "./MentionNotification";
 import BackButton from "../Navigation/BackButton";
+import {ClearAllNotification} from "./ClearAllNotificationButton";
+
 
 const Notifications = () => {
   const navigate = useNavigate();
@@ -44,7 +48,13 @@ const Notifications = () => {
                 />
               );
             case "reply":
-              return <ListItem key={id} />;
+              return (
+                <CommentReplyNotification
+                  key={id}
+                  notifId={id}
+                  notifObj={notifObj}
+                />
+              );
             case "mention":
               return (
                 <MentionNotification
@@ -69,6 +79,7 @@ const Notifications = () => {
 
   return (
     <>
+      <ClearAllNotification uid={userData.uid}/>
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
         <CardHeader
           avatar={

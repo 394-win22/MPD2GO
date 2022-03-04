@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 import {
   DialogActions,
@@ -9,11 +8,10 @@ import {
   Dialog,
   Button,
 } from "@mui/material";
-import { deleteData } from "../../utilities/firebase";
+import { removeAtPath } from "../../utilities/firebase";
 
-export const DeletePostButton = ({ post }) => {
+export const ClearAllNotification = ({ uid }) => {
   const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -22,9 +20,8 @@ export const DeletePostButton = ({ post }) => {
     setOpen(false);
   };
 
-  function deletePost(post) {
-    deleteData(`/posts/${post.id}`);
-    navigate("/");
+  function deleteAllNotification(uid) {
+    removeAtPath(`users/${uid}/notifications`);
     handleClose();
   }
 
@@ -36,20 +33,24 @@ export const DeletePostButton = ({ post }) => {
         color="error"
         sx={{ mb: 2 }}
       >
-        Delete Post
+        Clear All Notification
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Delete Post</DialogTitle>
+        <DialogTitle>Clear All Notification</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete this Post?
+            Are you sure you want to clear all notification?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="secondary">
             Cancel
           </Button>
-          <Button onClick={() => deletePost(post)} color="primary" autoFocus>
+          <Button
+            onClick={() => deleteAllNotification(uid)}
+            color="primary"
+            autoFocus
+          >
             Yes
           </Button>
         </DialogActions>

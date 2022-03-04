@@ -25,7 +25,6 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
     var el = document.createElement("html");
     el.innerHTML = comment;
     var mentionSpans = el.getElementsByClassName("mention");
-
     // add link to mention spans
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
@@ -38,7 +37,6 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
       });
 
     const modifiedContent = el.querySelector("body").innerHTML;
-
     replyToComment(modifiedContent);
 
     // add mentioned to notification
@@ -68,7 +66,6 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
-
         // limit the items in list to 5
         renderList(includesSearchTerm.slice(0, 5));
       },
@@ -95,7 +92,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         onChange={setComment}
         placeholder="Type @ or # to see mentions autocomplete"
         mentions={mentions}
-        style={{ marginTop: "12px", width: "100%" }}
+        style={{ marginLeft: "8px", marginTop: "16px", width: "100%" }}
         onDragStart={() => {
           return false;
         }}
