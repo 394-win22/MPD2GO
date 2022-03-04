@@ -17,8 +17,8 @@ import { getProjectFromUid } from "../../utilities/firebase";
 import { getUserDataFromUID } from "../../utilities/posts";
 import { UserContext } from "components/Routing";
 import EditProjectButton from "components/EditProject/EditProjectButton";
-import DriveLogo from "google-drive.png";
-import MuralLogo from "mural.png";
+import DriveLogo from "resources/google-drive.png";
+import MuralLogo from "resources/mural.png";
 
 const Project = (user) => {
   const navigate = useNavigate();

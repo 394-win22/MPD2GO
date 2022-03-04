@@ -16,7 +16,7 @@ import {
   Notifications as NotificationsIcon,
   PeopleAlt as PeopleAltIcon,
 } from "@mui/icons-material";
-import logo from "logo.png";
+import logo from "resources/logo.png";
 import { UserContext } from "components/Routing";
 
 const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
