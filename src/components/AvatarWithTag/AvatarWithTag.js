@@ -14,6 +14,7 @@ const AvatarWithTag = ({ user, post, menu }) => {
     teamData = projectList.find((obj) => obj.uid === user.teamId);
   }
 
+
   return (
     <CardHeader
       align="left"
@@ -31,15 +32,26 @@ const AvatarWithTag = ({ user, post, menu }) => {
         menu
       }
       title={
-        <Stack direction="row">
+        <Stack direction="row" spacing={3}>
           <Typography>{user.displayName}</Typography>
           {"teamId" in user && (
             <Chip
-              icon={<InsertDriveFileIcon style={{ color: teamData.textColor }} />}
               size="small"
-              label="Capstone Page"
+              label={teamData.name}
               variant="outlined"
-              sx={{ mx: 1, backgroundColor: teamData.teamColor, color: teamData.textColor }}
+              sx={{
+                marginLeft: "30px !important",
+                mx: 1,
+                backgroundColor: teamData.teamColor,
+                color: teamData.textColor,
+                border: 0,
+                "&:hover": {
+                  backgroundColor: shade(teamData.teamColor, -0.3) + " !important"
+                },
+                "&:active": {
+                  backgroundColor: shade(teamData.teamColor, -0.5) + " !important"
+                },
+              }}
               onClick={(event) => {
                 event.stopPropagation();
                 navigate(`/project/${user.teamId}`);
@@ -53,4 +65,39 @@ const AvatarWithTag = ({ user, post, menu }) => {
   );
 };
 
+function hex2(c) {
+  c = Math.round(c);
+  if (c < 0) c = 0;
+  if (c > 255) c = 255;
+
+  var s = c.toString(16);
+  if (s.length < 2) s = "0" + s;
+
+  return s;
+}
+
+function color(r, g, b) {
+  return "#" + hex2(r) + hex2(g) + hex2(b);
+}
+
+function shade(col, light) {
+
+  // TODO: Assert that col is good and that -1 < light < 1
+
+  var r = parseInt(col.substr(1, 2), 16);
+  var g = parseInt(col.substr(3, 2), 16);
+  var b = parseInt(col.substr(5, 2), 16);
+
+  if (light < 0) {
+    r = (1 + light) * r;
+    g = (1 + light) * g;
+    b = (1 + light) * b;
+  } else {
+    r = (1 - light) * r + light * 255;
+    g = (1 - light) * g + light * 255;
+    b = (1 - light) * b + light * 255;
+  }
+
+  return color(r, g, b);
+}
 export default AvatarWithTag;

@@ -117,8 +117,9 @@ const PostWithThreads = () => {
                   label={tag}
                   key={i}
                   color="primary"
-                  variant="outlined"
+                  variant="contained"
                   size="small"
+                  sx={{ backgroundColor: "#c0c0c0", color: "#ffffff" }}
                 />
               ))}
           </Stack>
