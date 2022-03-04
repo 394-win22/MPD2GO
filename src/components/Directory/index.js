@@ -64,25 +64,21 @@ const Directory = () => {
 
   return (
     <>
-      <Card sx={{ mb: 10, mt: 2 }} style={{ borderRadius: 10 }}>
-      <BackButton/>
-      <DirectorySearchBar
+      <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+        <CardHeader
+          sx={{ padding: "10px 16px" }}
+          avatar={
+            <BackButton/>
+          }
+          title="Directory"
+          titleTypographyProps={{ sx: { fontSize: "16x" } ,variant:"h6" }}
+        />
+        <DirectorySearchBar
         setQuery={setQuery}
         filter={filter}
         expertiseFilter={expertiseFilter}
         setExpertiseFilter={setExpertiseFilter}
       />
-        <CardHeader
-          sx={{ padding: "10px 16px" }}
-          avatar={
-            <Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}>
-              <PeopleAltIcon />
-            </Avatar>
-          }
-          title="Directory"
-          titleTypographyProps={{ sx: { fontSize: "16px" } }}
-        />
-
         <List>
           {filteredUsers.map((user) => (
             <ListItem

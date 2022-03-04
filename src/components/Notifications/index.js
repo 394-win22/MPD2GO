@@ -9,12 +9,13 @@ import {
   Button,
   ListItem,
   Divider,
+  Stack,
 } from "@mui/material";
 import { UserContext } from "components/Routing";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CommentNotification from "./CommentNotification";
 import MentionNotification from "./MentionNotification";
-import BackButton from "../Navigation/BackButton"
+import BackButton from "../Navigation/BackButton";
 
 const Notifications = () => {
   const navigate = useNavigate();
@@ -68,20 +69,19 @@ const Notifications = () => {
 
   return (
     <>
-      
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
-      <BackButton/>
         <CardHeader
-          sx={{ padding: "10px 16px" }}
           avatar={
-            <Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}>
-              <NotificationsIcon />
-            </Avatar>
+            <BackButton />
           }
           title="Notifications"
-          titleTypographyProps={{ sx: { fontSize: "16px" } }}
+          titleTypographyProps={{ sx: { fontSize: "16x" } ,variant:"h6" }}
         />
-        {hasNotifications ? notificationsList : <Box sx={{margin: 2, paddingLeft:1}}>No New Notifications</Box>}
+        {hasNotifications ? (
+          notificationsList
+        ) : (
+          <Box sx={{ margin: 2, paddingLeft: 1 }}>No New Notifications</Box>
+        )}
       </Card>
     </>
   );

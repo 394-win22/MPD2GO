@@ -6,7 +6,7 @@ const BackButton = () => {
   const navigate = useNavigate();
   return (
     <IconButton
-      sx={{ ml: 2, mt: 1 }}
+      sx={{ mt: 1 }}
       color="inherit"
       onClick={() => {
         navigate(-1);
