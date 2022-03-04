@@ -15,6 +15,7 @@ import {
 import { UserContext } from "components/Routing";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import DirectorySearchBar from "components/DirectorySearchBar";
+import BackButton from "../Navigation/BackButton"
 
 const getStatus = (userData) => {
   if (!("year" in userData) || userData.year == "") {
@@ -69,31 +70,22 @@ const Directory = () => {
 
   return (
     <>
-      <Button
-        sx={{ ml: 1, mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
-      <DirectorySearchBar
-        setQuery={setQuery}
-        filter={filter}
-        setFilter={setFilter}
-      />
-      <Card sx={{ mx: 1, mt: 3 }} style={{ borderRadius: 10 }}>
+      <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
         <CardHeader
           sx={{ padding: "10px 16px" }}
           avatar={
-            <Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}>
-              <PeopleAltIcon />
-            </Avatar>
+            <BackButton/>
           }
           title="Directory"
-          titleTypographyProps={{ sx: { fontSize: "16px" } }}
+          titleTypographyProps={{ sx: { fontSize: "16x" } ,variant:"h6" }}
         />
+
+        <DirectorySearchBar
+        setQuery={setQuery}
+        filter={filter}
+        expertiseFilter={expertiseFilter}
+        setExpertiseFilter={setExpertiseFilter}
+      />
         <List>
           {filteredUsers.map((user) => (
             <ListItem

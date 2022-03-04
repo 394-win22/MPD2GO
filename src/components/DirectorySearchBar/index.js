@@ -32,6 +32,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const DirectorySearchBar = ({ setQuery, filter, setFilter }) => {
   const [isDropped, setIsDropped] = useState(false);
+
+  const handleClickAway = () => {
+    setIsDropped(false);
+  };
+
   return (
     <>
       <Search>
