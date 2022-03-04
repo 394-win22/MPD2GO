@@ -87,7 +87,7 @@ const Notifications = () => {
           title="Notifications"
           titleTypographyProps={{ sx: { fontSize: "16px" } }}
         />
-        {hasNotifications ? notificationsList : <Box>No New Notifications</Box>}
+        {hasNotifications ? notificationsList : <Box sx={{margin: 2, paddingLeft:1}}>No New Notifications</Box>}
       </Card>
     </>
   );
