@@ -12,8 +12,8 @@ import Project from "components/Project";
 import Notifications from "components/Notifications";
 import NotFound from "components/NotFound";
 import Directory from "components/Directory";
-
 import Main from "components/Feed";
+import Loading from "components/Loading";
 
 const getPostList = (posts) => {
   const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
@@ -38,13 +38,11 @@ export const UserContext = createContext();
 
 const Routing = ({ user }) => {
   const [postList, postListLoading] = useData("/posts", getPostList);
-
   const [userList, userListLoading] = useData("/users", getUserList);
-
   const [projectList, projectListLoading] = useData("/project", getProjectList);
 
   if (postListLoading || userListLoading || projectListLoading) {
-    return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
+    return (<Loading />)
   }
 
   return (
@@ -62,7 +60,7 @@ const Routing = ({ user }) => {
           <Route exact path="/createPost" element={<CreatePost />} />
           <Route exact path="/profile" element={<Profile user={user} />} />
           <Route exact path="/notifications" element={<Notifications />} />
-          <Route exact path="/directory" element={<Directory/>} />
+          <Route exact path="/directory" element={<Directory />} />
           <Route
             exact
             path="/profile/:userID"
