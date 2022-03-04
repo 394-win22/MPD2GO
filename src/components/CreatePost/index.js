@@ -19,8 +19,7 @@ import { RichTextEditor } from "@mantine/rte";
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
 
-import { UserContext } from 'components/Routing'
-
+import { UserContext } from "components/Routing";
 
 import { createNotification } from "utilities/notifications";
 
@@ -40,16 +39,17 @@ const useStyles = makeStyles({
   },
 });
 
-const postTagNames = [
-  "Ethnography",
-  "Market Research",
-  "Brainstorming",
-  "Idea Convergence",
-  "Prototyping",
-  "Engineering/Design",
-  "Materials Selection",
-  "Business Modeling",
-  "Story/Presentation",
+const expertises = [
+  "Marketing",
+  "Industrial Design",
+  "Mechanical Engineering",
+  "Electrical Engineering",
+  "Software Development",
+  "Product Owner",
+  "UI/UX Design",
+  "Finance",
+  "Graphic Design",
+  "Project Management",
 ];
 
 const topicTags = [
@@ -59,12 +59,12 @@ const topicTags = [
   { id: 4, value: "Python" },
 ];
 
-
 const CreatePost = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
 
-  const postDescriptionPlaceHolder = "<p>Enter post detail here. Type @ or # to see mentions autocomplete. When inserting links, make sure url start with http:// or https://</p>"
+  const postDescriptionPlaceHolder =
+    "<p>Enter post detail here. Type @ or # to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://</p>";
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState(postDescriptionPlaceHolder);
   const [postTags, setPostTags] = useState([]);
@@ -77,21 +77,18 @@ const CreatePost = () => {
     const {
       target: { value },
     } = event;
-    setPostTags(
-      typeof value === "string" ? value.split(",") : value
-    );
+    setPostTags(typeof value === "string" ? value.split(",") : value);
   };
 
   const handleDescriptionClick = () => {
-    if (description == postDescriptionPlaceHolder)
-      setDescription("");
-  }
+    if (description === postDescriptionPlaceHolder) setDescription("");
+  };
 
   const people = context.userList.map((u) => {
     return { id: u.uid, value: u.displayName };
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     // check if there any mentions
     var el = document.createElement("html");
     el.innerHTML = description;
@@ -108,7 +105,7 @@ const CreatePost = () => {
         }
       });
 
-    const modifiedContent = el.querySelector('body').innerHTML;
+    const modifiedContent = el.querySelector("body").innerHTML;
 
     const postId = createPostInFirebase({
       title: title,
@@ -118,7 +115,6 @@ const CreatePost = () => {
       author: user.uid,
       numComments: 0,
     });
-
 
     // add mentioned to notification
     mentionSpans &&
@@ -153,13 +149,11 @@ const CreatePost = () => {
         renderList(includesSearchTerm.slice(0, 5));
       },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
-
-
-
 
   return (
     <Box className={classes.container}>
@@ -193,14 +187,13 @@ const CreatePost = () => {
               </Box>
             )}
           >
-            {postTagNames.map((tags) => (
+            {expertises.map((tags) => (
               <MenuItem key={tags} value={tags}>
                 {tags}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-
 
         <RichTextEditor
           value={description}
@@ -212,7 +205,6 @@ const CreatePost = () => {
           style={{ width: "100%", marginTop: "16px" }}
         />
 
-
         <Stack spacing={2} direction="row" sx={{ mt: 3 }}>
           <Button
             variant="contained"
@@ -221,7 +213,13 @@ const CreatePost = () => {
           >
             Cancel
           </Button>
-          <Button variant="contained" type="submit" onClick={() => { if (description != '<p><br></p>') handleSubmit() }}>
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={() => {
+              if (description !== "<p><br></p>") handleSubmit();
+            }}
+          >
             Post
           </Button>
         </Stack>

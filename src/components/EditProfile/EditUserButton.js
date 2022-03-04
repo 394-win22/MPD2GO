@@ -4,15 +4,12 @@ import EditUserModal from "../EditProfile";
 
 export const EditUserButton = ({ user, userID }) => {
   const [open, setOpen] = useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
   return (
     <>
       <Button

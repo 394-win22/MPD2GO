@@ -1,15 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import RichTextEditor from "@mantine/rte";
-import {
-  Typography,
-  Card,
-  Button,
-  CardContent,
-  Box,
-  Chip,
-  Stack,
-} from "@mui/material";
+import { Card, Button, CardContent, Box, Chip, Stack } from "@mui/material";
 
 import Thread from "./Thread";
 import { UserContext } from "components/Routing";
@@ -42,7 +34,7 @@ const PostWithThreads = () => {
       setPostAuthor(postAuthor);
       setPostContent(post.description);
     }
-  }, [pageId, postList, userList]);
+  }, [navigate, pageId, postList, userList]);
   let sortedThreads = [];
   const haveChild = "threads" in post && Object.values(post.threads).length > 0;
 
@@ -117,7 +109,7 @@ const PostWithThreads = () => {
           <Stack
             direction="row"
             spacing={1}
-            sx={{ mt: 2, overflowX: "scroll" }}
+            sx={{ mt: 2, overflowX: "scroll", paddingLeft: 2 }}
           >
             {"tags" in post &&
               post.tags.map((tag, i) => (

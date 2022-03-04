@@ -1,6 +1,7 @@
-import { Card, Button, IconButton, Typography, Chip } from "@mui/material";
+import { Card, IconButton, Typography, Chip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
+import { useData } from "utilities/firebase";
 
 const expertises = [
   "Marketing",
@@ -14,23 +15,26 @@ const expertises = [
   "Graphic Design",
   "Project Management",
 ];
-const currentPhases = [
-  "Ethnography",
-  "Market Research",
-  "Brainstorming",
-  "Idea Convergence",
-  "Prototyping",
-  "Engineering/Design",
-  "Materials Selection",
-  "Business Modeling",
-  "Story/Presentation",
-];
+
+const getProjectList = (project) => {
+  const listOfProject = Object.entries(project).map(
+    ([projectId, projectObj]) => {
+      return { ...projectObj, id: projectId };
+    }
+  );
+  return listOfProject;
+};
+
 const SearchDropdown = ({
   isDropped,
   setIsDropped,
   setPhaseFilter,
   phaseFilter,
+  setTeamFilter,
+  teamFilter,
 }) => {
+  const [teams] = useData("/project", getProjectList);
+
   return (
     <>
       {isDropped && (
@@ -57,10 +61,10 @@ const SearchDropdown = ({
           </IconButton>
           <Typography variant="h7" sx={{ left: 0, p: 2 }}>
             {" "}
-            Search By <span style={{ fontWeight: "bold" }}>Current Phase</span>
+            Search By <span style={{ fontWeight: "bold" }}>Expertise</span>
           </Typography>
           <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
-            {currentPhases.map((phase, i) => (
+            {expertises.map((phase, i) => (
               <Chip
                 key={i}
                 style={{
@@ -72,6 +76,29 @@ const SearchDropdown = ({
                   phaseFilter.includes(phase)
                     ? setPhaseFilter(phaseFilter.filter((p) => p !== phase))
                     : setPhaseFilter([...phaseFilter, phase]);
+                }}
+              />
+            ))}
+          </Box>
+
+          <Typography variant="h7" sx={{ left: 0, p: 2 }}>
+            {" "}
+            Search By <span style={{ fontWeight: "bold" }}>Team</span>
+          </Typography>
+
+          <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
+            {teams.map((team, i) => (
+              <Chip
+                key={i}
+                style={{
+                  backgroundColor: teamFilter.includes(team.id) && "#f1b844",
+                }}
+                label={team.name}
+                sx={{ mx: 1, my: 0.5 }}
+                onClick={() => {
+                  teamFilter.includes(team.id)
+                    ? setTeamFilter(teamFilter.filter((t) => t !== team.id))
+                    : setTeamFilter([...teamFilter, team.id]);
                 }}
               />
             ))}

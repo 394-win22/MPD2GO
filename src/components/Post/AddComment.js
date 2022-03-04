@@ -2,7 +2,7 @@ import { useState, useContext, useMemo } from "react";
 import { Box, Button } from "@mui/material";
 import { RichTextEditor } from "@mantine/rte";
 import { useUserState } from "utilities/firebase.js";
-import { UserContext } from 'components/Routing'
+import { UserContext } from "components/Routing";
 import { createNotification } from "utilities/notifications";
 
 const topicTags = [
@@ -25,7 +25,6 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
     var el = document.createElement("html");
     el.innerHTML = comment;
     var mentionSpans = el.getElementsByClassName("mention");
-
     // add link to mention spans
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
@@ -37,8 +36,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         }
       });
 
-    const modifiedContent = el.querySelector('body').innerHTML;
-
+    const modifiedContent = el.querySelector("body").innerHTML;
     replyToComment(modifiedContent);
 
     // add mentioned to notification
@@ -55,7 +53,6 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         }
       });
 
-
     setComment("");
     setIsShowTextField(false);
   };
@@ -69,32 +66,39 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
-
         // limit the items in list to 5
         renderList(includesSearchTerm.slice(0, 5));
       },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", maxWidth: "600px" }}>
-
       <RichTextEditor
         controls={[
-          ['bold', 'italic', 'underline', 'link'],
-          ['unorderedList', 'h1', 'h2', 'h3'],
-          ['sup', 'sub'],
-          ['alignLeft', 'alignCenter', 'alignRight'],
+          ["bold", "italic", "underline", "link"],
+          ["unorderedList", "h1", "h2", "h3"],
+          ["sup", "sub"],
+          ["alignLeft", "alignCenter", "alignRight"],
         ]}
-        onImageUpload={() => { return new Promise((_, reject) => { reject('Image uploading not allowed.') }) }}
+        onImageUpload={() => {
+          return new Promise((_, reject) => {
+            reject("Image uploading not allowed.");
+          });
+        }}
         value={comment}
         onChange={setComment}
         placeholder="Type @ or # to see mentions autocomplete"
         mentions={mentions}
-        style={{ marginTop: "12px", width: "100%" }}
-        onDragStart={() => { return false }}
-        onDrop={() => { return false }}
+        style={{ marginLeft: "8px", marginTop: "16px", width: "100%" }}
+        onDragStart={() => {
+          return false;
+        }}
+        onDrop={() => {
+          return false;
+        }}
       />
 
       <Box
@@ -113,7 +117,13 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         >
           Cancel
         </Button>
-        <Button variant="contained" type="submit" onClick={() => { if (comment != '<p><br></p>') handleSubmit() }}>
+        <Button
+          variant="contained"
+          type="submit"
+          onClick={() => {
+            if (comment !== "<p><br></p>") handleSubmit();
+          }}
+        >
           Send
         </Button>
       </Box>

@@ -1,16 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Typography,
-  CardHeader,
-  CardContent,
-  Avatar,
-  Card,
-  Box,
-  Stack,
-} from "@mui/material/";
+import { Typography, CardHeader, Avatar, Stack, Chip } from "@mui/material";
 import moment from "moment";
-import Chip from "@mui/material/Chip";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import { UserContext } from "components/Routing";
 
