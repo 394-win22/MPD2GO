@@ -5,11 +5,11 @@ import moment from "moment";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import { UserContext } from "components/Routing";
 
-const AvatarWithTag = ({ user, post }) => {
+const AvatarWithTag = ({ user, post, menu }) => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const projectList = context.projectList;
-  let teamData;
+  let teamData
   if ("teamId" in user) {
     teamData = projectList.find((obj) => obj.uid === user.teamId);
   }
@@ -27,6 +27,9 @@ const AvatarWithTag = ({ user, post }) => {
             navigate(`/profile/${user.uid}`);
           }}
         />
+      }
+      action={
+        menu
       }
       title={
         <Stack direction="row" spacing={3}>
@@ -48,7 +51,6 @@ const AvatarWithTag = ({ user, post }) => {
                 "&:active": {
                   backgroundColor: shade(teamData.teamColor, -0.5) + " !important"
                 },
-
               }}
               onClick={(event) => {
                 event.stopPropagation();

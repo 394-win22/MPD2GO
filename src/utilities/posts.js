@@ -34,16 +34,17 @@ export const addCommentToPost = (
   );
 };
 
-export const replyToThread = (uid, postId, path, comment) => {
+export const replyToThread = (uid,postAuthorUid, postId, path, comment) => {
   pushData(`posts/${path}`, {
     author: uid,
     comment: comment,
     time: Date.now(),
   });
   updateData(`posts/${postId}`, {
-    numComments: increment(1),
-  });
-};
+    numComments: increment(1)
+  })
+  createNotification(postAuthorUid, uid, postId, comment, "reply");
+}
 
 export const getUserDataFromUID = (uid, users) => {
   return users.find((user) => user.uid === uid);

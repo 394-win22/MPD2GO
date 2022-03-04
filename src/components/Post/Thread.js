@@ -141,7 +141,7 @@ const Thread = ({ postId, ids, data, style }) => {
       path += id;
     });
     path += "/threads/";
-    replyToThread(user.uid, postId, path, comment);
+    replyToThread(user.uid, postAuthor.uid, postId, path, comment);
     setIsShowTextField(false);
   };
 
@@ -178,7 +178,7 @@ const Thread = ({ postId, ids, data, style }) => {
       path += "/threads/";
       path += id;
     });
-    if (window.confirm("Are you sure you want to delete this comment")) {
+    if (window.confirm("Are you sure you want to delete this comment? ")) {
       const totalComments = totalCommentsInThread();
       deleteData(`/posts/${path}`);
       updateData(`posts/${postId}`, {
