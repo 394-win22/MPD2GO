@@ -46,21 +46,38 @@ const Directory = () => {
 		expertise: [],
 		type: []
 	});
-	const [filteredUsers, setFilteredUsers] = useState(users);
 
-	useEffect(() => {
-		if (filter.expertise.length > 0) {
-			console.log(filter)
-			setFilteredUsers(users.filter((user) => "expertise" in user && 
-				filter.expertise.every(x=>Object.values(user.expertise).includes(x)) &&
-					filter.type.every(x=>Object.values(getStatus(user)).includes(x))));
-		} else {
-			setFilteredUsers(users)
+	let filteredUsers= users;
+
+	function filtering(e){
+		let x = true;
+		if (!("expertise" in e)&& filter.expertise.length > 0 || !("year" in e) && filter.type.length>0 ){
+		  return false;
 		}
+		if(("expertise" in e) && filter.expertise.length > 0){
+		  x = x && filter.expertise.every(x=>Object.values(e.expertise).includes(x));
+		}
+		// if(query) {
+		//   x = x && e.description.toLowerCase().includes(query.toLowerCase());
+		// }
+		if("year" in e && filter.type.length>0){
+		  x= x && filter.type.every(x=> [getStatus(e)].includes(x));
+		}
+		return x;
+		
+	}
 
-	}, [filter, users]);
+	if (filter.expertise.length > 0 || filter.type.length>0) {
+		filteredUsers = users.filter((e) => {
+		  //console.log(filtering(e));
+		  return (
+			filtering(e)
+		  );
+		});
+		
+	}
+	
 
-	// const isYear = (("year" in userData) && userData.year !== "")
 	return (
 		<>
 			<Button
