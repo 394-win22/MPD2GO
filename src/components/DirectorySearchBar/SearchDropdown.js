@@ -1,4 +1,4 @@
-import { Card, Button, IconButton, Typography, Chip } from "@mui/material";
+import { Card, IconButton, Typography, Chip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
 
@@ -19,7 +19,6 @@ const types = [
   'Current Student',
   'Alumni'
 ]
-
 
 const SearchDropdown = ({
   isDropped,
@@ -108,7 +107,7 @@ const SearchDropdown = ({
                       });
                   }}
                 />
-              )
+              );
             })}
           </Box>
         </Card>

@@ -42,14 +42,13 @@ const DirectorySearchBar = ({ setQuery, filter, setFilter }) => {
           onClick={() => setIsDropped(true)}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search…"
-          style={{ width: "80%" }}
+          style={{ paddingLeft: "50px", width: "100%" }}
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
       <SearchDropdown
         isDropped={isDropped}
         setIsDropped={setIsDropped}
-        setQuery={setQuery}
         filter={filter}
         setFilter={setFilter}
       />
