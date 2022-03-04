@@ -7,14 +7,14 @@ import {
   Avatar,
   Box,
   Button,
-  ListItem,
-  Divider,
+    Divider,
 } from "@mui/material";
 import { UserContext } from "components/Routing";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CommentNotification from "./CommentNotification";
 import CommentReplyNotification from "./CommentReplyNotification";
 import MentionNotification from "./MentionNotification";
+import {ClearAllNotification} from "./ClearAllNotificationButton";
 
 const Notifications = () => {
   const navigate = useNavigate();
@@ -43,7 +43,13 @@ const Notifications = () => {
                 />
               );
             case "reply":
-              return <CommentReplyNotification key={id} notifId ={id} notifObj={notifObj} />;
+              return (
+                <CommentReplyNotification
+                  key={id}
+                  notifId={id}
+                  notifObj={notifObj}
+                />
+              );
             case "mention":
               return (
                 <MentionNotification
@@ -68,15 +74,21 @@ const Notifications = () => {
 
   return (
     <>
-      <Button
-        sx={{ mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ flexGrow: "1" }}>
+          <Button
+            sx={{ mb: 2, color: "white" }}
+            variant="contained"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Back
+          </Button>
+        </Box>
+
+            <ClearAllNotification uid={userData.uid}/>
+      </Box>
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
         <CardHeader
           sx={{ padding: "10px 16px" }}

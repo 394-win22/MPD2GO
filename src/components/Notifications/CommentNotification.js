@@ -15,7 +15,8 @@ import { UserContext } from "components/Routing";
 import RichTextEditor from "@mantine/rte";
 
 import { markNotificationAsRead } from "utilities/notifications";
-
+import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
+import IconButton from "@mui/material/IconButton";
 const CommentNotification = ({ notifId, notifObj }) => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
@@ -36,6 +37,18 @@ const CommentNotification = ({ notifId, notifObj }) => {
         component={ListItemButton}
         onClick={handleNotificationClicked}
         alignItems="flex-start"
+        secondaryAction={
+          <IconButton
+            edge="end"
+            aria-label="Mark this notification as read"
+            onClick={(event) => {
+              event.stopPropagation();
+              markNotificationAsRead(context.user.uid, notifId);
+            }}
+          >
+            <MarkChatReadIcon />
+          </IconButton>
+        }
         sx={{ height: "100%", width: "100%", padding: "18px" }}
       >
         <ListItemAvatar>
