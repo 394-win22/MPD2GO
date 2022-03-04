@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import RichTextEditor from "@mantine/rte";
 import { Card, Button, CardContent, Box, Chip, Stack } from "@mui/material";
+import BackButton from "../Navigation/BackButton"
 
 import Thread from "./Thread";
 import { UserContext } from "components/Routing";
@@ -48,7 +49,7 @@ const PostWithThreads = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box sx={{ flexGrow: "1" }}>
+        {/* <Box sx={{ flexGrow: "1" }}>
           <Button
             sx={{ mb: 2, color: "white" }}
             variant="contained"
@@ -58,8 +59,7 @@ const PostWithThreads = () => {
           >
             Back
           </Button>
-        </Box>
-
+        </Box> */}
         {post.author === user.uid && (
           <EditPostButton
             key={post}
@@ -73,6 +73,7 @@ const PostWithThreads = () => {
         )}
       </Box>
       <Card sx={{ mb: 10 }}>
+        <BackButton/>
         <AvatarWithTag user={postAuthor} post={post} />
 
         <CardContent sx={{ px: 0, pt: 0 }}>

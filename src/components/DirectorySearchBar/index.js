@@ -37,6 +37,11 @@ const DirectorySearchBar = ({
   setExpertiseFilter,
 }) => {
   const [isDropped, setIsDropped] = useState(false);
+
+  const handleClickAway = () => {
+    setIsDropped(false);
+  };
+
   return (
     <>
       <Search>
@@ -51,13 +56,13 @@ const DirectorySearchBar = ({
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
-      <SearchDropdown
-        isDropped={isDropped}
-        setIsDropped={setIsDropped}
-        setQuery={setQuery}
-        setExpertiseFilter={setExpertiseFilter}
-        expertiseFilter={expertiseFilter}
-      />
+        <SearchDropdown
+          isDropped={isDropped}
+          setIsDropped={setIsDropped}
+          setQuery={setQuery}
+          setExpertiseFilter={setExpertiseFilter}
+          expertiseFilter={expertiseFilter}
+        />
     </>
   );
 };

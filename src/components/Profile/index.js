@@ -14,6 +14,7 @@ import {
 import { Email as EmailIcon } from "@mui/icons-material";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import BackButton from "../Navigation/BackButton"
 
 // local files
 import { EditUserButton } from "../EditProfile/EditUserButton";
@@ -64,17 +65,9 @@ const Profile = ({ user }) => {
 
   return (
     <>
-      <Button
-        sx={{ mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
-      <Card sx={{ px: 4, py: 4, mb: 10 }} style={{ borderRadius: 10 }}>
-        <Box textAlign="center">
+      <Card style={{ borderRadius: 10 }}>
+        <BackButton/>
+        <Box textAlign="center" sx={{ px: 4, py: 4, mb: 10 }} >
           <Avatar
             alt={userData.displayName}
             src={userData.photoURL}

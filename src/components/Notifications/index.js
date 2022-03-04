@@ -14,6 +14,7 @@ import { UserContext } from "components/Routing";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CommentNotification from "./CommentNotification";
 import MentionNotification from "./MentionNotification";
+import BackButton from "../Navigation/BackButton"
 
 const Notifications = () => {
   const navigate = useNavigate();
@@ -67,16 +68,9 @@ const Notifications = () => {
 
   return (
     <>
-      <Button
-        sx={{ mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
+      
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+      <BackButton/>
         <CardHeader
           sx={{ padding: "10px 16px" }}
           avatar={

@@ -15,6 +15,7 @@ import {
 import { UserContext } from "components/Routing";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import DirectorySearchBar from "components/DirectorySearchBar";
+import BackButton from "../Navigation/BackButton"
 
 const getStatus = (userData) => {
   if (!("year" in userData) || userData.year === "") {
@@ -63,22 +64,14 @@ const Directory = () => {
 
   return (
     <>
-      <Button
-        sx={{ ml: 1, mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
+      <Card sx={{ mb: 10, mt: 2 }} style={{ borderRadius: 10 }}>
+      <BackButton/>
       <DirectorySearchBar
         setQuery={setQuery}
         filter={filter}
         expertiseFilter={expertiseFilter}
         setExpertiseFilter={setExpertiseFilter}
       />
-      <Card sx={{ mb: 10, mt: 2 }} style={{ borderRadius: 10 }}>
         <CardHeader
           sx={{ padding: "10px 16px" }}
           avatar={
