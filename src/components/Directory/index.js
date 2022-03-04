@@ -17,13 +17,13 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import DirectorySearchBar from "components/DirectorySearchBar";
 
 const getStatus = (userData) => {
-  if (!("year" in userData) || userData.year === "") {
-    return "";
+  if (!("year" in userData) || userData.year == "") {
+    return "Unknown Status";
   }
   if (userData.year < new Date().getFullYear()) {
-    return `Alumni`;
+    return "Alumni";
   } else {
-    return `Current Student`;
+    return "Current Student";
   }
 };
 
@@ -31,35 +31,41 @@ const Directory = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const users = context.userList;
-  const [, setQuery] = useState("");
-  const [expertiseFilter, setExpertiseFilter] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState(users);
+  const [filter, setFilter] = useState({
+    expertise: [],
+    type: [],
+  });
+  const [query, setQuery] = useState("");
 
-  const filter = (e) => {
-    const keyword = e.target.value;
-    if (keyword !== "") {
-      const lowQuery = keyword.toLowerCase();
-      const results = users.filter((user) => {
-        return user.displayName.toLowerCase().includes(lowQuery);
-      });
-      setFilteredUsers(results);
-    } else {
-      setFilteredUsers(users);
+  let filteredUsers = users;
+
+  function filtering(e) {
+    let x = true;
+    if (
+      (!("expertise" in e) && filter.expertise.length > 0) ||
+      (!("year" in e) && filter.type.length > 0)
+    ) {
+      return false;
     }
-  };
-  useEffect(() => {
-    if (expertiseFilter.length > 0) {
-      setFilteredUsers(
-        users.filter(
-          (user) =>
-            "expertise" in user &&
-            Object.values(user.expertise).some((x) =>
-              expertiseFilter.includes(x)
-            )
-        )
-      );
+    if ("expertise" in e && filter.expertise.length > 0) {
+      x =
+        x &&
+        filter.expertise.every((i) => Object.values(e.expertise).includes(i));
     }
-  }, [expertiseFilter, users]);
+    if (query) {
+      x = x && e.displayName.toLowerCase().includes(query.toLowerCase());
+    }
+    if ("year" in e && filter.type.length > 0) {
+      x = x && filter.type.every((i) => [getStatus(e)].includes(i));
+    }
+    return x;
+  }
+
+  if (query !== "" || filter.expertise.length > 0 || filter.type.length > 0) {
+    filteredUsers = users.filter((e) => {
+      return filtering(e);
+    });
+  }
 
   return (
     <>
@@ -75,10 +81,9 @@ const Directory = () => {
       <DirectorySearchBar
         setQuery={setQuery}
         filter={filter}
-        expertiseFilter={expertiseFilter}
-        setExpertiseFilter={setExpertiseFilter}
+        setFilter={setFilter}
       />
-      <Card sx={{ mb: 10, mt: 2 }} style={{ borderRadius: 10 }}>
+      <Card sx={{ mx: 1, mt: 3 }} style={{ borderRadius: 10 }}>
         <CardHeader
           sx={{ padding: "10px 16px" }}
           avatar={
@@ -89,7 +94,6 @@ const Directory = () => {
           title="Directory"
           titleTypographyProps={{ sx: { fontSize: "16px" } }}
         />
-
         <List>
           {filteredUsers.map((user) => (
             <ListItem
