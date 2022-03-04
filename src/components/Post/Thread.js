@@ -9,6 +9,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { Message as MessageIcon } from "@mui/icons-material";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { UserContext } from "components/Routing";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
@@ -18,6 +19,7 @@ import { replyToThread } from "utilities/posts";
 import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
+import DeleteCommentMenu from "./DeleteCommentMenu";
 
 const useStyles = makeStyles({
   // Comment
@@ -223,10 +225,15 @@ const Thread = ({ postId, ids, data, style }) => {
       <Box className={classes.rightContainer}>
         {/* comment */}
         <Box className={classes.contentContainer}>
+
           <Box className={classes.infoContainer}>
-            <Typography variant="subtitle2">
-              {postAuthor.displayName}
-            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
+              <Typography variant="subtitle2">
+                {postAuthor.displayName}
+              </Typography>
+              {data.author === user.uid && <DeleteCommentMenu delThreadFunction={deleteThread} />}
+            </Box>
+
             <Typography className={classes.time}>
               {moment(data.time).format("MMMM Do YYYY, h:mm a")}
             </Typography>
@@ -274,17 +281,7 @@ const Thread = ({ postId, ids, data, style }) => {
               />
             </Button>
           )}
-          {data.author === user.uid && !isShowTextField && (
-            <Button
-              className={classes.deleteButton}
-              color="error"
-              onClick={() => {
-                deleteThread();
-              }}
-            >
-              Delete
-            </Button>
-          )}
+
         </Box>
 
         {/* child threads */}
@@ -303,7 +300,7 @@ const Thread = ({ postId, ids, data, style }) => {
             })}
         </Collapse>
       </Box>
-    </Box>
+    </Box >
   );
 };
 
