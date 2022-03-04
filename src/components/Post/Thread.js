@@ -1,10 +1,16 @@
 import { useState, useContext, memo } from "react";
 import { useNavigate } from "react-router";
-import { Box, Collapse, Button } from "@mui/material";
+import {
+  Box,
+  Collapse,
+  Button,
+  Avatar,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import { Message as MessageIcon } from "@mui/icons-material";
 import { UserContext } from "components/Routing";
 import { makeStyles } from "@mui/styles";
-import { Avatar, Typography, IconButton } from "@mui/material";
 import moment from "moment";
 import { RichTextEditor } from "@mantine/rte";
 
@@ -12,7 +18,6 @@ import { replyToThread } from "utilities/posts";
 import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
-import {red} from '@mui/material/colors';
 
 const useStyles = makeStyles({
   // Comment
@@ -32,9 +37,9 @@ const useStyles = makeStyles({
   },
   rightContainer: {
     display: "inline",
-    float: 'left',
+    float: "left",
     flexDirection: "column",
-    marginLeft: '5px',
+    marginLeft: "5px",
     alignItems: "flex-start",
     height: "100%",
     minWidth: "0px",
@@ -43,14 +48,14 @@ const useStyles = makeStyles({
   avatarButton: {
     width: "24px",
     height: "24px",
-    display: 'inline',
-    float: 'left'
+    display: "inline",
+    float: "left",
   },
   avatar: {
     width: "24px",
     height: "24px",
-    display: 'inline',
-    float: 'left',
+    display: "inline",
+    float: "left",
   },
   contentContainer: {
     marginLeft: "10px",
@@ -127,7 +132,6 @@ const Thread = ({ postId, ids, data, style }) => {
   const [isShowTextField, setIsShowTextField] = useState(false);
   const [isShowThreads, setIsShowThreads] = useState(true);
 
-
   const replyToComment = (comment) => {
     // GENERATE A PATH TO PUSH TO IN DATABASE
     let path = `${postId}`;
@@ -199,8 +203,8 @@ const Thread = ({ postId, ids, data, style }) => {
   const haveChild = "threads" in data && Object.values(data.threads).length > 0;
   if (haveChild) sortedThreads = Object.entries(data.threads).sort().reverse();
   return (
-    <Box className={classes.container} >
-      <Box className={classes.leftContainer} sx={{ml: 1 }}>
+    <Box className={classes.container}>
+      <Box className={classes.leftContainer} sx={{ ml: 1 }}>
         <IconButton
           className={classes.avatarButton}
           onClick={() => {
@@ -231,7 +235,11 @@ const Thread = ({ postId, ids, data, style }) => {
               {moment(data.time).format("MMMM Do YYYY, h:mm a")}
             </Typography>
           </Box>
-          <RichTextEditor readOnly value={data.comment} style={{marginLeft: -17, marginBottom: -20, border: 'none'}}/>
+          <RichTextEditor
+            readOnly
+            value={data.comment}
+            style={{ marginLeft: -17, marginBottom: -20, border: "none" }}
+          />
         </Box>
 
         {/* Box to add comment */}
@@ -247,7 +255,6 @@ const Thread = ({ postId, ids, data, style }) => {
         <Box className={classes.buttonContainer}>
           {!isShowThreads && haveChild && (
             <Button
-              color={red[500]}
               className={classes.showReplies}
               onClick={() => {
                 setIsShowThreads(true);
@@ -271,10 +278,10 @@ const Thread = ({ postId, ids, data, style }) => {
               />
             </Button>
           )}
-          {data.author == user.uid && !isShowTextField && (
+          {data.author === user.uid && !isShowTextField && (
             <Button
               className={classes.deleteButton}
-              color="primary"
+              color="error"
               onClick={() => {
                 deleteThread();
               }}

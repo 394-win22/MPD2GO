@@ -1,15 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import RichTextEditor from "@mantine/rte";
-import {
-  Typography,
-  Card,
-  Button,
-  CardContent,
-  Box,
-  Chip,
-  Stack,
-} from "@mui/material";
+import { Card, Button, CardContent, Box, Chip, Stack } from "@mui/material";
 
 import Thread from "./Thread";
 import { UserContext } from "components/Routing";
@@ -27,7 +19,6 @@ const PostWithThreads = () => {
   const [postAuthor, setPostAuthor] = useState({});
   const [isEdit, setIsEdit] = useState(false);
   const [postContent, setPostContent] = useState(post.description);
-  
 
   const user = context.user;
   const userList = context.userList;
@@ -43,14 +34,14 @@ const PostWithThreads = () => {
       setPostAuthor(postAuthor);
       setPostContent(post.description);
     }
-  }, [pageId, postList, userList]);
+  }, [navigate, pageId, postList, userList]);
   let sortedThreads = [];
   const haveChild = "threads" in post && Object.values(post.threads).length > 0;
 
   if (haveChild) sortedThreads = Object.entries(post.threads).sort().reverse();
 
   const handleSubmit = () => {
-    updateData(`/posts/${post.id}`, {description: postContent});
+    updateData(`/posts/${post.id}`, { description: postContent });
     setIsEdit(false);
   };
 
@@ -69,7 +60,7 @@ const PostWithThreads = () => {
           </Button>
         </Box>
 
-        {post.author == user.uid && (
+        {post.author === user.uid && (
           <EditPostButton
             key={post}
             post={post}
@@ -77,19 +68,17 @@ const PostWithThreads = () => {
             setIsEdit={setIsEdit}
           />
         )}
-        {post.author == user.uid && <DeletePostButton key={post} post={post} />}
+        {post.author === user.uid && (
+          <DeletePostButton key={post} post={post} />
+        )}
       </Box>
       <Card sx={{ mb: 10 }}>
         <AvatarWithTag user={postAuthor} post={post} />
 
         <CardContent sx={{ px: 0, pt: 0 }}>
-          
           {isEdit ? (
             <>
-              <RichTextEditor
-                value={postContent}
-                onChange={setPostContent}
-              />
+              <RichTextEditor value={postContent} onChange={setPostContent} />
               <Box alignItems="right">
                 <Button
                   onClick={handleSubmit}
@@ -100,10 +89,9 @@ const PostWithThreads = () => {
                     mt: 1,
                   }}
                 >
-                  submit
+                  Submit
                 </Button>
               </Box>
-              
             </>
           ) : (
             <RichTextEditor
@@ -116,7 +104,7 @@ const PostWithThreads = () => {
           <Stack
             direction="row"
             spacing={1}
-            sx={{ mt: 2, overflowX: "scroll", paddingLeft: 2}}
+            sx={{ mt: 2, overflowX: "scroll", paddingLeft: 2 }}
           >
             {"tags" in post &&
               post.tags.map((tag, i) => (

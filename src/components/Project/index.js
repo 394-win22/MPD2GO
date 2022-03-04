@@ -5,21 +5,20 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardMedia,
   Avatar,
   Box,
-  Button
+  Button,
+  Chip,
 } from "@mui/material";
-import LinkIcon from '@mui/icons-material/Link'
+import LinkIcon from "@mui/icons-material/Link";
 import moment from "moment";
-import Chip from "@mui/material/Chip";
 import ReactGoogleSlides from "react-google-slides";
 import { getProjectFromUid } from "../../utilities/firebase";
 import { getUserDataFromUID } from "../../utilities/posts";
 import { UserContext } from "components/Routing";
 import EditProjectButton from "components/EditProject/EditProjectButton";
-import DriveLogo from 'google-drive.png'
-import MuralLogo from 'mural.png'
+import DriveLogo from "google-drive.png";
+import MuralLogo from "mural.png";
 
 const Project = (user) => {
   const navigate = useNavigate();
@@ -44,8 +43,8 @@ const Project = (user) => {
   return (
     <>
       <Button
-        sx={{ mb: 2, color: 'white' }}
-        variant='contained'
+        sx={{ mb: 2, color: "white" }}
+        variant="contained"
         onClick={() => {
           navigate(-1);
         }}
@@ -53,11 +52,13 @@ const Project = (user) => {
         Back
       </Button>
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
-        {Object.values(projectData.member).includes(user.user.uid) &&
-        <EditProjectButton project = {projectData}
-          projectId={projectId}
-          setProjectData={setProjectData}/>
-        }
+        {Object.values(projectData.member).includes(user.user.uid) && (
+          <EditProjectButton
+            project={projectData}
+            projectId={projectId}
+            setProjectData={setProjectData}
+          />
+        )}
         <Box sx={{ my: 2 }} style={{ display: "block" }}>
           <Avatar
             sx={{ width: 100, height: "auto", mx: 2 }}
@@ -125,23 +126,43 @@ const Project = (user) => {
             showControls
             loop
           />
-          {projectData.resources !== undefined && Object.values(projectData.resources).length > 0 &&
-            <>
-              <Typography variant="h6" align="left" sx={{ my: 1 }}>
-                Additional Resources
-              </Typography>
-              {Object.values(projectData.resources).map((resource) => (
-                <>
-                  <Button sx={{ marginLeft: '8px' }}
-                    startIcon={(resource.url.includes('mural')) ? <img src={MuralLogo} alt="" style={{ height: 20, width: 20 }} /> : (
-                      (resource.url.includes('drive') ? <img src={DriveLogo} alt="" style={{ height: '20px', width: '20px' }} /> : <LinkIcon />))}
-                    onClick={() => {
-                      window.open(resource.url)
-                    }}
-                  >{resource.text}</Button>
-                </>
-              ))}
-            </>}
+          {projectData.resources !== undefined &&
+            Object.values(projectData.resources).length > 0 && (
+              <>
+                <Typography variant="h6" align="left" sx={{ my: 1 }}>
+                  Additional Resources
+                </Typography>
+                {Object.values(projectData.resources).map((resource) => (
+                  <>
+                    <Button
+                      sx={{ marginLeft: "8px" }}
+                      startIcon={
+                        resource.url.includes("mural") ? (
+                          <img
+                            src={MuralLogo}
+                            alt=""
+                            style={{ height: 20, width: 20 }}
+                          />
+                        ) : resource.url.includes("drive") ? (
+                          <img
+                            src={DriveLogo}
+                            alt=""
+                            style={{ height: "20px", width: "20px" }}
+                          />
+                        ) : (
+                          <LinkIcon />
+                        )
+                      }
+                      onClick={() => {
+                        window.open(resource.url);
+                      }}
+                    >
+                      {resource.text}
+                    </Button>
+                  </>
+                ))}
+              </>
+            )}
         </CardContent>
       </Card>
     </>

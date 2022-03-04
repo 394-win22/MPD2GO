@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import EditProject from "/";
 
-const EditProjectButton = ({ project, projectId, setProjectData }) => {  
+const EditProjectButton = ({ project, projectId, setProjectData }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -12,22 +12,24 @@ const EditProjectButton = ({ project, projectId, setProjectData }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   return (
     <>
-      <Button variant="contained"
-      sx={{margin:1}}
-      style={{float:"right"}}
-      onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        sx={{ margin: 1 }}
+        style={{ float: "right" }}
+        onClick={handleClickOpen}
+      >
         Edit Project
       </Button>
       <EditProject
-          project={project}
-          projectId={projectId}
-          open={open}
-          handleClose={handleClose}
-          setProjectData={setProjectData}
-        />
+        project={project}
+        projectId={projectId}
+        open={open}
+        handleClose={handleClose}
+        setProjectData={setProjectData}
+      />
     </>
   );
 };

@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 import { registerWithEmailAndPassword } from "utilities/firebase";
 
 export default function SignUp() {
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

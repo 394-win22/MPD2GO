@@ -21,7 +21,6 @@ import {
   FormControl,
   Select,
   Chip,
-  OutlinedInput,
   Input,
 } from "@mui/material/";
 
@@ -40,7 +39,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     borderRadius: "10px",
     overflowY: "scroll",
-    overflowX: "hidden"
+    overflowX: "hidden",
   },
   title: {
     textAlign: "center",
@@ -60,7 +59,7 @@ const expertiseList = [
   "UI/UX Design",
   "Finance",
   "Graphic Design",
-  "Project Management"
+  "Project Management",
 ];
 
 function editUserInFirebase(user, userID, formValues) {
@@ -225,9 +224,13 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               onChange={(e) => {
                 onImageChange(e);
               }}
-              style={{display: "none"}}
+              style={{ display: "none" }}
             />
-            <Button variant="contained" component="span" sx={{ m: 1, width: "25ch" }}>
+            <Button
+              variant="contained"
+              component="span"
+              sx={{ m: 1, width: "25ch" }}
+            >
               Upload Avatar File
             </Button>
           </label>
@@ -241,12 +244,12 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               onChange={handleTagChange}
               multiple
               renderValue={(selected) => (
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} />
-                ))}
-              </Box>
-            )}
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+              )}
             >
               {expertiseList.map((expert) => (
                 <MenuItem key={expert} value={expert}>
@@ -255,7 +258,6 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               ))}
             </Select>
           </FormControl>
-
 
           <TextField
             name="bio"
