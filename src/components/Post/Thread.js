@@ -19,6 +19,7 @@ import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
 import DeleteThread from "./DeleteThread";
+import { deleteNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
   // Comment
@@ -113,11 +114,6 @@ const useStyles = makeStyles({
     fontSize: "13px",
     padding: "8px 14px 8px 14px",
   },
-  deleteButton: {
-    fontSize: "13px",
-    padding: "80px 14px 8px 14px",
-    marginLeft: "80px"
-  },
   showReplies: {
     fontSize: "13px",
     padding: "8px 14px 8px 10px",
@@ -133,7 +129,7 @@ const Thread = ({ postId, ids, data, style }) => {
   const [isShowTextField, setIsShowTextField] = useState(false);
   const [isShowThreads, setIsShowThreads] = useState(true);
 
-  const replyToComment = (comment) => {
+  const replyToComment = (comment, notifications) => {
     // GENERATE A PATH TO PUSH TO IN DATABASE
     let path = `${postId}`;
     ids.forEach((id) => {
@@ -141,7 +137,7 @@ const Thread = ({ postId, ids, data, style }) => {
       path += id;
     });
     path += "/threads/";
-    replyToThread(user.uid, postId, path, comment);
+    replyToThread(user.uid, postId, path, comment, notifications);
     setIsShowTextField(false);
   };
 
@@ -177,6 +173,29 @@ const Thread = ({ postId, ids, data, style }) => {
     return childrenTotal;
   };
 
+  const deleteCommentNotificationsRecursive = (thread, uids) => {
+    const notifications = thread.notifications;
+    if (notifications) {
+      const lst = Object.values(notifications);
+      if (lst.length > 0) {
+        lst.forEach((notifId) => {
+          deleteNotification(notifId, uids)
+        });
+      }
+    }
+
+    const children = thread.threads;
+    if (children) {
+      const lst = Object.values(children);
+      lst.forEach((child) => deleteCommentNotificationsRecursive(child, uids));
+    }
+  }
+
+  const deleteCommentNotifications = (path) => {
+    const uids = userList.map((user)=>user.uid);
+    deleteCommentNotificationsRecursive(data, uids);
+  }
+
   const deleteThread = () => {
     let path = `${postId}`;
     ids.forEach((id) => {
@@ -185,6 +204,7 @@ const Thread = ({ postId, ids, data, style }) => {
     });
     if (window.confirm("Are you sure you want to delete this comment")) {
       const totalComments = totalCommentsInThread();
+      deleteCommentNotifications(path);
       deleteData(`/posts/${path}`);
       updateData(`posts/${postId}`, {
         numComments: increment(-1 * totalComments),

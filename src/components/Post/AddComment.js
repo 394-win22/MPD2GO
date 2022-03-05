@@ -39,21 +39,25 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
 
     const modifiedContent = el.querySelector("body").innerHTML;
 
-    replyToComment(modifiedContent);
-
+    let notificationIds = [];
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
         if (mentionSpan.getAttribute("data-denotation-char") === "@") {
-          createNotification(
+          const notificationPath = createNotification(
             mentionSpan.getAttribute("data-id"),
             user.uid,
             postId,
             modifiedContent,
             "mention"
-          );
+          ).toString().split('/');
+          const notificationId = notificationPath[notificationPath.length-1];
+          //console.log("NOTIF ID:", notificationId);
+          notificationIds.push(notificationId);
         }
       });
+
+    replyToComment(modifiedContent, notificationIds);
 
     setComment("");
     setIsShowTextField(false);

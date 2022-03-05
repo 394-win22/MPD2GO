@@ -7,7 +7,7 @@ export const createNotification = (
   content,
   type
 ) => {
-  pushData(`users/${receiverUid}/notifications`, {
+  return pushData(`users/${receiverUid}/notifications`, {
     senderUid: senderUid,
     postId: postId,
     content: content,
@@ -19,3 +19,7 @@ export const createNotification = (
 export const markNotificationAsRead = (uid, notificationId) => {
   removeAtPath(`users/${uid}/notifications/${notificationId}`);
 };
+
+export const deleteNotification = (notificationId, uids) => {
+  uids.forEach((uid) => markNotificationAsRead(uid, notificationId));
+}

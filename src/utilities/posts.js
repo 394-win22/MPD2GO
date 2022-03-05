@@ -34,11 +34,12 @@ export const addCommentToPost = (
   );
 };
 
-export const replyToThread = (uid, postId, path, comment) => {
+export const replyToThread = (uid, postId, path, comment, notifications) => {
   pushData(`posts/${path}`, {
     author: uid,
     comment: comment,
     time: Date.now(),
+    associatedNotificationIds: notifications,
   });
   updateData(`posts/${postId}`, {
     numComments: increment(1),

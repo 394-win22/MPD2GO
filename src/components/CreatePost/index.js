@@ -118,13 +118,14 @@ const CreatePost = () => {
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
         if (mentionSpan.getAttribute("data-denotation-char") === "@") {
-          createNotification(
+          const notRef = createNotification(
             mentionSpan.getAttribute("data-id"),
             user.uid,
             postId,
             modifiedContent,
             "mention"
           );
+          console.log("notRef:", notRef);
         }
       });
 
