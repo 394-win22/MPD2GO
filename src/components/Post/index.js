@@ -9,6 +9,7 @@ import ReplyTextField from "./ReplyTextField";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 import { updateData } from "utilities/firebase";
 import EditPostMenu from "./EditPostMenu";
+import BackButton from "../Navigation/BackButton"
 
 const PostWithThreads = () => {
   const navigate = useNavigate();
@@ -47,25 +48,14 @@ const PostWithThreads = () => {
 
   return (
     <>
-
-      <Button
-        sx={{ mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
-
-      <Card sx={{ mb: 10 }}>
+      <Card sx={{ mb:10, borderRadius: 2, padding: 1}}>
+      <BackButton/>
         <AvatarWithTag
           user={postAuthor}
           post={post}
           menu={post.author == user.uid ?
             <EditPostMenu post={post} isEdit={isEdit} setIsEdit={setIsEdit} /> : null}
         />
-
         <CardContent sx={{ px: 0, pt: 0 }}>
           {isEdit ? (
             <>
@@ -83,7 +73,7 @@ const PostWithThreads = () => {
                     mr: 1,
                   }}
                 >
-                  Calcel
+                  Cancel
                 </Button>
                 <Button
                   onClick={handleSubmit}
