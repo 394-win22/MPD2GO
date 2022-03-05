@@ -29,7 +29,8 @@ const EditPostMenu = ({ post, isEdit, setIsEdit }) => {
             <IconButton aria-label="menu" aria-controls={isMenuOpen ? 'basic-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={isMenuOpen ? 'true' : undefined}
-                onClick={handleClick}>
+                onClick={handleClick}
+            >
                 <MoreVertIcon />
             </IconButton>
             <Menu
