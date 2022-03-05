@@ -19,7 +19,7 @@ import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
 import DeleteThread from "./DeleteThread";
-import { deleteNotification } from "utilities/notifications";
+import { deleteCommentNotifications } from "utilities/notifications";
 
 const useStyles = makeStyles({
   // Comment
@@ -173,29 +173,6 @@ const Thread = ({ postId, ids, data, style }) => {
     return childrenTotal;
   };
 
-  const deleteCommentNotificationsRecursive = (thread, uids) => {
-    const notifications = thread.notifications;
-    if (notifications) {
-      const lst = Object.values(notifications);
-      if (lst.length > 0) {
-        lst.forEach((notifId) => {
-          deleteNotification(notifId, uids)
-        });
-      }
-    }
-
-    const children = thread.threads;
-    if (children) {
-      const lst = Object.values(children);
-      lst.forEach((child) => deleteCommentNotificationsRecursive(child, uids));
-    }
-  }
-
-  const deleteCommentNotifications = (path) => {
-    const uids = userList.map((user)=>user.uid);
-    deleteCommentNotificationsRecursive(data, uids);
-  }
-
   const deleteThread = () => {
     let path = `${postId}`;
     ids.forEach((id) => {
@@ -204,7 +181,7 @@ const Thread = ({ postId, ids, data, style }) => {
     });
     if (window.confirm("Are you sure you want to delete this comment")) {
       const totalComments = totalCommentsInThread();
-      deleteCommentNotifications(path);
+      deleteCommentNotifications(path, userList, data);
       deleteData(`/posts/${path}`);
       updateData(`posts/${postId}`, {
         numComments: increment(-1 * totalComments),

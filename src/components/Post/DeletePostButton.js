@@ -10,8 +10,9 @@ import {
   Button,
 } from "@mui/material";
 import { deleteData } from "../../utilities/firebase";
+import { deleteCommentNotifications } from "utilities/notifications";
 
-export const DeletePostButton = ({ post }) => {
+export const DeletePostButton = ({ post, userList }) => {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const handleClickOpen = () => {
@@ -23,6 +24,12 @@ export const DeletePostButton = ({ post }) => {
   };
 
   function deletePost(post) {
+    if (post.threads) {
+      Object.keys(post.threads).map((key)=>{
+        const data = post.threads[key];
+        deleteCommentNotifications(`/posts/${post.id}/threads/${key}`, userList, data);
+      });
+    }
     deleteData(`/posts/${post.id}`);
     navigate("/");
     handleClose();

@@ -69,7 +69,7 @@ const PostWithThreads = () => {
           />
         )}
         {post.author === user.uid && (
-          <DeletePostButton key={post} post={post} />
+          <DeletePostButton key={post} post={post} userList={userList} />
         )}
       </Box>
       <Card sx={{ mb: 10 }}>
