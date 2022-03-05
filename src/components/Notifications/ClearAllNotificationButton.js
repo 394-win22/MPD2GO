@@ -33,13 +33,13 @@ export const ClearAllNotification = ({ uid }) => {
         color="error"
         sx={{ mb: 2 }}
       >
-        Clear All Notification
+        Clear All Notifications
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Clear All Notification</DialogTitle>
+        <DialogTitle>Clear All Notifications</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to clear all notification?
+            Are you sure you want to clear all notifications?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -49,6 +49,7 @@ export const ClearAllNotification = ({ uid }) => {
           <Button
             onClick={() => deleteAllNotification(uid)}
             color="primary"
+            variant="contained"
             autoFocus
           >
             Yes

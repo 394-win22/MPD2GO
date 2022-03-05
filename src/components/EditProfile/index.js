@@ -22,6 +22,7 @@ import {
   Select,
   Chip,
   Input,
+  Stack
 } from "@mui/material/";
 
 const useStyles = makeStyles({
@@ -155,21 +156,40 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
       sx={{ "& .MuiTextField-root": { m: 2, width: "25ch" } }}
     >
       <Box className={classes.container}>
+        <Typography
+          variant="h5"
+          component="h5"
+          align="center"
+          className={classes.title}
+        >
+          Edit Your Profile
+        </Typography>
         <form className={classes.form}>
-          <Typography
-            variant="h5"
-            component="h5"
-            align="center"
-            className={classes.title}
-          >
-            Edit Your Profile
-          </Typography>
+
+          <label htmlFor="Avatar-File">
+            <Input
+              accept="image/*"
+              id="Avatar-File"
+              type="file"
+              onChange={(e) => {
+                onImageChange(e);
+              }}
+              style={{ display: "none" }}
+            />
+            <Button
+              variant="contained"
+              component="span"
+              sx={{ m: 1, width: "25ch" }}
+            >
+              Upload Profile Photo
+            </Button>
+          </label>
           <TextField
             required
             name="displayName"
             value={formValues.displayName}
             onChange={handleInputChange}
-            label="name"
+            label="Name"
             type="text"
             InputLabelProps={{ shrink: true }}
           />
@@ -183,10 +203,20 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             InputLabelProps={{ shrink: true }}
           />
           <TextField
+            name="bio"
+            multiline
+            minRows={4}
+            value={formValues.bio}
+            onChange={handleInputChange}
+            label="Bio"
+            type="text"
+            InputLabelProps={{ shrink: true }}
+          />
+          <TextField
             name="location"
             value={formValues.location}
             onChange={handleInputChange}
-            label="location"
+            label="Location"
             type="text"
             InputLabelProps={{ shrink: true }}
           />
@@ -194,7 +224,7 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
             name="year"
             value={formValues.year}
             onChange={handleInputChange}
-            label="year"
+            label="Year"
             type="number"
             InputLabelProps={{ shrink: true }}
           />
@@ -216,24 +246,6 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
               })}
             </Select>
           </FormControl>
-          <label htmlFor="Avatar-File">
-            <Input
-              accept="image/*"
-              id="Avatar-File"
-              type="file"
-              onChange={(e) => {
-                onImageChange(e);
-              }}
-              style={{ display: "none" }}
-            />
-            <Button
-              variant="contained"
-              component="span"
-              sx={{ m: 1, width: "25ch" }}
-            >
-              Upload Avatar File
-            </Button>
-          </label>
           <FormControl sx={{ m: 1, width: "25ch" }}>
             <InputLabel id="expertise">Expertise</InputLabel>
             <Select
@@ -260,35 +272,27 @@ const EditUserModal = ({ user, userID, open, handleClose }) => {
           </FormControl>
 
           <TextField
-            name="bio"
-            multiline
-            minRows={4}
-            value={formValues.bio}
-            onChange={handleInputChange}
-            label="bio"
-            type="text"
-            InputLabelProps={{ shrink: true }}
-          />
-          <TextField
             name="linkedIn"
             value={formValues.linkedIn}
             onChange={handleInputChange}
-            label="linkedIn"
+            label="LinkedIn"
             type="url"
             InputLabelProps={{ shrink: true }}
           />
         </form>
-        <Button
-          variant="contained"
-          endIcon={<SendIcon />}
-          onClick={handleSubmit}
-          type="submit"
-        >
-          Edit
-        </Button>
-        <Button type="button" onClick={() => handleClose()}>
-          Cancel
-        </Button>
+        <Stack direction="row" s>
+
+          <Button type="button" onClick={() => handleClose()}>
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            type="submit"
+          >
+            Save
+          </Button>
+        </Stack>
       </Box>
     </Modal>
   );

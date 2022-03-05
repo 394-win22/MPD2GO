@@ -117,36 +117,22 @@ const Profile = ({ user }) => {
           <Divider />
           <Typography
             variant="body1"
+            style={{ color: "#7B7B7B" }}
+            sx={{ paddingLeft: 1, my: 1 }}
+          >
+            {getStatus(userData)}
+          </Typography>
+
+          <Typography
+            variant="body1"
             display="block"
             style={{ color: "#7B7B7B" }}
-            sx={{ flexGrow: 1, paddingLeft: 1, my: 1 }}
+            sx={{ flexGrow: 1, paddingLeft: 1 }}
           >
             {userData.year ? "Class of " + userData.year : "No Year"}
           </Typography>
 
-          <Stack direction="row" justifyContent="center">
-            <Typography
-              variant="body1"
-              style={{ color: "#7B7B7B" }}
-              sx={{ paddingLeft: 1 }}
-            >
-              {getStatus(userData)}
-            </Typography>
 
-            {"teamId" in userData && (
-              <Chip
-                key={projectData.name}
-                size="small"
-                label={projectData.name}
-                variant="outlined"
-                sx={{
-                  mx: 1,
-                  border: `1px solid ${projectData.teamColor}`,
-                  textBlendMode: "exclusion",
-                }}
-              />
-            )}
-          </Stack>
 
           {"teamId" in userData && (
             <Button
@@ -155,28 +141,29 @@ const Profile = ({ user }) => {
                 navigate(`/project/${userData.teamId}`);
               }}
               sx={{
-                m: 1,
+                mt: 1,
+                mb: 2,
                 backgroundColor: projectData.teamColor,
                 color: projectData.textColor,
                 textBlendMode: "exclusion",
               }}
             >
-              <InsertDriveFileIcon />
-              View Capstone Page
+              View {projectData.name}
             </Button>
           )}
 
           <Divider />
 
+
           <Typography
             align="left"
-            sx={{ marginBottom: 3, ml: 1, color: "#7B7B7B" }}
+            sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}
           >
             Expertise
           </Typography>
           <Stack
             direction="row"
-            sx={{ marginBottom: 3, overflowX: "scroll" }}
+            sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
             spacing={1}
           >
             {"expertise" in userData &&
@@ -184,6 +171,7 @@ const Profile = ({ user }) => {
                 <Chip key={i} color="secondary" label={x} />
               ))}
           </Stack>
+
           <Divider />
           <Box
             sx={{

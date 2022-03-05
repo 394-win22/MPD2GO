@@ -89,7 +89,7 @@ const Project = (user) => {
                   avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
                   label={user.displayName}
                   variant="outlined"
-                  sx={{ mx: 1,  verticalAlign: "middle" }}
+                  sx={{ mx: 1, verticalAlign: "middle" }}
                   onClick={() => {
                     navigate(`/profile/${user.uid}`);
                   }}
