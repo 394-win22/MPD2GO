@@ -17,6 +17,7 @@ export const createNotification = (
 };
 
 export const markNotificationAsRead = (uid, notificationId) => {
+  console.log("REMOVING AT PATH:", uid, notificationId);
   removeAtPath(`users/${uid}/notifications/${notificationId}`);
 };
 

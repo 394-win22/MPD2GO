@@ -106,26 +106,27 @@ const CreatePost = () => {
 
     const modifiedContent = el.querySelector("body").innerHTML;
 
-    const postId = createPostInFirebase({
-      tags: postTags,
-      description: modifiedContent,
-      time: Date.now(),
-      author: user.uid,
-      numComments: 0,
-    });
+  const postId = createPostInFirebase({
+    tags: postTags,
+    description: modifiedContent,
+    time: Date.now(),
+    author: user.uid,
+    numComments: 0,
+    associatedNotificationIds: []
+  });
 
+    let notificationIds = [];
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
         if (mentionSpan.getAttribute("data-denotation-char") === "@") {
-          const notRef = createNotification(
+          createNotification(
             mentionSpan.getAttribute("data-id"),
             user.uid,
             postId,
             modifiedContent,
             "mention"
           );
-          console.log("notRef:", notRef);
         }
       });
 

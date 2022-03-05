@@ -10,7 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import { deleteData } from "../../utilities/firebase";
-import { deleteCommentNotifications } from "utilities/notifications";
+import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
 
 export const DeletePostButton = ({ post, userList }) => {
   const [open, setOpen] = React.useState(false);
@@ -23,6 +23,21 @@ export const DeletePostButton = ({ post, userList }) => {
     setOpen(false);
   };
 
+  const deletePostNotifications = (postId) => {
+    userList.map((user)=> {
+      if (user.notifications) {
+        Object.values(user.notifications).map((notif) => {
+          //console.log("NOTIF:", notif);
+          if (notif.postId === postId) {
+            console.log("NOTIF MATCH:",notif);
+            console.log(user.uid, notif.postId);
+            markNotificationAsRead(user.uid, notif.postId);
+          }
+        });
+      }
+    });
+  }
+
   function deletePost(post) {
     if (post.threads) {
       Object.keys(post.threads).map((key)=>{
@@ -30,6 +45,7 @@ export const DeletePostButton = ({ post, userList }) => {
         deleteCommentNotifications(`/posts/${post.id}/threads/${key}`, userList, data);
       });
     }
+    deletePostNotifications(post.id);
     deleteData(`/posts/${post.id}`);
     navigate("/");
     handleClose();
