@@ -64,37 +64,39 @@ const SearchDropdown = ({
           <Box>
             <Typography variant="h7" sx={{ left: 0, p: 2 }}>
               {" "}
-              Search by <span style={{ fontWeight: "bold" }}>Expertise</span>
+              Filter by <span style={{ fontWeight: "bold" }}>Expertise</span>
             </Typography>
             <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap", ml: 1, mt: 1 }}>
-              {expertises.map((phase, i) => (
-                <Chip
+              {expertises.map((phase, i) => {
+                const active = phaseFilter.includes(phase)
+                return (<Chip
                   key={i}
                   style={{
-                    backgroundColor: phaseFilter.includes(phase) && "#f1b844",
+                    backgroundColor: active && "#f1b844",
+                    color: active && "#ffffff",
                   }}
                   label={phase}
                   sx={{ mx: 1, my: 0.5 }}
                   onClick={() => {
-                    phaseFilter.includes(phase)
+                    active
                       ? setPhaseFilter(phaseFilter.filter((p) => p !== phase))
                       : setPhaseFilter([...phaseFilter, phase]);
                   }}
                 />
-              ))}
+                )
+              })}
             </Box>
           </Box>
 
           <Box sx={{ mt: 2 }}>
             <Typography variant="h7" sx={{ left: 0, p: 2, marginTop: "20px !important" }}>
               {" "}
-              Search by <span style={{ fontWeight: "bold" }}>Team</span>
+              Filter by <span style={{ fontWeight: "bold" }}>Team</span>
             </Typography>
             <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap", ml: 1, mt: 1 }}>
               {teams.map((team, i) => {
                 const teamActive = teamFilter.includes(team.id);
                 return (
-
                   < Chip
                     key={i}
                     style={{
