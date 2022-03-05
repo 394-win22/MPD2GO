@@ -39,72 +39,85 @@ const SearchDropdown = ({
     <>
       {isDropped && (
         <Card
-          sx={{ my: 0, py: 1 }}
+          sx={{ my: 0, py: 1.5 }}
           style={{
             width: "100%",
             zIndex: 10,
             height: "100%",
             textAlign: "left",
-            borderTop: "1px solid rgba(0, 0, 0, 0.6)",
+            borderTop: "1px solid rgba(0, 0, 0, 0.1)",
+            marginTop: "10px",
+            position: "relative"
           }}
         >
           <IconButton
             sx={{
-              position: "relative",
-              right: 0,
+              position: "absolute",
+              right: 2,
               top: 0,
               float: "right",
             }}
             onClick={() => setIsDropped(false)}
           >
-            <CloseIcon />
+            <CloseIcon sx={{ width: "24px", height: "24px" }} />
           </IconButton>
-          <Typography variant="h7" sx={{ left: 0, p: 2 }}>
-            {" "}
-            Search By <span style={{ fontWeight: "bold" }}>Expertise</span>
-          </Typography>
-          <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
-            {expertises.map((phase, i) => (
-              <Chip
-                key={i}
-                style={{
-                  backgroundColor: phaseFilter.includes(phase) && "#f1b844",
-                }}
-                label={phase}
-                sx={{ mx: 1, my: 0.5 }}
-                onClick={() => {
-                  phaseFilter.includes(phase)
-                    ? setPhaseFilter(phaseFilter.filter((p) => p !== phase))
-                    : setPhaseFilter([...phaseFilter, phase]);
-                }}
-              />
-            ))}
+          <Box>
+            <Typography variant="h7" sx={{ left: 0, p: 2 }}>
+              {" "}
+              Search by <span style={{ fontWeight: "bold" }}>Expertise</span>
+            </Typography>
+            <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap", ml: 1, mt: 1 }}>
+              {expertises.map((phase, i) => (
+                <Chip
+                  key={i}
+                  style={{
+                    backgroundColor: phaseFilter.includes(phase) && "#f1b844",
+                  }}
+                  label={phase}
+                  sx={{ mx: 1, my: 0.5 }}
+                  onClick={() => {
+                    phaseFilter.includes(phase)
+                      ? setPhaseFilter(phaseFilter.filter((p) => p !== phase))
+                      : setPhaseFilter([...phaseFilter, phase]);
+                  }}
+                />
+              ))}
+            </Box>
           </Box>
 
-          <Typography variant="h7" sx={{ left: 0, p: 2 }}>
-            {" "}
-            Search By <span style={{ fontWeight: "bold" }}>Team</span>
-          </Typography>
+          <Box sx={{ mt: 2 }}>
+            <Typography variant="h7" sx={{ left: 0, p: 2, marginTop: "20px !important" }}>
+              {" "}
+              Search by <span style={{ fontWeight: "bold" }}>Team</span>
+            </Typography>
+            <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap", ml: 1, mt: 1 }}>
+              {teams.map((team, i) => {
+                console.log(team)
+                const teamActive = teamFilter.includes(team.id);
+                return (
 
-          <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
-            {teams.map((team, i) => (
-              <Chip
-                key={i}
-                style={{
-                  backgroundColor: teamFilter.includes(team.id) && "#f1b844",
-                }}
-                label={team.name}
-                sx={{ mx: 1, my: 0.5 }}
-                onClick={() => {
-                  teamFilter.includes(team.id)
-                    ? setTeamFilter(teamFilter.filter((t) => t !== team.id))
-                    : setTeamFilter([...teamFilter, team.id]);
-                }}
-              />
-            ))}
+                  < Chip
+                    key={i}
+                    style={{
+                      backgroundColor: teamActive && team.teamColor,
+                      color: teamActive && team.textColor
+                    }
+                    }
+                    label={team.name}
+                    sx={{ mx: 1, my: 0.5 }}
+                    onClick={() => {
+                      teamActive
+                        ? setTeamFilter(teamFilter.filter((t) => t !== team.id))
+                        : setTeamFilter([...teamFilter, team.id]);
+                    }}
+                  />
+                )
+              })}
+            </Box>
           </Box>
         </Card>
-      )}
+      )
+      }
     </>
   );
 };
