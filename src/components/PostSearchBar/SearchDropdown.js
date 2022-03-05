@@ -92,7 +92,6 @@ const SearchDropdown = ({
             </Typography>
             <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap", ml: 1, mt: 1 }}>
               {teams.map((team, i) => {
-                console.log(team)
                 const teamActive = teamFilter.includes(team.id);
                 return (
 
