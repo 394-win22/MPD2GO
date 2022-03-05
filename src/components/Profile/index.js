@@ -19,6 +19,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { EditUserButton } from "../EditProfile/EditUserButton";
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
 import { signOut } from "utilities/firebase";
+import BackButton from "../Navigation/BackButton"
 
 const getStatus = (userData) => {
   if (!("year" in userData) || userData.year === "") {
@@ -64,16 +65,8 @@ const Profile = ({ user }) => {
 
   return (
     <>
-      <Button
-        sx={{ mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
-      <Card sx={{ px: 4, py: 4, mb: 10 }} style={{ borderRadius: 10 }}>
+      <Card sx={{ px: 2, py: 2, mb: 10 }} style={{ borderRadius: 10 }}>
+      <BackButton/>
         <Box textAlign="center">
           <Avatar
             alt={userData.displayName}
