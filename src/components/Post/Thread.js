@@ -144,7 +144,6 @@ const Thread = ({ postId, ids, data, style }) => {
   const totalCommentsInThread = () => {
     let total = 1;
 
-    console.log("TOTAL COMMENTS IN THREAD");
     const haveChild =
       "threads" in data && Object.values(data.threads).length > 0;
 
@@ -152,14 +151,11 @@ const Thread = ({ postId, ids, data, style }) => {
       total += totalCommentsInChildren(Object.values(data.threads));
     }
 
-    console.log(total);
-
     return total;
   };
 
   const totalCommentsInChildren = (childrenArr) => {
     let childrenTotal = 0;
-    console.log("TOTAL COMMENTS IN CHILD");
 
     childrenArr.forEach((child) => {
       childrenTotal++;
@@ -169,7 +165,6 @@ const Thread = ({ postId, ids, data, style }) => {
         childrenTotal += totalCommentsInChildren(Object.values(child.threads));
       }
     });
-    console.log(childrenTotal);
     return childrenTotal;
   };
 
