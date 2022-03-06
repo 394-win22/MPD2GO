@@ -15,12 +15,13 @@ import { deleteCommentNotifications, markNotificationAsRead } from "utilities/no
 function deletePostNotifications(postId, userList)  {
   userList.map((user)=> {
     if (user.notifications) {
-      Object.values(user.notifications).map(async (notif) => {
+      Object.keys(user.notifications).map(async (key) => {
+        const notif = user.notifications[key];
         //console.log("NOTIF:", notif);
         if (notif.postId === postId) {
           console.log("NOTIF MATCH:",notif);
           console.log(user.uid, notif.postId);
-          await markNotificationAsRead(user.uid, notif.postId);
+          await markNotificationAsRead(user.uid, key);
         }
       });
     }

@@ -17,7 +17,7 @@ export const createNotification = (
 };
 
 export const markNotificationAsRead = (uid, notificationId) => {
-  console.log("REMOVING AT PATH:", uid, notificationId);
+  //console.log("REMOVING AT PATH:", uid, notificationId);
   removeAtPath(`users/${uid}/notifications/${notificationId}`);
 };
 
@@ -31,9 +31,9 @@ const deleteCommentNotificationsRecursive = (thread, uids) => {
 
   // delete notifications from @ mentions on this comment
   const notifications = thread.associatedNotificationIds;
-  console.log("DELETING COMMENT NOTIFICATIONS, thread:", thread);
+  //console.log("DELETING COMMENT NOTIFICATIONS, thread:", thread);
   if (notifications) {
-    console.log("DELETING THREAD NOTIFICATIONS");
+    //console.log("DELETING THREAD NOTIFICATIONS");
     const lst = Object.values(notifications);
     if (lst.length > 0) {
       lst.forEach((notifId) => {
@@ -51,7 +51,7 @@ const deleteCommentNotificationsRecursive = (thread, uids) => {
 }
 
 export const deleteCommentNotifications = (path, userList, data) => {
-  console.log("DELETING TOP COMMENT NOTIFICATIONS");
+  //console.log("DELETING TOP COMMENT NOTIFICATIONS");
   const uids = userList.map((user)=>user.uid);
   deleteCommentNotificationsRecursive(data, uids);
 }
