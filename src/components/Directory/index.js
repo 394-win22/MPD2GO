@@ -83,7 +83,7 @@ const Directory = () => {
         setFilter={setFilter}
       />
         <List>
-          {filteredUsers.map((user) => (
+          {filteredUsers.sort((u1, u2) => u1.displayName.localeCompare(u2.displayName)).map((user) => (
             <ListItem
               component={ListItemButton}
               onClick={() => navigate(`/profile/${user.uid}`)}
