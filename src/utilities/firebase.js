@@ -133,6 +133,20 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
   }
 };
 
+export const getUserStatus = (userData) => {
+  if ("isStaff" in userData && userData.isStaff) {
+    return "Staff"
+  }
+  if (!("year" in userData) || userData.year === "") {
+    return "Unknown Status";
+  }
+  if (userData.year < new Date().getFullYear()) {
+    return "Alumni";
+  } else {
+    return "Current Student";
+  }
+};
+
 export const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
@@ -176,6 +190,7 @@ export const saveUserToDb = (userObject) => {
     bio: userObject.bio || "",
     year: userObject.year || "",
     location: userObject.location || "",
+    isStaff: userObject.isStaff || false,
   });
   window.location.href = "/";
 };
