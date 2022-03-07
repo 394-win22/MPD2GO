@@ -6,7 +6,7 @@ import { deleteCommentNotifications, markNotificationAsRead } from "utilities/no
 
 import { deleteData } from "../../utilities/firebase";
 
-const EditPostMenu = ({ post, isEdit, setIsEdit }) => {
+const EditPostMenu = ({ post, isEdit, setIsEdit, userList }) => {
     const navigate = useNavigate();
     const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
@@ -87,7 +87,7 @@ const EditPostMenu = ({ post, isEdit, setIsEdit }) => {
                     <Button onClick={() => setIsDialogOpen(false)} color="secondary">
                         Cancel
                     </Button>
-                    <Button onClick={() => deletePost(post)} color="primary" autoFocus>
+                    <Button onClick={() => deletePost(post, userList)} color="primary" autoFocus>
                         Yes
                     </Button>
                 </DialogActions>
