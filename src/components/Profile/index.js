@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 // local files
@@ -213,6 +212,7 @@ const Profile = ({ user }) => {
                 sx={{ width: "150px", marginTop: "10px" }}
                 variant="contained"
                 onClick={signOut}
+                id="logout_btn"
               >
                 Sign out{" "}
               </Button>

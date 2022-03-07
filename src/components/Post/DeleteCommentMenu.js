@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Menu, MenuItem, IconButton, Dialog, DialogContentText, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import { Menu, MenuItem, IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const DeleteCommentMenu = ({ delThreadFunction }) => {
