@@ -101,7 +101,11 @@ export const pushData = (path, value) => push(ref(database, path), value);
 
 export const updateData = (path, value) => update(ref(database, path), value);
 
-export const removeAtPath = (path) => remove(ref(database, path));
+export const removeAtPath = (path) => {
+  console.log("removing at path:", path);
+  const result = remove(ref(database, path));
+  console.log("remove result:", result);
+};
 
 /* authentication functions */
 export const signInWithGoogle = () => {

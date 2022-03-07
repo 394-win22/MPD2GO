@@ -15,35 +15,43 @@ export const addCommentToPost = (
   postAuthorUid,
   commentAuthorUid,
   postId,
-  comment
+  comment,
+  notifications,
 ) => {
-  pushData(`posts/${postId}/threads`, {
-    author: commentAuthorUid,
-    comment: comment,
-    time: Date.now(),
-  });
-  updateData(`posts/${postId}`, {
-    numComments: increment(1),
-  });
-  createNotification(
+  const notificationPath = createNotification(
     postAuthorUid,
     commentAuthorUid,
     postId,
     comment,
     "comment"
-  );
+  ).toString().split('/');
+  const notificationId = notificationPath[notificationPath.length-1];
+  if (notifications) {
+    //console.log("util notifications:", notifications);
+    notifications.push(notificationId);
+  }
+  pushData(`posts/${postId}/threads`, {
+    author: commentAuthorUid,
+    comment: comment,
+    time: Date.now(),
+    associatedNotificationIds: notifications,
+  });
+  updateData(`posts/${postId}`, {
+    numComments: increment(1),
+  });
 };
 
-export const replyToThread = (uid,postAuthorUid, postId, path, comment) => {
+export const replyToThread = (uid, postId, path, comment, notifications) => {
   pushData(`posts/${path}`, {
     author: uid,
     comment: comment,
     time: Date.now(),
+    associatedNotificationIds: notifications,
   });
   updateData(`posts/${postId}`, {
     numComments: increment(1)
   })
-  createNotification(postAuthorUid, uid, postId, comment, "reply");
+  //createNotification(postAuthorUid, uid, postId, comment, "reply");
 }
 
 export const getUserDataFromUID = (uid, users) => {

@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 import { Menu, MenuItem, IconButton, Dialog, DialogContentText, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { deleteData } from "../../utilities/firebase";
+import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
 
 import { deleteData } from "../../utilities/firebase";
 
@@ -18,11 +20,34 @@ const EditPostMenu = ({ post, isEdit, setIsEdit }) => {
         setAnchorEl(null);
     };
 
-    const deletePost = (post) => {
+    function deletePost(post) {
+        if (post.threads) {
+          Object.keys(post.threads).map((key)=>{
+            const data = post.threads[key];
+            deleteCommentNotifications(`/posts/${post.id}/threads/${key}`, userList, data);
+          });
+        }
+        deletePostNotifications(post.id, userList);
         deleteData(`/posts/${post.id}`);
         navigate("/");
     }
 
+    function deletePostNotifications(postId, userList)  {
+        userList.map((user)=> {
+          if (user.notifications) {
+            Object.keys(user.notifications).map(async (key) => {
+              const notif = user.notifications[key];
+              //console.log("NOTIF:", notif);
+              if (notif.postId === postId) {
+                console.log("NOTIF MATCH:",notif);
+                console.log(user.uid, notif.postId);
+                await markNotificationAsRead(user.uid, key);
+              }
+            });
+          }
+        });
+      }
+      
 
     return (
         <>

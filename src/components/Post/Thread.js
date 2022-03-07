@@ -18,6 +18,8 @@ import { replyToThread } from "utilities/posts";
 import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
+import DeleteThread from "./DeleteThread";
+import { deleteCommentNotifications } from "utilities/notifications";
 import DeleteCommentMenu from "./DeleteCommentMenu";
 
 const useStyles = makeStyles({
@@ -114,11 +116,6 @@ const useStyles = makeStyles({
     fontSize: "13px",
     padding: "8px 14px 8px 14px",
   },
-  deleteButton: {
-    color: "red",
-    fontSize: "13px",
-    padding: "8px 14px 8px 14px",
-  },
   showReplies: {
     fontSize: "13px",
     padding: "8px 14px 8px 10px",
@@ -134,7 +131,7 @@ const Thread = ({ postId, ids, data, style }) => {
   const [isShowTextField, setIsShowTextField] = useState(false);
   const [isShowThreads, setIsShowThreads] = useState(true);
 
-  const replyToComment = (comment) => {
+  const replyToComment = (comment, notifications) => {
     // GENERATE A PATH TO PUSH TO IN DATABASE
     let path = `${postId}`;
     ids.forEach((id) => {
@@ -142,7 +139,7 @@ const Thread = ({ postId, ids, data, style }) => {
       path += id;
     });
     path += "/threads/";
-    replyToThread(user.uid, postAuthor.uid, postId, path, comment);
+    replyToThread(user.uid, postId, path, comment, notifications);
     setIsShowTextField(false);
   };
 
@@ -159,8 +156,6 @@ const Thread = ({ postId, ids, data, style }) => {
 
   const totalCommentsInChildren = (childrenArr) => {
     let childrenTotal = 0;
-    // console.log("TOTAL COMMENTS IN CHILD");
-
     childrenArr.forEach((child) => {
       childrenTotal++;
       const haveChild =
@@ -169,7 +164,6 @@ const Thread = ({ postId, ids, data, style }) => {
         childrenTotal += totalCommentsInChildren(Object.values(child.threads));
       }
     });
-    // console.log(childrenTotal);
     return childrenTotal;
   };
 
@@ -181,6 +175,7 @@ const Thread = ({ postId, ids, data, style }) => {
     });
     if (window.confirm("Are you sure you want to delete this comment? ")) {
       const totalComments = totalCommentsInThread();
+      deleteCommentNotifications(path, userList, data);
       deleteData(`/posts/${path}`);
       updateData(`posts/${postId}`, {
         numComments: increment(-1 * totalComments),
@@ -280,7 +275,6 @@ const Thread = ({ postId, ids, data, style }) => {
               />
             </Button>
           )}
-
         </Box>
 
         {/* child threads */}

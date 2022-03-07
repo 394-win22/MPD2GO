@@ -58,21 +58,24 @@ const ReplyTextField = ({ post, user }) => {
 
     const modifiedContent = el.querySelector("body").innerHTML;
 
-    addCommentToPost(post.author, user.uid, post.id, modifiedContent);
-
+    let notificationIds = [];
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
         if (mentionSpan.getAttribute("data-denotation-char") === "@") {
-          createNotification(
+          const notificationPath = createNotification(
             mentionSpan.getAttribute("data-id"),
             user.uid,
             post.id,
             modifiedContent,
             "mention"
-          );
+          ).toString().split('/');
+          const notificationId = notificationPath[notificationPath.length-1];
+          notificationIds.push(notificationId);
         }
       });
+
+    addCommentToPost(post.author, user.uid, post.id, modifiedContent, notificationIds);
 
     setComment("");
   };

@@ -4,6 +4,8 @@ import { RichTextEditor } from "@mantine/rte";
 import { useUserState } from "utilities/firebase.js";
 import { UserContext } from "components/Routing";
 import { createNotification } from "utilities/notifications";
+import { deleteData } from "../../utilities/firebase";
+import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
 
 const topicTags = [
   { id: 1, value: "JavaScript" },
@@ -37,21 +39,26 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
       });
 
     const modifiedContent = el.querySelector("body").innerHTML;
+    let notificationIds = [];
     replyToComment(modifiedContent);
-
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
         if (mentionSpan.getAttribute("data-denotation-char") === "@") {
-          createNotification(
+          const notificationPath = createNotification(
             mentionSpan.getAttribute("data-id"),
             user.uid,
             postId,
             modifiedContent,
             "mention"
-          );
+          ).toString().split('/');
+          const notificationId = notificationPath[notificationPath.length-1];
+          //console.log("NOTIF ID:", notificationId);
+          notificationIds.push(notificationId);
         }
       });
+
+    replyToComment(modifiedContent, notificationIds);
 
     setComment("");
     setIsShowTextField(false);

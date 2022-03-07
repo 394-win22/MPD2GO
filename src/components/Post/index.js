@@ -54,7 +54,7 @@ const PostWithThreads = () => {
           user={postAuthor}
           post={post}
           menu={post.author === user.uid ?
-            <EditPostMenu post={post} isEdit={isEdit} setIsEdit={setIsEdit} /> : null}
+            <EditPostMenu post={post} isEdit={isEdit} setIsEdit={setIsEdit} userList={userList} /> : null}
         />
         <CardContent sx={{ px: 0, pt: 0 }}>
           {isEdit ? (
