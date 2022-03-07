@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 import { Menu, MenuItem, IconButton, Dialog, DialogContentText, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { deleteData } from "../../utilities/firebase";
 import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
 
 import { deleteData } from "../../utilities/firebase";
