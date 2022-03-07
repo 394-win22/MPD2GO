@@ -19,6 +19,7 @@ import { UserContext } from "components/Routing";
 import EditProjectButton from "components/EditProject/EditProjectButton";
 import DriveLogo from "resources/google-drive.png";
 import MuralLogo from "resources/mural.png";
+import BackButton from "../Navigation/BackButton"
 
 const Project = (user) => {
   const navigate = useNavigate();
@@ -42,16 +43,8 @@ const Project = (user) => {
 
   return (
     <>
-      <Button
-        sx={{ mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+      <BackButton/>
         {Object.values(projectData.member).includes(user.user.uid) && (
           <EditProjectButton
             project={projectData}

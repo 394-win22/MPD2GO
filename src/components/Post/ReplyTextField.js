@@ -108,9 +108,7 @@ const ReplyTextField = ({ post, user }) => {
         <RichTextEditor
           controls={[
             ["bold", "italic", "underline", "link"],
-            ["unorderedList", "h1", "h2", "h3"],
-            ["sup", "sub"],
-            ["alignLeft", "alignCenter", "alignRight"],
+            ["unorderedList","orderedList"],
           ]}
           onImageUpload={() => {
             return new Promise((_, reject) => {

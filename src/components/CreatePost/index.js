@@ -192,6 +192,10 @@ const CreatePost = () => {
           mentions={mentions}
           onImageUpload={handleImageUpload}
           style={{ width: "100%", marginTop: "16px" }}
+          controls={[
+            ["bold", "italic", "underline", "link", "image"],
+            ["unorderedList","orderedList"],
+          ]}
         />
 
         <Stack spacing={2} direction="row" sx={{ mt: 3 }}>
