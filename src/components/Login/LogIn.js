@@ -63,6 +63,7 @@ const LogIn = () => {
         </Link>
 
         <Button
+          id="submitLogin"
           color="secondary"
           type="submit"
           fullWidth

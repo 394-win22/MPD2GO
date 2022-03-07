@@ -45,6 +45,7 @@ const ResetPasswordModal = ({ open, handleClose }) => {
             top: 8,
           }}
           onClick={handleClose}
+          data-cy="closeResetPasswordModel"
         >
           <CloseIcon />
         </IconButton>

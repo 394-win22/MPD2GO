@@ -5,6 +5,7 @@ import {
   ref as sRef,
   uploadBytes,
   getDownloadURL,
+  connectStorageEmulator,
 } from "firebase/storage";
 import {
   getDatabase,
@@ -14,6 +15,7 @@ import {
   push,
   update,
   remove,
+  connectDatabaseEmulator,
 } from "firebase/database";
 import {
   getAuth,
@@ -24,6 +26,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  connectAuthEmulator,
+  signInWithCredential,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -37,8 +41,18 @@ const firebaseConfig = {
 };
 
 export const firebase = initializeApp(firebaseConfig);
+export const auth = getAuth(firebase);
 export const database = getDatabase(firebase);
-const storage = getStorage();
+export const storage = getStorage();
+
+if (window.Cypress) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectDatabaseEmulator(database, "127.0.0.1", 9000);
+  connectStorageEmulator(storage, "localhost", 9199);
+  // signInWithCredential(auth, GoogleAuthProvider.credential(
+  //   '{"sub": "U7npX0jtE4ssHAPKwXV5q9bvPjPQ", "email": "test@example.com", "displayName":"Testing User 1", "email_verified": true}'
+  // ));
+}
 
 const firebaseSignOut = () => signOut(getAuth(firebase));
 
@@ -98,8 +112,6 @@ export const signInWithGoogle = () => {
 
   signInWithPopup(getAuth(firebase), provider);
 };
-
-const auth = getAuth();
 
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {

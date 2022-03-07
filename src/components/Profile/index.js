@@ -213,6 +213,7 @@ const Profile = ({ user }) => {
                 sx={{ width: "150px", marginTop: "10px" }}
                 variant="contained"
                 onClick={signOut}
+                id="logout_btn"
               >
                 Sign out{" "}
               </Button>
