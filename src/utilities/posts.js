@@ -49,9 +49,10 @@ export const replyToThread = (uid, postId, path, comment, notifications) => {
     associatedNotificationIds: notifications,
   });
   updateData(`posts/${postId}`, {
-    numComments: increment(1),
-  });
-};
+    numComments: increment(1)
+  })
+  //createNotification(postAuthorUid, uid, postId, comment, "reply");
+}
 
 export const getUserDataFromUID = (uid, users) => {
   return users.find((user) => user.uid === uid);

@@ -5,7 +5,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { deleteData } from "../../utilities/firebase";
 import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
 
-const EditPostMenu = ({ post, isEdit, setIsEdit, userList }) => {
+import { deleteData } from "../../utilities/firebase";
+
+const EditPostMenu = ({ post, isEdit, setIsEdit }) => {
     const navigate = useNavigate();
     const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
