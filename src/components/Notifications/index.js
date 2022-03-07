@@ -13,22 +13,39 @@ import MentionNotification from "./MentionNotification";
 import {ClearAllNotification} from "./ClearAllNotificationButton";
 import BackButton from "../Navigation/BackButton"
 
+const getPostList = (userData) => {
+  try{
+  let notificationList = Object.entries(userData.notifications).map(([id, notifObj]) => {
+    return { ...notifObj, id: id };
+  });
+  notificationList = notificationList.sort((item1, item2) => {
+    return item2.time - item1.time;
+  });
+  return notificationList;
+}catch{
+  return []
+}
+};
+
+
 const Notifications = () => {
   const context = useContext(UserContext);
   const users = context.userList;
   const userData = users.find((x) => x.uid === context.user.uid);
+  const listOfNotifications = getPostList(userData);
   const hasNotifications =
     "notifications" in userData &&
     Object.values(userData.notifications).length > 0;
 
   useEffect(() => {}, []);
 
+
   let notificationsList;
   if (hasNotifications) {
     notificationsList = (
       <List sx={{ paddingTop: "0px" }}>
         <Divider component="li" />
-        {Object.entries(userData.notifications).map(([id, notifObj]) => {
+        {Object.entries(listOfNotifications).map(([id, notifObj]) => {
           switch (notifObj.type) {
             case "comment":
               return (
