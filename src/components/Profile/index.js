@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 // local files

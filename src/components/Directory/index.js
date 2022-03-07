@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -6,19 +6,17 @@ import {
   CardHeader,
   List,
   Avatar,
-  Button,
   ListItem,
   ListItemAvatar,
   ListItemText,
   ListItemButton,
 } from "@mui/material";
 import { UserContext } from "components/Routing";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import DirectorySearchBar from "components/DirectorySearchBar";
 import BackButton from "../Navigation/BackButton"
 
 const getStatus = (userData) => {
-  if (!("year" in userData) || userData.year == "") {
+  if (!("year" in userData) || userData.year === "") {
     return "Unknown Status";
   }
   if (userData.year < new Date().getFullYear()) {

@@ -53,7 +53,7 @@ const PostWithThreads = () => {
         <AvatarWithTag
           user={postAuthor}
           post={post}
-          menu={post.author == user.uid ?
+          menu={post.author === user.uid ?
             <EditPostMenu post={post} isEdit={isEdit} setIsEdit={setIsEdit} /> : null}
         />
         <CardContent sx={{ px: 0, pt: 0 }}>

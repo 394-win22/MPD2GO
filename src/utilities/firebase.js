@@ -27,7 +27,7 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   connectAuthEmulator,
-  signInWithCredential,
+  // signInWithCredential,
 } from "firebase/auth";
 
 const firebaseConfig = {

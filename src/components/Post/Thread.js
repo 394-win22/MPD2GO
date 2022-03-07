@@ -9,7 +9,6 @@ import {
   IconButton,
 } from "@mui/material";
 import { Message as MessageIcon } from "@mui/icons-material";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { UserContext } from "components/Routing";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";

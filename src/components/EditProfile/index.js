@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
-import SendIcon from "@mui/icons-material/Send";
 import {
   setData,
   useData,

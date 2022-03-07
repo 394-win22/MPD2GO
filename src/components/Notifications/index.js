@@ -1,5 +1,4 @@
 import { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -15,7 +14,6 @@ import {ClearAllNotification} from "./ClearAllNotificationButton";
 import BackButton from "../Navigation/BackButton"
 
 const Notifications = () => {
-  const navigate = useNavigate();
   const context = useContext(UserContext);
   const users = context.userList;
   const userData = users.find((x) => x.uid === context.user.uid);
