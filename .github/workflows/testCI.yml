@@ -24,7 +24,8 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          build: npm run em:build
+          group: "E2E Tests"
           start: npm run em:run
+          wait-on: http://localhost:3000
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
