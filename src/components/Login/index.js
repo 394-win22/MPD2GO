@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid, Box, Paper, Typography, Link } from "@mui/material";
+import { Grid, Box, Paper, Typography, Link, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
 
@@ -20,6 +20,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    position: "relative"
   },
 });
 
@@ -57,8 +58,36 @@ const Login = () => {
                 : "Don't have an account? Sign Up"}
             </Typography>
           </Link>
+
         </Box>
       </Grid>
+      <Button variant="contained"
+        disableElevation
+        sx={{
+          borderRadius: "20px",
+          backgroundColor: "#f1d07a",
+          color: "#ffffff",
+          display: "flex",
+          flexDirection: "column",
+          position: "absolute",
+          bottom: "20px",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          px: 3,
+          py: 2,
+          "&:hover": {
+            backgroundColor: "#e7c771"
+          }
+
+        }}
+      >
+        <Typography sx={{ display: "inline-block" }}>
+          Welcome 👋 🐝
+        </Typography>
+        <Typography sx={{ display: "inline-block" }}>
+          Take a tour of the Hive
+        </Typography>
+      </Button>
     </Grid>
   );
 };
