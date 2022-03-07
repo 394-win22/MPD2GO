@@ -10,6 +10,7 @@ import {
   Card,
   Chip,
 } from "@mui/material";
+import { getUserStatus } from "../../utilities/firebase";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -19,17 +20,6 @@ import { EditUserButton } from "../EditProfile/EditUserButton";
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
 import { signOut } from "utilities/firebase";
 import BackButton from "../Navigation/BackButton"
-
-const getStatus = (userData) => {
-  if (!("year" in userData) || userData.year === "") {
-    return "Unknown Status";
-  }
-  if (userData.year < new Date().getFullYear()) {
-    return "Alumni";
-  } else {
-    return "Current Student";
-  }
-};
 
 const Profile = ({ user }) => {
   const params = useParams();
@@ -112,7 +102,7 @@ const Profile = ({ user }) => {
             style={{ color: "#7B7B7B" }}
             sx={{ paddingLeft: 1, my: 1 }}
           >
-            {getStatus(userData)}
+            {getUserStatus(userData)}
           </Typography>
 
           <Typography
