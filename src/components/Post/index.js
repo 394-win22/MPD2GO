@@ -6,10 +6,10 @@ import { Card, Button, CardContent, Box, Chip, Stack } from "@mui/material";
 import Thread from "./Thread";
 import { UserContext } from "components/Routing";
 import ReplyTextField from "./ReplyTextField";
-import { DeletePostButton } from "./DeletePostButton";
-import { EditPostButton } from "./EditPostButton";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 import { updateData } from "utilities/firebase";
+import EditPostMenu from "./EditPostMenu";
+import BackButton from "../Navigation/BackButton"
 
 const PostWithThreads = () => {
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ const PostWithThreads = () => {
   const [postAuthor, setPostAuthor] = useState({});
   const [isEdit, setIsEdit] = useState(false);
   const [postContent, setPostContent] = useState(post.description);
+
 
   const user = context.user;
   const userList = context.userList;
@@ -47,51 +48,45 @@ const PostWithThreads = () => {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box sx={{ flexGrow: "1" }}>
-          <Button
-            sx={{ mb: 2, color: "white" }}
-            variant="contained"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Back
-          </Button>
-        </Box>
-
-        {post.author === user.uid && (
-          <EditPostButton
-            key={post}
-            post={post}
-            isEdit={isEdit}
-            setIsEdit={setIsEdit}
-          />
-        )}
-        {post.author === user.uid && (
-          <DeletePostButton key={post} post={post} userList={userList} />
-        )}
-      </Box>
-      <Card sx={{ mb: 10 }}>
-        <AvatarWithTag user={postAuthor} post={post} />
-
+      <Card sx={{ mb:10, borderRadius: 2, padding: 1}}>
+      <BackButton/>
+        <AvatarWithTag
+          user={postAuthor}
+          post={post}
+          menu={post.author === user.uid ?
+            <EditPostMenu post={post} isEdit={isEdit} setIsEdit={setIsEdit} userList={userList} /> : null}
+        />
         <CardContent sx={{ px: 0, pt: 0 }}>
           {isEdit ? (
             <>
-              <RichTextEditor value={postContent} onChange={setPostContent} />
-              <Box alignItems="right">
+              <RichTextEditor
+                value={postContent}
+                onChange={setPostContent}
+              />
+              <Box sx={{ mt: 1, mr: 2, display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
-                  onClick={handleSubmit}
+                  onClick={() => setIsEdit(false)}
                   variant="contained"
                   color="secondary"
                   sx={{
                     color: "white",
-                    mt: 1,
+                    mr: 1,
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleSubmit}
+                  variant="contained"
+                  color="primary"
+                  sx={{
+                    color: "white",
                   }}
                 >
                   Submit
                 </Button>
               </Box>
+
             </>
           ) : (
             <RichTextEditor
@@ -112,8 +107,9 @@ const PostWithThreads = () => {
                   label={tag}
                   key={i}
                   color="primary"
-                  variant="outlined"
+                  variant="contained"
                   size="small"
+                  sx={{ backgroundColor: "#c0c0c0", color: "#ffffff" }}
                 />
               ))}
           </Stack>

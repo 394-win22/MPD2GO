@@ -28,6 +28,7 @@
     "react-mentions": "^4.3.1",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
+    "react-rte": "^0.16.5",
     "react-scripts": "5.0.0",
     "react-window": "^1.8.6",
     "web-vitals": "^2.1.4"
@@ -37,7 +38,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "em:start": "firebase emulators:start --import=./emulators/saved-data --export-on-exit",
+    "em:run": "firebase emulators:exec \"npm start\" --import=./emulators/saved-data",
+    "em:build": "firebase emulators:exec \"npm run build\" --import=./emulators/saved-data"
   },
   "eslintConfig": {
     "extends": [

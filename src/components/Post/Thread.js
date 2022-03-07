@@ -20,6 +20,7 @@ import { increment } from "firebase/database";
 import AddComment from "./AddComment";
 import DeleteThread from "./DeleteThread";
 import { deleteCommentNotifications } from "utilities/notifications";
+import DeleteCommentMenu from "./DeleteCommentMenu";
 
 const useStyles = makeStyles({
   // Comment
@@ -54,8 +55,8 @@ const useStyles = makeStyles({
     float: "left",
   },
   avatar: {
-    width: "24px",
-    height: "24px",
+    width: "24px !important",
+    height: "24px !important",
     display: "inline",
     float: "left",
   },
@@ -80,7 +81,7 @@ const useStyles = makeStyles({
   },
   time: {
     color: "#888888",
-    fontSize: "13px",
+    fontSize: "13px !important",
   },
   collapseButton: {
     display: "flex",
@@ -107,6 +108,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    marginTop: "5px",
     marginBottom: "5px",
   },
 
@@ -143,20 +145,17 @@ const Thread = ({ postId, ids, data, style }) => {
 
   const totalCommentsInThread = () => {
     let total = 1;
-
     const haveChild =
       "threads" in data && Object.values(data.threads).length > 0;
 
     if (haveChild) {
       total += totalCommentsInChildren(Object.values(data.threads));
     }
-
     return total;
   };
 
   const totalCommentsInChildren = (childrenArr) => {
     let childrenTotal = 0;
-
     childrenArr.forEach((child) => {
       childrenTotal++;
       const haveChild =
@@ -174,7 +173,7 @@ const Thread = ({ postId, ids, data, style }) => {
       path += "/threads/";
       path += id;
     });
-    if (window.confirm("Are you sure you want to delete this comment")) {
+    if (window.confirm("Are you sure you want to delete this comment? ")) {
       const totalComments = totalCommentsInThread();
       deleteCommentNotifications(path, userList, data);
       deleteData(`/posts/${path}`);
@@ -220,10 +219,15 @@ const Thread = ({ postId, ids, data, style }) => {
       <Box className={classes.rightContainer}>
         {/* comment */}
         <Box className={classes.contentContainer}>
+
           <Box className={classes.infoContainer}>
-            <Typography variant="subtitle2">
-              {postAuthor.displayName}
-            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
+              <Typography variant="subtitle2">
+                {postAuthor.displayName}
+              </Typography>
+              {data.author === user.uid && <DeleteCommentMenu delThreadFunction={deleteThread} />}
+            </Box>
+
             <Typography className={classes.time}>
               {moment(data.time).format("MMMM Do YYYY, h:mm a")}
             </Typography>
@@ -231,7 +235,7 @@ const Thread = ({ postId, ids, data, style }) => {
           <RichTextEditor
             readOnly
             value={data.comment}
-            style={{ marginLeft: -17, marginBottom: -20, border: "none" }}
+            style={{ marginLeft: -17, marginBottom: -20, border: "none", padding: "0" }}
           />
         </Box>
 
@@ -271,9 +275,6 @@ const Thread = ({ postId, ids, data, style }) => {
               />
             </Button>
           )}
-          {data.author === user.uid && !isShowTextField && (
-            <DeleteThread deleteThread={deleteThread} classes={classes}/>
-          )}
         </Box>
 
         {/* child threads */}
@@ -292,7 +293,7 @@ const Thread = ({ postId, ids, data, style }) => {
             })}
         </Collapse>
       </Box>
-    </Box>
+    </Box >
   );
 };
 

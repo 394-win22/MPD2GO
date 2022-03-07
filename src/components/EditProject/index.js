@@ -17,8 +17,8 @@ import { deleteData, pushData } from "../../utilities/firebase";
 import { editProjectInFirebase } from "utilities/projects";
 import { FixedSizeList } from "react-window";
 
-import DriveLogo from "google-drive.png";
-import MuralLogo from "mural.png";
+import DriveLogo from "resources/google-drive.png";
+import MuralLogo from "resources/mural.png";
 import { getProjectFromUid } from "../../utilities/firebase";
 import { textColor } from "../../utilities/posts";
 

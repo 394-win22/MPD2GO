@@ -1,0 +1,19 @@
+{
+  "name": "hive-mpd2-default-rtdb.json",
+  "bucket": "hive-mpd2.appspot.com",
+  "contentType": "application/json",
+  "metageneration": 1,
+  "generation": 1646679159663,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "522a9acd-3646-4b97-8bdb-53e792a0fbe1"
+  ],
+  "timeCreated": "2022-03-07T18:52:39.663Z",
+  "updated": "2022-03-07T18:52:39.663Z",
+  "size": 1737,
+  "md5Hash": "0rq/5Gcay9oCV750KckPfg==",
+  "crc32c": "1333271650"
+}

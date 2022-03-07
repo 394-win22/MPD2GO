@@ -14,29 +14,37 @@ const expertises = [
   "Graphic Design",
   "Project Management",
 ];
+
+const types = [
+  'Current Student',
+  'Alumni'
+]
+
 const SearchDropdown = ({
   isDropped,
   setIsDropped,
-  setExpertiseFilter,
-  expertiseFilter,
+  setFilter,
+  filter
 }) => {
   return (
     <>
       {isDropped && (
         <Card
-          sx={{ my: 0, py: 1 }}
+          sx={{ my: 0, py: 1.5 }}
           style={{
             width: "100%",
             zIndex: 10,
             height: "100%",
             textAlign: "left",
-            borderTop: "1px solid rgba(0, 0, 0, 0.6)",
+            borderTop: "1px solid rgba(0, 0, 0, 0.1)",
+            marginTop: "10px",
+            position: "relative"
           }}
         >
           <IconButton
             sx={{
-              position: "relative",
-              right: 0,
+              position: "absolute",
+              right: 2,
               top: 0,
               float: "right",
             }}
@@ -44,34 +52,77 @@ const SearchDropdown = ({
           >
             <CloseIcon />
           </IconButton>
-          <Typography variant="h7" sx={{ left: 0, p: 2 }}>
-            {" "}
-            Search By <span style={{ fontWeight: "bold" }}>Expertise</span>
-          </Typography>
-          <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap" }}>
-            {expertises.map((expertise, i) => {
-              return (
-                <Chip
-                  key={i}
-                  style={{
-                    backgroundColor:
-                      expertiseFilter.includes(expertise) && "#f1b844",
-                  }}
-                  label={expertise}
-                  sx={{ mx: 1, my: 0.5 }}
-                  onClick={() => {
-                    expertiseFilter.includes(expertise)
-                      ? setExpertiseFilter(
-                          expertiseFilter.filter((p) => p !== expertise)
-                        )
-                      : setExpertiseFilter([...expertiseFilter, expertise]);
-                  }}
-                />
-              );
-            })}
+          <Box>
+            <Typography variant="h7" sx={{ left: 0, p: 2, }}>
+              {" "}
+              Filter by <span style={{ fontWeight: "bold" }}>Expertise</span>
+            </Typography>
+            <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap", ml: 1, mt: 1 }}>
+              {expertises.map((expertise, i) => {
+                const active = filter.expertise.includes(expertise);
+                return (
+                  <Chip
+                    key={i}
+                    style={{
+                      backgroundColor: active && "#f1b844",
+                      color: active && "#ffffff",
+                    }}
+                    label={expertise}
+                    sx={{ mx: 1, my: 0.5 }}
+                    onClick={() => {
+                      const newExpertise = filter.expertise.filter((p) => p !== expertise)
+                      active
+                        ? setFilter({
+                          ...filter,
+                          expertise: newExpertise
+                        })
+                        : setFilter({
+                          ...filter,
+                          expertise: [...filter.expertise, expertise]
+                        });
+                    }}
+                  />
+                )
+              })}
+            </Box>
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <Typography variant="h7" sx={{ left: 0, p: 2 }}>
+              {" "}
+              Filter by <span style={{ fontWeight: "bold" }}>Profile Type</span>
+            </Typography>
+            <Box alignItems="left" sx={{ display: "flex", flexWrap: "wrap", ml: 1, mt: 1 }}>
+              {types.map((type, i) => {
+                const active = filter.type.includes(type);
+                return (
+                  <Chip
+                    key={i}
+                    style={{
+                      backgroundColor: active && "#f1b844",
+                      color: active && "#ffffff",
+                    }}
+                    label={type}
+                    sx={{ mx: 1, my: 0.5 }}
+                    onClick={() => {
+                      const newType = filter.type.filter((p) => p !== type)
+                      filter.type.includes(type)
+                        ? setFilter({
+                          ...filter,
+                          type: newType
+                        })
+                        : setFilter({
+                          ...filter,
+                          type: [...filter.type, type]
+                        });
+                    }}
+                  />
+                );
+              })}
+            </Box>
           </Box>
         </Card>
-      )}
+      )
+      }
     </>
   );
 };

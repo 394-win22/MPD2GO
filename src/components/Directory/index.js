@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -6,24 +6,23 @@ import {
   CardHeader,
   List,
   Avatar,
-  Button,
   ListItem,
   ListItemAvatar,
   ListItemText,
   ListItemButton,
 } from "@mui/material";
 import { UserContext } from "components/Routing";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import DirectorySearchBar from "components/DirectorySearchBar";
+import BackButton from "../Navigation/BackButton"
 
 const getStatus = (userData) => {
   if (!("year" in userData) || userData.year === "") {
-    return "";
+    return "Unknown Status";
   }
   if (userData.year < new Date().getFullYear()) {
-    return `Alumni`;
+    return "Alumni";
   } else {
-    return `Current Student`;
+    return "Current Student";
   }
 };
 
@@ -31,65 +30,58 @@ const Directory = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const users = context.userList;
-  const [, setQuery] = useState("");
-  const [expertiseFilter, setExpertiseFilter] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState(users);
+  const [filter, setFilter] = useState({
+    expertise: [],
+    type: [],
+  });
+  const [query, setQuery] = useState("");
 
-  const filter = (e) => {
-    const keyword = e.target.value;
-    if (keyword !== "") {
-      const lowQuery = keyword.toLowerCase();
-      const results = users.filter((user) => {
-        return user.displayName.toLowerCase().includes(lowQuery);
-      });
-      setFilteredUsers(results);
-    } else {
-      setFilteredUsers(users);
+  let filteredUsers = users;
+
+  function filtering(e) {
+    let x = true;
+    if (
+      (!("expertise" in e) && filter.expertise.length > 0) ||
+      (!("year" in e) && filter.type.length > 0)
+    ) {
+      return false;
     }
-  };
-  useEffect(() => {
-    if (expertiseFilter.length > 0) {
-      setFilteredUsers(
-        users.filter(
-          (user) =>
-            "expertise" in user &&
-            Object.values(user.expertise).some((x) =>
-              expertiseFilter.includes(x)
-            )
-        )
-      );
+    if ("expertise" in e && filter.expertise.length > 0) {
+      x =
+        x &&
+        filter.expertise.every((i) => Object.values(e.expertise).includes(i));
     }
-  }, [expertiseFilter, users]);
+    if (query) {
+      x = x && e.displayName.toLowerCase().includes(query.toLowerCase());
+    }
+    if ("year" in e && filter.type.length > 0) {
+      x = x && filter.type.every((i) => [getStatus(e)].includes(i));
+    }
+    return x;
+  }
+
+  if (query !== "" || filter.expertise.length > 0 || filter.type.length > 0) {
+    filteredUsers = users.filter((e) => {
+      return filtering(e);
+    });
+  }
 
   return (
-    <>
-      <Button
-        sx={{ ml: 1, mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
-      <DirectorySearchBar
-        setQuery={setQuery}
-        filter={filter}
-        expertiseFilter={expertiseFilter}
-        setExpertiseFilter={setExpertiseFilter}
-      />
-      <Card sx={{ mb: 10, mt: 2 }} style={{ borderRadius: 10 }}>
+    <>      
+      <Card sx={{ mb:10 }} style={{ borderRadius: 10 }}>
         <CardHeader
           sx={{ padding: "10px 16px" }}
           avatar={
-            <Avatar sx={{ backgroundColor: "white", color: "#bbbbbb" }}>
-              <PeopleAltIcon />
-            </Avatar>
+            <BackButton/>
           }
           title="Directory"
-          titleTypographyProps={{ sx: { fontSize: "16px" } }}
+          titleTypographyProps={{ variant:'h6' }}
         />
-
+        <DirectorySearchBar
+        setQuery={setQuery}
+        filter={filter}
+        setFilter={setFilter}
+      />
         <List>
           {filteredUsers.map((user) => (
             <ListItem

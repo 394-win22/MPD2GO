@@ -4,6 +4,8 @@ import { RichTextEditor } from "@mantine/rte";
 import { useUserState } from "utilities/firebase.js";
 import { UserContext } from "components/Routing";
 import { createNotification } from "utilities/notifications";
+import { deleteData } from "../../utilities/firebase";
+import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
 
 const topicTags = [
   { id: 1, value: "JavaScript" },
@@ -25,7 +27,6 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
     var el = document.createElement("html");
     el.innerHTML = comment;
     var mentionSpans = el.getElementsByClassName("mention");
-
     // add link to mention spans
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
@@ -38,8 +39,8 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
       });
 
     const modifiedContent = el.querySelector("body").innerHTML;
-
     let notificationIds = [];
+    replyToComment(modifiedContent);
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
@@ -72,7 +73,6 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
-
         // limit the items in list to 5
         renderList(includesSearchTerm.slice(0, 5));
       },
@@ -99,7 +99,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         onChange={setComment}
         placeholder="Type @ or # to see mentions autocomplete"
         mentions={mentions}
-        style={{ marginTop: "12px", width: "100%" }}
+        style={{ marginLeft: "8px", marginTop: "16px", width: "100%" }}
         onDragStart={() => {
           return false;
         }}
