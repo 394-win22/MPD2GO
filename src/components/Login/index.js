@@ -51,10 +51,10 @@ const Login = () => {
             sx={{ color: "white" }}
             onClick={() => setIsSignUp(!isSignUp)}
           >
-            <Typography color="rgb(240, 242, 245)">
+            <Typography color="rgb(240, 242, 245)" style={{fontWeight:"bold"}}>
               {isSignUp
                 ? "Already have an account? Sign in"
-                : "Don't have an account? Sign Up"}
+                : "Create an Account"}
             </Typography>
           </Link>
         </Box>

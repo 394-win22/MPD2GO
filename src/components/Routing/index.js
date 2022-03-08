@@ -16,8 +16,11 @@ import Main from "components/Feed";
 import Loading from "components/Loading";
 
 const getPostList = (posts) => {
-  const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
+  let listOfPost = Object.entries(posts).map(([postId, postObj]) => {
     return { ...postObj, id: postId };
+  });
+  listOfPost = listOfPost.sort((item1, item2) => {
+    return item2.time - item1.time;
   });
   return listOfPost;
 };
@@ -48,10 +51,10 @@ const Routing = ({ user }) => {
   return (
     <UserContext.Provider
       value={{
-        user: user,
-        postList: postList,
-        userList: userList,
-        projectList: projectList,
+        user: user || {} ,
+        postList: postList || [],
+        userList: userList || [],
+        projectList: projectList || [],
       }}
     >
       <Navigation user={user} />

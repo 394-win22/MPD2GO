@@ -20,6 +20,7 @@ import EditProjectButton from "components/EditProject/EditProjectButton";
 import DriveLogo from "resources/google-drive.png";
 import MuralLogo from "resources/mural.png";
 import { ContactPageOutlined } from "@mui/icons-material";
+import BackButton from "../Navigation/BackButton"
 
 const Project = (user) => {
   const navigate = useNavigate();
@@ -72,6 +73,7 @@ const Project = (user) => {
           Back
         </Button>
         <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+          <BackButton/>
           {Object.values(projectData.member).includes(user.user.uid) && (
             <EditProjectButton
               project={projectData}
@@ -95,6 +97,32 @@ const Project = (user) => {
               aria-label="avatar"
             />
           </Box>
+    <>
+      <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+      <BackButton/>
+        {Object.values(projectData.member).includes(user.user.uid) && (
+          <EditProjectButton
+            project={projectData}
+            projectId={projectId}
+            setProjectData={setProjectData}
+          />
+        )}
+        <Box sx={{ my: 2 }} style={{ display: "block" }}>
+          <Avatar
+            sx={{ width: 100, height: "auto", mx: 2 }}
+            style={{ float: "left" }}
+            src={projectData.photoURL}
+          ></Avatar>
+          <CardHeader
+            align="left"
+            title={projectData.name}
+            subheader={
+              "Last Updated " +
+              moment(projectData.lastUpdateTime).format("MMMM Do YYYY")
+            }
+            aria-label="avatar"
+          />
+        </Box>
 
           <CardContent>
             <Typography variant="h6" align="left">
