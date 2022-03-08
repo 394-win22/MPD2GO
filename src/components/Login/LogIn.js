@@ -41,7 +41,7 @@ const LogIn = () => {
         >
           Sign in with Google
         </Button>
-        <Divider color="white" style={{border:"2px solid white"}}/>
+        <Divider color="white"  style={{border:"1px solid white"}}/>
         <Typography color="rgb(240, 242, 245)" variant="h6" align="center" sx={{mt:2}}>Sign in with Email</Typography>
         <TextField
           variant="filled"
