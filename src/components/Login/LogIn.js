@@ -29,6 +29,20 @@ const LogIn = () => {
   return (
     <Box sx={{ mt: 5, width: 300 }} data-cy="Login">
       <Box component="form" noValidate onSubmit={handleSubmit}>
+        
+        <Button
+          color="secondary"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 3}}
+          style={{fontSize:"1.2em"}}
+          onClick={signInWithGoogle}
+          startIcon={<GoogleIcon />}
+        >
+          Sign in with Google
+        </Button>
+        <Divider color="white"  style={{border:"1px solid white"}}/>
+        <Typography color="rgb(240, 242, 245)" variant="h6" align="center" sx={{mt:2}}>Sign in with Email</Typography>
         <TextField
           variant="filled"
           color="secondary"
@@ -53,15 +67,7 @@ const LogIn = () => {
           id="password"
           autoComplete="current-password"
         />
-        <Link
-          variant="body2"
-          sx={{ color: "white" }}
-          onClick={handleModalOpen}
-          data-cy="ForgotPasswordLink"
-        >
-          <Typography color="rgb(240, 242, 245)">Forgot password?</Typography>
-        </Link>
-
+        
         <Button
           id="submitLogin"
           color="secondary"
@@ -69,20 +75,19 @@ const LogIn = () => {
           fullWidth
           variant="contained"
           sx={{ mt: 2, mb: 3 }}
+          data-testid="signin-button"
         >
           Sign In
         </Button>
-        <Divider>OR</Divider>
-        <Button
-          color="secondary"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          onClick={signInWithGoogle}
-          startIcon={<GoogleIcon />}
+        <Link
+          variant="body2"
+          sx={{ color: "white" }}
+          onClick={handleModalOpen}
+          data-cy="ForgotPasswordLink"
         >
-          Sign in with Google
-        </Button>
+          <Typography color="rgb(240, 242, 245)" align="center" style={{fontWeight:"bold"}}> Forgot password?</Typography>
+        </Link>
+
       </Box>
       <ResetPasswordModal open={isModalOpen} handleClose={handleModalClose} />
     </Box>

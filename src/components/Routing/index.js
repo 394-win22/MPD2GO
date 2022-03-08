@@ -51,10 +51,10 @@ const Routing = ({ user }) => {
   return (
     <UserContext.Provider
       value={{
-        user: user,
-        postList: postList,
-        userList: userList,
-        projectList: projectList,
+        user: user || {} ,
+        postList: postList || [],
+        userList: userList || [],
+        projectList: projectList || [],
       }}
     >
       <Navigation user={user} />

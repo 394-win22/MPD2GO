@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import PostList from "./PostsList";
 import { UserContext } from "components/Routing";
 import PostSearchBar from "components/PostSearchBar";
+import { Typography } from "@mui/material";
 
 const Main = () => {
   const [query, setQuery] = useState("");
@@ -9,6 +10,7 @@ const Main = () => {
   const [phaseFilter, setPhaseFilter] = useState([]);
   const [teamFilter, setTeamFilter] = useState([]);
 
+  
   let filteredPosts = context.postList;
   const filtering = (e) => {
     let x = true;
@@ -53,7 +55,9 @@ const Main = () => {
         phaseFilter={phaseFilter}
         teamFilter={teamFilter}
       />
-      <PostList posts={filteredPosts} />
+      
+      {(!filteredPosts) ? <Typography>No posts yet</Typography>:<PostList posts={filteredPosts} />}
+      
     </div>
   );
 };
