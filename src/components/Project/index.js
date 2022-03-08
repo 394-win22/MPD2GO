@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Typography,
@@ -19,6 +19,7 @@ import { UserContext } from "components/Routing";
 import EditProjectButton from "components/EditProject/EditProjectButton";
 import DriveLogo from "resources/google-drive.png";
 import MuralLogo from "resources/mural.png";
+import { ContactPageOutlined } from "@mui/icons-material";
 
 const Project = (user) => {
   const navigate = useNavigate();
@@ -26,6 +27,14 @@ const Project = (user) => {
   const [projectData, setProjectData] = useState(null);
   const context = useContext(UserContext);
   const users = context.userList;
+
+  const [width, setWidth] = useState();
+  const ref = useCallback((e) => {
+    console.log("e", e);
+      if (e) {
+        setWidth(e.clientWidth)
+      }
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -41,7 +50,7 @@ const Project = (user) => {
   }
 
   return (
-    <>
+    <div ref={ref}>
       <Button
         sx={{ mb: 2, color: "white" }}
         variant="contained"
@@ -119,7 +128,7 @@ const Project = (user) => {
           </Typography>
           <ReactGoogleSlides
             width={"100%"}
-            height={480}
+            height={parseInt(width*0.6)+"px"}
             slidesLink={projectData.slideURL}
             slideDuration={5}
             position={1}
@@ -165,7 +174,7 @@ const Project = (user) => {
             )}
         </CardContent>
       </Card>
-    </>
+    </div>
   );
 };
 
