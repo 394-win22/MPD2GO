@@ -23,7 +23,7 @@ import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
 import { signOut } from "utilities/firebase";
 import BackButton from "../Navigation/BackButton";
 
-const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
+const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
   const params = useParams();
   const navigate = useNavigate();
 
@@ -35,9 +35,9 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
     <>
       <IconButton
         sx={{ position: "absolute", right: 27 }}
-        onClick={handleProfileSubmit}
+        onClick={() => setIsEditProfile(true)}
       >
-        <CheckIcon />
+        <EditIcon />
       </IconButton>
 
       <Box textAlign="center">
@@ -189,4 +189,4 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
   );
 };
 
-export default EditProfile;
+export default DisplayProfile;

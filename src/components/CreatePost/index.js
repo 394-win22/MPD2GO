@@ -59,7 +59,6 @@ const CreatePost = () => {
 
   const postDescriptionPlaceHolder =
     "Enter post detail below. Type @ or # to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://";
-  console.log(postDescriptionPlaceHolder);
 
   const [description, setDescription] = useState("");
   const [postTags, setPostTags] = useState([]);
