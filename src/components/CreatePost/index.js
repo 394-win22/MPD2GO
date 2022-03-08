@@ -12,6 +12,7 @@ import {
   OutlinedInput,
   Chip,
   MenuItem,
+  Popover,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
@@ -25,7 +26,7 @@ import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
   container: {
-    alignItems: "center",
+    alignItems: "left",
     justifyContent: "center",
     backgroundColor: "white",
     padding: "40px 24px 40px 24px",
@@ -33,7 +34,7 @@ const useStyles = makeStyles({
   form: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "left",
     justifyContent: "space-evenly",
     "& .MuiTextField-root": { my: 1, width: "100%" },
   },
@@ -52,20 +53,15 @@ const expertises = [
   "Project Management",
 ];
 
-const topicTags = [
-  { id: 1, value: "JavaScript" },
-  { id: 2, value: "TypeScript" },
-  { id: 3, value: "Ruby" },
-  { id: 4, value: "Python" },
-];
-
 const CreatePost = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
 
   const postDescriptionPlaceHolder =
-    "<p>Enter post detail here. Type @ or # to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://</p>";
-  const [description, setDescription] = useState(postDescriptionPlaceHolder);
+    "Enter post detail below. Type @ or # to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://";
+  console.log(postDescriptionPlaceHolder);
+
+  const [description, setDescription] = useState("");
   const [postTags, setPostTags] = useState([]);
 
   const user = useUserState();
@@ -106,14 +102,14 @@ const CreatePost = () => {
 
     const modifiedContent = el.querySelector("body").innerHTML;
 
-  const postId = createPostInFirebase({
-    tags: postTags,
-    description: modifiedContent,
-    time: Date.now(),
-    author: user.uid,
-    numComments: 0,
-    associatedNotificationIds: []
-  });
+    const postId = createPostInFirebase({
+      tags: postTags,
+      description: modifiedContent,
+      time: Date.now(),
+      author: user.uid,
+      numComments: 0,
+      associatedNotificationIds: [],
+    });
 
     let notificationIds = [];
     // add mentioned to notification
@@ -137,9 +133,9 @@ const CreatePost = () => {
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-      mentionDenotationChars: ["@", "#"],
+      mentionDenotationChars: ["@"],
       source: (searchTerm, renderList, mentionChar) => {
-        const list = mentionChar === "@" ? people : topicTags;
+        const list = people;
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -160,8 +156,7 @@ const CreatePost = () => {
         Create Post
       </Typography>
       <Box className={classes.form}>
-
-        <FormControl sx={{ mt: 1, width: "100%" }}>
+        <FormControl sx={{ my: 1, width: "100%" }}>
           <InputLabel>Tags</InputLabel>
           <Select
             multiple
@@ -184,6 +179,10 @@ const CreatePost = () => {
           </Select>
         </FormControl>
 
+        <Typography variant="caption" align="left" sx={{ color: "gray" }}>
+          {postDescriptionPlaceHolder}
+        </Typography>
+
         <RichTextEditor
           value={description}
           onClick={handleDescriptionClick}
@@ -198,10 +197,10 @@ const CreatePost = () => {
           ]}
         />
 
-        <Stack spacing={2} direction="row" sx={{ mt: 3 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           <Button
             variant="contained"
-            style={{ backgroundColor: "#808080" }}
+            sx={{ backgroundColor: "#808080", mr: 2 }}
             onClick={() => navigate(-1)}
           >
             Cancel
@@ -215,7 +214,7 @@ const CreatePost = () => {
           >
             Post
           </Button>
-        </Stack>
+        </Box>
       </Box>
     </Box>
   );
