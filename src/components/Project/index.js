@@ -19,7 +19,6 @@ import { UserContext } from "components/Routing";
 import EditProjectButton from "components/EditProject/EditProjectButton";
 import DriveLogo from "resources/google-drive.png";
 import MuralLogo from "resources/mural.png";
-import { ContactPageOutlined } from "@mui/icons-material";
 import BackButton from "../Navigation/BackButton"
 
 const Project = (user) => {
@@ -212,6 +211,8 @@ const Project = (user) => {
                 </>
               )}
           </CardContent>
+        </Card>
+        </>
         </Card>
       </div>
     </div>

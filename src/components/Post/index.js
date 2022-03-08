@@ -110,7 +110,7 @@ const PostWithThreads = () => {
                       color="primary"
                       variant="contained"
                       size="small"
-                      sx={{ backgroundColor: "#c0c0c0", color: "#ffffff" }}
+                      sx={{ backgroundColor: "#c0c0c0", color: "#ffffff", mr:1, mt:1 }}
                     />
                   ))}
               </Box>}
