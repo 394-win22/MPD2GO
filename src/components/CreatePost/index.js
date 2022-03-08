@@ -190,7 +190,11 @@ const CreatePost = () => {
           placeholder="Type @ or # to see mentions autocomplete"
           mentions={mentions}
           onImageUpload={handleImageUpload}
-          style={{ width: "100%" }}
+          style={{ width: "100%", marginTop: "16px" }}
+          controls={[
+            ["bold", "italic", "underline", "link", "image"],
+            ["unorderedList","orderedList"],
+          ]}
         />
 
         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
