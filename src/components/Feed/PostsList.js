@@ -5,7 +5,7 @@ import Post from "./Post";
 const PostsList = ({ posts }) => {
   return (
     <Box sx={{ mx: "auto", pb: 10, mt: 2 }}>
-      {posts.map((post) => {
+      {posts.sort((a, b) => b.time - a.time).map((post) => {
         return <Post key={post.id} post={post} />;
       })}
     </Box>

@@ -187,7 +187,7 @@ const CreatePost = () => {
           value={description}
           onClick={handleDescriptionClick}
           onChange={setDescription}
-          placeholder="Type @ or # to see mentions autocomplete"
+          placeholder="Type @ to see mentions autocomplete"
           mentions={mentions}
           onImageUpload={handleImageUpload}
           style={{ width: "100%", marginTop: "16px" }}
