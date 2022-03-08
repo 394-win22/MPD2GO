@@ -5,6 +5,7 @@ import {
   ref as sRef,
   uploadBytes,
   getDownloadURL,
+  connectStorageEmulator,
 } from "firebase/storage";
 import {
   getDatabase,
@@ -14,6 +15,7 @@ import {
   push,
   update,
   remove,
+  connectDatabaseEmulator,
 } from "firebase/database";
 import {
   getAuth,
@@ -24,6 +26,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  connectAuthEmulator,
+  // signInWithCredential,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -37,8 +41,18 @@ const firebaseConfig = {
 };
 
 export const firebase = initializeApp(firebaseConfig);
+export const auth = getAuth(firebase);
 export const database = getDatabase(firebase);
-const storage = getStorage();
+export const storage = getStorage();
+
+if (window.Cypress) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectDatabaseEmulator(database, "127.0.0.1", 9000);
+  connectStorageEmulator(storage, "localhost", 9199);
+  // signInWithCredential(auth, GoogleAuthProvider.credential(
+  //   '{"sub": "U7npX0jtE4ssHAPKwXV5q9bvPjPQ", "email": "test@example.com", "displayName":"Testing User 1", "email_verified": true}'
+  // ));
+}
 
 const firebaseSignOut = () => signOut(getAuth(firebase));
 
@@ -87,7 +101,11 @@ export const pushData = (path, value) => push(ref(database, path), value);
 
 export const updateData = (path, value) => update(ref(database, path), value);
 
-export const removeAtPath = (path) => remove(ref(database, path));
+export const removeAtPath = (path) => {
+  console.log("removing at path:", path);
+  const result = remove(ref(database, path));
+  console.log("remove result:", result);
+};
 
 /* authentication functions */
 export const signInWithGoogle = () => {
@@ -98,8 +116,6 @@ export const signInWithGoogle = () => {
 
   signInWithPopup(getAuth(firebase), provider);
 };
-
-const auth = getAuth();
 
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {
@@ -118,6 +134,20 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
   } catch (err) {
     console.error(err);
     alert(err.message);
+  }
+};
+
+export const getUserStatus = (userData) => {
+  if ("isStaff" in userData && userData.isStaff) {
+    return "Staff"
+  }
+  if (!("year" in userData) || userData.year === "") {
+    return "Unknown Status";
+  }
+  if (userData.year < new Date().getFullYear()) {
+    return "Alumni";
+  } else {
+    return "Current Student";
   }
 };
 
@@ -164,6 +194,7 @@ export const saveUserToDb = (userObject) => {
     bio: userObject.bio || "",
     year: userObject.year || "",
     location: userObject.location || "",
+    isStaff: userObject.isStaff || false,
   });
   window.location.href = "/";
 };

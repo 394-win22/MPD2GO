@@ -12,8 +12,7 @@ import { makeStyles, useTheme } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
 
 import { UserContext } from "components/Routing";
-
-import { getUserDataFromUID } from "../../utilities/posts";
+import { getUserDataFromUID } from "utilities/posts";
 import AvatarWithTag from "components/AvatarWithTag/AvatarWithTag";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.foreground,
   },
   comment: {
-    marginLeft: "10px",
+    marginLeft: "6px !important",
     fontsize: "12px",
     color: "grey",
   },
@@ -60,22 +59,24 @@ const Post = ({ post }) => {
       <AvatarWithTag user={user} post={post} />
 
       <CardContent sx={{ pt: 0, px: 0 }}>
-        <RichTextEditor readOnly value={post.description} style={{border: 'none', marginBottom: -15}}/>
-
-
-        <Stack direction="row" spacing={1} sx={{mt:2,overflowX: "scroll", paddingLeft: 2}}>
-
-        {"tags" in post &&
-          post.tags.map((tag, i) => (
-            <Chip
-              label={tag}
-              key={i}
-              color="primary"
-              variant="outlined"
-              size="small"
-            />
-          ))}
-          </Stack>
+        <RichTextEditor
+          readOnly
+          value={post.description}
+          style={{ border: "none", marginBottom: -15 }}
+        />
+        {'tags' in post && post.tags.length > 0 &&
+          <Box sx={{paddingLeft: 2.5, paddingTop: 2}}>
+              {post.tags.map((tag, i) => (
+                <Chip
+                  label={tag}
+                  key={i}
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                  sx={{ backgroundColor: "#c0c0c0", color: "#ffffff", mr:1, mt:1 }}
+                />
+              ))}
+          </Box>}
       </CardContent>
 
       <Box sx={{ display: "flex", marginBottom: 2, mx: 2 }}>

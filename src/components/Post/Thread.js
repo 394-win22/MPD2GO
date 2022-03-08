@@ -1,16 +1,26 @@
 import { useState, useContext, memo } from "react";
 import { useNavigate } from "react-router";
-import { Box, Collapse, Button } from "@mui/material";
+import {
+  Box,
+  Collapse,
+  Button,
+  Avatar,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import { Message as MessageIcon } from "@mui/icons-material";
 import { UserContext } from "components/Routing";
 import { makeStyles } from "@mui/styles";
-import { Avatar, Typography, IconButton } from "@mui/material";
 import moment from "moment";
 import { RichTextEditor } from "@mantine/rte";
 
-import { deleteData } from "../../utilities/firebase";
 import { replyToThread } from "utilities/posts";
+import { deleteData, updateData } from "../../utilities/firebase";
+import { increment } from "firebase/database";
 import AddComment from "./AddComment";
+import DeleteThread from "./DeleteThread";
+import { deleteCommentNotifications } from "utilities/notifications";
+import DeleteCommentMenu from "./DeleteCommentMenu";
 
 const useStyles = makeStyles({
   // Comment
@@ -30,9 +40,9 @@ const useStyles = makeStyles({
   },
   rightContainer: {
     display: "inline",
-    float: 'left',
+    float: "left",
     flexDirection: "column",
-    marginLeft: '5px',
+    marginLeft: "5px",
     alignItems: "flex-start",
     height: "100%",
     minWidth: "0px",
@@ -41,14 +51,14 @@ const useStyles = makeStyles({
   avatarButton: {
     width: "24px",
     height: "24px",
-    display: 'inline',
-    float: 'left'
+    display: "inline",
+    float: "left",
   },
   avatar: {
-    width: "24px",
-    height: "24px",
-    display: 'inline',
-    float: 'left',
+    width: "24px !important",
+    height: "24px !important",
+    display: "inline",
+    float: "left",
   },
   contentContainer: {
     marginLeft: "10px",
@@ -71,7 +81,7 @@ const useStyles = makeStyles({
   },
   time: {
     color: "#888888",
-    fontSize: "13px",
+    fontSize: "13px !important",
   },
   collapseButton: {
     display: "flex",
@@ -98,15 +108,11 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    marginTop: "5px",
     marginBottom: "5px",
   },
 
   replyButton: {
-    fontSize: "13px",
-    padding: "8px 14px 8px 14px",
-  },
-  deleteButton: {
-    color: "red",
     fontSize: "13px",
     padding: "8px 14px 8px 14px",
   },
@@ -125,7 +131,7 @@ const Thread = ({ postId, ids, data, style }) => {
   const [isShowTextField, setIsShowTextField] = useState(false);
   const [isShowThreads, setIsShowThreads] = useState(true);
 
-  const replyToComment = (comment) => {
+  const replyToComment = (comment, notifications) => {
     // GENERATE A PATH TO PUSH TO IN DATABASE
     let path = `${postId}`;
     ids.forEach((id) => {
@@ -133,8 +139,32 @@ const Thread = ({ postId, ids, data, style }) => {
       path += id;
     });
     path += "/threads/";
-    replyToThread(user.uid, postId, path, comment);
+    replyToThread(user.uid, postId, path, comment, notifications);
     setIsShowTextField(false);
+  };
+
+  const totalCommentsInThread = () => {
+    let total = 1;
+    const haveChild =
+      "threads" in data && Object.values(data.threads).length > 0;
+
+    if (haveChild) {
+      total += totalCommentsInChildren(Object.values(data.threads));
+    }
+    return total;
+  };
+
+  const totalCommentsInChildren = (childrenArr) => {
+    let childrenTotal = 0;
+    childrenArr.forEach((child) => {
+      childrenTotal++;
+      const haveChild =
+        "threads" in child && Object.values(child.threads).length > 0;
+      if (haveChild) {
+        childrenTotal += totalCommentsInChildren(Object.values(child.threads));
+      }
+    });
+    return childrenTotal;
   };
 
   const deleteThread = () => {
@@ -143,8 +173,13 @@ const Thread = ({ postId, ids, data, style }) => {
       path += "/threads/";
       path += id;
     });
-    if (window.confirm("Are you sure you want to delete this comment")) {
+    if (window.confirm("Are you sure you want to delete this comment? ")) {
+      const totalComments = totalCommentsInThread();
+      deleteCommentNotifications(path, userList, data);
       deleteData(`/posts/${path}`);
+      updateData(`posts/${postId}`, {
+        numComments: increment(-1 * totalComments),
+      });
     }
   };
 
@@ -161,7 +196,7 @@ const Thread = ({ postId, ids, data, style }) => {
   if (haveChild) sortedThreads = Object.entries(data.threads).sort().reverse();
   return (
     <Box className={classes.container}>
-      <Box className={classes.leftContainer}>
+      <Box className={classes.leftContainer} sx={{ ml: 1 }}>
         <IconButton
           className={classes.avatarButton}
           onClick={() => {
@@ -184,15 +219,24 @@ const Thread = ({ postId, ids, data, style }) => {
       <Box className={classes.rightContainer}>
         {/* comment */}
         <Box className={classes.contentContainer}>
+
           <Box className={classes.infoContainer}>
-            <Typography variant="subtitle2">
-              {postAuthor.displayName}
-            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
+              <Typography variant="subtitle2">
+                {postAuthor.displayName}
+              </Typography>
+              {data.author === user.uid && <DeleteCommentMenu delThreadFunction={deleteThread} />}
+            </Box>
+
             <Typography className={classes.time}>
               {moment(data.time).format("MMMM Do YYYY, h:mm a")}
             </Typography>
           </Box>
-          <RichTextEditor readOnly value={data.comment} style={{marginLeft: -17, marginBottom: -20, border: 'none'}}/>
+          <RichTextEditor
+            readOnly
+            value={data.comment}
+            style={{ marginLeft: -17, marginBottom: -20, border: "none", padding: "0" }}
+          />
         </Box>
 
         {/* Box to add comment */}
@@ -208,7 +252,6 @@ const Thread = ({ postId, ids, data, style }) => {
         <Box className={classes.buttonContainer}>
           {!isShowThreads && haveChild && (
             <Button
-              color="primary"
               className={classes.showReplies}
               onClick={() => {
                 setIsShowThreads(true);
@@ -232,17 +275,6 @@ const Thread = ({ postId, ids, data, style }) => {
               />
             </Button>
           )}
-          {data.author == user.uid && !isShowTextField && (
-            <Button
-              className={classes.deleteButton}
-              color="primary"
-              onClick={() => {
-                deleteThread();
-              }}
-            >
-              Delete
-            </Button>
-          )}
         </Box>
 
         {/* child threads */}
@@ -261,7 +293,7 @@ const Thread = ({ postId, ids, data, style }) => {
             })}
         </Collapse>
       </Box>
-    </Box>
+    </Box >
   );
 };
 

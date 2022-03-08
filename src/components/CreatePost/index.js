@@ -12,6 +12,7 @@ import {
   OutlinedInput,
   Chip,
   MenuItem,
+  Popover,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
@@ -19,14 +20,13 @@ import { RichTextEditor } from "@mantine/rte";
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
 
-import { UserContext } from 'components/Routing'
-
+import { UserContext } from "components/Routing";
 
 import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
   container: {
-    alignItems: "center",
+    alignItems: "left",
     justifyContent: "center",
     backgroundColor: "white",
     padding: "40px 24px 40px 24px",
@@ -34,40 +34,34 @@ const useStyles = makeStyles({
   form: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "left",
     justifyContent: "space-evenly",
     "& .MuiTextField-root": { my: 1, width: "100%" },
   },
 });
 
-const postTagNames = [
-  "Ethnography",
-  "Market Research",
-  "Brainstorming",
-  "Idea Convergence",
-  "Prototyping",
-  "Engineering/Design",
-  "Materials Selection",
-  "Business Modeling",
-  "Story/Presentation",
+const expertises = [
+  "Marketing",
+  "Industrial Design",
+  "Mechanical Engineering",
+  "Electrical Engineering",
+  "Software Development",
+  "Product Owner",
+  "UI/UX Design",
+  "Finance",
+  "Graphic Design",
+  "Project Management",
 ];
-
-const topicTags = [
-  { id: 1, value: "JavaScript" },
-  { id: 2, value: "TypeScript" },
-  { id: 3, value: "Ruby" },
-  { id: 4, value: "Python" },
-];
-
 
 const CreatePost = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState(
-    "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>"
-  );
+  const postDescriptionPlaceHolder =
+    "Enter post detail below. Type @ or # to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://";
+  console.log(postDescriptionPlaceHolder);
+
+  const [description, setDescription] = useState("");
   const [postTags, setPostTags] = useState([]);
 
   const user = useUserState();
@@ -78,21 +72,18 @@ const CreatePost = () => {
     const {
       target: { value },
     } = event;
-    setPostTags(
-      typeof value === "string" ? value.split(",") : value
-    );
+    setPostTags(typeof value === "string" ? value.split(",") : value);
   };
 
   const handleDescriptionClick = () => {
-    if (description == "<p>Enter post detail here. Type @ or # to see mentions autocomplete</p>")
-      setDescription("")
-  }
+    if (description === postDescriptionPlaceHolder) setDescription("");
+  };
 
   const people = context.userList.map((u) => {
     return { id: u.uid, value: u.displayName };
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     // check if there any mentions
     var el = document.createElement("html");
     el.innerHTML = description;
@@ -104,21 +95,23 @@ const CreatePost = () => {
         if (mentionSpan.getAttribute("data-denotation-char") === "@") {
           var mentionWithLink = document.createElement("p");
           const uid = mentionSpan.getAttribute("data-id");
-          mentionWithLink.innerHTML = `<a href="/profile/${uid}" rel="noopener noreferrer" target="_blank">  ${mentionSpan.outerHTML}  </a>`;
+          mentionWithLink.innerHTML = `<a href="/profile/${uid}" rel="noopener noreferrer" target="_self">  ${mentionSpan.outerHTML}  </a>`;
           mentionSpan.outerHTML = mentionWithLink.innerHTML;
         }
       });
 
+    const modifiedContent = el.querySelector("body").innerHTML;
+
     const postId = createPostInFirebase({
-      title: title,
       tags: postTags,
-      description: el.querySelector('body').innerHTML,
+      description: modifiedContent,
       time: Date.now(),
       author: user.uid,
       numComments: 0,
+      associatedNotificationIds: [],
     });
 
-
+    let notificationIds = [];
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
@@ -127,13 +120,12 @@ const CreatePost = () => {
             mentionSpan.getAttribute("data-id"),
             user.uid,
             postId,
-            el.querySelector('body').innerHTML,
+            modifiedContent,
             "mention"
           );
         }
       });
 
-    setTitle("");
     setDescription("");
     navigate("/");
   };
@@ -141,9 +133,9 @@ const CreatePost = () => {
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-      mentionDenotationChars: ["@", "#"],
+      mentionDenotationChars: ["@"],
       source: (searchTerm, renderList, mentionChar) => {
-        const list = mentionChar === "@" ? people : topicTags;
+        const list = people;
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -152,13 +144,11 @@ const CreatePost = () => {
         renderList(includesSearchTerm.slice(0, 5));
       },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
-
-
-
 
   return (
     <Box className={classes.container}>
@@ -166,18 +156,7 @@ const CreatePost = () => {
         Create Post
       </Typography>
       <Box className={classes.form}>
-        <TextField
-          margin="normal"
-          label="Title"
-          value={title}
-          variant="outlined"
-          onChange={(event) => {
-            setTitle(event.target.value);
-          }}
-          autoComplete="off"
-        />
-
-        <FormControl sx={{ mt: 1, width: "100%" }}>
+        <FormControl sx={{ my: 1, width: "100%" }}>
           <InputLabel>Tags</InputLabel>
           <Select
             multiple
@@ -192,7 +171,7 @@ const CreatePost = () => {
               </Box>
             )}
           >
-            {postTagNames.map((tags) => (
+            {expertises.map((tags) => (
               <MenuItem key={tags} value={tags}>
                 {tags}
               </MenuItem>
@@ -200,30 +179,42 @@ const CreatePost = () => {
           </Select>
         </FormControl>
 
+        <Typography variant="caption" align="left" sx={{ color: "gray" }}>
+          {postDescriptionPlaceHolder}
+        </Typography>
 
         <RichTextEditor
           value={description}
           onClick={handleDescriptionClick}
           onChange={setDescription}
-          placeholder="Type @ or # to see mentions autocomplete"
+          placeholder="Type @ to see mentions autocomplete"
           mentions={mentions}
           onImageUpload={handleImageUpload}
           style={{ width: "100%", marginTop: "16px" }}
+          controls={[
+            ["bold", "italic", "underline", "link", "image"],
+            ["unorderedList","orderedList"],
+          ]}
         />
 
-
-        <Stack spacing={2} direction="row" sx={{ mt: 3 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           <Button
             variant="contained"
-            style={{ backgroundColor: "#808080" }}
+            sx={{ backgroundColor: "#808080", mr: 2 }}
             onClick={() => navigate(-1)}
           >
             Cancel
           </Button>
-          <Button variant="contained" type="submit" onClick={() => { if (description != '<p><br></p>') handleSubmit() }}>
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={() => {
+              if (description !== "<p><br></p>") handleSubmit();
+            }}
+          >
             Post
           </Button>
-        </Stack>
+        </Box>
       </Box>
     </Box>
   );

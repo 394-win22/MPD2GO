@@ -10,34 +10,22 @@ import {
   Card,
   Chip,
 } from "@mui/material";
+import { getUserStatus } from "../../utilities/firebase";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 // local files
 import { EditUserButton } from "../EditProfile/EditUserButton";
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
-import { signOut } from 'utilities/firebase'
-
-const getStatus = (userData) => {
-  if (!("year" in userData) || userData.year == "") {
-    return "Unknown Status";
-  }
-  if (userData.year < new Date().getFullYear()) {
-    return "Alumni";
-  }
-  else {
-    return "Current Student";
-  }
-}
+import { signOut } from "utilities/firebase";
+import BackButton from "../Navigation/BackButton"
 
 const Profile = ({ user }) => {
   const params = useParams();
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
-
 
   useEffect(() => {
     const userToSearch = params.userID || user.uid;
@@ -66,16 +54,8 @@ const Profile = ({ user }) => {
 
   return (
     <>
-      <Button
-        sx={{ mb: 2, color: "white" }}
-        variant="contained"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
-      <Card sx={{ px: 4, py: 4, mb: 10 }} style={{ borderRadius: 10 }}>
+      <Card sx={{ px: 2, py: 2, mb: 10 }} style={{ borderRadius: 10 }}>
+      <BackButton/>
         <Box textAlign="center">
           <Avatar
             alt={userData.displayName}
@@ -119,33 +99,22 @@ const Profile = ({ user }) => {
           <Divider />
           <Typography
             variant="body1"
+            style={{ color: "#7B7B7B" }}
+            sx={{ paddingLeft: 1, my: 1 }}
+          >
+            {getUserStatus(userData)}
+          </Typography>
+
+          <Typography
+            variant="body1"
             display="block"
             style={{ color: "#7B7B7B" }}
-            sx={{ flexGrow: 1, paddingLeft: 1, my: 1 }}
+            sx={{ flexGrow: 1, paddingLeft: 1 }}
           >
             {userData.year ? "Class of " + userData.year : "No Year"}
           </Typography>
 
-          <Stack direction="row" justifyContent="center">
-            <Typography
-              variant="body1"
-              style={{ color: "#7B7B7B" }}
-              sx={{ paddingLeft: 1 }}
-            >
-              {getStatus(userData)}
 
-            </Typography>
-
-            {"teamId" in userData && (
-              <Chip
-                key={projectData.name}
-                size="small"
-                label={projectData.name}
-                variant="outlined"
-                sx={{ mx: 1 }}
-              />
-            )}
-          </Stack>
 
           {"teamId" in userData && (
             <Button
@@ -153,44 +122,90 @@ const Profile = ({ user }) => {
               onClick={() => {
                 navigate(`/project/${userData.teamId}`);
               }}
-              sx={{ m: 1 }}
+              sx={{
+                mt: 1,
+                mb: 2,
+                backgroundColor: projectData.teamColor,
+                color: projectData.textColor,
+                textBlendMode: "exclusion",
+              }}
             >
-              <InsertDriveFileIcon />
-              View Capstone Page
+              View {projectData.name}
             </Button>
           )}
 
           <Divider />
 
-          <Typography align="left" sx={{ marginBottom: 3, ml: 1, color: "#7B7B7B" }}>
+
+          <Typography
+            align="left"
+            sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}
+          >
             Expertise
           </Typography>
-          <Stack direction="row" sx={{ marginBottom: 3, overflowX: "scroll" }} spacing={1}>
-            {"expertise" in userData && Object.values(userData.expertise).map((x, i) => (
-              <Chip
-                key={i}
-                color="secondary"
-                label={x}
-              />
-            ))}
+          <Stack
+            direction="row"
+            sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
+            spacing={1}
+          >
+            {"expertise" in userData &&
+              Object.values(userData.expertise).map((x, i) => (
+                <Chip key={i} color="secondary" label={x} />
+              ))}
           </Stack>
+
           <Divider />
-          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-              <Stack direction="row" sx={{ marginBottom: 3, marginTop: 2 }} spacing={1}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <Stack
+                direction="row"
+                sx={{ marginBottom: 3, marginTop: 2 }}
+                spacing={1}
+              >
                 <EmailIcon sx={{ color: "#999999" }} />
                 <Typography>{userData.email}</Typography>
               </Stack>
               <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
                 <LinkedInIcon sx={{ color: "#4173ac" }} />
-                <Typography>{(userData.linkedIn) ? userData.linkedIn : "No LinkedIn"}</Typography>
+                <Typography>
+                  {userData.linkedIn ? userData.linkedIn : "No LinkedIn"}
+                </Typography>
               </Stack>
             </Box>
           </Box>
           {(!params.userID || params.userID === user.uid) && (
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <EditUserButton key={userData} user={userData} userID={user.uid} />
-              <Button sx={{ width: "150px", marginTop: "10px" }} variant="contained" onClick={signOut}>Sign out </Button>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <EditUserButton
+                key={userData}
+                user={userData}
+                userID={user.uid}
+              />
+              <Button
+                sx={{ width: "150px", marginTop: "10px" }}
+                variant="contained"
+                onClick={signOut}
+                id="logout_btn"
+              >
+                Sign out{" "}
+              </Button>
             </Box>
           )}
         </Box>

@@ -12,12 +12,15 @@ import Project from "components/Project";
 import Notifications from "components/Notifications";
 import NotFound from "components/NotFound";
 import Directory from "components/Directory";
-
 import Main from "components/Feed";
+import Loading from "components/Loading";
 
 const getPostList = (posts) => {
-  const listOfPost = Object.entries(posts).map(([postId, postObj]) => {
+  let listOfPost = Object.entries(posts).map(([postId, postObj]) => {
     return { ...postObj, id: postId };
+  });
+  listOfPost = listOfPost.sort((item1, item2) => {
+    return item2.time - item1.time;
   });
   return listOfPost;
 };
@@ -28,23 +31,30 @@ const getUserList = (users) => {
   });
 };
 
+const getProjectList = (project) => {
+  return Object.entries(project).map(([uid, projectObj]) => {
+    return { ...projectObj, uid: uid };
+  });
+};
+
 export const UserContext = createContext();
 
 const Routing = ({ user }) => {
   const [postList, postListLoading] = useData("/posts", getPostList);
-
   const [userList, userListLoading] = useData("/users", getUserList);
+  const [projectList, projectListLoading] = useData("/project", getProjectList);
 
-  if (postListLoading || userListLoading) {
-    return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
+  if (postListLoading || userListLoading || projectListLoading) {
+    return (<Loading />)
   }
 
   return (
     <UserContext.Provider
       value={{
-        user: user,
-        postList: postList,
-        userList: userList,
+        user: user || {} ,
+        postList: postList || [],
+        userList: userList || [],
+        projectList: projectList || [],
       }}
     >
       <Navigation user={user} />
@@ -53,7 +63,7 @@ const Routing = ({ user }) => {
           <Route exact path="/createPost" element={<CreatePost />} />
           <Route exact path="/profile" element={<Profile user={user} />} />
           <Route exact path="/notifications" element={<Notifications />} />
-          <Route exact path="/directory" element={<Directory/>} />
+          <Route exact path="/directory" element={<Directory />} />
           <Route
             exact
             path="/profile/:userID"
@@ -62,7 +72,7 @@ const Routing = ({ user }) => {
           <Route exact path="/" element={<Main />} />
           <Route path="/createPost" element={<CreatePost />} />
           <Route path="/post/:pageId" element={<PostWithThreads />}></Route>
-          <Route path="/project/:projectId" element={<Project />}></Route>
+          <Route path="/project/:projectId" element={<Project user={user} />}></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
