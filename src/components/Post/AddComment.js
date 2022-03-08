@@ -40,7 +40,6 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
 
     const modifiedContent = el.querySelector("body").innerHTML;
     let notificationIds = [];
-    replyToComment(modifiedContent);
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
