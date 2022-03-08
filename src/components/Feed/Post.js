@@ -64,24 +64,19 @@ const Post = ({ post }) => {
           value={post.description}
           style={{ border: "none", marginBottom: -15 }}
         />
-
-        <Stack
-          direction="row"
-          spacing={1}
-          sx={{ mt: 2, overflowX: "scroll", paddingLeft: 2 }}
-        >
-          {"tags" in post &&
-            post.tags.map((tag, i) => (
-              <Chip
-                label={tag}
-                key={i}
-                color="primary"
-                variant="contained"
-                size="small"
-                sx={{ backgroundColor: "#c0c0c0", color: "#ffffff" }}
-              />
-            ))}
-        </Stack>
+        {'tags' in post && post.tags.length > 0 &&
+          <Box sx={{paddingLeft: 2.5, paddingTop: 2}}>
+              {post.tags.map((tag, i) => (
+                <Chip
+                  label={tag}
+                  key={i}
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                  sx={{ backgroundColor: "#c0c0c0", color: "#ffffff" }}
+                />
+              ))}
+          </Box>}
       </CardContent>
 
       <Box sx={{ display: "flex", marginBottom: 2, mx: 2 }}>

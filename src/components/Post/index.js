@@ -92,7 +92,7 @@ const PostWithThreads = () => {
             <RichTextEditor
               readOnly
               value={postContent}
-              style={{ border: "none" }}
+              style={{ border: "none", marginBottom: -15 }}
             />
           )}
 
@@ -101,17 +101,19 @@ const PostWithThreads = () => {
             spacing={1}
             sx={{ mt: 2, overflowX: "scroll", paddingLeft: 2 }}
           >
-            {"tags" in post &&
-              post.tags.map((tag, i) => (
-                <Chip
-                  label={tag}
-                  key={i}
-                  color="primary"
-                  variant="contained"
-                  size="small"
-                  sx={{ backgroundColor: "#c0c0c0", color: "#ffffff" }}
-                />
-              ))}
+            {'tags' in post && post.tags.length > 0 &&
+              <Box>
+                  {post.tags.map((tag, i) => (
+                    <Chip
+                      label={tag}
+                      key={i}
+                      color="primary"
+                      variant="contained"
+                      size="small"
+                      sx={{ backgroundColor: "#c0c0c0", color: "#ffffff" }}
+                    />
+                  ))}
+              </Box>}
           </Stack>
         </CardContent>
 
