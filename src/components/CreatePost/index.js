@@ -52,12 +52,12 @@ const expertises = [
   "Project Management",
 ];
 
-const topicTags = [
+/*const topicTags = [
   { id: 1, value: "JavaScript" },
   { id: 2, value: "TypeScript" },
   { id: 3, value: "Ruby" },
   { id: 4, value: "Python" },
-];
+];*/
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -137,9 +137,9 @@ const CreatePost = () => {
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-      mentionDenotationChars: ["@", "#"],
+      mentionDenotationChars: ["@"],//, "#"],
       source: (searchTerm, renderList, mentionChar) => {
-        const list = mentionChar === "@" ? people : topicTags;
+        const list = people //mentionChar === "@" ? people : topicTags;
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -188,7 +188,7 @@ const CreatePost = () => {
           value={description}
           onClick={handleDescriptionClick}
           onChange={setDescription}
-          placeholder="Type @ or # to see mentions autocomplete"
+          placeholder="Type @ to see mentions autocomplete"
           mentions={mentions}
           onImageUpload={handleImageUpload}
           style={{ width: "100%", marginTop: "16px" }}

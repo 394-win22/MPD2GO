@@ -7,12 +7,12 @@ import { createNotification } from "utilities/notifications";
 import { deleteData } from "../../utilities/firebase";
 import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
 
-const topicTags = [
+/*const topicTags = [
   { id: 1, value: "JavaScript" },
   { id: 2, value: "TypeScript" },
   { id: 3, value: "Ruby" },
   { id: 4, value: "Python" },
-];
+];*/
 
 const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
   const [comment, setComment] = useState("");
@@ -67,9 +67,9 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-      mentionDenotationChars: ["@", "#"],
+      mentionDenotationChars: ["@"],//, "#"],
       source: (searchTerm, renderList, mentionChar) => {
-        const list = mentionChar === "@" ? people : topicTags;
+        const list = people//mentionChar === "@" ? people : topicTags;
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -97,7 +97,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         }}
         value={comment}
         onChange={setComment}
-        placeholder="Type @ or # to see mentions autocomplete"
+        placeholder="Type @ to see mentions autocomplete"
         mentions={mentions}
         style={{ marginLeft: "8px", marginTop: "16px", width: "100%" }}
         onDragStart={() => {
