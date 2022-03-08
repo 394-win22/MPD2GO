@@ -9,23 +9,28 @@ import {
   Stack,
   Card,
   Chip,
+  IconButton,
 } from "@mui/material";
 import { getUserStatus } from "../../utilities/firebase";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import EditIcon from "@mui/icons-material/Edit";
+import CheckIcon from "@mui/icons-material/Check";
 
 // local files
 import { EditUserButton } from "../EditProfile/EditUserButton";
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
 import { signOut } from "utilities/firebase";
-import BackButton from "../Navigation/BackButton"
+import BackButton from "../Navigation/BackButton";
 
 const Profile = ({ user }) => {
   const params = useParams();
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
+
+  const [isEditProfile, setIsEditProfile] = useState(false);
 
   useEffect(() => {
     const userToSearch = params.userID || user.uid;
@@ -46,6 +51,10 @@ const Profile = ({ user }) => {
     });
   }, [params, user]);
 
+  const handleProfileSubmit = () => {
+    setIsEditProfile(false);
+  };
+
   if (!userData || !projectData)
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
 
@@ -55,7 +64,23 @@ const Profile = ({ user }) => {
   return (
     <>
       <Card sx={{ px: 2, py: 2, mb: 10 }} style={{ borderRadius: 10 }}>
-      <BackButton/>
+        <BackButton />
+        {isEditProfile ? (
+          <IconButton
+            sx={{ position: "absolute", right: 27 }}
+            onClick={handleProfileSubmit}
+          >
+            <CheckIcon />
+          </IconButton>
+        ) : (
+          <IconButton
+            sx={{ position: "absolute", right: 27 }}
+            onClick={() => setIsEditProfile(true)}
+          >
+            <EditIcon />
+          </IconButton>
+        )}
+
         <Box textAlign="center">
           <Avatar
             alt={userData.displayName}
@@ -114,8 +139,6 @@ const Profile = ({ user }) => {
             {userData.year ? "Class of " + userData.year : "No Year"}
           </Typography>
 
-
-
           {"teamId" in userData && (
             <Button
               variant="contained"
@@ -135,7 +158,6 @@ const Profile = ({ user }) => {
           )}
 
           <Divider />
-
 
           <Typography
             align="left"
