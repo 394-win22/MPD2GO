@@ -11,6 +11,19 @@ export const createPostInFirebase = (postObj) => {
   return postId.key;
 };
 
+export const findLevel =(path)=>{
+  let count =0;
+  for (let i = 0; i < path.length; i++) {
+    if (path[i]==="/"){
+      count+=1;
+    }
+    if (count >2){
+      return 1; // 1 represents level beyond the first comment
+    }
+  }
+  return 0; // first level
+};
+
 export const addCommentToPost = (
   postAuthorUid,
   commentAuthorUid,
@@ -18,6 +31,7 @@ export const addCommentToPost = (
   comment,
   notifications,
 ) => {
+  console.log(`posts/${postId}/threads`);
   const notificationPath = createNotification(
     postAuthorUid,
     commentAuthorUid,
@@ -42,6 +56,7 @@ export const addCommentToPost = (
 };
 
 export const replyToThread = (uid, postId, path, comment, notifications) => {
+  console.log(`posts/${path}`);
   pushData(`posts/${path}`, {
     author: uid,
     comment: comment,

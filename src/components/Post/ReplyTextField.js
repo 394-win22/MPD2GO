@@ -3,7 +3,6 @@ import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 import { RichTextEditor } from "@mantine/rte";
 import { UserContext } from "components/Routing/index.js";
-
 import { addCommentToPost } from "../../utilities/posts.js";
 import { createNotification } from "utilities/notifications.js";
 
