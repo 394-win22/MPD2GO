@@ -60,42 +60,6 @@ const Project = (user) => {
   }
 
   return (
-    <div ref={otherRef}>
-      <div ref={ref}>
-        <Button
-          sx={{ mb: 2, color: "white" }}
-          variant="contained"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Back
-        </Button>
-        <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
-          <BackButton/>
-          {Object.values(projectData.member).includes(user.user.uid) && (
-            <EditProjectButton
-              project={projectData}
-              projectId={projectId}
-              setProjectData={setProjectData}
-            />
-          )}
-          <Box sx={{ my: 2 }} style={{ display: "block" }}>
-            <Avatar
-              sx={{ width: 100, height: "auto", mx: 2 }}
-              style={{ float: "left" }}
-              src={projectData.photoURL}
-            ></Avatar>
-            <CardHeader
-              align="left"
-              title={projectData.name}
-              subheader={
-                "Last Updated " +
-                moment(projectData.lastUpdateTime).format("MMMM Do YYYY")
-              }
-              aria-label="avatar"
-            />
-          </Box>
     <>
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
       <BackButton/>
@@ -213,9 +177,6 @@ const Project = (user) => {
           </CardContent>
         </Card>
         </>
-        </Card>
-      </div>
-    </div>
   );
 };
 
