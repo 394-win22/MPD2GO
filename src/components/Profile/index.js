@@ -37,6 +37,12 @@ const Profile = ({ user }) => {
   const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
 
+  function handleSignOut() {
+    navigate("/");
+    signOut()
+  }
+
+
   useEffect(() => {
     const userToSearch = params.userID || user.uid;
 
@@ -65,7 +71,7 @@ const Profile = ({ user }) => {
   return (
     <>
       <Card sx={{ px: 2, py: 2, mb: 10 }} style={{ borderRadius: 10 }}>
-      <BackButton/>
+        <BackButton />
         <Box textAlign="center">
           <Avatar
             alt={userData.displayName}
@@ -211,7 +217,7 @@ const Profile = ({ user }) => {
               <Button
                 sx={{ width: "150px", marginTop: "10px" }}
                 variant="contained"
-                onClick={signOut}
+                onClick={handleSignOut}
                 id="logout_btn"
               >
                 Sign out{" "}
