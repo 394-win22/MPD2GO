@@ -60,6 +60,8 @@ const Project = (user) => {
   }
 
   return (
+    <div ref={otherRef}>
+      <div ref={ref}>
     <>
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
       <BackButton/>
@@ -177,6 +179,8 @@ const Project = (user) => {
           </CardContent>
         </Card>
         </>
+      </div>
+    </div>
   );
 };
 
