@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { Card, CardHeader, List, Box, Divider } from "@mui/material";
+import { Card, CardHeader, List, Box, Divider, Stack } from "@mui/material";
 import { UserContext } from "components/Routing";
 import CommentNotification from "./CommentNotification";
 import CommentReplyNotification from "./CommentReplyNotification";
@@ -58,13 +58,15 @@ const Notifications = () => {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <ClearAllNotification uid={userData.uid} />
-      </Box>
       <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
         <CardHeader
           sx={{ padding: "10px 10px" }}
           avatar={<BackButton />}
+          action={
+            <Box sx={{ display: "flex", justifyContent: "space-between", m:1 }}>
+            <ClearAllNotification uid={userData.uid}/>
+            </Box>
+          }
           title="Notifications"
           titleTypographyProps={{ variant: "h6" }}
         />

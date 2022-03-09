@@ -8,6 +8,7 @@ import {
   Dialog,
   Button,
 } from "@mui/material";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { removeAtPath } from "../../utilities/firebase";
 
 export const ClearAllNotification = ({ uid }) => {
@@ -30,10 +31,11 @@ export const ClearAllNotification = ({ uid }) => {
       <Button
         onClick={handleClickOpen}
         variant="contained"
-        color="error"
         sx={{ mb: 2 }}
+        style={{backgroundColor: '#98E297', borderRadius: 10, padding:5}}
+        startIcon={<CheckCircleIcon/>}
       >
-        Clear All Notifications
+        Clear All
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Clear All Notifications</DialogTitle>
@@ -48,8 +50,8 @@ export const ClearAllNotification = ({ uid }) => {
           </Button>
           <Button
             onClick={() => deleteAllNotification(uid)}
-            color="primary"
             variant="contained"
+            color="primary"
             autoFocus
           >
             Yes
