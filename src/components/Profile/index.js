@@ -83,6 +83,7 @@ const Profile = ({ user }) => {
 
           <Typography
             component="div"
+            cy-data="bio"
             sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}
           >
             {userData.bio ? userData.bio : "No Bio"}
@@ -91,6 +92,7 @@ const Profile = ({ user }) => {
           <Typography
             variant="body1"
             display="block"
+            cy-data="location"
             sx={{ my: 1 }}
             style={{ color: "#7B7B7B" }}
           >
@@ -108,6 +110,7 @@ const Profile = ({ user }) => {
           <Typography
             variant="body1"
             display="block"
+            cy-data="class"
             style={{ color: "#7B7B7B" }}
             sx={{ flexGrow: 1, paddingLeft: 1 }}
           >
@@ -129,6 +132,7 @@ const Profile = ({ user }) => {
                 color: projectData.textColor,
                 textBlendMode: "exclusion",
               }}
+              cy-data="teamButton"
             >
               View {projectData.name}
             </Button>
