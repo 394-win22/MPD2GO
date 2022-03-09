@@ -4,10 +4,12 @@ import Post from "./Post";
 
 const PostsList = ({ posts }) => {
   return (
-    <Box sx={{ mx: "auto", pb: 10, mt: 2 }}>
-      {posts.sort((a, b) => b.time - a.time).map((post) => {
-        return <Post key={post.id} post={post} />;
-      })}
+    <Box sx={{ mx: "auto", pb: 10, mt: 2 }} data-cy="postListBox">
+      {posts
+        .sort((a, b) => b.time - a.time)
+        .map((post) => {
+          return <Post key={post.id} post={post} />;
+        })}
     </Box>
   );
 };
