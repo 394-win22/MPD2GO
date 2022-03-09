@@ -151,7 +151,7 @@ const CreatePost = () => {
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
 
   return (
-    <Box className={classes.container}>
+    <Box className={classes.container} data-cy="createPostBox">
       <Typography align="center" variant="h4" sx={{ mb: 3 }}>
         Create Post
       </Typography>
@@ -193,7 +193,7 @@ const CreatePost = () => {
           style={{ width: "100%", marginTop: "16px" }}
           controls={[
             ["bold", "italic", "underline", "link", "image"],
-            ["unorderedList","orderedList"],
+            ["unorderedList", "orderedList"],
           ]}
         />
 
@@ -202,6 +202,7 @@ const CreatePost = () => {
             variant="contained"
             sx={{ backgroundColor: "#808080", mr: 2 }}
             onClick={() => navigate(-1)}
+            data-cy="cancelCreatePostBtn"
           >
             Cancel
           </Button>
@@ -211,6 +212,7 @@ const CreatePost = () => {
             onClick={() => {
               if (description !== "<p><br></p>") handleSubmit();
             }}
+            data-cy="submitPostBtn"
           >
             Post
           </Button>
