@@ -102,9 +102,7 @@ export const pushData = (path, value) => push(ref(database, path), value);
 export const updateData = (path, value) => update(ref(database, path), value);
 
 export const removeAtPath = (path) => {
-  console.log("removing at path:", path);
   const result = remove(ref(database, path));
-  console.log("remove result:", result);
 };
 
 /* authentication functions */
@@ -139,7 +137,7 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
 
 export const getUserStatus = (userData) => {
   if ("isStaff" in userData && userData.isStaff) {
-    return "Staff"
+    return "Staff";
   }
   if (!("year" in userData) || userData.year === "") {
     return "Unknown Status";
@@ -242,11 +240,11 @@ export const addToProject = (userId, project) => {
 
 export const removeFromProject = (userId, project) => {
   let newMemberArray = Object.values(project.member).filter((user) => {
-    return user !== userId
+    return user !== userId;
   });
   setData("project/" + project.id + "/member", newMemberArray);
 };
 
 export const getProjectFromId = (id, projectList) => {
   return projectList.filter((project) => project.id === id)[0];
-}
+};
