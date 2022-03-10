@@ -10,6 +10,12 @@ import {
   Card,
   Chip,
   IconButton,
+  CardHeader,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { getUserStatus } from "../../utilities/firebase";
 // icons
@@ -17,15 +23,47 @@ import { Email as EmailIcon } from "@mui/icons-material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 // local files
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
 import { signOut } from "utilities/firebase";
 import BackButton from "../Navigation/BackButton";
 
+const expertiseList = [
+  "Marketing",
+  "Industrial Design",
+  "Mechanical Engineering",
+  "Electrical Engineering",
+  "Software Development",
+  "Product Owner",
+  "UI/UX Design",
+  "Finance",
+  "Graphic Design",
+  "Project Management",
+];
+
 const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
   const params = useParams();
   const navigate = useNavigate();
+
+  const [isNameEditing, setIsNameEditing] = useState(false);
+  const [isBioEditing, setIsBioEditing] = useState(false);
+  const [isLocationEditing, setIsLocationEditing] = useState(false);
+  const [isYearEditing, setIsYearEditing] = useState(false);
+  const [isExpertiseEditing, setIsExpertiseEditing] = useState(false);
+  const [isEmailEditing, setIsEmailEditing] = useState(false);
+  const [isLinkedInEditing, setIsLinkedInEditing] = useState(false);
+
+  const [formValues, setFormValues] = useState(user);
+  const [expertise, setExpertise] = useState("");
+
+  const handleTagChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setExpertise(typeof value === "string" ? value.split(",") : value);
+  };
 
   const handleProfileSubmit = () => {
     setIsEditProfile(false);
@@ -33,14 +71,21 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
 
   return (
     <>
-      <IconButton
-        sx={{ position: "absolute", right: 27 }}
-        onClick={handleProfileSubmit}
-      >
-        <CheckIcon />
-      </IconButton>
+      <CardHeader
+        sx={{ p: 0 }}
+        avatar={<BackButton />}
+        action={
+          <IconButton onClick={handleProfileSubmit}>
+            <CheckIcon />
+          </IconButton>
+        }
+      ></CardHeader>
 
-      <Box textAlign="center">
+      <Box
+        component="form"
+        sx={{ justifyContent: "center", textAlign: "center" }}
+        noValidate
+      >
         <Avatar
           alt={userData.displayName}
           src={userData.photoURL}
@@ -52,34 +97,84 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
             my: 1,
           }}
         />
-        <Typography
-          variant="h4"
-          component="div"
-          sx={{
-            flexGrow: 1,
-            paddingLeft: 1,
-            paddingBottom: 1,
-            marginBottom: "0px",
-          }}
-        >
-          {userData.displayName}
-        </Typography>
+        {isNameEditing ? (
+          <Stack direction="row" sx={{ display: "block" }}>
+            <IconButton onClick={() => setIsNameEditing(false)}>
+              <CancelOutlinedIcon />
+            </IconButton>
+            <TextField
+              required
+              id="name"
+              label="Name"
+              defaultValue={userData.displayName}
+            />
+          </Stack>
+        ) : (
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              paddingLeft: 1,
+              paddingBottom: 1,
+              marginBottom: "0px",
+            }}
+          >
+            <IconButton onClick={() => setIsNameEditing(true)}>
+              <EditIcon />
+            </IconButton>
+            {userData.displayName}
+          </Typography>
+        )}
 
-        <Typography
-          component="div"
-          sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}
-        >
-          {userData.bio ? userData.bio : "No Bio"}
-        </Typography>
+        {isBioEditing ? (
+          <Stack direction="row" sx={{ display: "block" }}>
+            <IconButton onClick={() => setIsBioEditing(false)}>
+              <CancelOutlinedIcon />
+            </IconButton>
+            <TextField
+              id="bio"
+              label="bio"
+              defaultValue={userData.bio ? userData.bio : "No Bio"}
+            />
+          </Stack>
+        ) : (
+          <Typography
+            component="div"
+            sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}
+          >
+            <IconButton onClick={() => setIsBioEditing(true)}>
+              <EditIcon />
+            </IconButton>
+            {userData.bio ? userData.bio : "No Bio"}
+          </Typography>
+        )}
 
-        <Typography
-          variant="body1"
-          display="block"
-          sx={{ my: 1 }}
-          style={{ color: "#7B7B7B" }}
-        >
-          {userData.location ? userData.location : "Unknown Location"}
-        </Typography>
+        {isLocationEditing ? (
+          <Stack direction="row" sx={{ display: "block" }}>
+            <IconButton onClick={() => setIsLocationEditing(false)}>
+              <CancelOutlinedIcon />
+            </IconButton>
+            <TextField
+              id="location"
+              label="Location"
+              defaultValue={userData.location ? userData.location : "Unknown Location"}
+            />
+          </Stack>
+        ) : (
+          <Typography
+            variant="body1"
+            display="block"
+            sx={{ my: 1 }}
+            style={{ color: "#7B7B7B" }}
+          >
+            <IconButton onClick={() => setIsLocationEditing(true)}>
+              <EditIcon />
+            </IconButton>
+            {userData.location ? userData.location : "Unknown Location"}
+          </Typography>
+        )}
+
         <Divider />
         <Typography
           variant="body1"
@@ -89,14 +184,30 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
           {getUserStatus(userData)}
         </Typography>
 
-        <Typography
-          variant="body1"
-          display="block"
-          style={{ color: "#7B7B7B" }}
-          sx={{ flexGrow: 1, paddingLeft: 1 }}
-        >
-          {userData.year ? "Class of " + userData.year : "No Year"}
-        </Typography>
+        {isYearEditing ? (
+          <Stack direction="row" sx={{ display: "block" }}>
+            <IconButton onClick={() => setIsYearEditing(false)}>
+              <CancelOutlinedIcon />
+            </IconButton>
+            <TextField
+              id="year"
+              label="Year"
+              defaultValue={userData.year ? "Class of " + userData.year : "No Year"}
+            />
+          </Stack>
+        ) : (
+          <Typography
+            variant="body1"
+            display="block"
+            style={{ color: "#7B7B7B" }}
+            sx={{ flexGrow: 1, paddingLeft: 1 }}
+          >
+            <IconButton onClick={() => setIsYearEditing(true)}>
+              <EditIcon />
+            </IconButton>
+            {userData.year ? "Class of " + userData.year : "No Year"}
+          </Typography>
+        )}
 
         {"teamId" in userData && (
           <Button
@@ -118,22 +229,59 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
 
         <Divider />
 
-        <Typography
-          align="left"
-          sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}
-        >
-          Expertise
-        </Typography>
-        <Stack
-          direction="row"
-          sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
-          spacing={1}
-        >
-          {"expertise" in userData &&
-            Object.values(userData.expertise).map((x, i) => (
-              <Chip key={i} color="secondary" label={x} />
-            ))}
-        </Stack>
+        {isExpertiseEditing ? (
+          <Stack direction="row" sx={{ display: "block" }}>
+            <IconButton onClick={() => setIsExpertiseEditing(false)}>
+              <CancelOutlinedIcon />
+            </IconButton>
+            <FormControl sx={{ m: 1, width: "25ch" }}>
+              <InputLabel id="expertise">Expertise</InputLabel>
+              <Select
+                labelId="expertise"
+                name="Expertise"
+                value={expertise || formValues.expertise || []}
+                label="expertise"
+                onChange={handleTagChange}
+                multiple
+                renderValue={(selected) => (
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+              >
+                {expertiseList.map((expert) => (
+                  <MenuItem key={expert} value={expert}>
+                    {expert}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Stack>
+        ) : (
+          <>
+            <Typography
+              align="left"
+              sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}
+            >
+              <IconButton onClick={() => setIsExpertiseEditing(true)}>
+                <EditIcon />
+              </IconButton>
+              Expertise
+            </Typography>
+            <Stack
+              direction="row"
+              sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
+              spacing={1}
+            >
+              {"expertise" in userData &&
+                Object.values(userData.expertise).map((x, i) => (
+                  <Chip key={i} color="secondary" label={x} />
+                ))}
+            </Stack>
+          </>
+        )}
 
         <Divider />
         <Box
@@ -150,40 +298,49 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
               alignItems: "flex-start",
             }}
           >
-            <Stack
-              direction="row"
-              sx={{ marginBottom: 3, marginTop: 2 }}
-              spacing={1}
-            >
-              <EmailIcon sx={{ color: "#999999" }} />
-              <Typography>{userData.email}</Typography>
-            </Stack>
-            <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
-              <LinkedInIcon sx={{ color: "#4173ac" }} />
-              <Typography>
-                {userData.linkedIn ? userData.linkedIn : "No LinkedIn"}
-              </Typography>
-            </Stack>
+            {isEmailEditing ? (
+              <Stack direction="row" sx={{ display: "block", my: 2 }}>
+                <IconButton onClick={() => setIsEmailEditing(false)}>
+                  <CancelOutlinedIcon />
+                </IconButton>
+
+                <TextField id="email" label="Email" defaultValue={userData.email} />
+              </Stack>
+            ) : (
+              <Stack direction="row" sx={{ marginBottom: 3, marginTop: 2 }} spacing={1}>
+                <IconButton onClick={() => setIsEmailEditing(true)} sx={{ p: 0 }}>
+                  <EditIcon />
+                </IconButton>
+                <EmailIcon sx={{ color: "#999999" }} />
+                <Typography>{userData.email}</Typography>
+              </Stack>
+            )}
+
+            {isLinkedInEditing ? (
+              <Stack direction="row" sx={{ display: "block", my: 2 }}>
+                <IconButton onClick={() => setIsLinkedInEditing(false)}>
+                  <CancelOutlinedIcon />
+                </IconButton>
+
+                <TextField
+                  id="linkedIn"
+                  label="LinkedIn"
+                  defaultValue={userData.linkedIn ? userData.linkedIn : "No LinkedIn"}
+                />
+              </Stack>
+            ) : (
+              <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
+                <IconButton onClick={() => setIsLinkedInEditing(true)} sx={{ p: 0 }}>
+                  <EditIcon />
+                </IconButton>
+                <LinkedInIcon sx={{ color: "#4173ac" }} />
+                <Typography>
+                  {userData.linkedIn ? userData.linkedIn : "No LinkedIn"}
+                </Typography>
+              </Stack>
+            )}
           </Box>
         </Box>
-        {(!params.userID || params.userID === user.uid) && (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Button
-              sx={{ width: "150px", marginTop: "10px" }}
-              variant="contained"
-              onClick={signOut}
-              id="logout_btn"
-            >
-              Sign out{" "}
-            </Button>
-          </Box>
-        )}
       </Box>
     </>
   );

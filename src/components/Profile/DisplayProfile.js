@@ -10,6 +10,7 @@ import {
   Card,
   Chip,
   IconButton,
+  CardHeader,
 } from "@mui/material";
 import { getUserStatus } from "../../utilities/firebase";
 // icons
@@ -22,6 +23,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
 import { signOut } from "utilities/firebase";
 import BackButton from "../Navigation/BackButton";
+import { CardActions } from "@material-ui/core";
 
 const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
   const params = useParams();
@@ -33,12 +35,15 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
 
   return (
     <>
-      <IconButton
-        sx={{ position: "absolute", right: 27 }}
-        onClick={() => setIsEditProfile(true)}
-      >
-        <EditIcon />
-      </IconButton>
+      <CardHeader
+        sx={{ p: 0 }}
+        avatar={<BackButton />}
+        action={
+          <IconButton onClick={() => setIsEditProfile(true)}>
+            <EditIcon />
+          </IconButton>
+        }
+      ></CardHeader>
 
       <Box textAlign="center">
         <Avatar
@@ -118,10 +123,7 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
 
         <Divider />
 
-        <Typography
-          align="left"
-          sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}
-        >
+        <Typography align="left" sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}>
           Expertise
         </Typography>
         <Stack
@@ -150,11 +152,7 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
               alignItems: "flex-start",
             }}
           >
-            <Stack
-              direction="row"
-              sx={{ marginBottom: 3, marginTop: 2 }}
-              spacing={1}
-            >
+            <Stack direction="row" sx={{ marginBottom: 3, marginTop: 2 }} spacing={1}>
               <EmailIcon sx={{ color: "#999999" }} />
               <Typography>{userData.email}</Typography>
             </Stack>

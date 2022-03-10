@@ -10,6 +10,7 @@ import {
   Card,
   Chip,
   IconButton,
+  CardHeader,
 } from "@mui/material";
 import { getUserStatus } from "../../utilities/firebase";
 // icons
@@ -56,16 +57,13 @@ const Profile = ({ user }) => {
     setIsEditProfile(false);
   };
 
-  if (!userData || !projectData)
-    return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
+  if (!userData || !projectData) return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
 
-  if (userData === "not found")
-    return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>;
+  if (userData === "not found") return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>;
 
   return (
     <>
       <Card sx={{ px: 2, py: 2, mb: 10 }} style={{ borderRadius: 10 }}>
-        <BackButton />
         {isEditProfile ? (
           <EditProfile
             userData={userData}
