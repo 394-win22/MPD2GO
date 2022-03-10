@@ -181,8 +181,7 @@
         "0" : "ExampleMonaYates",
         "1" : "ExampleAaronGriffin",
         "2" : "ExampleEdRios",
-        "3" : "ExampleJianZhi",
-        "-MxkkhZcg5E8C3BnV2k9" : "L5xnvqXM8Lf9JY6aH6zvVeNtxTD2"
+        "3" : "ExampleJianZhi"
       },
       "name" : "Blue Team",
       "phase" : "Product Ideation",
@@ -207,8 +206,7 @@
       "member" : {
         "0" : "ExampleAnnaCollins",
         "1" : "ExampleLolaPeters",
-        "2" : "ExampleScottHarris",
-        "-MxlA6yoBrrnLQNJ1Odz" : "L5xnvqXM8Lf9JY6aH6zvVeNtxTD2"
+        "2" : "ExampleScottHarris"
       },
       "name" : "Green Team",
       "phase" : "Prototyping",
@@ -230,7 +228,10 @@
     "ExampleOrangeTeam" : {
       "description" : "We’re looking to create a home lighting system that adapts to the different lighting needs during different activities throughout the day.",
       "lastUpdateTime" : 1645237203123,
-      "member" : [ "ExampleVanPearson", "ExampleLorenzoSoto", "ExampleKerryBurton", "ExampleStaceyMay" ],
+      "member" : [ "ExampleVanPearson",
+        "ExampleLorenzoSoto",
+        "ExampleKerryBurton",
+        "ExampleStaceyMay" ],
       "name" : "Orange Team",
       "phase" : "Idea Convergence",
       "photoURL" : "https://preview.redd.it/jzomsstbnx7y.jpg?auto=webp&s=ba0d43e8becd6fde0911ce233019b3635a09d5fa",
