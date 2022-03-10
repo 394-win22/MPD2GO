@@ -14,10 +14,20 @@ import NotFound from "components/NotFound";
 import Directory from "components/Directory";
 import Main from "components/Feed";
 import Loading from "components/Loading";
-import Tutorial from "components/Tutorial";
 
+
+
+const REQUIRED_POST_FIELDS = ["author", "description", "title", "time"]
 const getPostList = (posts) => {
-  let listOfPost = Object.entries(posts).map(([postId, postObj]) => {
+  let listOfPost = Object.entries(posts).filter(([postId, postObj]) => {
+    REQUIRED_POST_FIELDS.forEach((requiredField) => {
+      if (!(requiredField in postObj) || postObj[requiredField] === "") {
+        console.warn('bad post obj detected', postObj, requiredField)
+        return false
+      }
+    })
+    return true
+  }).map(([postId, postObj]) => {
     return { ...postObj, id: postId };
   });
   listOfPost = listOfPost.sort((item1, item2) => {
@@ -26,14 +36,35 @@ const getPostList = (posts) => {
   return listOfPost;
 };
 
+
+// required fields in user data object
+// displayName, email, photoURL
+const REQUIRED_USER_FIELDS = ["displayName", "email", "photoURL"]
 const getUserList = (users) => {
-  return Object.entries(users).map(([uid, userObj]) => {
+  return Object.entries(users).filter(([uid, userObj]) => {
+    REQUIRED_USER_FIELDS.forEach((requiredField) => {
+      if (!(requiredField in userObj) || userObj[requiredField] === "") {
+        console.warn('bad user obj detected', userObj, requiredField)
+        return false
+      }
+    })
+    return true
+  }).map(([uid, userObj]) => {
     return { ...userObj, uid: uid };
   });
-};
+}
 
+const REQUIRED_PROJECT_FIELDS = ["member", "name", "teamColor"]
 const getProjectList = (project) => {
-  return Object.entries(project).map(([uid, projectObj]) => {
+  return Object.entries(project).filter(([uid, projectObj]) => {
+    REQUIRED_PROJECT_FIELDS.forEach((requiredField) => {
+      if (!(requiredField in projectObj) || projectObj[requiredField] === "") {
+        console.warn('bad project obj detected', projectObj, requiredField)
+        return false
+      }
+    })
+    return true
+  }).map(([uid, projectObj]) => {
     return { ...projectObj, uid: uid };
   });
 };
@@ -49,10 +80,12 @@ const Routing = ({ user }) => {
     return (<Loading />)
   }
 
+  // console.log(user, postList, userList, projectList)
+
   return (
     <UserContext.Provider
       value={{
-        user: user || {} ,
+        user: user || {},
         postList: postList || [],
         userList: userList || [],
         projectList: projectList || [],
