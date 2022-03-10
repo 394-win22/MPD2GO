@@ -58,29 +58,33 @@ const Directory = () => {
   }
   // Sort alphabetically
   filteredUsers = filteredUsers.sort((a, b) => {
-    let nameA = a.displayName.toUpperCase();
-    let nameB = b.displayName.toUpperCase();
-    if (nameA < nameB) return -1;
-    if (nameA > nameB) return 1;
+    try {
+      let nameA = a.displayName.toUpperCase();
+      let nameB = b.displayName.toUpperCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+    } catch {
+      console.log(a, b)
+    }
     return 0;
   });
 
   return (
-    <>      
-      <Card sx={{ mb:10 }} style={{ borderRadius: 10 }}>
+    <>
+      <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
         <CardHeader
           sx={{ padding: "10px 16px" }}
           avatar={
-            <BackButton/>
+            <BackButton />
           }
           title="Directory"
-          titleTypographyProps={{ variant:'h6' }}
+          titleTypographyProps={{ variant: 'h6' }}
         />
         <DirectorySearchBar
-        setQuery={setQuery}
-        filter={filter}
-        setFilter={setFilter}
-      />
+          setQuery={setQuery}
+          filter={filter}
+          setFilter={setFilter}
+        />
         <List>
           {filteredUsers.sort((u1, u2) => u1.displayName.localeCompare(u2.displayName)).map((user) => (
             <ListItem

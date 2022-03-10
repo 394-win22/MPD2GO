@@ -4,10 +4,7 @@ import { RichTextEditor } from "@mantine/rte";
 import { useUserState } from "utilities/firebase.js";
 import { UserContext } from "components/Routing";
 import { createNotification } from "utilities/notifications";
-import { deleteData } from "../../utilities/firebase";
-import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
 import { makeStyles } from "@mui/styles";
-import { ClassNames } from "@emotion/react";
 
 /*const topicTags = [
   { id: 1, value: "JavaScript" },

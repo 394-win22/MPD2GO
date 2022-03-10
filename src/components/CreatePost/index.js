@@ -1,7 +1,6 @@
 import { useState, useMemo, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import {
-  Stack,
   Box,
   Typography,
   TextField,
@@ -12,7 +11,6 @@ import {
   OutlinedInput,
   Chip,
   MenuItem,
-  Popover,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
@@ -62,6 +60,7 @@ const CreatePost = () => {
 
   const [description, setDescription] = useState("");
   const [postTags, setPostTags] = useState([]);
+  const [title,setTitle]=useState("")
 
   const user = useUserState();
 
@@ -102,6 +101,7 @@ const CreatePost = () => {
     const modifiedContent = el.querySelector("body").innerHTML;
 
     const postId = createPostInFirebase({
+      title:title,
       tags: postTags,
       description: modifiedContent,
       time: Date.now(),
@@ -110,7 +110,6 @@ const CreatePost = () => {
       associatedNotificationIds: [],
     });
 
-    let notificationIds = [];
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
@@ -125,8 +124,9 @@ const CreatePost = () => {
         }
       });
 
-    setDescription("");
-    navigate("/");
+    setDescription("")
+    setTitle("")
+    navigate("/")
   };
 
   const mentions = useMemo(
@@ -151,11 +151,12 @@ const CreatePost = () => {
 
   return (
     <Box className={classes.container} data-cy="createPostBox">
-      <Typography align="center" variant="h4" sx={{ mb: 3 }}>
-        Create Post
+      <Typography align="center" variant="h6" sx={{ mb: 1 }}>
+        Create a Post
       </Typography>
+      
       <Box className={classes.form}>
-        <FormControl sx={{ my: 1, width: "100%" }}>
+      <FormControl sx={{ my: 1, width: "100%"}}>
           <InputLabel>Tags</InputLabel>
           <Select
             multiple
@@ -177,8 +178,9 @@ const CreatePost = () => {
             ))}
           </Select>
         </FormControl>
+      <TextField label='Title' value={title} onChange={(e)=>{setTitle(e.target.value)}} />
 
-        <Typography variant="caption" align="left" sx={{ color: "gray" }}>
+        <Typography variant="caption" align="left" sx={{ color: "gray",mt:2 }}>
           {postDescriptionPlaceHolder}
         </Typography>
 
@@ -189,18 +191,19 @@ const CreatePost = () => {
           placeholder="Type @ to see mentions autocomplete"
           mentions={mentions}
           onImageUpload={handleImageUpload}
-          style={{ width: "100%", marginTop: "16px" }}
+          style={{ width: "100%", marginTop: 2,height:"300px" }}
           controls={[
             ["bold", "italic", "underline", "link", "image"],
             ["unorderedList", "orderedList"],
           ]}
         />
+       
 
         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           <Button
             variant="contained"
             sx={{ backgroundColor: "#808080", mr: 2 }}
-            onClick={() => navigate(-1)}
+            onClick={() => navigate()}
             data-cy="cancelCreatePostBtn"
           >
             Cancel

@@ -32,7 +32,9 @@ const Profile = ({ user }) => {
   const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
 
+
   const [isEditProfile, setIsEditProfile] = useState(false);
+
 
   useEffect(() => {
     const userToSearch = params.userID || user.uid;
@@ -79,6 +81,7 @@ const Profile = ({ user }) => {
             projectData={projectData}
           />
         )}
+
       </Card>
     </>
   );
