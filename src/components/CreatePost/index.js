@@ -1,7 +1,6 @@
 import { useState, useMemo, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
-  Stack,
   Box,
   Typography,
   TextField,
@@ -12,12 +11,14 @@ import {
   OutlinedInput,
   Chip,
   MenuItem,
+  Card,
+  CardHeader
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
-
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
+import BackButton from "../Navigation/BackButton"
 
 import { UserContext } from "components/Routing";
 
@@ -25,18 +26,29 @@ import { createNotification } from "utilities/notifications";
 
 const useStyles = makeStyles({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "left",
+    justifyContent: "flex-start",
     backgroundColor: "white",
-    padding: "40px 24px 40px 24px",
+    minHeight: "80vh",
+    display: "flex",
+    flexDirection: "column",
+    // justifyContent: 'space-between',
+    // alignItems: "center"
+    // padding: "0px 24px 20px 24px",
   },
   form: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "left",
+    padding: "0px 24px 20px 24px",
+    marginTop: "13px",
+    height: "100%",
     justifyContent: "space-evenly",
     "& .MuiTextField-root": { my: 1, width: "100%" },
   },
+  field: {
+
+  }
 });
 
 const expertises = [
@@ -52,24 +64,19 @@ const expertises = [
   "Project Management",
 ];
 
-const topicTags = [
-  { id: 1, value: "JavaScript" },
-  { id: 2, value: "TypeScript" },
-  { id: 3, value: "Ruby" },
-  { id: 4, value: "Python" },
-];
-
 const CreatePost = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
 
   const postDescriptionPlaceHolder =
-    "<p>Enter post detail here. Type @ or # to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://</p>";
-  const [description, setDescription] = useState(postDescriptionPlaceHolder);
+    "Enter post detail below. Type @ or # to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://";
+
+  const [description, setDescription] = useState("");
   const [postTags, setPostTags] = useState([]);
+  const [title, setTitle] = useState("")
+
 
   const user = useUserState();
-
   const classes = useStyles();
 
   const handlePostTagsChange = (event) => {
@@ -106,16 +113,16 @@ const CreatePost = () => {
 
     const modifiedContent = el.querySelector("body").innerHTML;
 
-  const postId = createPostInFirebase({
-    tags: postTags,
-    description: modifiedContent,
-    time: Date.now(),
-    author: user.uid,
-    numComments: 0,
-    associatedNotificationIds: []
-  });
+    const postId = createPostInFirebase({
+      title: title,
+      tags: postTags,
+      description: modifiedContent,
+      time: Date.now(),
+      author: user.uid,
+      numComments: 0,
+      associatedNotificationIds: [],
+    });
 
-    let notificationIds = [];
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
@@ -131,15 +138,19 @@ const CreatePost = () => {
       });
 
     setDescription("");
+    setTitle("");
     navigate("/");
   };
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
 
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-      mentionDenotationChars: ["@", "#"],
+      mentionDenotationChars: ["@"],
       source: (searchTerm, renderList, mentionChar) => {
-        const list = mentionChar === "@" ? people : topicTags;
+        const list = people;
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -154,20 +165,43 @@ const CreatePost = () => {
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
 
-  return (
-    <Box className={classes.container}>
-      <Typography align="center" variant="h4" sx={{ mb: 3 }}>
-        Create Post
-      </Typography>
-      <Box className={classes.form}>
 
-        <FormControl sx={{ mt: 1, width: "100%" }}>
-          <InputLabel>Tags</InputLabel>
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 6.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  return (
+    <Card className={classes.container} sx={{ mb: 3 }} data-cy="createPostBox">
+      <CardHeader
+        sx={{ padding: "10px 16px" }}
+        avatar={
+          <BackButton />
+        }
+        title="Create a Post"
+        titleTypographyProps={{ variant: 'h6' }}
+      />
+      <Box className={classes.form}>
+        <TextField
+          className={classes.field}
+          autoComplete="off"
+          inputProps={{ style: { fontSize: "14px" } }} // font size of input text
+          InputLabelProps={{ style: { fontSize: "14px" } }} // font size of input label
+          label='Title' value={title}
+          onChange={(e) => { setTitle(e.target.value) }} />
+        <FormControl sx={{ my: 1, width: "100%" }}>
+          <InputLabel sx={{ fontSize: "14px" }}>Tags</InputLabel>
           <Select
+            className={classes.field}
             multiple
             value={postTags}
             onChange={handlePostTagsChange}
             input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            MenuProps={MenuProps}
             renderValue={(selected) => (
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {selected.map((value) => (
@@ -177,28 +211,45 @@ const CreatePost = () => {
             )}
           >
             {expertises.map((tags) => (
-              <MenuItem key={tags} value={tags}>
+              <MenuItem sx={{
+                fontSize: "14px",
+                '&.Mui-selected': { // <-- mixing the two classes
+                  backgroundColor: '#ececec'
+                },
+                '&.Mui-selected:hover': { // <-- mixing the two classes
+                  backgroundColor: '#ececec'
+                }
+              }} key={tags} value={tags}>
                 {tags}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
 
+        <Typography variant="caption" align="left" sx={{ color: "gray", mt: 2 }}>
+          {postDescriptionPlaceHolder}
+        </Typography>
+
         <RichTextEditor
           value={description}
-          onClick={handleDescriptionClick}
+          // onClick={handleDescriptionClick}
           onChange={setDescription}
-          placeholder="Type @ or # to see mentions autocomplete"
+          placeholder="Type @ to see mentions autocomplete"
           mentions={mentions}
           onImageUpload={handleImageUpload}
-          style={{ width: "100%", marginTop: "16px" }}
+          style={{ width: "100%", marginTop: 2, height: "300px" }}
+          controls={[
+            ["bold", "italic", "underline", "link", "image"],
+            ["unorderedList", "orderedList"],
+          ]}
         />
 
-        <Stack spacing={2} direction="row" sx={{ mt: 3 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           <Button
             variant="contained"
-            style={{ backgroundColor: "#808080" }}
+            sx={{ backgroundColor: "#808080", mr: 2 }}
             onClick={() => navigate(-1)}
+            data-cy="cancelCreatePostBtn"
           >
             Cancel
           </Button>
@@ -208,12 +259,13 @@ const CreatePost = () => {
             onClick={() => {
               if (description !== "<p><br></p>") handleSubmit();
             }}
+            data-cy="submitPostBtn"
           >
             Post
           </Button>
-        </Stack>
+        </Box>
       </Box>
-    </Box>
+    </Card>
   );
 };
 

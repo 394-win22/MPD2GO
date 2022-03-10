@@ -6,12 +6,12 @@ import { UserContext } from "components/Routing/index.js";
 import { addCommentToPost } from "../../utilities/posts.js";
 import { createNotification } from "utilities/notifications.js";
 
-const topicTags = [
+/*const topicTags = [
   { id: 1, value: "JavaScript" },
   { id: 2, value: "TypeScript" },
   { id: 3, value: "Ruby" },
   { id: 4, value: "Python" },
-];
+];*/
 
 const ReplyTextField = ({ post, user }) => {
   const context = useContext(UserContext);
@@ -23,9 +23,9 @@ const ReplyTextField = ({ post, user }) => {
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-      mentionDenotationChars: ["@", "#"],
+      mentionDenotationChars: ["@"],//, "#"],
       source: (searchTerm, renderList, mentionChar) => {
-        const list = mentionChar === "@" ? people : topicTags;
+        const list = people //mentionChar === "@" ? people : topicTags;
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -69,7 +69,7 @@ const ReplyTextField = ({ post, user }) => {
             modifiedContent,
             "mention"
           ).toString().split('/');
-          const notificationId = notificationPath[notificationPath.length-1];
+          const notificationId = notificationPath[notificationPath.length - 1];
           notificationIds.push(notificationId);
         }
       });
@@ -91,6 +91,7 @@ const ReplyTextField = ({ post, user }) => {
         paddingLeft: "3%",
         paddingRight: "3%",
         paddingBottom: "20px",
+        marginBottom: "20px"
       }}
       borderBottom={"1px solid #e9e9e9"}
     >
@@ -100,16 +101,14 @@ const ReplyTextField = ({ post, user }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
-          marginTop: "5px",
+          marginTop: "0px",
           width: "100%",
         }}
       >
         <RichTextEditor
           controls={[
             ["bold", "italic", "underline", "link"],
-            ["unorderedList", "h1", "h2", "h3"],
-            ["sup", "sub"],
-            ["alignLeft", "alignCenter", "alignRight"],
+            ["unorderedList", "orderedList"],
           ]}
           onImageUpload={() => {
             return new Promise((_, reject) => {
@@ -118,7 +117,7 @@ const ReplyTextField = ({ post, user }) => {
           }}
           value={comment}
           onChange={setComment}
-          placeholder="Type @ or # to see mentions autocomplete"
+          placeholder="Type @ to see mentions autocomplete"
           mentions={mentions}
           style={{ marginTop: "12px", width: "100%" }}
           onDragStart={() => {

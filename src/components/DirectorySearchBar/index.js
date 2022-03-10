@@ -8,7 +8,6 @@ const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: "#ffffff",
-  width: "100%",
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -34,15 +33,15 @@ const DirectorySearchBar = ({ setQuery, filter, setFilter }) => {
   const [isDropped, setIsDropped] = useState(false);
   return (
     <>
-      <Search>
+      <Search sx={{ backgroundColor: "#f2f2f0", mx: 2, }}>
         <SearchIconWrapper>
-          <SearchIcon />
+          <SearchIcon style={{ color: "#999999" }} />
         </SearchIconWrapper>
         <StyledInputBase
           onClick={() => setIsDropped(true)}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search…"
-          style={{ paddingLeft: "50px", width: "100%" }}
+          placeholder="Search for users"
+          sx={{ paddingLeft: "50px", width: "100%", borderRadius: "10px" }}
           inputProps={{ "aria-label": "search" }}
         />
       </Search>

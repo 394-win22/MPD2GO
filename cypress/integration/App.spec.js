@@ -1,4 +1,5 @@
 /* globals cy */
+// If get No version of Cypress install do: ./node_modules/.bin/cypress install
 
 Cypress.Commands.add("login", function () {
   cy.get("#email").should("be.visible").type("test@example.com");
