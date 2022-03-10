@@ -60,7 +60,9 @@ const Profile = ({ user }) => {
 
   return (
     <>
-      <Card sx={{ px: 2, py: 2, mb: 10 }} style={{ borderRadius: 10 }}>
+      <Card sx={{ px: 2, py: 2, mb: 2, minHeight: "77vh" }} style={{ borderRadius: 10 }}>
+
+
         <BackButton />
         <Box textAlign="center">
           <Avatar
@@ -68,14 +70,14 @@ const Profile = ({ user }) => {
             src={userData.photoURL}
             variant="circular"
             sx={{
-              height: "20vh",
-              width: "20vh",
+              height: "80px",
+              width: "80px",
               margin: "auto",
-              my: 1,
+              mb: 3,
             }}
           />
           <Typography
-            variant="h4"
+            variant="h5"
             component="div"
             sx={{
               flexGrow: 1,

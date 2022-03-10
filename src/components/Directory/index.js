@@ -70,56 +70,54 @@ const Directory = () => {
   });
 
   return (
-    <>
-      <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
-        <CardHeader
-          sx={{ padding: "10px 16px" }}
-          avatar={
-            <BackButton />
-          }
-          title="Directory"
-          titleTypographyProps={{ variant: 'h6' }}
-        />
-        <DirectorySearchBar
-          setQuery={setQuery}
-          filter={filter}
-          setFilter={setFilter}
-        />
-        <List>
-          {filteredUsers.sort((u1, u2) => u1.displayName.localeCompare(u2.displayName)).map((user) => (
-            <ListItem
-              component={ListItemButton}
-              onClick={() => navigate(`/profile/${user.uid}`)}
-              key={user.uid}
-            >
-              <ListItemAvatar>
-                <Avatar alt={user.displayName} src={user.photoURL} />
-              </ListItemAvatar>
-              {"year" in user && user.year !== "" ? (
-                <ListItemText
-                  primary={user.displayName}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        {getUserStatus(user)}
-                      </Typography>
-                      {` - Class of ${user.year}`}
-                    </React.Fragment>
-                  }
-                />
-              ) : (
-                <ListItemText primary={user.displayName} />
-              )}
-            </ListItem>
-          ))}
-        </List>
-      </Card>
-    </>
+    <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+      <CardHeader
+        sx={{ padding: "10px 16px" }}
+        avatar={
+          <BackButton />
+        }
+        title="Directory"
+        titleTypographyProps={{ variant: 'h6' }}
+      />
+      <DirectorySearchBar
+        setQuery={setQuery}
+        filter={filter}
+        setFilter={setFilter}
+      />
+      <List>
+        {filteredUsers.sort((u1, u2) => u1.displayName.localeCompare(u2.displayName)).map((user) => (
+          <ListItem
+            component={ListItemButton}
+            onClick={() => navigate(`/profile/${user.uid}`)}
+            key={user.uid}
+          >
+            <ListItemAvatar>
+              <Avatar alt={user.displayName} src={user.photoURL} />
+            </ListItemAvatar>
+            {"year" in user && user.year !== "" ? (
+              <ListItemText
+                primary={user.displayName}
+                secondary={
+                  <React.Fragment>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      {getUserStatus(user)}
+                    </Typography>
+                    {` - Class of ${user.year}`}
+                  </React.Fragment>
+                }
+              />
+            ) : (
+              <ListItemText primary={user.displayName} />
+            )}
+          </ListItem>
+        ))}
+      </List>
+    </Card>
   );
 };
 

@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AppBar, Box, MenuItem, ClickAwayListener, Badge } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -35,9 +35,8 @@ const theme = createTheme({
 const MobileBottomNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-
+  const location = useLocation();
   const [, setAnchorEl] = useState(null);
-  const [activeIcon, setActiveIcon] = useState("");
 
   const handleClickAway = () => {
     setAnchorEl(null);
@@ -46,6 +45,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
   let notificationsCount = 0;
   if ("notifications" in userData)
     notificationsCount = Object.values(userData.notifications).length;
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -65,18 +65,16 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
             <MenuItem
               onClick={() => {
                 navigate("/");
-                setActiveIcon("home")
               }}
 
             >
-              {(activeIcon === "home") ? <HomeIcon color={"white"} /> : <HomeOutlinedIcon color={"white"} />}
+              {(location.pathname === "/") ? <HomeIcon color={"white"} /> : <HomeOutlinedIcon color={"white"} />}
             </MenuItem>
 
             {isLoggedIn && (
               <>
                 <MenuItem onClick={() => {
                   navigate("/notifications")
-                  setActiveIcon("notif")
                 }}>
                   <Badge
                     badgeContent={notificationsCount}
@@ -87,31 +85,29 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
                       },
                     }}
                   >
-                    {(activeIcon === "notif") ? <NotificationsIcon color={"white"} /> : <NotificationsOutlinedIcon color={"white"} />}
+                    {(location.pathname === "/notifications") ? <NotificationsIcon color={"white"} /> : <NotificationsOutlinedIcon color={"white"} />}
                   </Badge>
                 </MenuItem>
                 <MenuItem onClick={() => {
                   navigate("/createPost")
-                  setActiveIcon("createPost")
                 }}>
-                  {(activeIcon === "createPost") ? <AddCircleIcon color={"white"} /> : <AddCircleOutlinedIcon color={"white"} />}
+                  {(location.pathname === "/createPost") ? <AddCircleIcon color={"white"} /> : <AddCircleOutlinedIcon color={"white"} />}
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
                     navigate("/directory");
-                    setActiveIcon("directory");
                   }}
                 >
-                  {(activeIcon === "directory") ? <Directory color={"white"} /> : <DirectoryOutlined color={"white"} />}
+                  {(location.pathname === "/directory") ? <Directory color={"white"} /> : <DirectoryOutlined color={"white"} />}
 
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
                     navigate("/profile");
-                    setActiveIcon("profile");
+
                   }}
                 >
-                  {(activeIcon === "profile") ? <AccountCircleIcon color={"white"} /> : <AccountCircleOutlinedIcon color={"white"} />}
+                  {(location.pathname === "/profiles") ? <AccountCircleIcon color={"white"} /> : <AccountCircleOutlinedIcon color={"white"} />}
                 </MenuItem>
               </>
             )}
