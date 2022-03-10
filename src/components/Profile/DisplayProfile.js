@@ -39,9 +39,11 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
         sx={{ p: 0 }}
         avatar={<BackButton />}
         action={
-          <IconButton onClick={() => setIsEditProfile(true)}>
-            <EditIcon />
-          </IconButton>
+          (!params.userID || params.userID === user.uid) && (
+            <IconButton onClick={() => setIsEditProfile(true)}>
+              <EditIcon />
+            </IconButton>
+          )
         }
       ></CardHeader>
 
@@ -131,12 +133,12 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
 
         <Divider />
 
-        <Typography align="left" sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}>
+        <Typography align="left" sx={{ marginBottom: 1, ml: 2, mt: 1, color: "#7B7B7B" }}>
           Expertise
         </Typography>
         <Stack
           direction="row"
-          sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
+          sx={{ marginBottom: 1, ml: 2, overflowX: "scroll" }}
           spacing={1}
         >
           {"expertise" in userData &&

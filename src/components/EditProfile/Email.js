@@ -17,23 +17,41 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { getUserStatus, useData } from "../../utilities/firebase";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
-const Email = ({ userData, isEmailEditing, setIsEmailEditing }) => {
+//local file
+import { updateData } from "utilities/firebase";
+
+const Email = ({ userData, uid }) => {
+  const [isEmailEditing, setIsEmailEditing] = useState(false);
+  const [email, setEmail] = useState(userData.email);
+
+  const handleEmailSubmit = () => {
+    updateData(`/users/${uid}`, { email: email });
+    setIsEmailEditing(false);
+  };
+
   if (isEmailEditing) {
     return (
       <Stack direction="row" justifyContent="center" alignItems="center" sx={{ my: 2 }}>
+        <TextField
+          id="email"
+          label="Email"
+          defaultValue={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
         <IconButton onClick={() => setIsEmailEditing(false)}>
           <CancelOutlinedIcon />
         </IconButton>
 
-        <TextField id="email" label="Email" defaultValue={userData.email} />
+        <IconButton onClick={handleEmailSubmit}>
+          <CheckIcon />
+        </IconButton>
       </Stack>
     );
   }
@@ -43,7 +61,7 @@ const Email = ({ userData, isEmailEditing, setIsEmailEditing }) => {
         <EditIcon />
       </IconButton>
       <EmailIcon sx={{ color: "#999999" }} />
-      <Typography>{userData.email}</Typography>
+      <Typography>{email}</Typography>
     </Stack>
   );
 };

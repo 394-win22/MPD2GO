@@ -48,15 +48,10 @@ export const getProjectList = (project) => {
 const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
   const params = useParams();
   const navigate = useNavigate();
-
   const [isNameEditing, setIsNameEditing] = useState(false);
-  const [isBioEditing, setIsBioEditing] = useState(false);
   const [isLocationEditing, setIsLocationEditing] = useState(false);
   const [isYearEditing, setIsYearEditing] = useState(false);
   const [isTeamEditing, setIsTeamEditing] = useState(false);
-  const [isExpertiseEditing, setIsExpertiseEditing] = useState(false);
-  const [isEmailEditing, setIsEmailEditing] = useState(false);
-  const [isLinkedInEditing, setIsLinkedInEditing] = useState(false);
 
   const [formValues, setFormValues] = useState(user);
   const [projectList, projectListLoading] = useData("/project", getProjectList);
@@ -101,17 +96,15 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
           userData={userData}
           isNameEditing={isNameEditing}
           setIsNameEditing={setIsNameEditing}
+          uid={user.uid}
         />
-        <Bio
-          userData={userData}
-          isBioEditing={isBioEditing}
-          setIsBioEditing={setIsBioEditing}
-        />
+        <Bio userData={userData} uid={user.uid} />
 
         <Location
           userData={userData}
           isLocationEditing={isLocationEditing}
           setIsLocationEditing={setIsLocationEditing}
+          uid={user.uid}
         />
 
         <Divider />
@@ -127,6 +120,7 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
           userData={userData}
           isYearEditing={isYearEditing}
           setIsYearEditing={setIsYearEditing}
+          uid={user.uid}
         />
         <Team
           userData={userData}
@@ -134,16 +128,12 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
           setIsTeamEditing={setIsTeamEditing}
           formValues={formValues}
           projectData={projectData}
+          uid={user.uid}
         />
 
         <Divider />
 
-        <Expertise
-          userData={userData}
-          isExpertiseEditing={isExpertiseEditing}
-          setIsExpertiseEditing={setIsExpertiseEditing}
-          formValues={formValues}
-        />
+        <Expertise userData={userData} uid={user.uid} />
 
         <Divider />
         <Box
@@ -160,17 +150,9 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
               alignItems: "flex-start",
             }}
           >
-            <Email
-              userData={userData}
-              isEmailEditing={isEmailEditing}
-              setIsEmailEditing={setIsEmailEditing}
-            />
+            <Email userData={userData} uid={user.uid} />
 
-            <LinkedIn
-              userData={userData}
-              isLinkedInEditing={isLinkedInEditing}
-              setIsLinkedInEditing={setIsLinkedInEditing}
-            />
+            <LinkedIn userData={userData} uid={user.uid} />
           </Box>
         </Box>
       </Box>

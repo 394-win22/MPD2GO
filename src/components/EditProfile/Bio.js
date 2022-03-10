@@ -1,42 +1,37 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
-import {
-  Typography,
-  Avatar,
-  Box,
-  Divider,
-  Button,
-  Stack,
-  Card,
-  Chip,
-  IconButton,
-  CardHeader,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import { getUserStatus, useData } from "../../utilities/firebase";
+import { useState } from "react";
+import { Typography, Stack, IconButton, TextField } from "@mui/material";
 // icons
-import { Email as EmailIcon } from "@mui/icons-material";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EditIcon from "@mui/icons-material/Edit";
-import CheckIcon from "@mui/icons-material/Check";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import CheckIcon from "@mui/icons-material/Check";
 
-const Bio = ({ userData, isBioEditing, setIsBioEditing }) => {
+//local file
+import { updateData } from "utilities/firebase";
+
+const Bio = ({ userData, uid }) => {
+  const [isBioEditing, setIsBioEditing] = useState(false);
+  const [bio, setBio] = useState(userData.bio);
+
+  const handleBioSubmit = () => {
+    updateData(`/users/${uid}`, { bio: bio });
+    setIsBioEditing(false);
+  };
+
   if (isBioEditing) {
     return (
       <Stack direction="row" sx={{ my: 2 }} justifyContent="center" alignItems="center">
-        <IconButton onClick={() => setIsBioEditing(false)}>
-          <CancelOutlinedIcon />
-        </IconButton>
         <TextField
           id="bio"
           label="bio"
-          defaultValue={userData.bio ? userData.bio : "No Bio"}
+          defaultValue={bio ? bio : "No Bio"}
+          onChange={(e) => setBio(e.target.value)}
         />
+        <IconButton onClick={() => setIsBioEditing(false)}>
+          <CancelOutlinedIcon />
+        </IconButton>
+        <IconButton onClick={handleBioSubmit}>
+          <CheckIcon />
+        </IconButton>
       </Stack>
     );
   }
@@ -45,7 +40,7 @@ const Bio = ({ userData, isBioEditing, setIsBioEditing }) => {
       <IconButton onClick={() => setIsBioEditing(true)}>
         <EditIcon />
       </IconButton>
-      {userData.bio ? userData.bio : "No Bio"}
+      {bio ? bio : "No Bio"}
     </Typography>
   );
 };

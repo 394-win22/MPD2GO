@@ -17,13 +17,14 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { getUserStatus, useData } from "../../utilities/firebase";
+
 // icons
-import { Email as EmailIcon } from "@mui/icons-material";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+
+//local file
+import { updateData } from "utilities/firebase";
 
 const expertiseList = [
   "Marketing",
@@ -38,13 +39,9 @@ const expertiseList = [
   "Project Management",
 ];
 
-const Expertise = ({
-  userData,
-  isExpertiseEditing,
-  setIsExpertiseEditing,
-  formValues,
-}) => {
-  const [expertise, setExpertise] = useState("");
+const Expertise = ({ userData, uid }) => {
+  const [isExpertiseEditing, setIsExpertiseEditing] = useState(false);
+  const [expertise, setExpertise] = useState([]);
 
   const handleTagChange = (event) => {
     const {
@@ -53,18 +50,20 @@ const Expertise = ({
     setExpertise(typeof value === "string" ? value.split(",") : value);
   };
 
+  const handleExpertiseSubmit = () => {
+    updateData(`/users/${uid}`, { expertise: expertise });
+    setIsExpertiseEditing(false);
+  };
+
   if (isExpertiseEditing) {
     return (
       <Stack direction="row" justifyContent="center" alignItems="center" sx={{ my: 2 }}>
-        <IconButton onClick={() => setIsExpertiseEditing(false)}>
-          <CancelOutlinedIcon />
-        </IconButton>
         <FormControl sx={{ width: 205 }}>
           <InputLabel id="expertise">Expertise</InputLabel>
           <Select
             labelId="expertise"
             name="Expertise"
-            value={expertise || formValues.expertise || []}
+            value={expertise}
             label="expertise"
             onChange={handleTagChange}
             multiple
@@ -83,12 +82,20 @@ const Expertise = ({
             ))}
           </Select>
         </FormControl>
+
+        <IconButton onClick={() => setIsExpertiseEditing(false)}>
+          <CancelOutlinedIcon />
+        </IconButton>
+
+        <IconButton onClick={handleExpertiseSubmit}>
+          <CheckIcon />
+        </IconButton>
       </Stack>
     );
   }
   return (
     <>
-      <Typography align="left" sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}>
+      <Typography align="left" sx={{ ml: 2, mt: 1, color: "#7B7B7B" }}>
         <IconButton onClick={() => setIsExpertiseEditing(true)}>
           <EditIcon />
         </IconButton>
@@ -96,13 +103,15 @@ const Expertise = ({
       </Typography>
       <Stack
         direction="row"
-        sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
+        sx={{ marginBottom: 1, ml: 2, overflowX: "scroll" }}
         spacing={1}
       >
-        {"expertise" in userData &&
-          Object.values(userData.expertise).map((x, i) => (
-            <Chip key={i} color="secondary" label={x} />
-          ))}
+        {expertise.length > 0
+          ? expertise.map((data, i) => <Chip key={i} color="secondary" label={data} />)
+          : "expertise" in userData &&
+            Object.values(userData.expertise).map((x, i) => (
+              <Chip key={i} color="secondary" label={x} />
+            ))}
       </Stack>
     </>
   );

@@ -1,23 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
-import {
-  Typography,
-  Avatar,
-  Box,
-  Divider,
-  Button,
-  Stack,
-  Card,
-  Chip,
-  IconButton,
-  CardHeader,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import { getUserStatus, useData } from "../../utilities/firebase";
+import { useState } from "react";
+import { Typography, Stack, IconButton, TextField } from "@mui/material";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -25,19 +7,34 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
-const LinkedIn = ({ userData, isLinkedInEditing, setIsLinkedInEditing }) => {
+//local file
+import { updateData } from "utilities/firebase";
+
+const LinkedIn = ({ userData, uid }) => {
+  const [isLinkedInEditing, setIsLinkedInEditing] = useState(false);
+  const [linkedIn, setLinkedIn] = useState(userData.linkedIn);
+
+  const handleLinkedInSubmit = () => {
+    updateData(`/users/${uid}`, { linkedIn: linkedIn });
+    setLinkedIn(false);
+  };
+
   if (isLinkedInEditing) {
     return (
       <Stack direction="row" justifyContent="center" alignItems="center" sx={{ my: 2 }}>
+        <TextField
+          id="linkedIn"
+          label="LinkedIn"
+          defaultValue={linkedIn ? linkedIn : "No LinkedIn"}
+        />
+
         <IconButton onClick={() => setIsLinkedInEditing(false)}>
           <CancelOutlinedIcon />
         </IconButton>
 
-        <TextField
-          id="linkedIn"
-          label="LinkedIn"
-          defaultValue={userData.linkedIn ? userData.linkedIn : "No LinkedIn"}
-        />
+        <IconButton onClick={handleLinkedInSubmit}>
+          <CheckIcon />
+        </IconButton>
       </Stack>
     );
   }
@@ -47,7 +44,7 @@ const LinkedIn = ({ userData, isLinkedInEditing, setIsLinkedInEditing }) => {
         <EditIcon />
       </IconButton>
       <LinkedInIcon sx={{ color: "#4173ac" }} />
-      <Typography>{userData.linkedIn ? userData.linkedIn : "No LinkedIn"}</Typography>
+      <Typography>{linkedIn ? linkedIn : "No LinkedIn"}</Typography>
     </Stack>
   );
 };
