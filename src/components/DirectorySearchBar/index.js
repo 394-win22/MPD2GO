@@ -34,9 +34,9 @@ const DirectorySearchBar = ({ setQuery, filter, setFilter }) => {
   const [isDropped, setIsDropped] = useState(false);
   return (
     <>
-      <Search>
+      <Search style={{ backgroundColor:"#f2f2f0" }}>
         <SearchIconWrapper>
-          <SearchIcon />
+          <SearchIcon style={{ color: "#999999" }}/>
         </SearchIconWrapper>
         <StyledInputBase
           onClick={() => setIsDropped(true)}
