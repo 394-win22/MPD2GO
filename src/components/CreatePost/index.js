@@ -1,5 +1,5 @@
 import { useState, useMemo, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import {
   Box,
   Typography,
@@ -203,7 +203,7 @@ const CreatePost = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "#808080", mr: 2 }}
-            onClick={() => navigate(-1)}
+            onClick={() => navigate()}
             data-cy="cancelCreatePostBtn"
           >
             Cancel
