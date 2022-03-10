@@ -97,19 +97,24 @@ const Project = (user) => {
               <Typography variant="h6" align="left">
                 {Object.values(projectData.member).map((member) => {
                   const user = getUserDataFromUID(member, users);
-                  return (
-                    <Chip
-                      avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
-                      label={user.displayName}
-                      variant="outlined"
-                      sx={{ mx: 1, verticalAlign: "middle" }}
-                      onClick={() => {
-                        navigate(`/profile/${user.uid}`);
-                      }}
-                      key={member}
-                      clickable
-                    />
-                  );
+                  if (user && "displayName" in user) {
+                    return (
+                      <Chip
+                        avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
+                        label={user.displayName}
+                        variant="outlined"
+                        sx={{ mx: 1, verticalAlign: "middle" }}
+                        onClick={() => {
+                          navigate(`/profile/${user.uid}`);
+                        }}
+                        key={member}
+                        clickable
+                      />
+                    );
+                  } else {
+                    console.warn("user without displayName found", user)
+                    return null;
+                  }
                 })}
               </Typography>
               <hr />
@@ -181,7 +186,7 @@ const Project = (user) => {
           </Card>
         </>
       </div>
-    </div>
+    </div >
   );
 };
 
