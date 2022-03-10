@@ -23,6 +23,9 @@ const theme = createTheme({
       textTransform: "none",
     },
   },
+  shape: {
+    borderRadius: "10px"
+  },
   breakpoints: {
     values: {
       xs: 0,
