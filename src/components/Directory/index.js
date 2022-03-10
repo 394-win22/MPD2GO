@@ -25,9 +25,7 @@ const Directory = () => {
     type: [],
   });
   const [query, setQuery] = useState("");
-
   let filteredUsers = users;
-
   function filtering(e) {
     let x = false;
     if (

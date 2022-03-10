@@ -47,7 +47,7 @@ const SearchBar = ({
         <StyledInputBase
           onClick={() => setIsDropped(true)}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search recent posts"
+          placeholder="Search latest posts"
           style={{ paddingLeft: 50, width: "100%" }}
           inputProps={{ "aria-label": "search" }}
           data-testid="search-bar"

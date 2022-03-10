@@ -7,6 +7,7 @@ import MentionNotification from "./MentionNotification";
 import { ClearAllNotification } from "./ClearAllNotificationButton";
 import BackButton from "../Navigation/BackButton";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 import { makeStyles } from "@mui/styles";
 
 const getPostList = (userData) => {
@@ -33,8 +34,9 @@ const useStyles = makeStyles({
   noNotification: {
     padding: "10px 16px",
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    height: '50vh', 
+    height: '50vh',
     justifyContent: 'center',
     color: "gray",
   },
@@ -53,7 +55,7 @@ const Notifications = () => {
     "notifications" in userData &&
     Object.values(userData.notifications).length > 0;
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   let notificationsList;
   if (hasNotifications) {
@@ -105,39 +107,44 @@ const Notifications = () => {
       {hasNotifications ? (
         <Card className={classes.card}>
           <CardHeader
-            className={classes.cardHeader}
-            avatar={<BackButton />}
+            sx={{ pt: 1, px: 2, display: "flex", flexDirection: "row", alignItems: "flex-start", pb: 0 }}
+            avatar={
+              <BackButton />
+            }
+            title="Notifications"
+            titleTypographyProps={{ variant: 'h6', mt: 0.5 }}
             action={
               <Box
-                sx={{ display: "flex", justifyContent: "space-between", m: 1 }}
+                sx={{ display: "flex", justifyContent: "space-between", mt: 1, mr: 1 }}
               >
                 <ClearAllNotification uid={userData.uid} />
               </Box>
             }
-            title="Notifications"
-            titleTypographyProps={{ variant: "h6" }}
           />
           {notificationsList}
         </Card>
       ) : (
         <Card className={classes.card}>
           <CardHeader
-            className={classes.cardHeader}
-            avatar={<BackButton />}
+            sx={{ padding: "10px 16px" }}
+            avatar={
+              <BackButton />
+            }
             title="Notifications"
-            titleTypographyProps={{ variant: "h6" }}
+            titleTypographyProps={{ variant: 'h6' }}
           />
 
           <Box className={classes.noNotification} >
-            <NotificationsNoneIcon
+            <NotificationsOffIcon
               fontSize="large"
               color="disabled"
-              sx={{ pr: 1 }}
+              sx={{ pr: 1, width: "100px", height: "auto", mb: 2 }}
             />
             No New Notifications
           </Box>
         </Card>
-      )}
+      )
+      }
     </>
   );
 };
