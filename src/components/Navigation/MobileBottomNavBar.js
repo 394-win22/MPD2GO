@@ -107,7 +107,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
 
                   }}
                 >
-                  {(location.pathname === "/profiles") ? <AccountCircleIcon color={"white"} /> : <AccountCircleOutlinedIcon color={"white"} />}
+                  {(location.pathname === "/profile") ? <AccountCircleIcon color={"white"} /> : <AccountCircleOutlinedIcon color={"white"} />}
                 </MenuItem>
               </>
             )}

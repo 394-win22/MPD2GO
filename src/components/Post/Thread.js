@@ -44,7 +44,7 @@ const useStyles = makeStyles({
     float: "left",
     flexDirection: "column",
     marginLeft: "5px",
-    marginRight: "5px",
+    marginRight: "14px",
     alignItems: "flex-start",
     height: "100%",
     minWidth: "0px",
@@ -83,18 +83,18 @@ const useStyles = makeStyles({
     minWidth: "0px",
   },
   alignIconWithText: {
-    display: "flex", 
-    flexDirection: "row", 
-    justifyContent: 'center', 
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: 'center',
     alignItems: 'center'
-  }, 
+  },
   time: {
     color: "#888888",
     fontSize: "13px !important",
   },
   collapseButton: {
     display: "flex",
-    marginTop: "10px",
+    marginTop: "13px",
     width: "20px",
     boxSizing: "border-box",
     justifyContent: "center",
@@ -205,7 +205,7 @@ const Thread = ({ postId, ids, data, style }) => {
   if (haveChild) sortedThreads = Object.entries(data.threads).sort().reverse();
   return (
     <Box className={classes.container}>
-      <Box className={classes.leftContainer} sx={{ ml: 1 }}>
+      <Box className={classes.leftContainer} sx={{ ml: 1, pt: 0.6 }}>
         <IconButton
           className={classes.avatarButton}
           onClick={() => {
@@ -228,7 +228,6 @@ const Thread = ({ postId, ids, data, style }) => {
       <Box className={classes.rightContainer}>
         {/* comment */}
         <Box className={classes.contentContainer}>
-
           <Box className={classes.infoContainer}>
             <Box className={classes.alignIconWithText}>
               <Typography variant="subtitle2">

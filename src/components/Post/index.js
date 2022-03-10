@@ -54,7 +54,7 @@ const PostWithThreads = () => {
           <BackButton />
         }
         title={post.title}
-        titleTypographyProps={{ fontSize: "16px", fontWeight: "500" }}
+        titleTypographyProps={{ fontSize: "17px", fontWeight: "500" }}
       />
 
       <CardContent sx={{ pl: 2, pr: 1, pt: 0 }}>
@@ -106,7 +106,7 @@ const PostWithThreads = () => {
         <Stack
           direction="row"
           spacing={1}
-          sx={{ mt: 2, overflowX: "scroll", paddingLeft: 2 }}
+          sx={{ mt: 2, mb: 2, overflowX: "scroll", paddingLeft: 2 }}
         >
           {'tags' in post && post.tags.length > 0 &&
             <Box>
@@ -124,7 +124,7 @@ const PostWithThreads = () => {
         </Stack>
 
         <ReplyTextField post={post} user={user} />
-                
+
 
         {"threads" in post &&
           Object.values(post.threads).length > 0 &&

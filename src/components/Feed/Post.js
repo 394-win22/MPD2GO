@@ -51,7 +51,7 @@ const Post = ({ post }) => {
   return (
     <Card
       className={classes.card}
-      sx={{ mb: 2, pl: 1 }}
+      sx={{ mb: 2, pl: 0.5 }}
       onClick={() => {
         navigate(`/post/${post.id}`);
       }}
@@ -60,11 +60,11 @@ const Post = ({ post }) => {
         <AvatarWithTag user={user} post={post} />
       </Box>
       <CardContent sx={{ pt: 0, px: 0 }}>
-        {post.title && <Typography sx={{ paddingLeft: 2, fontWeight: "500", fontSize: "16px" }}>{post.title}</Typography>}
+        {post.title && <Typography sx={{ marginLeft: 3, fontWeight: "500", fontSize: "17px" }}>{post.title}</Typography>}
         <RichTextEditor
           readOnly
           value={post.description}
-          style={{ border: "none", marginBottom: -15 }}
+          style={{ border: "none", marginBottom: -15, marginLeft: 9 }}
         />
         {'tags' in post && post.tags.length > 0 &&
           <Box sx={{ paddingLeft: 2.5, paddingTop: 2 }}>

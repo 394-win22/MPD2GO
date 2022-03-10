@@ -31,9 +31,9 @@ export const ClearAllNotification = ({ uid }) => {
       <Button
         onClick={handleClickOpen}
         variant="contained"
-        sx={{ mb: 2 }}
-        style={{backgroundColor: '#98E297', borderRadius: 10, padding:5}}
-        startIcon={<CheckCircleIcon/>}
+        sx={{ mb: 2, px: 2 }}
+        style={{ backgroundColor: '#98E297', borderRadius: 10 }}
+        startIcon={<CheckCircleIcon />}
       >
         Clear All
       </Button>

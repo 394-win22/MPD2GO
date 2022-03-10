@@ -37,25 +37,26 @@ const AvatarWithTag = ({ user, post, menu }) => {
       action={
         menu
       }
-      subheaderTypographyProps={{ style: { fontSize: "12px", marginTop: "5px" } }}
+      subheaderTypographyProps={{ style: { fontSize: "12px", marginTop: "2px" } }}
       title={
         <Stack direction="row" spacing={3} sx={{ alignItems: "flex-end" }}>
-          <Typography sx={{ fontSize: "15px" }} >{user.displayName}</Typography>
+          <Typography sx={{ fontSize: "16px", fontWeight: "500" }} >{user.displayName}</Typography>
           {"teamId" in user && (
             <Chip
               size="small"
               label="Capstone Page"
               variant="outlined"
-              icon={<InsertDriveFileIcon style={{ color: "white" }} />}
+              icon={<InsertDriveFileIcon style={{ color: "white", width: "14px" }} />}
               sx={{
                 marginLeft: "30px !important",
-                marginBottom: "2px !important",
+                marginBottom: "0px !important",
                 mx: 1,
                 backgroundColor: teamData.teamColor,
                 color: teamData.textColor,
-
-                px: 1,
-                // fontSize: "12px",
+                borderRadius: "7px",
+                px: 0.7,
+                py: 0,
+                fontSize: "12px",
                 border: 0,
                 "&:hover": {
                   backgroundColor: shade(teamData.teamColor, -0.3) + " !important"

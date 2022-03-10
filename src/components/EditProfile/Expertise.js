@@ -109,9 +109,9 @@ const Expertise = ({ userData, uid }) => {
         {expertise.length > 0
           ? expertise.map((data, i) => <Chip key={i} color="secondary" label={data} />)
           : "expertise" in userData &&
-            Object.values(userData.expertise).map((x, i) => (
-              <Chip key={i} color="secondary" label={x} />
-            ))}
+          Object.values(userData.expertise).map((x, i) => (
+            <Chip key={i} color="secondary" label={x} />
+          ))}
       </Stack>
     </>
   );

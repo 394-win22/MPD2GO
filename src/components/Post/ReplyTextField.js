@@ -102,7 +102,7 @@ const ReplyTextField = ({ post, user }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
-          marginTop: "5px",
+          marginTop: "0px",
           width: "100%",
         }}
       >

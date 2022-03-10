@@ -21,6 +21,7 @@ const DeleteCommentMenu = ({ delThreadFunction }) => {
                 onClick={handleClick}
                 // fontSize='small'
                 size="small"
+                sx={{ ml: 1 }}
             >
                 <MoreVertIcon fontSize='small' />
             </IconButton>
@@ -31,9 +32,15 @@ const DeleteCommentMenu = ({ delThreadFunction }) => {
                 onClose={handleClose}
                 MenuListProps={{
                     'aria-labelledby': 'basic-button',
+                    style: {
+                        padding: "0px"
+                    }
                 }}
             >
-                <MenuItem onClick={delThreadFunction}>Delete</MenuItem>
+                <MenuItem sx={{ fontSize: "14px", px: 3 }} onClick={() => {
+                    handleClose();
+                    delThreadFunction()
+                }}>Delete</MenuItem>
             </Menu>
         </>
     );
