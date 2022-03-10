@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppBar, Box, MenuItem, ClickAwayListener, Badge } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import {
   AccountCircle as AccountCircleIcon,
   Notifications as NotificationsIcon,
@@ -10,11 +12,25 @@ import {
 } from "@mui/icons-material";
 import { UserContext } from "components/Routing";
 
+const theme = createTheme({
+  palette: {
+    foreground: "#ffffff",
+    primary: {
+      main: "#f1b844",
+      contrastText: "#f3f3f3ff",
+    },
+    secondary: { main: "#808080", 
+    contrastText: "#f3f3f3ff" },
+  },
+
+  })
+
 const MobileBottomNavBar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
 
   const [, setAnchorEl] = useState(null);
+  const [activeIcon, setActiveIcon] = useState("");
 
   const handleClickAway = () => {
     setAnchorEl(null);
@@ -25,6 +41,7 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
     notificationsCount = Object.values(userData.notifications).length;
 
   return (
+  <ThemeProvider theme={theme}>
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
@@ -41,14 +58,19 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
           <MenuItem
             onClick={() => {
               navigate("/");
+              setActiveIcon("home")
             }}
+            
           >
-            <HomeIcon />
+      <HomeIcon color = {(activeIcon === "home") ? "secondary" : "white" }/>
           </MenuItem>
 
           {isLoggedIn && (
             <>
-              <MenuItem onClick={() => navigate("/notifications")}>
+              <MenuItem onClick={() => {
+                navigate("/notifications")
+                setActiveIcon("notif")
+                }}>
                 <Badge
                   badgeContent={notificationsCount}
                   max={99}
@@ -58,31 +80,36 @@ const MobileBottomNavBar = ({ isLoggedIn }) => {
                     },
                   }}
                 >
-                  <NotificationsIcon />
+                  <NotificationsIcon color = {(activeIcon === "notif") ? "secondary" : "white" }/>
                 </Badge>
               </MenuItem>
-              <MenuItem onClick={() => navigate("/createPost")}>
-                <AddCircleIcon />
+              <MenuItem onClick={() => {
+                navigate("/createPost") 
+                setActiveIcon("createPost")}}>
+                <AddCircleIcon  color = {(activeIcon === "createPost") ? "secondary" : "white" }/>
               </MenuItem>
               <MenuItem
                 onClick={() => {
                   navigate("/directory");
+                  setActiveIcon("directory");
                 }}
               >
-                <Directory />
+                <Directory color = {(activeIcon === "directory") ? "secondary" : "white" }/>
               </MenuItem>
               <MenuItem
                 onClick={() => {
                   navigate("/profile");
+                  setActiveIcon("profile");
                 }}
               >
-                <AccountCircleIcon />
+                <AccountCircleIcon color = {(activeIcon === "profile") ? "secondary" : "white" } />
               </MenuItem>
             </>
           )}
         </AppBar>
       </Box>
     </ClickAwayListener>
+    </ThemeProvider>
   );
 };
 

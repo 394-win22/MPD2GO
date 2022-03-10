@@ -6,16 +6,26 @@ import { UserContext } from "components/Routing";
 import { createNotification } from "utilities/notifications";
 import { deleteData } from "../../utilities/firebase";
 import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
+import { makeStyles } from "@mui/styles";
+import { ClassNames } from "@emotion/react";
 
-const topicTags = [
+/*const topicTags = [
   { id: 1, value: "JavaScript" },
   { id: 2, value: "TypeScript" },
   { id: 3, value: "Ruby" },
   { id: 4, value: "Python" },
-];
+];*/
+
+
+const useStyles = makeStyles({
+  addCommentContainer: {
+    display: "flex", flexDirection: "column", maxWidth: "600px"
+  }
+});
 
 const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
   const [comment, setComment] = useState("");
+  const classes = useStyles();
   const context = useContext(UserContext);
   const user = useUserState();
   const people = context.userList.map((u) => {
@@ -40,7 +50,6 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
 
     const modifiedContent = el.querySelector("body").innerHTML;
     let notificationIds = [];
-    replyToComment(modifiedContent);
     // add mentioned to notification
     mentionSpans &&
       Array.from(mentionSpans).forEach(function (mentionSpan) {
@@ -52,7 +61,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
             modifiedContent,
             "mention"
           ).toString().split('/');
-          const notificationId = notificationPath[notificationPath.length-1];
+          const notificationId = notificationPath[notificationPath.length - 1];
           //console.log("NOTIF ID:", notificationId);
           notificationIds.push(notificationId);
         }
@@ -67,9 +76,9 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-      mentionDenotationChars: ["@", "#"],
+      mentionDenotationChars: ["@"],//, "#"],
       source: (searchTerm, renderList, mentionChar) => {
-        const list = mentionChar === "@" ? people : topicTags;
+        const list = people//mentionChar === "@" ? people : topicTags;
         const includesSearchTerm = list.filter((item) =>
           item.value.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -82,13 +91,11 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
   );
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", maxWidth: "600px" }}>
+    <Box className={classes.addCommentContainer}>
       <RichTextEditor
         controls={[
           ["bold", "italic", "underline", "link"],
-          ["unorderedList", "h1", "h2", "h3"],
-          ["sup", "sub"],
-          ["alignLeft", "alignCenter", "alignRight"],
+          ["unorderedList", "orderedList"]
         ]}
         onImageUpload={() => {
           return new Promise((_, reject) => {
@@ -97,7 +104,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         }}
         value={comment}
         onChange={setComment}
-        placeholder="Type @ or # to see mentions autocomplete"
+        placeholder="Type @ to see mentions autocomplete"
         mentions={mentions}
         style={{ marginLeft: "8px", marginTop: "16px", width: "100%" }}
         onDragStart={() => {
@@ -117,6 +124,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         }}
       >
         <Button
+          data-cy="AddCommentButton"
           onClick={() => {
             setIsShowTextField(false);
             setComment("");

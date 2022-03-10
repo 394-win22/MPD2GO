@@ -50,6 +50,7 @@ const SearchBar = ({
           placeholder="Search…"
           style={{ paddingLeft: 50, width: "100%" }}
           inputProps={{ "aria-label": "search" }}
+          data-testid="search-bar"
         />
       </Search>
       <SearchDropdown
