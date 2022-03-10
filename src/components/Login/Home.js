@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 		backgroundPosition: "center",
 	},
 	rightPanel: {
-		margin: "64px 32px",
+		margin: "55px 32px",
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
@@ -47,19 +47,21 @@ const Home = () => {
 			>
 				<Box className={classes.rightPanel}>
 					<img src={logo} alt="Hive Logo" style={{ height: "10em" }} />
-
 					{!isSignUp ? <LogIn /> : <SignUp />}
 
 					<Link
 						variant="body2"
-						sx={{ color: "white" }}
+						sx={{ color: "white", textDecoration: "none" }}
 						onClick={() => setIsSignUp(!isSignUp)}
 					>
-						<Typography color="rgb(240, 242, 245)">
-							{isSignUp
-								? "Already have an account? Sign in"
-								: "Don't have an account? Sign Up"}
-						</Typography>
+						{(isSignUp) ?
+							<Typography sx={{ textDecoration: "none" }} color="rgb(240, 242, 245)">
+								Already have an account? <strong>Sign In</strong>
+							</Typography> :
+							<Typography sx={{ textDecoration: "none", mt: 1 }} color="rgb(240, 242, 245)">
+								Don't have an account? <strong>Sign Up</strong>
+							</Typography>
+						}
 					</Link>
 
 				</Box>
@@ -75,7 +77,7 @@ const Home = () => {
 					display: "flex",
 					flexDirection: "column",
 					position: "absolute",
-					bottom: "20px",
+					bottom: "15px",
 					left: "50%",
 					transform: "translate(-50%, -50%)",
 					px: 4,
