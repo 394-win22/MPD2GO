@@ -40,9 +40,9 @@ const SearchBar = ({
   const [isDropped, setIsDropped] = useState(false);
   return (
     <>
-      <Search>
+      <Search >
         <SearchIconWrapper>
-          <SearchIcon />
+          <SearchIcon style={{ color: "#999999" }}/>
         </SearchIconWrapper>
         <StyledInputBase
           onClick={() => setIsDropped(true)}

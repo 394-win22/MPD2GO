@@ -6,7 +6,6 @@ import {
   Card,
   Box,
   Chip,
-  Stack,
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
@@ -57,8 +56,9 @@ const Post = ({ post }) => {
       }}
     >
       <AvatarWithTag user={user} post={post} />
-
+      
       <CardContent sx={{ pt: 0, px: 0 }}>
+        {post.title && <Typography sx={{paddingLeft: 2}} variant="h6">{post.title}</Typography>}
         <RichTextEditor
           readOnly
           value={post.description}
