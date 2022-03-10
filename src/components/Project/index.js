@@ -30,9 +30,9 @@ const Project = (user) => {
 
   const [width, setWidth] = useState();
   const ref = useCallback((e) => {
-      if (e) {
-        setWidth(e.clientWidth)
-      }
+    if (e) {
+      setWidth(e.clientWidth)
+    }
   });
 
   const otherRef = useRef();
@@ -42,7 +42,7 @@ const Project = (user) => {
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
-        window.removeEventListener('resize', handleWindowSizeChange);
+      window.removeEventListener('resize', handleWindowSizeChange);
     };
   }, []);
 
@@ -62,122 +62,123 @@ const Project = (user) => {
   return (
     <div ref={otherRef}>
       <div ref={ref}>
-    <>
-      <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
-      <BackButton/>
-        {Object.values(projectData.member).includes(user.user.uid) && (
-          <EditProjectButton
-            project={projectData}
-            projectId={projectId}
-            setProjectData={setProjectData}
-          />
-        )}
-        <Box sx={{ my: 2 }} style={{ display: "block" }}>
-          <Avatar
-            sx={{ width: 100, height: "auto", mx: 2 }}
-            style={{ float: "left" }}
-            src={projectData.photoURL}
-          ></Avatar>
-          <CardHeader
-            align="left"
-            title={projectData.name}
-            subheader={
-              "Last Updated " +
-              moment(projectData.lastUpdateTime).format("MMMM Do YYYY")
-            }
-            aria-label="avatar"
-          />
-        </Box>
-
-          <CardContent>
-            <Typography variant="h6" align="left">
-              Team Members
-            </Typography>
-
-            <Typography variant="h6" align="left">
-              {Object.values(projectData.member).map((member) => {
-                const user = getUserDataFromUID(member, users);
-                return (
-                  <Chip
-                    avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
-                    label={user.displayName}
-                    variant="outlined"
-                    sx={{ mx: 1, verticalAlign: "middle" }}
-                    onClick={() => {
-                      navigate(`/profile/${user.uid}`);
-                    }}
-                    key={member}
-                    clickable
-                  />
-                );
-              })}
-            </Typography>
-            <hr />
-            <Typography variant="h6" align="left" sx={{ my: 1 }}>
-              Current Phase&emsp;
-              <Chip
-                label={projectData.phase}
-                color="primary"
-                variant="contained"
-                size="small"
+        <>
+          <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+            <BackButton />
+            {Object.values(projectData.member).includes(user.user.uid) && (
+              <EditProjectButton
+                project={projectData}
+                projectId={projectId}
+                setProjectData={setProjectData}
               />
-            </Typography>
-            <Typography variant="h6" align="left" sx={{ my: 1 }}>
-              Description
-            </Typography>
+            )}
+            <Box sx={{ my: 2 }} style={{ display: "block" }}>
+              <Avatar
+                sx={{ width: 100, height: "auto", mx: 2 }}
+                style={{ float: "left" }}
+                src={projectData.photoURL}
+              ></Avatar>
+              <CardHeader
+                align="left"
+                title={projectData.name}
+                subheader={
+                  "Last Updated " +
+                  moment(projectData.lastUpdateTime).format("MMMM Do YYYY")
+                }
+                aria-label="avatar"
+              />
+            </Box>
 
-            <Typography variant="body2">{projectData.description}</Typography>
-            <Typography variant="h6" align="left" sx={{ my: 1 }}>
-              Project Snapshot
-            </Typography>
-            <ReactGoogleSlides
-              width={"100%"}
-              height={parseInt(width*0.6)+"px"}
-              slidesLink={projectData.slideURL}
-              slideDuration={5}
-              position={1}
-              showControls
-              loop
-            />
-            {projectData.resources !== undefined &&
-              Object.values(projectData.resources).length > 0 && (
-                <>
-                  <Typography variant="h6" align="left" sx={{ my: 1 }}>
-                    Additional Resources
-                  </Typography>
-                  {Object.values(projectData.resources).map((resource) => (
-                    <>
-                      <Button
-                        sx={{ marginLeft: "8px" }}
-                        startIcon={
-                          resource.url.includes("mural") ? (
-                            <img
-                              src={MuralLogo}
-                              alt=""
-                              style={{ height: 20, width: 20 }}
-                            />
-                          ) : resource.url.includes("drive") ? (
-                            <img
-                              src={DriveLogo}
-                              alt=""
-                              style={{ height: "20px", width: "20px" }}
-                            />
-                          ) : (
-                            <LinkIcon />
-                          )
-                        }
-                        onClick={() => {
-                          window.open(resource.url);
-                        }}
-                      >
-                        {resource.text}
-                      </Button>
-                    </>
-                  ))}
-                </>
-              )}
-          </CardContent>
-        </Card>
+            <CardContent>
+              <Typography variant="h6" align="left">
+                Team Members
+              </Typography>
+
+              <Typography variant="h6" align="left">
+                {Object.values(projectData.member).map((member) => {
+                  const user = getUserDataFromUID(member, users);
+                  return (
+                    <Chip
+                      avatar={<Avatar alt={user.displayName} src={user.photoURL} />}
+                      label={user.displayName}
+                      variant="outlined"
+                      sx={{ mx: 1, verticalAlign: "middle" }}
+                      onClick={() => {
+                        navigate(`/profile/${user.uid}`);
+                      }}
+                      key={member}
+                      clickable
+                    />
+                  );
+                })}
+              </Typography>
+              <hr />
+              <Typography variant="h6" align="left" sx={{ my: 1 }}>
+                Current Phase&emsp;
+                <Chip
+                  label={projectData.phase}
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                />
+              </Typography>
+              <Typography variant="h6" align="left" sx={{ my: 1 }}>
+                Description
+              </Typography>
+
+              <Typography variant="body2">{projectData.description}</Typography>
+              <Typography variant="h6" align="left" sx={{ my: 1 }}>
+                Project Snapshot
+              </Typography>
+              <ReactGoogleSlides
+                width={"100%"}
+                height={parseInt(width * 0.6) + "px"}
+                slidesLink={projectData.slideURL}
+                slideDuration={5}
+                position={1}
+                showControls
+                loop
+              />
+              {projectData.resources !== undefined &&
+                Object.values(projectData.resources).length > 0 && (
+                  <>
+                    <Typography variant="h6" align="left" sx={{ my: 1 }}>
+                      Additional Resources
+                    </Typography>
+                    {Object.values(projectData.resources).map((resource, i) => (
+                      <>
+                        <Button
+                          sx={{ marginLeft: "8px" }}
+                          key={i}
+                          startIcon={
+                            resource.url.includes("mural") ? (
+                              <img
+                                src={MuralLogo}
+                                alt=""
+                                style={{ height: 20, width: 20 }}
+                              />
+                            ) : resource.url.includes("drive") ? (
+                              <img
+                                src={DriveLogo}
+                                alt=""
+                                style={{ height: "20px", width: "20px" }}
+                              />
+                            ) : (
+                              <LinkIcon />
+                            )
+                          }
+                          onClick={() => {
+                            window.open(resource.url);
+                          }}
+                        >
+                          {resource.text}
+                        </Button>
+                      </>
+                    ))}
+                  </>
+                )}
+            </CardContent>
+          </Card>
         </>
       </div>
     </div>
