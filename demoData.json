@@ -158,8 +158,8 @@
         }
       },
       "slideURL" : "https://docs.google.com/presentation/d/1cC8vpF_VkRHX82BUtdauXgDydcSpDDvU/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
-      "teamColor" : "#00ffff",
-      "textColor" : "black"
+      "teamColor" : "#7FDDCC",
+      "textColor" : "white"
     },
     "ExampleBlueTeam" : {
       "description" : "Our team is exploring the next generation of land-based, engine-powered products that go beyond just functional value. Instead, we’re thinking about how to speak to untapped audiences and designing customer-first products ",
@@ -232,8 +232,8 @@
         }
       },
       "slideURL" : "https://docs.google.com/presentation/d/1x25r5bFv4_EphojgYy1cEXbBkp7AZ7rh/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
-      "teamColor" : "#ffa500",
-      "textColor" : "black"
+      "teamColor" : "#E9C98C",
+      "textColor" : "white"
     },
     "ExamplePurpleTeam" : {
       "description" : "Our team is looking to build an innovative, modular bluetooth speaker design that allows users to pull apart the speaker into pieces but listen to the same music simultaneously.",
@@ -274,7 +274,7 @@
         }
       },
       "slideURL" : "https://docs.google.com/presentation/d/1sVh4KAYufIK2FIHySWgNyG5YxJHSIWyo/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
-      "teamColor" : "#d00b0b",
+      "teamColor" : "#E29797",
       "textColor" : "white"
     }
   },

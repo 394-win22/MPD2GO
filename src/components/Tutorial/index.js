@@ -78,7 +78,6 @@ const Tutorial = () => {
 		// 	)
 		// },
 		onChange: (oldIndex, newIndex) => {
-			console.log(oldIndex, newIndex);
 			setIndex(newIndex);
 		}
 	};
