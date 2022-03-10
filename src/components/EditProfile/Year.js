@@ -1,42 +1,39 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
-import {
-  Typography,
-  Avatar,
-  Box,
-  Divider,
-  Button,
-  Stack,
-  Card,
-  Chip,
-  IconButton,
-  CardHeader,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import { getUserStatus, useData } from "../../utilities/firebase";
+import { useState } from "react";
+import { Typography, Stack, IconButton, TextField } from "@mui/material";
 // icons
-import { Email as EmailIcon } from "@mui/icons-material";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
-const Year = ({ userData, isYearEditing, setIsYearEditing }) => {
+//local file
+import { updateData } from "utilities/firebase";
+
+const Year = ({ userData, uid }) => {
+  const [isYearEditing, setIsYearEditing] = useState(false);
+  const [year, setYear] = useState(userData.year);
+
+  const handleYearSubmit = () => {
+    updateData(`/users/${uid}`, { year: year });
+    setIsYearEditing(false);
+  };
+
   if (isYearEditing) {
     return (
       <Stack direction="row" justifyContent="center" alignItems="center" sx={{ my: 1 }}>
+        <TextField
+          type="number"
+          id="year"
+          label="Year"
+          defaultValue={year ? year : ""}
+          onChange={(e) => setYear(e.target.value)}
+        />
         <IconButton onClick={() => setIsYearEditing(false)}>
           <CancelOutlinedIcon />
         </IconButton>
-        <TextField
-          id="year"
-          label="Year"
-          defaultValue={userData.year ? "Class of " + userData.year : "No Year"}
-        />
+
+        <IconButton onClick={handleYearSubmit}>
+          <CheckIcon />
+        </IconButton>
       </Stack>
     );
   }
@@ -50,7 +47,7 @@ const Year = ({ userData, isYearEditing, setIsYearEditing }) => {
       <IconButton onClick={() => setIsYearEditing(true)}>
         <EditIcon />
       </IconButton>
-      {userData.year ? "Class of " + userData.year : "No Year"}
+      {year ? "Class of " + year : "No Year"}
     </Typography>
   );
 };

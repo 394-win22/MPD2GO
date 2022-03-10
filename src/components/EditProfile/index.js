@@ -48,10 +48,6 @@ export const getProjectList = (project) => {
 const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
   const params = useParams();
   const navigate = useNavigate();
-  const [isNameEditing, setIsNameEditing] = useState(false);
-  const [isLocationEditing, setIsLocationEditing] = useState(false);
-  const [isYearEditing, setIsYearEditing] = useState(false);
-  const [isTeamEditing, setIsTeamEditing] = useState(false);
 
   const [formValues, setFormValues] = useState(user);
   const [projectList, projectListLoading] = useData("/project", getProjectList);
@@ -92,20 +88,9 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
             my: 1,
           }}
         />
-        <Name
-          userData={userData}
-          isNameEditing={isNameEditing}
-          setIsNameEditing={setIsNameEditing}
-          uid={user.uid}
-        />
+        <Name userData={userData} uid={user.uid} />
         <Bio userData={userData} uid={user.uid} />
-
-        <Location
-          userData={userData}
-          isLocationEditing={isLocationEditing}
-          setIsLocationEditing={setIsLocationEditing}
-          uid={user.uid}
-        />
+        <Location userData={userData} uid={user.uid} />
 
         <Divider />
         <Typography
@@ -116,20 +101,8 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
           {getUserStatus(userData)}
         </Typography>
 
-        <Year
-          userData={userData}
-          isYearEditing={isYearEditing}
-          setIsYearEditing={setIsYearEditing}
-          uid={user.uid}
-        />
-        <Team
-          userData={userData}
-          isTeamEditing={isTeamEditing}
-          setIsTeamEditing={setIsTeamEditing}
-          formValues={formValues}
-          projectData={projectData}
-          uid={user.uid}
-        />
+        <Year userData={userData} uid={user.uid} />
+        <Team userData={userData} projectData={projectData} uid={user.uid} />
 
         <Divider />
 

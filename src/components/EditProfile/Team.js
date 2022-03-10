@@ -1,29 +1,22 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Typography,
-  Avatar,
-  Box,
-  Divider,
   Button,
   Stack,
-  Card,
-  Chip,
   IconButton,
-  CardHeader,
-  TextField,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
 } from "@mui/material";
-import { getUserStatus, useData } from "../../utilities/firebase";
 // icons
-import { Email as EmailIcon } from "@mui/icons-material";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+
+//local file
+import { updateData, useData } from "utilities/firebase";
 
 export const getProjectList = (project) => {
   const listOfProject = Object.entries(project).map(([projectId, projectObj]) => {
@@ -32,9 +25,16 @@ export const getProjectList = (project) => {
   return listOfProject;
 };
 
-const Team = ({ userData, isTeamEditing, setIsTeamEditing, formValues, projectData }) => {
+const Team = ({ userData, projectData, uid }) => {
   const navigate = useNavigate();
+  const [isTeamEditing, setIsTeamEditing] = useState(false);
   const [projectList, projectListLoading] = useData("/project", getProjectList);
+  const [teamId, setTeamId] = useState(userData.teamId);
+
+  const handleTeamSubmit = () => {
+    updateData(`/users/${uid}`, { teamId: teamId });
+    setIsTeamEditing(false);
+  };
 
   if (projectListLoading) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
@@ -42,17 +42,14 @@ const Team = ({ userData, isTeamEditing, setIsTeamEditing, formValues, projectDa
   if (isTeamEditing) {
     return (
       <Stack direction="row" justifyContent="center" alignItems="center" sx={{ my: 2 }}>
-        <IconButton onClick={() => setIsTeamEditing(false)}>
-          <CancelOutlinedIcon />
-        </IconButton>
-
         <FormControl sx={{ width: 205 }}>
           <InputLabel id="team">Team</InputLabel>
           <Select
             labelId="team"
             name="teamId"
-            value={formValues.teamId || ""}
+            value={teamId}
             label="team"
+            onChange={(e) => setTeamId(e.target.value)}
           >
             {projectList.map((project) => {
               return (
@@ -63,6 +60,13 @@ const Team = ({ userData, isTeamEditing, setIsTeamEditing, formValues, projectDa
             })}
           </Select>
         </FormControl>
+
+        <IconButton onClick={() => setIsTeamEditing(false)}>
+          <CancelOutlinedIcon />
+        </IconButton>
+        <IconButton onClick={handleTeamSubmit}>
+          <CheckIcon />
+        </IconButton>
       </Stack>
     );
   }
@@ -71,11 +75,11 @@ const Team = ({ userData, isTeamEditing, setIsTeamEditing, formValues, projectDa
       <IconButton onClick={() => setIsTeamEditing(true)}>
         <EditIcon />
       </IconButton>
-      {"teamId" in userData ? (
+      {teamId ? (
         <Button
           variant="contained"
           onClick={() => {
-            navigate(`/project/${userData.teamId}`);
+            navigate(`/project/${teamId}`);
           }}
           sx={{
             mt: 1,

@@ -16,7 +16,7 @@ const LinkedIn = ({ userData, uid }) => {
 
   const handleLinkedInSubmit = () => {
     updateData(`/users/${uid}`, { linkedIn: linkedIn });
-    setLinkedIn(false);
+    setIsLinkedInEditing(false);
   };
 
   if (isLinkedInEditing) {
@@ -26,6 +26,7 @@ const LinkedIn = ({ userData, uid }) => {
           id="linkedIn"
           label="LinkedIn"
           defaultValue={linkedIn ? linkedIn : "No LinkedIn"}
+          onChange={(e) => setLinkedIn(e.target.value)}
         />
 
         <IconButton onClick={() => setIsLinkedInEditing(false)}>
