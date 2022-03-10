@@ -42,12 +42,12 @@ const SearchBar = ({
     <>
       <Search >
         <SearchIconWrapper>
-          <SearchIcon style={{ color: "#999999" }}/>
+          <SearchIcon style={{ color: "#999999" }} />
         </SearchIconWrapper>
         <StyledInputBase
           onClick={() => setIsDropped(true)}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search…"
+          placeholder="Search recent posts"
           style={{ paddingLeft: 50, width: "100%" }}
           inputProps={{ "aria-label": "search" }}
           data-testid="search-bar"

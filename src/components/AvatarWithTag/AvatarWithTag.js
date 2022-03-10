@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Typography, CardHeader, Avatar, Stack, Chip } from "@mui/material";
 import moment from "moment";
 import { UserContext } from "components/Routing";
-
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 const AvatarWithTag = ({ user, post, menu }) => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
@@ -17,9 +17,16 @@ const AvatarWithTag = ({ user, post, menu }) => {
   return (
     <CardHeader
       align="left"
+      sx={{
+        padding: 0,
+        pl: 2,
+        mt: 0,
+        mb: 2
+      }}
       avatar={
         <Avatar
           src={user.photoURL}
+          sx={{ width: "35px", height: "35px" }}
           aria-label="avatar"
           onClick={(event) => {
             event.stopPropagation();
@@ -30,19 +37,25 @@ const AvatarWithTag = ({ user, post, menu }) => {
       action={
         menu
       }
+      subheaderTypographyProps={{ style: { fontSize: "12px", marginTop: "5px" } }}
       title={
-        <Stack direction="row" spacing={3}>
-          <Typography>{user.displayName}</Typography>
+        <Stack direction="row" spacing={3} sx={{ alignItems: "flex-end" }}>
+          <Typography sx={{ fontSize: "15px" }} >{user.displayName}</Typography>
           {"teamId" in user && (
             <Chip
               size="small"
-              label={teamData.name}
+              label="Capstone Page"
               variant="outlined"
+              icon={<InsertDriveFileIcon style={{ color: "white" }} />}
               sx={{
                 marginLeft: "30px !important",
+                marginBottom: "2px !important",
                 mx: 1,
                 backgroundColor: teamData.teamColor,
                 color: teamData.textColor,
+
+                px: 1,
+                // fontSize: "12px",
                 border: 0,
                 "&:hover": {
                   backgroundColor: shade(teamData.teamColor, -0.3) + " !important"

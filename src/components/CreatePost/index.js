@@ -11,12 +11,14 @@ import {
   OutlinedInput,
   Chip,
   MenuItem,
+  Card,
+  CardHeader
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
-
 import { createPostInFirebase } from "utilities/posts.js";
 import { useUserState, uploadPhotoToStorage } from "utilities/firebase.js";
+import BackButton from "../Navigation/BackButton"
 
 import { UserContext } from "components/Routing";
 
@@ -25,17 +27,28 @@ import { createNotification } from "utilities/notifications";
 const useStyles = makeStyles({
   container: {
     alignItems: "left",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     backgroundColor: "white",
-    padding: "40px 24px 40px 24px",
+    minHeight: "80vh",
+    display: "flex",
+    flexDirection: "column",
+    // justifyContent: 'space-between',
+    // alignItems: "center"
+    // padding: "0px 24px 20px 24px",
   },
   form: {
     display: "flex",
     flexDirection: "column",
     alignItems: "left",
+    padding: "0px 24px 20px 24px",
+    marginTop: "13px",
+    height: "100%",
     justifyContent: "space-evenly",
     "& .MuiTextField-root": { my: 1, width: "100%" },
   },
+  field: {
+
+  }
 });
 
 const expertises = [
@@ -60,10 +73,10 @@ const CreatePost = () => {
 
   const [description, setDescription] = useState("");
   const [postTags, setPostTags] = useState([]);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("")
+
 
   const user = useUserState();
-
   const classes = useStyles();
 
   const handlePostTagsChange = (event) => {
@@ -129,6 +142,9 @@ const CreatePost = () => {
     navigate("/");
   };
 
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
@@ -149,20 +165,43 @@ const CreatePost = () => {
 
   const handleImageUpload = (file) => uploadPhotoToStorage(file);
 
-  return (
-    <Box className={classes.container} style={{ borderRadius: 10 }} data-cy="createPostBox">
-      <Typography align="center" variant="h6" sx={{ mb: 1 }}>
-        Create a Post
-      </Typography>
 
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 6.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  return (
+    <Card className={classes.container} sx={{ mb: 3 }} data-cy="createPostBox">
+      <CardHeader
+        sx={{ padding: "10px 16px" }}
+        avatar={
+          <BackButton />
+        }
+        title="Create a Post"
+        titleTypographyProps={{ variant: 'h6' }}
+      />
       <Box className={classes.form}>
+        <TextField
+          className={classes.field}
+          autoComplete="off"
+          inputProps={{ style: { fontSize: "14px" } }} // font size of input text
+          InputLabelProps={{ style: { fontSize: "14px" } }} // font size of input label
+          label='Title' value={title}
+          onChange={(e) => { setTitle(e.target.value) }} />
         <FormControl sx={{ my: 1, width: "100%" }}>
-          <InputLabel>Tags</InputLabel>
+          <InputLabel sx={{ fontSize: "14px" }}>Tags</InputLabel>
           <Select
+            className={classes.field}
             multiple
             value={postTags}
             onChange={handlePostTagsChange}
             input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            MenuProps={MenuProps}
             renderValue={(selected) => (
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {selected.map((value) => (
@@ -172,31 +211,28 @@ const CreatePost = () => {
             )}
           >
             {expertises.map((tags) => (
-              <MenuItem key={tags} value={tags}>
+              <MenuItem sx={{
+                fontSize: "14px",
+                '&.Mui-selected': { // <-- mixing the two classes
+                  backgroundColor: '#ececec'
+                },
+                '&.Mui-selected:hover': { // <-- mixing the two classes
+                  backgroundColor: '#ececec'
+                }
+              }} key={tags} value={tags}>
                 {tags}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-        <TextField
-          label="Title"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
 
-        <Typography
-          variant="caption"
-          align="left"
-          sx={{ color: "gray", mt: 2 }}
-        >
+        <Typography variant="caption" align="left" sx={{ color: "gray", mt: 2 }}>
           {postDescriptionPlaceHolder}
         </Typography>
 
         <RichTextEditor
           value={description}
-          onClick={handleDescriptionClick}
+          // onClick={handleDescriptionClick}
           onChange={setDescription}
           placeholder="Type @ to see mentions autocomplete"
           mentions={mentions}
@@ -212,7 +248,7 @@ const CreatePost = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "#808080", mr: 2 }}
-            onClick={() => navigate()}
+            onClick={() => navigate(-1)}
             data-cy="cancelCreatePostBtn"
           >
             Cancel
@@ -229,7 +265,7 @@ const CreatePost = () => {
           </Button>
         </Box>
       </Box>
-    </Box>
+    </Card>
   );
 };
 

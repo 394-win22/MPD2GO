@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     justifyContent: "flex-start",
     marginBottom: "15px",
     alignItems: "stretch",
+    width: "100%"
   },
   leftContainer: {
     display: "flex",
@@ -43,10 +44,12 @@ const useStyles = makeStyles({
     float: "left",
     flexDirection: "column",
     marginLeft: "5px",
+    marginRight: "5px",
     alignItems: "flex-start",
     height: "100%",
     minWidth: "0px",
     flexWrap: "wrap",
+    flexGrow: 1,
   },
   avatarButton: {
     width: "24px",
