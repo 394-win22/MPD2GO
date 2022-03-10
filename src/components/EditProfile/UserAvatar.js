@@ -24,10 +24,10 @@ const UserAvatar = ({ userData, uid }) => {
         src={avatarURL}
         variant="circular"
         sx={{
-          height: "20vh",
-          width: "20vh",
+          height: "80px",
+          width: "80px",
           margin: "auto",
-          my: 1,
+          mb: 3,
         }}
       />
 

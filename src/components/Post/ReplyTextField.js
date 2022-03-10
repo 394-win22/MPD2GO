@@ -70,7 +70,7 @@ const ReplyTextField = ({ post, user }) => {
             modifiedContent,
             "mention"
           ).toString().split('/');
-          const notificationId = notificationPath[notificationPath.length-1];
+          const notificationId = notificationPath[notificationPath.length - 1];
           notificationIds.push(notificationId);
         }
       });
@@ -92,6 +92,7 @@ const ReplyTextField = ({ post, user }) => {
         paddingLeft: "3%",
         paddingRight: "3%",
         paddingBottom: "20px",
+        marginBottom: "20px"
       }}
       borderBottom={"1px solid #e9e9e9"}
     >
@@ -108,7 +109,7 @@ const ReplyTextField = ({ post, user }) => {
         <RichTextEditor
           controls={[
             ["bold", "italic", "underline", "link"],
-            ["unorderedList","orderedList"],
+            ["unorderedList", "orderedList"],
           ]}
           onImageUpload={() => {
             return new Promise((_, reject) => {

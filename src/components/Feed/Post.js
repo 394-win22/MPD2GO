@@ -6,6 +6,7 @@ import {
   Card,
   Box,
   Chip,
+  CardHeader
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
@@ -50,32 +51,33 @@ const Post = ({ post }) => {
   return (
     <Card
       className={classes.card}
-      sx={{ mb: 3 }}
+      sx={{ mb: 2, pl: 1 }}
       onClick={() => {
         navigate(`/post/${post.id}`);
       }}
     >
-      <AvatarWithTag user={user} post={post} />
-      
+      <Box sx={{ ml: 0, mt: 2 }}>
+        <AvatarWithTag user={user} post={post} />
+      </Box>
       <CardContent sx={{ pt: 0, px: 0 }}>
-        {post.title && <Typography sx={{paddingLeft: 2}} variant="h6">{post.title}</Typography>}
+        {post.title && <Typography sx={{ paddingLeft: 2, fontWeight: "500", fontSize: "16px" }}>{post.title}</Typography>}
         <RichTextEditor
           readOnly
           value={post.description}
           style={{ border: "none", marginBottom: -15 }}
         />
         {'tags' in post && post.tags.length > 0 &&
-          <Box sx={{paddingLeft: 2.5, paddingTop: 2}}>
-              {post.tags.map((tag, i) => (
-                <Chip
-                  label={tag}
-                  key={i}
-                  color="primary"
-                  variant="contained"
-                  size="small"
-                  sx={{ backgroundColor: "#c0c0c0", color: "#ffffff", mr:1, mt:1 }}
-                />
-              ))}
+          <Box sx={{ paddingLeft: 2.5, paddingTop: 2 }}>
+            {post.tags.map((tag, i) => (
+              <Chip
+                label={tag}
+                key={i}
+                color="primary"
+                variant="contained"
+                size="small"
+                sx={{ backgroundColor: "#c0c0c0", color: "#ffffff", mr: 1, mt: 1 }}
+              />
+            ))}
           </Box>}
       </CardContent>
 

@@ -10,7 +10,7 @@ const Main = () => {
   const [phaseFilter, setPhaseFilter] = useState([]);
   const [teamFilter, setTeamFilter] = useState([]);
 
-  
+
   let filteredPosts = context.postList;
   const filtering = (e) => {
     let x = true;
@@ -55,9 +55,9 @@ const Main = () => {
         phaseFilter={phaseFilter}
         teamFilter={teamFilter}
       />
-      
-      {(!filteredPosts) ? <Typography>No posts yet</Typography>:<PostList posts={filteredPosts} />}
-      
+
+      {(!filteredPosts) ? <Typography>No posts yet</Typography> : <PostList posts={filteredPosts} />}
+
     </div>
   );
 };

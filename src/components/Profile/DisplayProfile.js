@@ -53,14 +53,14 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
           src={userData.photoURL}
           variant="circular"
           sx={{
-            height: "20vh",
-            width: "20vh",
+            height: "80px",
+            width: "80px",
             margin: "auto",
-            my: 1,
+            mb: 3,
           }}
         />
         <Typography
-          variant="h4"
+          variant="h5"
           component="div"
           sx={{
             flexGrow: 1,
