@@ -19,8 +19,8 @@ const DeleteCommentMenu = ({ delThreadFunction }) => {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                sx={{ pt: "2px" }}
-                fontSize='small'
+                // fontSize='small'
+                size="small"
             >
                 <MoreVertIcon fontSize='small' />
             </IconButton>

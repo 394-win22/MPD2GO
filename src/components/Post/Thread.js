@@ -79,6 +79,12 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     minWidth: "0px",
   },
+  alignIconWithText: {
+    display: "flex", 
+    flexDirection: "row", 
+    justifyContent: 'center', 
+    alignItems: 'center'
+  }, 
   time: {
     color: "#888888",
     fontSize: "13px !important",
@@ -221,7 +227,7 @@ const Thread = ({ postId, ids, data, style }) => {
         <Box className={classes.contentContainer}>
 
           <Box className={classes.infoContainer}>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Box className={classes.alignIconWithText}>
               <Typography variant="subtitle2">
                 {postAuthor.displayName}
               </Typography>
