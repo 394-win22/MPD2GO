@@ -103,7 +103,7 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
           {userData.year ? "Class of " + userData.year : "No Year"}
         </Typography>
 
-        {"teamId" in userData && (
+        {"teamId" in userData ? (
           <Button
             variant="contained"
             onClick={() => {
@@ -119,6 +119,14 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
           >
             View {projectData.name}
           </Button>
+        ) : (
+          <Typography
+            variant="body1"
+            style={{ color: "#7B7B7B" }}
+            sx={{ paddingLeft: 1, my: 1 }}
+          >
+            No team
+          </Typography>
         )}
 
         <Divider />
