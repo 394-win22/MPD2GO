@@ -27,7 +27,7 @@ const LogIn = () => {
   const handleModalClose = () => setIsModalOpen(false);
 
   return (
-    <Box sx={{ mt: 5, width: 300 }} data-cy="Login">
+    <Box sx={{ mt: 4, width: 300 }} data-cy="Login">
       <Box component="form" noValidate onSubmit={handleSubmit}>
 
         <Button

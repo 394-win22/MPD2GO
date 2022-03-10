@@ -21,7 +21,7 @@ export default function SignUp() {
   };
 
   return (
-    <Box sx={{ mt: 5, width: 300 }}>
+    <Box sx={{ mt: 3, width: 300 }}>
       <Box component="form" noValidate onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
