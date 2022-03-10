@@ -201,7 +201,7 @@ const CreatePost = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "#808080", mr: 2 }}
-            onClick={() => navigate(-1)}
+            onClick={() => navigate()}
             data-cy="cancelCreatePostBtn"
           >
             Cancel
