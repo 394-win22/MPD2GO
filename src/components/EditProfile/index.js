@@ -29,6 +29,7 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
 import { signOut } from "utilities/firebase";
 import BackButton from "../Navigation/BackButton";
+import UserAvatar from "./UserAvatar";
 import Name from "./Name";
 import Bio from "./Bio";
 import Location from "./Location";
@@ -77,17 +78,7 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
         sx={{ justifyContent: "center", textAlign: "center" }}
         noValidate
       >
-        <Avatar
-          alt={userData.displayName}
-          src={userData.photoURL}
-          variant="circular"
-          sx={{
-            height: "20vh",
-            width: "20vh",
-            margin: "auto",
-            my: 1,
-          }}
-        />
+        <UserAvatar userData={userData} uid={user.uid} />
         <Name userData={userData} uid={user.uid} />
         <Bio userData={userData} uid={user.uid} />
         <Location userData={userData} uid={user.uid} />
