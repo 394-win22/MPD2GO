@@ -11,16 +11,18 @@ export const createPostInFirebase = (postObj) => {
   return postId.key;
 };
 
-export const findLevel =(path)=>{
-  let count =0;
+export const findLevel =(path)=> {
+  console.log("finding level for path", path);
+  let count = 0;
   for (let i = 0; i < path.length; i++) {
     if (path[i]==="/"){
       count+=1;
     }
-    if (count >2){
+    if (count > 2){
       return 1; // 1 represents level beyond the first comment
     }
   }
+  console.log("returning 0 from findLevel");
   return 0; // first level
 };
 

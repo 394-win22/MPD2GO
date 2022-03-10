@@ -14,7 +14,7 @@ import { makeStyles } from "@mui/styles";
 import moment from "moment";
 import { RichTextEditor } from "@mantine/rte";
 
-import { replyToThread } from "utilities/posts";
+import { findLevel, replyToThread } from "utilities/posts";
 import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
@@ -131,13 +131,18 @@ const Thread = ({ postId, ids, data, style }) => {
   const [isShowTextField, setIsShowTextField] = useState(false);
   const [isShowThreads, setIsShowThreads] = useState(true);
 
-  const replyToComment = (comment, notifications) => {
+  const myPath = () => {
     // GENERATE A PATH TO PUSH TO IN DATABASE
     let path = `${postId}`;
     ids.forEach((id) => {
       path += "/threads/";
       path += id;
     });
+    return path;
+  }
+
+  const replyToComment = (comment, notifications) => {
+    let path = myPath();
     path += "/threads/";
     replyToThread(user.uid, postId, path, comment, notifications);
     setIsShowTextField(false);
@@ -205,7 +210,7 @@ const Thread = ({ postId, ids, data, style }) => {
         >
           <Avatar className={classes.avatar} src={postAuthor.photoURL} />
         </IconButton>
-        {isShowThreads && haveChild ? (
+       {isShowThreads && haveChild && findLevel(myPath()) === 0 ? (
           <Box
             className={classes.collapseButton}
             onClick={() => setIsShowThreads(false)}
@@ -215,6 +220,7 @@ const Thread = ({ postId, ids, data, style }) => {
         ) : (
           <Box className={classes.collapseButton} />
         )}
+        
       </Box>
       <Box className={classes.rightContainer}>
         {/* comment */}
@@ -261,7 +267,7 @@ const Thread = ({ postId, ids, data, style }) => {
             </Button>
           )}
 
-          {!isShowTextField && (
+          {!isShowTextField && findLevel(myPath()) === 0 && (
             <Button
               className={classes.replyButton}
               color="primary"
