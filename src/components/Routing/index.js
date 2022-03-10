@@ -14,6 +14,7 @@ import NotFound from "components/NotFound";
 import Directory from "components/Directory";
 import Main from "components/Feed";
 import Loading from "components/Loading";
+import Tutorial from "components/Tutorial";
 
 const getPostList = (posts) => {
   let listOfPost = Object.entries(posts).map(([postId, postObj]) => {
@@ -64,6 +65,7 @@ const Routing = ({ user }) => {
           <Route exact path="/profile" element={<Profile user={user} />} />
           <Route exact path="/notifications" element={<Notifications />} />
           <Route exact path="/directory" element={<Directory />} />
+          {/* <Route exact path="/tutorial" element={<Tutorial />} /> */}
           <Route
             exact
             path="/profile/:userID"

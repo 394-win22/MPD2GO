@@ -29,20 +29,20 @@ const LogIn = () => {
   return (
     <Box sx={{ mt: 5, width: 300 }} data-cy="Login">
       <Box component="form" noValidate onSubmit={handleSubmit}>
-        
+
         <Button
           color="secondary"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 3}}
-          style={{fontSize:"1.2em"}}
+          sx={{ mt: 3, mb: 3 }}
+          style={{ fontSize: "1.2em" }}
           onClick={signInWithGoogle}
           startIcon={<GoogleIcon />}
         >
           Sign in with Google
         </Button>
-        <Divider color="white"  style={{border:"1px solid white"}}/>
-        <Typography color="rgb(240, 242, 245)" variant="h6" align="center" sx={{mt:2}}>Sign in with Email</Typography>
+        <Divider color="white" style={{ border: "1px solid white" }} />
+        <Typography color="rgb(240, 242, 245)" variant="h6" align="center" sx={{ mt: 2 }}>Sign in with Email</Typography>
         <TextField
           variant="filled"
           color="secondary"
@@ -67,7 +67,7 @@ const LogIn = () => {
           id="password"
           autoComplete="current-password"
         />
-        
+
         <Button
           id="submitLogin"
           color="secondary"
@@ -85,7 +85,7 @@ const LogIn = () => {
           onClick={handleModalOpen}
           data-cy="ForgotPasswordLink"
         >
-          <Typography color="rgb(240, 242, 245)" align="center" style={{fontWeight:"bold"}}> Forgot password?</Typography>
+          <Typography color="rgb(240, 242, 245)" align="center" style={{ fontWeight: "bold" }}> Forgot password?</Typography>
         </Link>
 
       </Box>
