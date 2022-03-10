@@ -30,6 +30,7 @@ const Home = () => {
 	const [isSignUp, setIsSignUp] = useState(false);
 
 
+
 	return (
 		<Grid container component="main" sx={{ height: "100vh" }}>
 			<CssBaseline />
@@ -77,7 +78,7 @@ const Home = () => {
 					bottom: "20px",
 					left: "50%",
 					transform: "translate(-50%, -50%)",
-					px: 3,
+					px: 4,
 					py: 2,
 					"&:hover": {
 						backgroundColor: "#e7c771"
@@ -85,10 +86,10 @@ const Home = () => {
 
 				}}
 			>
-				<Typography sx={{ display: "inline-block" }}>
+				<Typography sx={{ display: "inline-block", whiteSpace: "nowrap" }}>
 					Welcome 👋 🐝
 				</Typography>
-				<Typography sx={{ display: "inline-block" }}>
+				<Typography sx={{ display: "inline-block", whiteSpace: "nowrap" }}>
 					Take a tour of the Hive
 				</Typography>
 			</Button>

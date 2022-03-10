@@ -17,7 +17,8 @@ const expertises = [
 
 const types = [
   'Current Student',
-  'Alumni'
+  'Alumni',
+  'Staff'
 ]
 
 const SearchDropdown = ({

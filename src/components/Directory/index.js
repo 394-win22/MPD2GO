@@ -14,17 +14,7 @@ import {
 import { UserContext } from "components/Routing";
 import DirectorySearchBar from "components/DirectorySearchBar";
 import BackButton from "../Navigation/BackButton"
-
-const getStatus = (userData) => {
-  if (!("year" in userData) || userData.year === "") {
-    return "Unknown Status";
-  }
-  if (userData.year < new Date().getFullYear()) {
-    return "Alumni";
-  } else {
-    return "Current Student";
-  }
-};
+import { getUserStatus } from "utilities/firebase";
 
 const Directory = () => {
   const navigate = useNavigate();
@@ -39,32 +29,41 @@ const Directory = () => {
   let filteredUsers = users;
 
   function filtering(e) {
-    let x = true;
+    let x = false;
     if (
       (!("expertise" in e) && filter.expertise.length > 0) ||
-      (!("year" in e) && filter.type.length > 0)
+      (!("isStaff" in e) && !("year" in e) && filter.type.length > 0)
     ) {
       return false;
     }
     if ("expertise" in e && filter.expertise.length > 0) {
       x =
-        x &&
-        filter.expertise.every((i) => Object.values(e.expertise).includes(i));
+        x ||
+        filter.expertise.some((i) => Object.values(e.expertise).includes(i));
     }
     if (query) {
-      x = x && e.displayName.toLowerCase().includes(query.toLowerCase());
+      x = x || e.displayName.toLowerCase().includes(query.toLowerCase());
     }
     if ("year" in e && filter.type.length > 0) {
-      x = x && filter.type.every((i) => [getStatus(e)].includes(i));
+      x = x || filter.type.some((i) => [getUserStatus(e)].includes(i));
     }
     return x;
   }
 
   if (query !== "" || filter.expertise.length > 0 || filter.type.length > 0) {
+    // Filter by criteria
     filteredUsers = users.filter((e) => {
       return filtering(e);
     });
   }
+  // Sort alphabetically
+  filteredUsers = filteredUsers.sort((a, b) => {
+    let nameA = a.displayName.toUpperCase();
+    let nameB = b.displayName.toUpperCase();
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+  });
 
   return (
     <>      
@@ -83,7 +82,7 @@ const Directory = () => {
         setFilter={setFilter}
       />
         <List>
-          {filteredUsers.map((user) => (
+          {filteredUsers.sort((u1, u2) => u1.displayName.localeCompare(u2.displayName)).map((user) => (
             <ListItem
               component={ListItemButton}
               onClick={() => navigate(`/profile/${user.uid}`)}
@@ -103,7 +102,7 @@ const Directory = () => {
                         variant="body2"
                         color="text.primary"
                       >
-                        {getStatus(user)}
+                        {getUserStatus(user)}
                       </Typography>
                       {` - Class of ${user.year}`}
                     </React.Fragment>
