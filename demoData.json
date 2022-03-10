@@ -168,8 +168,7 @@
         "0" : "ExampleMonaYates",
         "1" : "ExampleAaronGriffin",
         "2" : "ExampleEdRios",
-        "3" : "ExampleJianZhi",
-        "-MxkkhZcg5E8C3BnV2k9" : "L5xnvqXM8Lf9JY6aH6zvVeNtxTD2"
+        "3" : "ExampleJianZhi"
       },
       "name" : "Blue Team",
       "phase" : "Product Ideation",
@@ -194,8 +193,7 @@
       "member" : {
         "0" : "ExampleAnnaCollins",
         "1" : "ExampleLolaPeters",
-        "2" : "ExampleScottHarris",
-        "-MxlA6yoBrrnLQNJ1Odz" : "L5xnvqXM8Lf9JY6aH6zvVeNtxTD2"
+        "2" : "ExampleScottHarris"
       },
       "name" : "Green Team",
       "phase" : "Prototyping",
@@ -306,7 +304,7 @@
       "expertise" : [ "Mechanical Engineering", "Electrical Engineering" ],
       "location" : "Lisle, IL",
       "photoURL" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0bD6lXcWvfKGKqLKcPtLR7Hxsb_wBAR-O2uYY_SCsnL6k_zTingjIjfAQW4FK2SFr4qU&usqp=CAU",
-      "teamId" : "ExampleGreemTeam",
+      "teamId" : "ExampleGreenTeam",
       "year" : 2023
     },
     "ExampleCaseyWade" : {
