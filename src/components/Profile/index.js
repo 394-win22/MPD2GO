@@ -9,17 +9,22 @@ import {
   Stack,
   Card,
   Chip,
+  IconButton,
+  CardHeader,
 } from "@mui/material";
 import { getUserStatus } from "../../utilities/firebase";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import EditIcon from "@mui/icons-material/Edit";
+import CheckIcon from "@mui/icons-material/Check";
 
 // local files
-import { EditUserButton } from "../EditProfile/EditUserButton";
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
 import { signOut } from "utilities/firebase";
-import BackButton from "../Navigation/BackButton"
+import BackButton from "../Navigation/BackButton";
+import DisplayProfile from "./DisplayProfile";
+import EditProfile from "components/EditProfile";
 
 const Profile = ({ user }) => {
   const params = useParams();
@@ -27,10 +32,8 @@ const Profile = ({ user }) => {
   const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
 
-  function handleSignOut() {
-    navigate("/");
-    signOut()
-  }
+
+  const [isEditProfile, setIsEditProfile] = useState(false);
 
 
   useEffect(() => {
@@ -52,176 +55,141 @@ const Profile = ({ user }) => {
     });
   }, [params, user]);
 
-  if (!userData || !projectData)
-    return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
+  const handleProfileSubmit = () => {
+    setIsEditProfile(false);
+  };
 
-  if (userData === "not found")
-    return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>;
+  if (!userData || !projectData) return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
+
+  if (userData === "not found") return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>;
 
   return (
-    <>
-      <Card sx={{ px: 2, py: 2, mb: 2, minHeight: "77vh" }} style={{ borderRadius: 10 }}>
+    <Card sx={{ px: 2, py: 2, mb: 2, minHeight: "77vh" }} style={{ borderRadius: 10 }}>
+      {isEditProfile ? (
+        <EditProfile
+          userData={userData}
+          user={user}
+          setIsEditProfile={setIsEditProfile}
+          projectData={projectData}
+        />
+      ) : (
+        <DisplayProfile
+          userData={userData}
+          user={user}
+          setIsEditProfile={setIsEditProfile}
+          projectData={projectData}
+        />
+      )}
 
-
-        <BackButton />
-        <Box textAlign="center">
-          <Avatar
-            alt={userData.displayName}
-            src={userData.photoURL}
-            variant="circular"
-            sx={{
-              height: "80px",
-              width: "80px",
-              margin: "auto",
-              mb: 3,
-            }}
-          />
-          <Typography
-            variant="h5"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              paddingLeft: 1,
-              paddingBottom: 1,
-              marginBottom: "0px",
-            }}
-          >
-            {userData.displayName}
-          </Typography>
-
-          <Typography
-            component="div"
-            cy-data="bio"
-            sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}
-          >
-            {userData.bio ? userData.bio : "No Bio"}
-          </Typography>
-
-          <Typography
-            variant="body1"
-            display="block"
-            cy-data="location"
-            sx={{ my: 1 }}
-            style={{ color: "#7B7B7B" }}
-          >
-            {userData.location ? userData.location : "Unknown Location"}
-          </Typography>
-          <Divider />
-          <Typography
-            variant="body1"
-            style={{ color: "#7B7B7B" }}
-            sx={{ paddingLeft: 1, my: 1 }}
-          >
-            {getUserStatus(userData)}
-          </Typography>
-
-          <Typography
-            variant="body1"
-            display="block"
-            cy-data="class"
-            style={{ color: "#7B7B7B" }}
-            sx={{ flexGrow: 1, paddingLeft: 1 }}
-          >
-            {userData.year ? "Class of " + userData.year : "No Year"}
-          </Typography>
-
-
-
-          {"teamId" in userData && (
-            <Button
-              variant="contained"
-              onClick={() => {
-                navigate(`/project/${userData.teamId}`);
-              }}
-              sx={{
-                mt: 1,
-                mb: 2,
-                backgroundColor: projectData.teamColor,
-                color: projectData.textColor,
-                textBlendMode: "exclusion",
-              }}
-              cy-data="teamButton"
-            >
-              View {projectData.name}
-            </Button>
-          )}
-
-          <Divider />
-
-
-          <Typography
-            align="left"
-            sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}
-          >
-            Expertise
-          </Typography>
-          <Stack
-            direction="row"
-            sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
-            spacing={1}
-          >
-            {"expertise" in userData &&
-              Object.values(userData.expertise).map((x, i) => (
-                <Chip key={i} color="secondary" label={x} />
-              ))}
-          </Stack>
-
-          <Divider />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <Stack
-                direction="row"
-                sx={{ marginBottom: 3, marginTop: 2 }}
-                spacing={1}
-              >
-                <EmailIcon sx={{ color: "#999999" }} />
-                <Typography>{userData.email}</Typography>
-              </Stack>
-              <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
-                <LinkedInIcon sx={{ color: userData.linkedIn ? "#4173ac" : "#999999" }} />
-                {userData.linkedIn ? <Typography> {userData.linkedIn} </Typography> : <Typography color="#999999"> <em>LinkedIn Not Available</em></Typography>}
-              </Stack>
-            </Box>
-          </Box>
-          {(!params.userID || params.userID === user.uid) && (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <EditUserButton
-                key={userData}
-                user={userData}
-                userID={user.uid}
-              />
-              <Button
-                sx={{ width: "150px", marginTop: "10px" }}
-                variant="contained"
-                onClick={handleSignOut}
-                id="logout_btn"
-              >
-                Sign out{" "}
-              </Button>
-            </Box>
-          )}
-        </Box>
-      </Card>
-    </>
+    </Card>
   );
 };
 
 export default Profile;
+
+
+// <Card sx={{ px: 2, py: 2, mb: 2, minHeight: "77vh" }} style={{ borderRadius: 10 }}>
+
+
+//   <BackButton />
+//   <Box textAlign="center">
+//     <Avatar
+//       alt={userData.displayName}
+//       src={userData.photoURL}
+//       variant="circular"
+//       sx={{
+//         height: "80px",
+//         width: "80px",
+//         margin: "auto",
+//         mb: 3,
+//       }}
+//     />
+//     <Typography
+//       variant="h5"
+//       component="div"
+//       sx={{
+//         flexGrow: 1,
+//         paddingLeft: 1,
+//         paddingBottom: 1,
+//         marginBottom: "0px",
+//       }}
+//     >
+//       {userData.displayName}
+//     </Typography>
+
+//     <Typography
+//       component="div"
+//       cy-data="bio"
+//       sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}
+//     >
+//       {userData.bio ? userData.bio : "No Bio"}
+//     </Typography>
+
+//     <Typography
+//       variant="body1"
+//       display="block"
+//       cy-data="location"
+//       sx={{ my: 1 }}
+//       style={{ color: "#7B7B7B" }}
+//     >
+//       {userData.location ? userData.location : "Unknown Location"}
+//     </Typography>
+//     <Divider />
+//     <Typography
+//       variant="body1"
+//       style={{ color: "#7B7B7B" }}
+//       sx={{ paddingLeft: 1, my: 1 }}
+//     >
+//       {getUserStatus(userData)}
+//     </Typography>
+
+//     <Typography
+//       variant="body1"
+//       display="block"
+//       cy-data="class"
+//       style={{ color: "#7B7B7B" }}
+//       sx={{ flexGrow: 1, paddingLeft: 1 }}
+//     >
+//       {userData.year ? "Class of " + userData.year : "No Year"}
+//     </Typography>
+
+
+
+//     {"teamId" in userData && (
+//       <Button
+//         variant="contained"
+//         onClick={() => {
+//           navigate(`/project/${userData.teamId}`);
+//         }}
+//         sx={{
+//           mt: 1,
+//           mb: 2,
+//           backgroundColor: projectData.teamColor,
+//           color: projectData.textColor,
+//           textBlendMode: "exclusion",
+//         }}
+//         cy-data="teamButton"
+//       >
+//         View {projectData.name}
+//       </Button>
+//     )}
+
+//     <Divider />
+
+
+//     <Typography
+//       align="left"
+//       sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}
+//     >
+//       Expertise
+//     </Typography>
+//     <Stack
+//       direction="row"
+//       sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
+//       spacing={1}
+//     >
+//       {"expertise" in userData &&
+//         Object.values(userData.expertise).map((x, i) => (
+//           <Chip key={i} color="secondary" label={x} />
+//         ))}
+//     </Stack>

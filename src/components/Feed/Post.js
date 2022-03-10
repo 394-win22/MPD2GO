@@ -51,7 +51,7 @@ const Post = ({ post }) => {
   return (
     <Card
       className={classes.card}
-      sx={{ mb: 3, pl: 1 }}
+      sx={{ mb: 2, pl: 1 }}
       onClick={() => {
         navigate(`/post/${post.id}`);
       }}
