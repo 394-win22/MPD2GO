@@ -75,6 +75,7 @@ const CreatePost = () => {
   const [postTags, setPostTags] = useState([]);
   const [title, setTitle] = useState("")
 
+
   const user = useUserState();
   const classes = useStyles();
 
@@ -136,9 +137,9 @@ const CreatePost = () => {
         }
       });
 
-    setDescription("")
-    setTitle("")
-    navigate("/")
+    setDescription("");
+    setTitle("");
+    navigate("/");
   };
 
   const ITEM_HEIGHT = 48;
