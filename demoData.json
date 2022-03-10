@@ -3,7 +3,7 @@
     "Demo1" : {
       "author" : "ExampleMelanieConner",
       "description" : "Hi Alumni! Our team is trying to choose between our three capstone opportunity spaces. We would love to hear some opinions on which space you think has the most opportunity for innovation. I’ve attached the link to our final pitch deck. Thank you in advance for the feedback!",
-      "numComments" : 11,
+      "numComments" : 9,
       "tags" : [ "Industrial Design", "UI/UX Design" ],
       "threads" : {
         "-Mw8ZIP0qpOC1uOWD5cR" : {
@@ -23,57 +23,44 @@
           },
           "time" : 1645132985865
         },
-        "-MwDWTylJfpFo40hKJ_z" : {
+        "-Mxpdx5HCH6RMdKDGJrJ" : {
+          "associatedNotificationIds" : [ "-Mxpdx5HCH6RMdKDGJrI" ],
           "author" : "ExampleLeahCastro",
-          "comment" : "Green Team – Great work so far! I remember this part of the capstone process being difficult. I really like the potential around your opportunity space #3. I have personally experienced the problem you are trying to address, and I think the space is ripe for innovative solutions. Good luck!",
+          "comment" : "<p>Green Team – Great work so far! I remember this part of the capstone process being difficult. I really like the potential around your opportunity space #3. I have personally experienced the problem you are trying to address, and I think the space is ripe for innovative solutions. Good luck!</p>",
           "threads" : {
-            "-MwDdPbTB8Foz-uuZa0d" : {
-              "author" : "ExampleKubraSuhayl",
-              "comment" : "I agree, well done guys! I think you are at the right track!",
-              "threads" : {
-                "-MwDff34IALl4YfN8-Cd" : {
-                  "author" : "ExampleMelanieConner",
-                  "comment" : "Thank you! We will keep working on it!",
-                  "threads" : {
-                    "-MwDoDc-iRvsddB0pVoI" : {
-                      "author" : "ExampleNicoleTaylor",
-                      "comment" : "Hi Melanie, our team also trying to choose between our three capstone opportunity spaces. We came up with an idea. But I do not know what is the best option for us. Do you think it is possible I can schedule a meeting with you to talk about this?",
-                      "threads" : {
-                        "-MwDogR33la99T2vfuQu" : {
-                          "author" : "ExampleMelanieConner",
-                          "comment" : "Yeah, sure! Do you want to talk about this after class on Saturday?",
-                          "threads" : {
-                            "-MwDomNUr17dc3sfB2uv" : {
-                              "author" : "ExampleNicoleTaylor",
-                              "comment" : "That works for me! See you on Saturday!",
-                              "threads" : {
-                                "-MwDonzgt4cRdRxQBqj0" : {
-                                  "author" : "ExampleMelanieConner",
-                                  "comment" : "See You.",
-                                  "time" : 1645221201797
-                                }
-                              },
-                              "time" : 1645221195192
-                            }
-                          },
-                          "time" : 1645221170845
-                        }
-                      },
-                      "time" : 1645221048722
-                    }
-                  },
-                  "time" : 1645218805861
-                }
-              },
-              "time" : 1645218214181
-            },
-            "-MwDfiZjwxWrjBA2FBkI" : {
+            "-Mxpe8P2LGQvHuhXb9ed" : {
+              "associatedNotificationIds" : [ "-Mxpe8P0ZJjX1ahJ6E7_" ],
               "author" : "ExampleMelanieConner",
-              "comment" : "Thank you Leah!",
-              "time" : 1645218820240
+              "comment" : "<p>Thank you <a href=\"https://mpd2go.firebaseapp.com/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_blank\"> <a href=\"/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleLeahCastro\" data-value=\"Leah Castro\">﻿<span contenteditable=\"false\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Leah Castro</span>﻿</span>﻿</span>  </a> </a> <a href=\"/profile/ExampleKubraSuhayl\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleKubraSuhayl\" data-value=\"Kubra Suhayl\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Kubra Suhayl</span>﻿</span>  </a> !</p>",
+              "time" : 1646946457079
+            },
+            "-MxpeFYbZGH11SsOKD_s" : {
+              "author" : "ExampleKubraSuhayl",
+              "comment" : "<p>I agree, well done guys! I think you are at the right track!</p>",
+              "time" : 1646946486364
             }
           },
-          "time" : 1645216134803
+          "time" : 1646946406663
+        },
+        "-MxpeeUta37OZ7jCEKy2" : {
+          "associatedNotificationIds" : [ "-MxpeeUr_68QegEGODy3" ],
+          "author" : "ExampleNicoleTaylor",
+          "comment" : "<p>Hi Melanie, our team also trying to choose between our three capstone opportunity spaces. We came up with an idea. But I do not know what is the best option for us. Do you think it is possible I can schedule a meeting with you to talk about this?</p>",
+          "threads" : {
+            "-MxpesJeAieA_3q3F_oB" : {
+              "author" : "ExampleMelanieConner",
+              "comment" : "<p>Yeah, sure! Do you want to talk about this after class on Saturday?</p>",
+              "threads" : {
+                "-Mxpf2iH_UXwLB8sbUBg" : {
+                  "author" : "ExampleNicoleTaylor",
+                  "comment" : "<p>That works for me! See you on Saturday!</p>",
+                  "time" : 1646946695943
+                }
+              },
+              "time" : 1646946649247
+            }
+          },
+          "time" : 1646946592622
         }
       },
       "time" : 1644885652551,
@@ -170,7 +157,7 @@
           "url" : "https://mural.co"
         }
       },
-      "slideURL" : "https://docs.google.com/presentation/d/1Ku9jCA5w2Y47g0hYaLMXZ8X4UOxZUNZo/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
+      "slideURL" : "https://docs.google.com/presentation/d/1cC8vpF_VkRHX82BUtdauXgDydcSpDDvU/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
       "teamColor" : "#00ffff",
       "textColor" : "black"
     },
@@ -181,7 +168,8 @@
         "0" : "ExampleMonaYates",
         "1" : "ExampleAaronGriffin",
         "2" : "ExampleEdRios",
-        "3" : "ExampleJianZhi"
+        "3" : "ExampleJianZhi",
+        "-MxkkhZcg5E8C3BnV2k9" : "L5xnvqXM8Lf9JY6aH6zvVeNtxTD2"
       },
       "name" : "Blue Team",
       "phase" : "Product Ideation",
@@ -196,7 +184,7 @@
           "url" : "https://mural.co"
         }
       },
-      "slideURL" : "https://docs.google.com/presentation/d/1_yL24szhWnvjrKfW9bAv9tDJNzhKnr9gtAdC62s2V0E/edit#slide=id.g114e4f0f9fb_0_0",
+      "slideURL" : "https://docs.google.com/presentation/d/1EljL6bQY-cheAG6Ke-jq63lkNVq6Mhod/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
       "teamColor" : "#A1E0E9",
       "textColor" : "white"
     },
@@ -206,7 +194,8 @@
       "member" : {
         "0" : "ExampleAnnaCollins",
         "1" : "ExampleLolaPeters",
-        "2" : "ExampleScottHarris"
+        "2" : "ExampleScottHarris",
+        "-MxlA6yoBrrnLQNJ1Odz" : "L5xnvqXM8Lf9JY6aH6zvVeNtxTD2"
       },
       "name" : "Green Team",
       "phase" : "Prototyping",
@@ -221,17 +210,14 @@
           "url" : "https://mural.co"
         }
       },
-      "slideURL" : "https://docs.google.com/presentation/d/16fYtvQW_cPHJ2UALNt5ACyLwzDfvqIeZgEqxdLEjEzc/edit?usp=sharing",
+      "slideURL" : "https://docs.google.com/presentation/d/1JGqSrNsmNmWvtkpuGWknGLjM9TKHOetr/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
       "teamColor" : "#98E297",
       "textColor" : "white"
     },
     "ExampleOrangeTeam" : {
       "description" : "We’re looking to create a home lighting system that adapts to the different lighting needs during different activities throughout the day.",
       "lastUpdateTime" : 1645237203123,
-      "member" : [ "ExampleVanPearson",
-        "ExampleLorenzoSoto",
-        "ExampleKerryBurton",
-        "ExampleStaceyMay" ],
+      "member" : [ "ExampleVanPearson", "ExampleLorenzoSoto", "ExampleKerryBurton", "ExampleStaceyMay" ],
       "name" : "Orange Team",
       "phase" : "Idea Convergence",
       "photoURL" : "https://preview.redd.it/jzomsstbnx7y.jpg?auto=webp&s=ba0d43e8becd6fde0911ce233019b3635a09d5fa",
@@ -245,7 +231,7 @@
           "url" : "https://mural.co"
         }
       },
-      "slideURL" : "https://docs.google.com/presentation/d/1-dpCgKpmQ8yV2Mj2rLz4lq2qV7_yaqHYm3qUyuSPnXo/edit?usp=sharing",
+      "slideURL" : "https://docs.google.com/presentation/d/1x25r5bFv4_EphojgYy1cEXbBkp7AZ7rh/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
       "teamColor" : "#ffa500",
       "textColor" : "black"
     },
@@ -266,7 +252,7 @@
           "url" : "https://mural.co"
         }
       },
-      "slideURL" : "https://docs.google.com/presentation/d/1-dpCgKpmQ8yV2Mj2rLz4lq2qV7_yaqHYm3qUyuSPnXo/edit?usp=sharing",
+      "slideURL" : "https://docs.google.com/presentation/d/1iXMcF4_ziZp4s8U2VbKibg462am3LeW8/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
       "teamColor" : "#C8AFD0",
       "textColor" : "white"
     },
@@ -287,7 +273,7 @@
           "url" : "https://mural.co"
         }
       },
-      "slideURL" : "https://docs.google.com/presentation/d/1-dpCgKpmQ8yV2Mj2rLz4lq2qV7_yaqHYm3qUyuSPnXo/edit?usp=sharing",
+      "slideURL" : "https://docs.google.com/presentation/d/1sVh4KAYufIK2FIHySWgNyG5YxJHSIWyo/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
       "teamColor" : "#d00b0b",
       "textColor" : "white"
     }
@@ -332,6 +318,15 @@
       "photoURL" : "https://srkheadshotday.com/wp-content/uploads/Herman_Man_Headshot_19G1006.jpg",
       "teamId" : "ExampleAquaTeam",
       "year" : 2023
+    },
+    "ExampleChristopherRiesbeck" : {
+      "bio" : "Hi, I am Christopher Riesbeck",
+      "displayName" : "Christopher Riesbeck",
+      "email" : "ChristopherRiesbeck@example.com",
+      "isStaff" : true,
+      "location" : "Evanston, IL",
+      "photoURL" : "https://www.mccormick.northwestern.edu/images/research-and-faculty/directory/riesbeck-chris.jpg",
+      "year" : 1999
     },
     "ExampleEdRios" : {
       "bio" : "Hi, I am Ed Rios",
@@ -416,6 +411,15 @@
       "email" : "KubraSuhayl@example.com",
       "expertise" : [ "Marketing", "Industrial Design" ],
       "location" : "Milwaukee, IL",
+      "notifications" : {
+        "-MxpeYFif2FJAJB73rSQ" : {
+          "content" : "<p>Thank you <a href=\"https://mpd2go.firebaseapp.com/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_blank\"> <a href=\"/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleLeahCastro\" data-value=\"Leah Castro\">﻿<span contenteditable=\"false\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Leah Castro</span>﻿</span>﻿</span>  </a> </a> <a href=\"/profile/ExampleKubraSuhayl\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleKubraSuhayl\" data-value=\"Kubra Suhayl\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Kubra Suhayl</span>﻿</span>  </a> !</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946562979,
+          "type" : "mention"
+        }
+      },
       "photoURL" : "https://fisherstudios.co.uk/wp-content/uploads/2021/12/DF-Portrait-5213-0793-scaled.jpg",
       "year" : 2019
     },
@@ -425,6 +429,22 @@
       "email" : "LeahCastro@example.com",
       "expertise" : [ "Marketing", "Industrial Design" ],
       "location" : "Kenosha, WI",
+      "notifications" : {
+        "-Mxpe8P0ZJjX1ahJ6E7_" : {
+          "content" : "<p>Thank you <a href=\"/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleLeahCastro\" data-value=\"Leah Castro\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Leah Castro</span>﻿</span>  </a> !</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946457078,
+          "type" : "mention"
+        },
+        "-MxpeYFhubPmsM8Og7Cc" : {
+          "content" : "<p>Thank you <a href=\"https://mpd2go.firebaseapp.com/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_blank\"> <a href=\"/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleLeahCastro\" data-value=\"Leah Castro\">﻿<span contenteditable=\"false\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Leah Castro</span>﻿</span>﻿</span>  </a> </a> <a href=\"/profile/ExampleKubraSuhayl\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleKubraSuhayl\" data-value=\"Kubra Suhayl\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Kubra Suhayl</span>﻿</span>  </a> !</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946562978,
+          "type" : "mention"
+        }
+      },
       "photoURL" : "https://www.sacmag.com/wp-content/uploads/sites/50/2020/12/HI_RES_FIN_IMG_8626.jpg",
       "year" : 2019
     },
@@ -464,8 +484,24 @@
       "email" : "MelanieConner@example.com",
       "expertise" : [ "Marketing", "Industrial Design" ],
       "location" : "Grand Rapids, MI",
-      "teamId" : "ExampleGreenTeam",
+      "notifications" : {
+        "-Mxpdx5HCH6RMdKDGJrI" : {
+          "content" : "<p>Green Team – Great work so far! I remember this part of the capstone process being difficult. I really like the potential around your opportunity space #3. I have personally experienced the problem you are trying to address, and I think the space is ripe for innovative solutions. Good luck!</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946406662,
+          "type" : "comment"
+        },
+        "-MxpeeUr_68QegEGODy3" : {
+          "content" : "<p>Hi Melanie, our team also trying to choose between our three capstone opportunity spaces. We came up with an idea. But I do not know what is the best option for us. Do you think it is possible I can schedule a meeting with you to talk about this?</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946592620,
+          "type" : "comment"
+        }
+      },
       "photoURL" : "https://images.squarespace-cdn.com/content/v1/51efe10de4b025019c37bb06/1593107343586-PZWIYI6X103MS3H7ZNTL/Corporate_Headshot_Photography.JPG",
+      "teamId" : "ExampleGreenTeam",
       "year" : 2019
     },
     "ExampleMillieAnanta" : {
@@ -565,6 +601,15 @@
       "photoURL" : "https://www.nyfa.edu/student-resources/wp-content/uploads/2018/11/pexels-photo-415829-1024x902.jpg",
       "teamId" : "ExampleOrangeTeam",
       "year" : 2023
+    },
+    "ExampleSusanGoren" : {
+      "bio" : "Hi I am Susan Goren",
+      "displayName" : "Susan Goren",
+      "email" : "SusanGoren@example.com",
+      "isStaff" : "true",
+      "location" : "Evanston, IL",
+      "photoURL" : "https://design.northwestern.edu/images/people/profiles/goren-susan-2019.jpg",
+      "year" : 1999
     },
     "ExampleTristinLu" : {
       "bio" : "Hi I am Tristin Lu",
