@@ -53,6 +53,8 @@ const LogIn = () => {
           label="Email Address"
           name="email"
           autoComplete="email"
+          sx={{ color: "white" }}
+
           autoFocus
         />
         <TextField
@@ -66,6 +68,7 @@ const LogIn = () => {
           type="password"
           id="password"
           autoComplete="current-password"
+          sx={{ color: "white" }}
         />
 
         <Button

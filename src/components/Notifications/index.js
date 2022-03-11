@@ -10,21 +10,22 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 import { makeStyles } from "@mui/styles";
 
-const getPostList = (userData) => {
-  try {
-    let notificationList = Object.entries(userData.notifications).map(
-      ([id, notifObj]) => {
-        return { ...notifObj, id: id };
-      }
-    );
-    notificationList = notificationList.sort((item1, item2) => {
-      return item2.time - item1.time;
-    });
-    return notificationList;
-  } catch {
-    return [];
-  }
-};
+// const getNotifications = (userData) => {
+//   try {
+//     let notificationList = Object.entries(userData.notifications).map(
+//       ([id, notifObj]) => {
+//         return { ...notifObj, id: id };
+//       }
+//     );
+//     notificationList = notificationList.sort((item1, item2) => {
+//       return item2.time - item1.time;
+//     });
+//     return notificationList;
+//   } catch {
+//     return [];
+//   }
+// };
+
 
 const useStyles = makeStyles({
   card: {
@@ -50,7 +51,11 @@ const Notifications = () => {
   const context = useContext(UserContext);
   const users = context.userList;
   const userData = users.find((x) => x.uid === context.user.uid);
-  const listOfNotifications = getPostList(userData);
+
+  let notificationsObj = {};
+  if ("notifications" in userData) notificationsObj = userData.notifications;
+
+
   const hasNotifications =
     "notifications" in userData &&
     Object.values(userData.notifications).length > 0;
@@ -62,10 +67,11 @@ const Notifications = () => {
 
   let notificationsList;
   if (hasNotifications) {
+    console.log(notificationsObj);
     notificationsList = (
       <List sx={{ paddingTop: "0px" }}>
         <Divider component="li" />
-        {Object.entries(listOfNotifications).map(([id, notifObj]) => {
+        {Object.entries(notificationsObj).map(([id, notifObj]) => {
           switch (notifObj.type) {
             case "comment":
               return (
