@@ -164,10 +164,8 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
               <Typography>{userData.email}</Typography>
             </Stack>
             <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
-              <LinkedInIcon sx={{ color: "#4173ac" }} />
-              <Typography>
-                {userData.linkedIn ? userData.linkedIn : "No LinkedIn"}
-              </Typography>
+              <LinkedInIcon sx={{ color: userData.linkedIn ? "#4173ac" : "#999999" }} />
+              {userData.linkedIn ? <Typography> {userData.linkedIn} </Typography> : <Typography color="#999999"> <em>LinkedIn Not Available</em></Typography>}
             </Stack>
           </Box>
         </Box>

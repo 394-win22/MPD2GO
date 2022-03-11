@@ -1,0 +1,633 @@
+{
+  "posts" : {
+    "Demo1" : {
+      "author" : "ExampleMelanieConner",
+      "description" : "Hi Alumni! Our team is trying to choose between our three capstone opportunity spaces. We would love to hear some opinions on which space you think has the most opportunity for innovation. I’ve attached the link to our final pitch deck. Thank you in advance for the feedback!",
+      "numComments" : 9,
+      "tags" : [ "Industrial Design", "UI/UX Design" ],
+      "threads" : {
+        "-Mw8ZIP0qpOC1uOWD5cR" : {
+          "author" : "ExampleJonathanKing",
+          "comment" : "Hi Melanie and team! I’m leaning towards #2 and #3. From my experience, the market for opportunity space #1 may be a little bit too saturated to make a splash. I think #2 and #3 have a lot of potential, and I look forward to seeing the results!",
+          "threads" : {
+            "-MwDhEu73bP0xygtC06l" : {
+              "author" : "ExampleMelanieConner",
+              "comment" : "Thanks Jonathan; we'll take this into consideration!",
+              "time" : 1645219217009
+            },
+            "-MxKbWFANKX-a3b48L9j" : {
+              "author" : "ExampleTristinLu",
+              "comment" : "<p>I agree with Jonathan #1 would be difficult.</p>",
+              "time" : 1646408898070
+            }
+          },
+          "time" : 1645132985865
+        },
+        "-Mxpdx5HCH6RMdKDGJrJ" : {
+          "associatedNotificationIds" : [ "-Mxpdx5HCH6RMdKDGJrI" ],
+          "author" : "ExampleLeahCastro",
+          "comment" : "<p>Green Team – Great work so far! I remember this part of the capstone process being difficult. I really like the potential around your opportunity space #3. I have personally experienced the problem you are trying to address, and I think the space is ripe for innovative solutions. Good luck!</p>",
+          "threads" : {
+            "-Mxpe8P2LGQvHuhXb9ed" : {
+              "associatedNotificationIds" : [ "-Mxpe8P0ZJjX1ahJ6E7_" ],
+              "author" : "ExampleMelanieConner",
+              "comment" : "<p>Thank you <a href=\"https://mpd2go.firebaseapp.com/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_blank\"> <a href=\"/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleLeahCastro\" data-value=\"Leah Castro\">﻿<span contenteditable=\"false\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Leah Castro</span>﻿</span>﻿</span>  </a> </a> <a href=\"/profile/ExampleKubraSuhayl\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleKubraSuhayl\" data-value=\"Kubra Suhayl\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Kubra Suhayl</span>﻿</span>  </a> !</p>",
+              "time" : 1646946457079
+            },
+            "-MxpeFYbZGH11SsOKD_s" : {
+              "author" : "ExampleKubraSuhayl",
+              "comment" : "<p>I agree, well done guys! I think you are at the right track!</p>",
+              "time" : 1646946486364
+            }
+          },
+          "time" : 1646946406663
+        },
+        "-MxpeeUta37OZ7jCEKy2" : {
+          "associatedNotificationIds" : [ "-MxpeeUr_68QegEGODy3" ],
+          "author" : "ExampleNicoleTaylor",
+          "comment" : "<p>Hi Melanie, our team also trying to choose between our three capstone opportunity spaces. We came up with an idea. But I do not know what is the best option for us. Do you think it is possible I can schedule a meeting with you to talk about this?</p>",
+          "threads" : {
+            "-MxpesJeAieA_3q3F_oB" : {
+              "author" : "ExampleMelanieConner",
+              "comment" : "<p>Yeah, sure! Do you want to talk about this after class on Saturday?</p>",
+              "threads" : {
+                "-Mxpf2iH_UXwLB8sbUBg" : {
+                  "author" : "ExampleNicoleTaylor",
+                  "comment" : "<p>That works for me! See you on Saturday!</p>",
+                  "time" : 1646946695943
+                }
+              },
+              "time" : 1646946649247
+            }
+          },
+          "time" : 1646946592622
+        }
+      },
+      "time" : 1644885652551,
+      "title" : "Feedback on capstone project ideas"
+    },
+    "Demo2" : {
+      "author" : "ExampleAaronGriffin",
+      "description" : "Does anyone have any connections in the kitchen appliance industry? Our team is interested in interviewing someone in the space to learn more about product opportunities for our capstone project. Thanks!",
+      "numComments" : 5,
+      "tags" : [ "Industrial Design" ],
+      "threads" : {
+        "-Mw8Z0ZyxEuc6UCIxA5u" : {
+          "author" : "ExampleRobertRivera",
+          "comment" : "Hi Aaron, I have a former coworker that now works as a product designer for Whirlpool. I’d be happy to introduce you to her. Send me a message, and we’ll set up a meeting time.",
+          "threads" : {
+            "-MwDgYRPVOlZvl8XhOoA" : {
+              "author" : "ExampleAaronGriffin",
+              "comment" : "Thank you Robert! Will do.",
+              "time" : 1645219034884
+            }
+          },
+          "time" : 1645132912838
+        },
+        "-Mw8Z354BxHIKdDk-AN6" : {
+          "author" : "ExampleAnnaCollins",
+          "comment" : "I work in the kitchenware space, and have some experience with appliances. Let me know if you’re interested in talking. I have availability in the evening this week.",
+          "threads" : {
+            "-MwDgUlR7VWZFJoUPLR6" : {
+              "author" : "ExampleAaronGriffin",
+              "comment" : "Thanks Anna, we'd love to chat!",
+              "time" : 1645219019847
+            }
+          },
+          "time" : 1645132923149
+        },
+        "-MxKaSjLw2GmHAodBZF_" : {
+          "author" : "ExampleOllieSullivan",
+          "comment" : "<p>Hi Aaron,  I have a good contact for you! </p>",
+          "time" : 1646408621536
+        }
+      },
+      "time" : 1644885772151,
+      "title" : "Connections in kitchen appliances industry"
+    },
+    "Demo3" : {
+      "author" : "ExampleNicoleTaylor",
+      "description" : "Hi all. We are finishing up our final Data Analytics report for the capstone project, and wanted to see if anyone that with background in analytics could review it for clarity. Thank you for the help, go Wildcats!",
+      "numComments" : 4,
+      "threads" : {
+        "-Mw8Z7VaSUGHVN9AWLJy" : {
+          "author" : "ExampleGregoryRussell",
+          "comment" : "Hi Purple team. I work in data analytics for Oracle. Great work on the report! The only advice I have is to spend a little more time polishing the data visualizations. Different colors for the datasets will go a long way. Reach out to me if you’d like to set up a call to discuss any other questions.",
+          "threads" : {
+            "ExampleReplyGreg" : {
+              "author" : "ExampleNicoleTaylor",
+              "comment" : "Thank you for the feedback, Gregory! We'll work on refining the colors.",
+              "time" : 1645142941230
+            }
+          },
+          "time" : 1645132941230
+        },
+        "-Mw8Z8ngIEPjwMR1ibW9" : {
+          "author" : "ExampleJoanHenderson",
+          "comment" : "Hi Nicole. If I were to receive this report from someone on my analytics team, I would ask them for more information about how they collected the data. I would add more context around that to create a more compelling recommendation.",
+          "threads" : {
+            "ExampleReplyJoan" : {
+              "author" : "ExampleNicoleTaylor",
+              "comment" : "Thank you Joan! We will keep this in mind.",
+              "time" : 1645132956548
+            }
+          },
+          "time" : 1645132946548
+        }
+      },
+      "time" : 1644886398575,
+      "title" : "Any data analytics insights?"
+    }
+  },
+  "project" : {
+    "ExampleAquaTeam" : {
+      "description" : "Introducing StoryConnect, a digital service that facilitates the capstone of your keepsake’s story, connection of your story to the keepsake, and curation of your story and keepsakes for others to experience. ",
+      "lastUpdateTime" : 1645237203123,
+      "member" : [ "ExamplePhilipByrd", "ExampleCaseyWade", "ExampleKristinStevens", "ExampleAllanFord" ],
+      "name" : "Aqua Team",
+      "phase" : "XYZ",
+      "photoURL" : "https://assets2.biggerpockets.com/uploads/company_profile/avatar/47222/1548258184-company-avatar.jpg",
+      "resources" : {
+        "drive" : {
+          "text" : "Project Folder",
+          "url" : "https://drive.google.com"
+        },
+        "mural" : {
+          "text" : "Project Mural",
+          "url" : "https://mural.co"
+        }
+      },
+      "slideURL" : "https://docs.google.com/presentation/d/1cC8vpF_VkRHX82BUtdauXgDydcSpDDvU/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
+      "teamColor" : "#7FDDCC",
+      "textColor" : "white"
+    },
+    "ExampleBlueTeam" : {
+      "description" : "Our team is exploring the next generation of land-based, engine-powered products that go beyond just functional value. Instead, we’re thinking about how to speak to untapped audiences and designing customer-first products ",
+      "lastUpdateTime" : 1645338063343,
+      "member" : {
+        "0" : "ExampleMonaYates",
+        "1" : "ExampleAaronGriffin",
+        "2" : "ExampleEdRios",
+        "3" : "ExampleJianZhi"
+      },
+      "name" : "Blue Team",
+      "phase" : "Product Ideation",
+      "photoURL" : "https://res.cloudinary.com/teepublic/image/private/s--hP78-__c--/t_Resized%20Artwork/c_fit,g_north_west,h_954,w_954/co_000000,e_outline:48/co_000000,e_outline:inner_fill:48/co_ffffff,e_outline:48/co_ffffff,e_outline:inner_fill:48/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1621430418/production/designs/21939461_0.jpg",
+      "resources" : {
+        "drive" : {
+          "text" : "Project Folder",
+          "url" : "https://drive.google.com"
+        },
+        "mural" : {
+          "text" : "Project Mural",
+          "url" : "https://mural.co"
+        }
+      },
+      "slideURL" : "https://docs.google.com/presentation/d/1EljL6bQY-cheAG6Ke-jq63lkNVq6Mhod/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
+      "teamColor" : "#A1E0E9",
+      "textColor" : "white"
+    },
+    "ExampleGreenTeam" : {
+      "description" : "Our team is exploring ways to  help young adults that work from home in shared spaces set boundaries,  enable flexibility with their space, and feel organized to ultimately create a better work life balance and enable greater control over their mental well-being.",
+      "lastUpdateTime" : 1645294803123,
+      "member" : {
+        "0" : "ExampleAnnaCollins",
+        "1" : "ExampleLolaPeters",
+        "2" : "ExampleScottHarris"
+      },
+      "name" : "Green Team",
+      "phase" : "Prototyping",
+      "photoURL" : "https://www.svsd410.org/cms/lib/WA01919490/Centricity/Domain/433/green%20team.png",
+      "resources" : {
+        "drive" : {
+          "text" : "Project Folder",
+          "url" : "https://drive.google.com"
+        },
+        "mural" : {
+          "text" : "Project Mural",
+          "url" : "https://mural.co"
+        }
+      },
+      "slideURL" : "https://docs.google.com/presentation/d/1JGqSrNsmNmWvtkpuGWknGLjM9TKHOetr/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
+      "teamColor" : "#98E297",
+      "textColor" : "white"
+    },
+    "ExampleOrangeTeam" : {
+      "description" : "We’re looking to create a home lighting system that adapts to the different lighting needs during different activities throughout the day.",
+      "lastUpdateTime" : 1645237203123,
+      "member" : [ "ExampleVanPearson", "ExampleLorenzoSoto", "ExampleKerryBurton", "ExampleStaceyMay" ],
+      "name" : "Orange Team",
+      "phase" : "Idea Convergence",
+      "photoURL" : "https://preview.redd.it/jzomsstbnx7y.jpg?auto=webp&s=ba0d43e8becd6fde0911ce233019b3635a09d5fa",
+      "resources" : {
+        "drive" : {
+          "text" : "Project Folder",
+          "url" : "https://drive.google.com"
+        },
+        "mural" : {
+          "text" : "Project Mural",
+          "url" : "https://mural.co"
+        }
+      },
+      "slideURL" : "https://docs.google.com/presentation/d/1x25r5bFv4_EphojgYy1cEXbBkp7AZ7rh/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
+      "teamColor" : "#E9C98C",
+      "textColor" : "white"
+    },
+    "ExamplePurpleTeam" : {
+      "description" : "Our team is looking to build an innovative, modular bluetooth speaker design that allows users to pull apart the speaker into pieces but listen to the same music simultaneously.",
+      "lastUpdateTime" : 1645237203123,
+      "member" : [ "ExampleNicoleTaylor", "ExampleMarieMoore", "ExampleOllieSullivan", "ExampleTristinLu" ],
+      "name" : "Purple Team",
+      "phase" : "Idea Convergence",
+      "photoURL" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj_TDFcIM9jsaLzbF4T0V62lgP4Ec4ZAfoYv86GHIr5RoC2Y80WZ8a5omlBVEp4mR4F2U&usqp=CAU",
+      "resources" : {
+        "drive" : {
+          "text" : "Project Folder",
+          "url" : "https://drive.google.com"
+        },
+        "mural" : {
+          "text" : "Project Mural",
+          "url" : "https://mural.co"
+        }
+      },
+      "slideURL" : "https://docs.google.com/presentation/d/1iXMcF4_ziZp4s8U2VbKibg462am3LeW8/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
+      "teamColor" : "#C8AFD0",
+      "textColor" : "white"
+    },
+    "ExampleRedTeam" : {
+      "description" : "Our team is exploring how we help young adults who cook prepare ingredients from scratch in a way that addresses their needs for organization, considers their limited space, and speeds up their cleaning process to reduce the time and stress they associate with cooking.",
+      "lastUpdateTime" : 1645237203123,
+      "member" : [ "ExampleIsmaelCarr", "ExampleRachaelBush", "ExampleMillieAnanta", "ExampleNickGonzalez" ],
+      "name" : "Red Team",
+      "phase" : "XYZ",
+      "photoURL" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj_TDFcIM9jsaLzbF4T0V62lgP4Ec4ZAfoYv86GHIr5RoC2Y80WZ8a5omlBVEp4mR4F2U&usqp=CAU",
+      "resources" : {
+        "drive" : {
+          "text" : "Project Folder",
+          "url" : "https://drive.google.com"
+        },
+        "mural" : {
+          "text" : "Project Mural",
+          "url" : "https://mural.co"
+        }
+      },
+      "slideURL" : "https://docs.google.com/presentation/d/1sVh4KAYufIK2FIHySWgNyG5YxJHSIWyo/edit?usp=sharing&ouid=111062012633500533543&rtpof=true&sd=true",
+      "teamColor" : "#E29797",
+      "textColor" : "white"
+    }
+  },
+  "users" : {
+    "ExampleAaronGriffin" : {
+      "bio" : "Hi, I am Aaron Griffin",
+      "displayName" : "Aaron Griffin",
+      "email" : "AaronGriffin@example.com ",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Chicago, IL",
+      "photoURL" : "https://d5t4h5a9.rocketcdn.me/wp-content/uploads/2021/04/Website-Photo-18.png",
+      "teamId" : "ExampleBlueTeam",
+      "year" : 2023
+    },
+    "ExampleAllanFord" : {
+      "bio" : "Hi I am Allan Ford",
+      "displayName" : "Allan Ford",
+      "email" : "AllanFord@example.com",
+      "expertise" : [ "Industrial Design", "Marketing" ],
+      "location" : "Naperville, IL",
+      "photoURL" : "https://www.lisasandlerphotography.com/img/port/head/men/professional-headshot-photographers01_thumb.jpg",
+      "teamId" : "ExampleAquaTeam",
+      "year" : 2023
+    },
+    "ExampleAnnaCollins" : {
+      "bio" : "Hi, I am Anna Collins",
+      "displayName" : "Anna Collins",
+      "email" : "email@example.com",
+      "expertise" : [ "Mechanical Engineering", "Electrical Engineering" ],
+      "location" : "Lisle, IL",
+      "photoURL" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0bD6lXcWvfKGKqLKcPtLR7Hxsb_wBAR-O2uYY_SCsnL6k_zTingjIjfAQW4FK2SFr4qU&usqp=CAU",
+      "teamId" : "ExampleGreenTeam",
+      "year" : 2023
+    },
+    "ExampleCaseyWade" : {
+      "bio" : "Hi I am Casey Wade",
+      "displayName" : "Casey Wade",
+      "email" : "CaseyWade@example.com",
+      "expertise" : [ "UI/UX Design", "Product Owner", "Software Development" ],
+      "location" : "Chicago, IL",
+      "photoURL" : "https://srkheadshotday.com/wp-content/uploads/Herman_Man_Headshot_19G1006.jpg",
+      "teamId" : "ExampleAquaTeam",
+      "year" : 2023
+    },
+    "ExampleChristopherRiesbeck" : {
+      "bio" : "Hi, I am Christopher Riesbeck",
+      "displayName" : "Christopher Riesbeck",
+      "email" : "ChristopherRiesbeck@example.com",
+      "isStaff" : true,
+      "location" : "Evanston, IL",
+      "photoURL" : "https://www.mccormick.northwestern.edu/images/research-and-faculty/directory/riesbeck-chris.jpg",
+      "year" : 1999
+    },
+    "ExampleEdRios" : {
+      "bio" : "Hi, I am Ed Rios",
+      "displayName" : "Ed Rios",
+      "email" : "EdRios@example.com ",
+      "expertise" : [ "Software Development", "Product Owner", "UI/UX Design" ],
+      "location" : "Plainfield, IL",
+      "photoURL" : "https://images.squarespace-cdn.com/content/v1/53ed0e3ce4b0c296acaeae80/1584577511464-8FDZYWQVXUI1OBS4VTZP/Bonneville14082-Edit-DHWEB%2BNick%2BFerguson%2BDenver%2BBroncos%2BHeadshot%2BPhotography%2Bby%2BAaron%2BLucy%2BDenver%2BColorado%2BHeadshots%2BPhotographer.jpg",
+      "teamId" : "ExampleBlueTeam",
+      "year" : 2023
+    },
+    "ExampleGregoryRussell" : {
+      "bio" : "Hi, I am Gregory Russell",
+      "displayName" : "Gregory Russell",
+      "email" : "GregoryRussell@example.com",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Eola, IL",
+      "photoURL" : "https://jenworley.com/wp-content/uploads/2020/04/Pittsburgh-Headshot-Photographer-1203-min.jpg",
+      "year" : 2020
+    },
+    "ExampleIsmaelCarr" : {
+      "bio" : "Hi I am Ismael Carr",
+      "displayName" : "Ismael Carr",
+      "email" : "IsmaelCarr@example.com",
+      "expertise" : [ "Project Management", "Graphic Design", "Finance" ],
+      "location" : "Winfield, IL",
+      "photoURL" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPehMZkuHS7QV07WIjF0gOP8L_hlt9jwmMqKSA28raAI5CXjOJd7WlSnZ7PALSEBbKqUs&usqp=CAU",
+      "teamId" : "ExampleRedTeam",
+      "year" : 2023
+    },
+    "ExampleJianZhi" : {
+      "bio" : "Hi, I am Jian Zhi",
+      "displayName" : "Jian Zhi",
+      "email" : "JianZhi@example.com ",
+      "expertise" : [ "Finance", "Graphic Design", "Project Management" ],
+      "location" : "Skokie, IL",
+      "photoURL" : "https://nyheadshots.com/wp-content/uploads/2018/07/headshots.jpg",
+      "teamId" : "ExampleBlueTeam",
+      "year" : 2023
+    },
+    "ExampleJoanHenderson" : {
+      "bio" : "Hi, I am Joan Henderson",
+      "displayName" : "Joan Henderson",
+      "email" : "JoanHenderson@example.com",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Nails, IL",
+      "photoURL" : "https://images.squarespace-cdn.com/content/v1/58b50653ebbd1a0f175fa501/1547770807237-QP0NW1AA2VCEF9VYN7BM/_K1A1653-high.jpg",
+      "year" : 2023
+    },
+    "ExampleJonathanKing" : {
+      "bio" : "Hi, I am Jonathan King",
+      "displayName" : "Jonathan King",
+      "email" : "JonathanKing@example.com ",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Chicago, IL",
+      "photoURL" : "https://media.istockphoto.com/photos/portrait-of-young-happy-indian-business-man-executive-looking-at-picture-id1309489745?b=1&k=20&m=1309489745&s=170667a&w=0&h=Wo_7nESC_ePyEYfEsnOm-rP6ElkxbWqIB3Ga4W3nw8M=",
+      "year" : 2023
+    },
+    "ExampleKerryBurton" : {
+      "bio" : "Hi I am Kerry Burton",
+      "displayName" : "Kerry Burton",
+      "email" : "KerryBurton@example.com",
+      "expertise" : [ "UI/UX Design", "Product Owner", "Software Development" ],
+      "location" : "Romeoville, IL",
+      "photoURL" : "https://images.squarespace-cdn.com/content/v1/5ec689480cc22c2d441e152f/1596829787739-YCYAROREZ2U3PHMNVZSH/headshot-gallery-female-corporate-headshots-photographer-greenwich-ct.jpg",
+      "teamId" : "ExampleOrangeTeam",
+      "year" : 2023
+    },
+    "ExampleKristinStevens" : {
+      "bio" : "Hi I am Kristin Stevens",
+      "displayName" : "Kristin Stevens",
+      "email" : "KristinStevens@example.com",
+      "expertise" : [ "Electrical Engineering", "Mechanical Engineering" ],
+      "location" : "Gary, IN",
+      "photoURL" : "https://expertphotography.b-cdn.net/wp-content/uploads/2019/12/headshot-1.jpg",
+      "teamId" : "ExampleAquaTeam",
+      "year" : 2023
+    },
+    "ExampleKubraSuhayl" : {
+      "bio" : "Hi, I am Kubra Suhayl",
+      "displayName" : "Kubra Suhayl",
+      "email" : "KubraSuhayl@example.com",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Milwaukee, IL",
+      "notifications" : {
+        "-MxpeYFif2FJAJB73rSQ" : {
+          "content" : "<p>Thank you <a href=\"https://mpd2go.firebaseapp.com/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_blank\"> <a href=\"/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleLeahCastro\" data-value=\"Leah Castro\">﻿<span contenteditable=\"false\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Leah Castro</span>﻿</span>﻿</span>  </a> </a> <a href=\"/profile/ExampleKubraSuhayl\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleKubraSuhayl\" data-value=\"Kubra Suhayl\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Kubra Suhayl</span>﻿</span>  </a> !</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946562979,
+          "type" : "mention"
+        }
+      },
+      "photoURL" : "https://fisherstudios.co.uk/wp-content/uploads/2021/12/DF-Portrait-5213-0793-scaled.jpg",
+      "year" : 2019
+    },
+    "ExampleLeahCastro" : {
+      "bio" : "Hi, I am Leah Castro",
+      "displayName" : "Leah Castro",
+      "email" : "LeahCastro@example.com",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Kenosha, WI",
+      "notifications" : {
+        "-Mxpe8P0ZJjX1ahJ6E7_" : {
+          "content" : "<p>Thank you <a href=\"/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleLeahCastro\" data-value=\"Leah Castro\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Leah Castro</span>﻿</span>  </a> !</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946457078,
+          "type" : "mention"
+        },
+        "-MxpeYFhubPmsM8Og7Cc" : {
+          "content" : "<p>Thank you <a href=\"https://mpd2go.firebaseapp.com/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_blank\"> <a href=\"/profile/ExampleLeahCastro\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleLeahCastro\" data-value=\"Leah Castro\">﻿<span contenteditable=\"false\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Leah Castro</span>﻿</span>﻿</span>  </a> </a> <a href=\"/profile/ExampleKubraSuhayl\" rel=\"noopener noreferrer\" target=\"_self\">  <span class=\"mention\" data-index=\"0\" data-denotation-char=\"@\" data-id=\"ExampleKubraSuhayl\" data-value=\"Kubra Suhayl\">﻿<span contenteditable=\"false\"><span class=\"ql-mention-denotation-char\">@</span>Kubra Suhayl</span>﻿</span>  </a> !</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946562978,
+          "type" : "mention"
+        }
+      },
+      "photoURL" : "https://www.sacmag.com/wp-content/uploads/sites/50/2020/12/HI_RES_FIN_IMG_8626.jpg",
+      "year" : 2019
+    },
+    "ExampleLolaPeters" : {
+      "bio" : "Hi, I am Lola Peters",
+      "displayName" : "Lola Peters",
+      "email" : "LolaPeters@example.com",
+      "expertise" : [ "Finance", "Graphic Design", "Project Management" ],
+      "location" : "Milwaukee, IL",
+      "photoURL" : "https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2016/02/Headshot-Photography-London-1052.jpeg?ssl=1",
+      "teamId" : "ExampleGreenTeam",
+      "year" : 2023
+    },
+    "ExampleLorenzoSoto" : {
+      "bio" : "Hi I am Lorenzo Soto",
+      "displayName" : "Lorenzo Soto",
+      "email" : "LorenzoSoto@example.com",
+      "expertise" : [ "Electrical Engineering", "Mechanical Engineering" ],
+      "location" : "Champaign, IL",
+      "photoURL" : "https://images.squarespace-cdn.com/content/v1/51ef4493e4b0561c90fa76d6/1615560639341-UZQWUXS1WM0KB3KD5P4F/corporate+headshot.jpg",
+      "teamId" : "ExampleOrangeTeam",
+      "year" : 2023
+    },
+    "ExampleMarieMoore" : {
+      "bio" : "Hi I am Marie Moore",
+      "displayName" : "Marie Moore",
+      "email" : "MarieMoore@example.com",
+      "expertise" : [ "Finance", "Graphic Design", "Project Management" ],
+      "location" : "Indianapolis, IN",
+      "photoURL" : "https://www.mauricejager.com/wp-content/uploads/2021/07/20201117-Stephanie-Bakker00034-2.jpg",
+      "teamId" : "ExamplePurpleTeam",
+      "year" : 2023
+    },
+    "ExampleMelanieConner" : {
+      "bio" : "I am Melanie Conner",
+      "displayName" : "Melanie Conner",
+      "email" : "MelanieConner@example.com",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Grand Rapids, MI",
+      "notifications" : {
+        "-Mxpdx5HCH6RMdKDGJrI" : {
+          "content" : "<p>Green Team – Great work so far! I remember this part of the capstone process being difficult. I really like the potential around your opportunity space #3. I have personally experienced the problem you are trying to address, and I think the space is ripe for innovative solutions. Good luck!</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946406662,
+          "type" : "comment"
+        },
+        "-MxpeeUr_68QegEGODy3" : {
+          "content" : "<p>Hi Melanie, our team also trying to choose between our three capstone opportunity spaces. We came up with an idea. But I do not know what is the best option for us. Do you think it is possible I can schedule a meeting with you to talk about this?</p>",
+          "postId" : "Demo1",
+          "senderUid" : "KcgCjiLuqrcw4ovEFesdyQQH2Gj2",
+          "time" : 1646946592620,
+          "type" : "comment"
+        }
+      },
+      "photoURL" : "https://images.squarespace-cdn.com/content/v1/51efe10de4b025019c37bb06/1593107343586-PZWIYI6X103MS3H7ZNTL/Corporate_Headshot_Photography.JPG",
+      "teamId" : "ExampleGreenTeam",
+      "year" : 2019
+    },
+    "ExampleMillieAnanta" : {
+      "bio" : "Hi I am Millie Ananta",
+      "displayName" : "Millie Ananta",
+      "email" : "MillieAnanta@example.com",
+      "expertise" : [ "Electrical Engineering", "Mechanical Engineering" ],
+      "location" : "Springfield, IL",
+      "photoURL" : "https://images.squarespace-cdn.com/content/v1/5404a441e4b0a7034afcd1fc/1594235199189-GQCLBPTDOP5L21ZVXFLD/NatalieBellott_06190183-Edit.jpg?format=2500w",
+      "teamId" : "ExampleRedTeam",
+      "year" : 2023
+    },
+    "ExampleMonaYates" : {
+      "bio" : "Hi I am Mona Yates",
+      "displayName" : "Mona Yates",
+      "email" : "MonaYates@example.com",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Chicago, IL",
+      "photoURL" : "https://i0.wp.com/www.headshotsandcorporate.com/wp-content/uploads/2018/12/IMG_8343-3.jpg?resize=300%2C300&ssl=1",
+      "teamId" : "ExampleBlueTeam",
+      "year" : 2023
+    },
+    "ExampleNickGonzalez" : {
+      "bio" : "Hi I am Nick Gonzalez",
+      "displayName" : "Nick Gonzalez",
+      "email" : "NickGonzalez@example.com",
+      "expertise" : [ "Industrial Design", "Marketing" ],
+      "location" : "Golf, IL",
+      "photoURL" : "https://www.jonbradley.co.uk/wp-content/uploads/2020/08/BUSINESS-HEADSHOTS-SLIDER-IMAGE-2.jpg",
+      "teamId" : "ExampleRedTeam",
+      "year" : 2023
+    },
+    "ExampleNicoleTaylor" : {
+      "bio" : "Hi I am Nicole Taylor",
+      "displayName" : "Nicole Taylor",
+      "email" : "exail@example.com",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "photoURL" : "https://dvyvvujm9h0uq.cloudfront.net/com/articles/1567147770-231381-headshot5jpg.jpg",
+      "teamId" : "ExamplePurpleTeam",
+      "year" : 2023
+    },
+    "ExampleOllieSullivan" : {
+      "bio" : "Hi I am Ollie Sullivan",
+      "displayName" : "Ollie Sullivan",
+      "email" : "OllieSullivan@example.com",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Evanston, IL",
+      "photoURL" : "https://images.squarespace-cdn.com/content/v1/59b15b7d914e6b2482c10777/1614376330216-8GMT2S4GLKTLIQW0V5Y2/Peoria-Headshot-Photographer3.JPG",
+      "teamId" : "ExamplePurpleTeam",
+      "year" : 2023
+    },
+    "ExamplePhilipByrd" : {
+      "bio" : "Hi I am Philip Byrd",
+      "displayName" : "Philip Byrd",
+      "email" : "PhilipByrd@example.com",
+      "expertise" : [ "Project Management", "Graphic Design", "Finance" ],
+      "location" : "Evanston, IL",
+      "photoURL" : "https://dvyvvujm9h0uq.cloudfront.net/com/articles/1567147191-30013-headshot4jpg.jpg",
+      "teamId" : "ExampleAquaTeam",
+      "year" : 2023
+    },
+    "ExampleRachaelBush" : {
+      "bio" : "Hi I am Rachael Bush",
+      "displayName" : "Rachael Bush",
+      "email" : "RachaelBush@example.com",
+      "expertise" : [ "UI/UX Design", "Product Owner", "Software Development" ],
+      "location" : "Evanston, IL",
+      "photoURL" : "https://blog.hubspot.com/hs-fs/hubfs/brittany-leaning-headshot-2.jpg?width=300&name=brittany-leaning-headshot-2.jpg",
+      "teamId" : "ExampleRedTeam",
+      "year" : 2023
+    },
+    "ExampleRobertRivera" : {
+      "bio" : "Hi, I am Robert Rivera",
+      "displayName" : "Robert Rivera",
+      "email" : "RobertRivera@example.com",
+      "expertise" : [ "Marketing", "Industrial Design" ],
+      "location" : "Chicago, IL",
+      "photoURL" : "https://eddie-hernandez.com/wp-content/uploads/2021/12/Mens-Professional-Headshot-JA-7683.jpg",
+      "year" : 2020
+    },
+    "ExampleScottHarris" : {
+      "bio" : "Hi, I am Scott Harris",
+      "displayName" : "Scott Harris",
+      "email" : "ScottHarris@example.com",
+      "expertise" : [ "Software Development", "Product Owner", "UI/UX Design" ],
+      "location" : "Chicago, IL",
+      "photoURL" : "https://img.freepik.com/free-photo/headshot-handsome-young-afro-american-male-looking-with-broad-friendly-smile-enjoying-good-day-leisure-time-indoors-black-man-feeling-happy-carefree-while-relaxing-home_273609-433.jpg?size=626&ext=jpg",
+      "teamId" : "ExampleGreenTeam",
+      "year" : 2023
+    },
+    "ExampleStaceyMay" : {
+      "bio" : "Hi I am Stacey May",
+      "displayName" : "Stacey May",
+      "email" : "StaceyMay@example.com",
+      "expertise" : [ "Project Management", "Graphic Design", "Finance" ],
+      "location" : "Chicago, IL",
+      "photoURL" : "https://www.nyfa.edu/student-resources/wp-content/uploads/2018/11/pexels-photo-415829-1024x902.jpg",
+      "teamId" : "ExampleOrangeTeam",
+      "year" : 2023
+    },
+    "ExampleSusanGoren" : {
+      "bio" : "Hi I am Susan Goren",
+      "displayName" : "Susan Goren",
+      "email" : "SusanGoren@example.com",
+      "isStaff" : "true",
+      "location" : "Evanston, IL",
+      "photoURL" : "https://design.northwestern.edu/images/people/profiles/goren-susan-2019.jpg",
+      "year" : 1999
+    },
+    "ExampleTristinLu" : {
+      "bio" : "Hi I am Tristin Lu",
+      "displayName" : "Tristin Lu",
+      "email" : "TristinLu@example.com",
+      "expertise" : [ "Finance", "Graphic Design", "Project Management" ],
+      "location" : "Chicago, IL",
+      "photoURL" : "https://media.istockphoto.com/photos/portrait-young-confident-smart-asian-businessman-look-at-camera-and-picture-id1288538088?k=20&m=1288538088&s=612x612&w=0&h=tQPfhDfWqApLGZN_rIv6_eV464qOAH9SqXsJYAJveYY=",
+      "teamId" : "ExamplePurpleTeam",
+      "year" : 2023
+    },
+    "ExampleVanPearson" : {
+      "bio" : "Hi I am Van Pearson",
+      "displayName" : "Van Pearson",
+      "email" : "VanPearson@example.com",
+      "expertise" : [ "Industrial Design", "Marketing" ],
+      "location" : "Chicago, IL",
+      "photoURL" : "https://static7.depositphotos.com/1298242/789/i/600/depositphotos_7894119-stock-photo-smiling-hispanic-man-headshot.jpg",
+      "teamId" : "ExampleOrangeTeam",
+      "year" : 2023
+    }
+  }
+}

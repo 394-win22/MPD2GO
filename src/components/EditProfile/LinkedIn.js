@@ -44,8 +44,8 @@ const LinkedIn = ({ userData, uid }) => {
       <IconButton onClick={() => setIsLinkedInEditing(true)} sx={{ p: 0 }}>
         <EditIcon />
       </IconButton>
-      <LinkedInIcon sx={{ color: "#4173ac" }} />
-      <Typography>{linkedIn ? linkedIn : "No LinkedIn"}</Typography>
+      <LinkedInIcon sx={{ color: userData.linkedIn ? "#4173ac" : "#999999" }} />
+      {userData.linkedIn ? <Typography> {userData.linkedIn} </Typography> : <Typography color="#999999"> <em>Add LinkedIn</em></Typography>}
     </Stack>
   );
 };
