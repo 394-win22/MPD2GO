@@ -1,33 +1,15 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
 import {
   Typography,
-  Avatar,
   Box,
   Divider,
-  Button,
-  Stack,
-  Card,
-  Chip,
   IconButton,
   CardHeader,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from "@mui/material";
 import { getUserStatus, useData } from "../../utilities/firebase";
 // icons
-import { Email as EmailIcon } from "@mui/icons-material";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 // local files
-import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
-import { signOut } from "utilities/firebase";
 import BackButton from "../Navigation/BackButton";
 import UserAvatar from "./UserAvatar";
 import Name from "./Name";
@@ -40,18 +22,16 @@ import Email from "./Email";
 import LinkedIn from "./LinkedIn";
 
 export const getProjectList = (project) => {
-  const listOfProject = Object.entries(project).map(([projectId, projectObj]) => {
-    return { ...projectObj, id: projectId };
-  });
+  const listOfProject = Object.entries(project).map(
+    ([projectId, projectObj]) => {
+      return { ...projectObj, id: projectId };
+    }
+  );
   return listOfProject;
 };
 
 const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
-  const params = useParams();
-  const navigate = useNavigate();
-
-  const [formValues, setFormValues] = useState(user);
-  const [projectList, projectListLoading] = useData("/project", getProjectList);
+  const [, projectListLoading] = useData("/project", getProjectList);
 
   if (projectListLoading) {
     return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;

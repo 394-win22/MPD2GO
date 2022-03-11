@@ -1,40 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
-import {
-  Typography,
-  Avatar,
-  Box,
-  Divider,
-  Button,
-  Stack,
-  Card,
-  Chip,
-  IconButton,
-  CardHeader,
-} from "@mui/material";
-import { getUserStatus } from "../../utilities/firebase";
+import { useParams } from "react-router";
+import { Card } from "@mui/material";
 // icons
-import { Email as EmailIcon } from "@mui/icons-material";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import EditIcon from "@mui/icons-material/Edit";
-import CheckIcon from "@mui/icons-material/Check";
 
 // local files
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
-import { signOut } from "utilities/firebase";
-import BackButton from "../Navigation/BackButton";
 import DisplayProfile from "./DisplayProfile";
 import EditProfile from "components/EditProfile";
 
 const Profile = ({ user }) => {
   const params = useParams();
   const [userData, setUserData] = useState(null);
-  const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
 
-
   const [isEditProfile, setIsEditProfile] = useState(false);
-
 
   useEffect(() => {
     const userToSearch = params.userID || user.uid;
@@ -55,16 +34,17 @@ const Profile = ({ user }) => {
     });
   }, [params, user]);
 
-  const handleProfileSubmit = () => {
-    setIsEditProfile(false);
-  };
+  if (!userData || !projectData)
+    return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
 
-  if (!userData || !projectData) return <h1 style={{ marginLeft: 20 }}>Loading...</h1>;
-
-  if (userData === "not found") return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>;
+  if (userData === "not found")
+    return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>;
 
   return (
-    <Card sx={{ px: 2, py: 2, mb: 2, minHeight: "77vh" }} style={{ borderRadius: 10 }}>
+    <Card
+      sx={{ px: 2, py: 2, mb: 2, minHeight: "77vh" }}
+      style={{ borderRadius: 10 }}
+    >
       {isEditProfile ? (
         <EditProfile
           userData={userData}
@@ -80,16 +60,13 @@ const Profile = ({ user }) => {
           projectData={projectData}
         />
       )}
-
     </Card>
   );
 };
 
 export default Profile;
 
-
 // <Card sx={{ px: 2, py: 2, mb: 2, minHeight: "77vh" }} style={{ borderRadius: 10 }}>
-
 
 //   <BackButton />
 //   <Box textAlign="center">
@@ -153,8 +130,6 @@ export default Profile;
 //       {userData.year ? "Class of " + userData.year : "No Year"}
 //     </Typography>
 
-
-
 //     {"teamId" in userData && (
 //       <Button
 //         variant="contained"
@@ -175,7 +150,6 @@ export default Profile;
 //     )}
 
 //     <Divider />
-
 
 //     <Typography
 //       align="left"

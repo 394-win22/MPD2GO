@@ -1,64 +1,46 @@
 import { useState } from "react";
-import {
+import { Box, IconButton, Stack, Button } from "@mui/material";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
+import First from "resources/tutorial/1.png";
+import Second from "resources/tutorial/2.png";
+import Third from "resources/tutorial/3.png";
+import Fourth from "resources/tutorial/4.png";
+import Fifth from "resources/tutorial/5.png";
+import Sixth from "resources/tutorial/6.png";
+import Seventh from "resources/tutorial/7.png";
+import Eighth from "resources/tutorial/8.png";
 
-	Box,
-	IconButton,
-	Stack,
-	Button
-} from "@mui/material";
-import { Slide } from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css'
-import First from 'resources/tutorial/1.png';
-import Second from 'resources/tutorial/2.png';
-import Third from 'resources/tutorial/3.png';
 import { useNavigate } from "react-router-dom";
 
-import CloseIcon from '@mui/icons-material/Close';
-import { makeStyles } from "@mui/styles";
-
+import CloseIcon from "@mui/icons-material/Close";
 
 const slideImages = [
-	{
-		img: First,
-	},
-	{
-		img: Second,
-	},
-	{
-		img: Third,
-	},
-	{
-		img: First,
-	},
-	{
-		img: Second,
-	},
-	{
-		img: Third,
-	},
+  {
+    img: First,
+  },
+  {
+    img: Second,
+  },
+  {
+    img: Third,
+  },
+  {
+    img: Fourth,
+  },
+  {
+    img: Fifth,
+  },
+  {
+    img: Sixth,
+  },
+  {
+    img: Seventh,
+  },
+  {
+    img: Eighth,
+  },
 ];
-
-const useStyles = makeStyles({
-	indicatorContainer: {},
-	indicator: {
-		width: "30px",
-		color: "blue",
-		textAlign: "center",
-		cursor: "pointer",
-		border: "1px blue solid",
-	},
-	indicatorActive: {
-		width: "30px",
-		textAlign: "center",
-		cursor: "pointer",
-		border: "1px blue solid",
-
-		backgroundColor: "#000",
-		color: "#fff",
-
-	}
-});
-
 
 const Tutorial = () => {
 	const classes = useStyles();

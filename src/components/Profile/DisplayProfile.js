@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import {
   Typography,
@@ -7,9 +6,8 @@ import {
   Divider,
   Button,
   Stack,
-  Card,
-  Chip,
   IconButton,
+  Chip,
   CardHeader,
 } from "@mui/material";
 import { getUserStatus } from "../../utilities/firebase";
@@ -17,21 +15,13 @@ import { getUserStatus } from "../../utilities/firebase";
 import { Email as EmailIcon } from "@mui/icons-material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EditIcon from "@mui/icons-material/Edit";
-import CheckIcon from "@mui/icons-material/Check";
 
 // local files
-import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
 import { signOut } from "utilities/firebase";
 import BackButton from "../Navigation/BackButton";
-import { CardActions } from "@material-ui/core";
-
 const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
   const params = useParams();
   const navigate = useNavigate();
-
-  const handleProfileSubmit = () => {
-    setIsEditProfile(false);
-  };
 
   return (
     <>
@@ -133,7 +123,10 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
 
         <Divider />
 
-        <Typography align="left" sx={{ marginBottom: 1, ml: 2, mt: 1, color: "#7B7B7B" }}>
+        <Typography
+          align="left"
+          sx={{ marginBottom: 1, ml: 2, mt: 1, color: "#7B7B7B" }}
+        >
           Expertise
         </Typography>
         <Stack
@@ -162,7 +155,11 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
               alignItems: "flex-start",
             }}
           >
-            <Stack direction="row" sx={{ marginBottom: 3, marginTop: 2 }} spacing={1}>
+            <Stack
+              direction="row"
+              sx={{ marginBottom: 3, marginTop: 2 }}
+              spacing={1}
+            >
               <EmailIcon sx={{ color: "#999999" }} />
               <Typography>{userData.email}</Typography>
             </Stack>
@@ -183,7 +180,10 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
             <Button
               sx={{ width: "150px", marginTop: "10px" }}
               variant="contained"
-              onClick={signOut}
+              onClick={() => {
+                navigate("/");
+                signOut();
+              }}
               id="logout_btn"
             >
               Sign out{" "}
