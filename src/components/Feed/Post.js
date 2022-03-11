@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -6,7 +6,8 @@ import {
   Card,
   Box,
   Chip,
-  CardHeader
+  CardHeader,
+  Button
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";
 import { RichTextEditor } from "@mantine/rte";
@@ -48,10 +49,11 @@ const Post = ({ post }) => {
     else if (num === 1) return "1 Comment";
     else return `${num} Comments`;
   };
+
   return (
     <Card
       className={classes.card}
-      sx={{ mb: 2, pl: 0.5 }}
+      sx={{ mb: 2, pl: 0.5, display: "flex", flexDirection: "column" }}
       onClick={() => {
         navigate(`/post/${post.id}`);
       }}
@@ -59,12 +61,12 @@ const Post = ({ post }) => {
       <Box sx={{ ml: 0, mt: 2 }}>
         <AvatarWithTag user={user} post={post} />
       </Box>
-      <CardContent sx={{ pt: 0, px: 0 }}>
+      <CardContent sx={{ pt: 0, px: 0, display: "flex", flexDirection: "column", }}>
         {post.title && <Typography sx={{ marginLeft: 3, fontWeight: "500", fontSize: "17px" }}>{post.title}</Typography>}
         <RichTextEditor
           readOnly
           value={post.description}
-          style={{ border: "none", marginBottom: -15, marginLeft: 9 }}
+          style={{ border: "none", marginBottom: -16, marginLeft: 9, paddingBottom: 0 }}
         />
         {'tags' in post && post.tags.length > 0 &&
           <Box sx={{ paddingLeft: 2.5, paddingTop: 2 }}>
@@ -79,13 +81,23 @@ const Post = ({ post }) => {
               />
             ))}
           </Box>}
-      </CardContent>
 
-      <Box sx={{ display: "flex", marginBottom: 2, mx: 2 }}>
-        <Typography className={classes.comment} variant="body2">
-          {getNumCommentsText(post)}
-        </Typography>
-      </Box>
+        <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", mx: 2, mt: 1 }}>
+          <Typography className={classes.comment} variant="body2">
+            {getNumCommentsText(post)}
+          </Typography>
+
+          <Button sx={{ color: "#e9e9e9" }} onClick={() => {
+            navigate(`/post/${post.id}`);
+          }}>
+            <Typography className={classes.comment} variant="body2">
+              View Post
+            </Typography>
+          </Button>
+        </Box>
+
+
+      </CardContent>
     </Card>
   );
 };
