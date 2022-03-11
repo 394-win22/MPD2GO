@@ -219,7 +219,7 @@ const Thread = ({ postId, ids, data, style }) => {
         >
           <Avatar className={classes.avatar} src={postAuthor.photoURL} />
         </IconButton>
-       {isShowThreads && haveChild && findLevel(myPath()) === 0 ? (
+        {isShowThreads && haveChild && findLevel(myPath()) === 0 ? (
           <Box
             className={classes.collapseButton}
             onClick={() => setIsShowThreads(false)}
@@ -229,7 +229,7 @@ const Thread = ({ postId, ids, data, style }) => {
         ) : (
           <Box className={classes.collapseButton} />
         )}
-        
+
       </Box>
       <Box className={classes.rightContainer}>
         {/* comment */}
@@ -249,7 +249,7 @@ const Thread = ({ postId, ids, data, style }) => {
           <RichTextEditor
             readOnly
             value={data.comment}
-            style={{ marginLeft: -17, marginBottom: -20, border: "none", padding: "0" }}
+            style={{ marginLeft: -17, marginTop: -8, marginBottom: -25, border: "none", padding: "0" }}
           />
         </Box>
 

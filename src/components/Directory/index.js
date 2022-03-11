@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -47,6 +47,11 @@ const Directory = () => {
     }
     return x;
   }
+
+  // scroll to top on load
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   if (query !== "" || filter.expertise.length > 0 || filter.type.length > 0) {
     // Filter by criteria

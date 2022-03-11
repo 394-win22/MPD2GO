@@ -55,7 +55,10 @@ const Notifications = () => {
     "notifications" in userData &&
     Object.values(userData.notifications).length > 0;
 
-  useEffect(() => { }, []);
+  // scroll to top on load
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   let notificationsList;
   if (hasNotifications) {

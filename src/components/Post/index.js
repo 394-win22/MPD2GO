@@ -36,6 +36,12 @@ const PostWithThreads = () => {
       setPostContent(post.description);
     }
   }, [navigate, pageId, postList, userList]);
+
+  // scroll to top on load
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   let sortedThreads = [];
   const haveChild = "threads" in post && Object.values(post.threads).length > 0;
 
@@ -99,7 +105,7 @@ const PostWithThreads = () => {
           <RichTextEditor
             readOnly
             value={postContent}
-            style={{ border: "none", marginBottom: -15 }}
+            style={{ border: "none", marginBottom: -25 }}
           />
         )}
 
