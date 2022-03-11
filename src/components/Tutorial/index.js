@@ -16,34 +16,34 @@ import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 
 const slideImages = [
-  {
-    img: First,
-  },
-  {
-    img: Second,
-  },
-  {
-    img: Third,
-  },
-  {
-    img: Fourth,
-  },
-  {
-    img: Fifth,
-  },
-  {
-    img: Sixth,
-  },
-  {
-    img: Seventh,
-  },
-  {
-    img: Eighth,
-  },
+	{
+		img: First,
+	},
+	{
+		img: Second,
+	},
+	{
+		img: Third,
+	},
+	{
+		img: Fourth,
+	},
+	{
+		img: Fifth,
+	},
+	{
+		img: Sixth,
+	},
+	{
+		img: Seventh,
+	},
+	{
+		img: Eighth,
+	},
 ];
 
 const Tutorial = () => {
-	const classes = useStyles();
+	// const classes = useStyles();
 	const [index, setIndex] = useState(0);
 	const navigate = useNavigate();
 
