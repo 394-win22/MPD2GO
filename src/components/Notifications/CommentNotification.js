@@ -17,8 +17,11 @@ import RichTextEditor from "@mantine/rte";
 import { markNotificationAsRead } from "utilities/notifications";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import IconButton from "@mui/material/IconButton";
+
+
 const CommentNotification = ({ notifId, notifObj }) => {
   const navigate = useNavigate();
+  console.log(notifId)
   const context = useContext(UserContext);
   const users = context.userList;
 
@@ -26,7 +29,9 @@ const CommentNotification = ({ notifId, notifObj }) => {
 
   const title = `${authorData.displayName} commented on your post`;
 
-  const handleNotificationClicked = () => {
+  const handleNotificationClicked = (e) => {
+    console.log("cliocked");
+    e.stopPropagation()
     markNotificationAsRead(context.user.uid, notifId);
     navigate(`/post/${notifObj.postId}`);
   };
@@ -43,6 +48,7 @@ const CommentNotification = ({ notifId, notifObj }) => {
             aria-label="Mark this notification as read"
             onClick={(event) => {
               event.stopPropagation();
+              console.log("HERE");
               markNotificationAsRead(context.user.uid, notifId);
             }}
           >
