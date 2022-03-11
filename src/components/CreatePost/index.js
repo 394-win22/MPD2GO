@@ -75,7 +75,6 @@ const CreatePost = () => {
   const [postTags, setPostTags] = useState([]);
   const [title, setTitle] = useState("")
 
-
   const user = useUserState();
   const classes = useStyles();
 
@@ -137,9 +136,9 @@ const CreatePost = () => {
         }
       });
 
-    setDescription("");
-    setTitle("");
-    navigate("/");
+    setDescription("")
+    setTitle("")
+    navigate("/")
   };
 
   const ITEM_HEIGHT = 48;
@@ -237,7 +236,7 @@ const CreatePost = () => {
           placeholder="Type @ to see mentions autocomplete"
           mentions={mentions}
           onImageUpload={handleImageUpload}
-          style={{ width: "100%", marginTop: 2, height: "300px" }}
+          style={{ width: "100%", marginTop: 2, minHeight: "300px" }}
           controls={[
             ["bold", "italic", "underline", "link", "image"],
             ["unorderedList", "orderedList"],

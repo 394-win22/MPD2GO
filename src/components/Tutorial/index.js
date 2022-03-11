@@ -85,7 +85,7 @@ const Tutorial = () => {
 			</div>
 
 
-			{(index === 0) && <Box sx={{
+			{/* {(index === 0) && <Box sx={{
 				position: "fixed", bottom: "40px",
 				height: "20px", width: "60%",
 				display: "flex",
@@ -97,7 +97,7 @@ const Tutorial = () => {
 				color: "#e1e1e1", fontSize: "12px"
 			}}>
 				Swipe to explore app features
-			</Box>}
+			</Box>} */}
 
 			{(index === slideImages.length - 1) && <Button sx={{
 				position: "fixed", bottom: "50px",
@@ -109,10 +109,10 @@ const Tutorial = () => {
 				transform: "translate(-50%, -50%)",
 				color: "white", fontSize: "14px"
 			}} variant="contained" onClick={handleClose}>
-				Finish tutorial
+				Go to app
 			</Button>}
 
-			<Stack sx={{
+			{/* <Stack sx={{
 				position: "fixed", bottom: "10px",
 				height: "20px", width: "60%",
 				display: "flex",
@@ -126,7 +126,7 @@ const Tutorial = () => {
 					if (i === index) return (<Box sx={{ backgroundColor: "#ffd000", height: "7px", width: "7px", borderRadius: "50%" }}></Box>);
 					return (<Box sx={{ backgroundColor: "#c5c5c5", height: "7px", width: "7px", borderRadius: "50%" }}></Box>);
 				})}
-			</Stack>
+			</Stack> */}
 
 			<IconButton sx={{
 				position: "fixed",

@@ -151,34 +151,32 @@ const Project = (user) => {
                       Additional Resources
                     </Typography>
                     {Object.values(projectData.resources).map((resource, i) => (
-                      <>
-                        <Button
-                          sx={{ marginLeft: "8px" }}
-                          key={i}
-                          startIcon={
-                            resource.url.includes("mural") ? (
-                              <img
-                                src={MuralLogo}
-                                alt=""
-                                style={{ height: 20, width: 20 }}
-                              />
-                            ) : resource.url.includes("drive") ? (
-                              <img
-                                src={DriveLogo}
-                                alt=""
-                                style={{ height: "20px", width: "20px" }}
-                              />
-                            ) : (
-                              <LinkIcon />
-                            )
-                          }
-                          onClick={() => {
-                            window.open(resource.url);
-                          }}
-                        >
-                          {resource.text}
-                        </Button>
-                      </>
+                      <Button
+                        sx={{ marginLeft: "8px" }}
+                        key={i}
+                        startIcon={
+                          resource.url.includes("mural") ? (
+                            <img
+                              src={MuralLogo}
+                              alt=""
+                              style={{ height: 20, width: 20 }}
+                            />
+                          ) : resource.url.includes("drive") ? (
+                            <img
+                              src={DriveLogo}
+                              alt=""
+                              style={{ height: "20px", width: "20px" }}
+                            />
+                          ) : (
+                            <LinkIcon />
+                          )
+                        }
+                        onClick={() => {
+                          window.open(resource.url);
+                        }}
+                      >
+                        {resource.text}
+                      </Button>
                     ))}
                   </>
                 )}
