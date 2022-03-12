@@ -33,7 +33,7 @@ Cypress.Commands.add('logout', () => {
 */
 
 describe('Directory Page', () => {
-  before(() => {
+  beforeEach(() => {
     // Logout if we are logged in
     cy.visit('/')
     cy.wait(1000)
@@ -52,16 +52,18 @@ describe('Directory Page', () => {
   })
 
   it('Filter Buttons Appear', () => {
-    cy.visit('/directory')
+    cy.visit('/')
     cy.wait(1000)
+    cy.get('[data-testid=PeopleAltIcon]').click()
     cy.get('[type=text]').should('be.visible').click()
     cy.contains('Staff').should('be.visible')
     cy.contains('Finance').should('be.visible')
   })
 
   it('Searching an Individual User Works', () => {
-    cy.visit('/directory')
+    cy.visit('/')
     cy.wait(1000)
+    cy.get('[data-testid=PeopleAltIcon]').click()
     cy.get('[type=text]').should('be.visible').click().type('User 2')
     cy.contains('Testing User 2').should('be.visible')
     cy.contains('Testing User 1').should('not.exist')
@@ -69,8 +71,9 @@ describe('Directory Page', () => {
   })
 
   it('Searching an Many Users Work', () => {
-    cy.visit('/directory')
+    cy.visit('/')
     cy.wait(1000)
+    cy.get('[data-testid=PeopleAltIcon]').click()
     cy.get('[type=text]').should('be.visible').click().type('Testing User')
     cy.contains('Testing User 2').should('be.visible')
     cy.contains('Testing User 1').should('be.visible')
@@ -78,8 +81,9 @@ describe('Directory Page', () => {
   })
 
   it('Clicking a User Goes to Profile', () => {
-    cy.visit('/directory')
+    cy.visit('/')
     cy.wait(1000)
+    cy.get('[data-testid=PeopleAltIcon]').click()
     cy.contains('Testing User 2').should('be.visible').click()
     cy.contains('Testing User 2').should('be.visible')
     cy.contains('Hi, I am test user 2').should('be.visible')
