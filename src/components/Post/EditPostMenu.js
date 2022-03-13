@@ -70,8 +70,9 @@ const EditPostMenu = ({ post, isEdit, setIsEdit, userList }) => {
         aria-haspopup="true"
         aria-expanded={isMenuOpen ? "true" : undefined}
         onClick={handleClick}
+        
       >
-        <MoreVertIcon />
+        <MoreVertIcon data-cy="postDotsMenu"/>
       </IconButton>
       <Menu
         id="basic-menu"
@@ -102,7 +103,7 @@ const EditPostMenu = ({ post, isEdit, setIsEdit, userList }) => {
           </MenuItem>
         )}
 
-        <MenuItem onClick={() => setIsDialogOpen(true)}>Delete</MenuItem>
+        <MenuItem onClick={() => setIsDialogOpen(true)} data-cy="postDelButton">Delete</MenuItem>
       </Menu>
 
       {/* Delete confirmation Alert */}
@@ -121,6 +122,7 @@ const EditPostMenu = ({ post, isEdit, setIsEdit, userList }) => {
             onClick={() => deletePost(post, userList)}
             color="primary"
             autoFocus
+            data-cy="postConfirmDelButton"
           >
             Yes
           </Button>

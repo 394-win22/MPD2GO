@@ -183,6 +183,7 @@ const CreatePost = () => {
         }
         title="Create a Post"
         titleTypographyProps={{ variant: 'h6' }}
+        data-cy="createPostBox"
       />
       <Box className={classes.form}>
         <TextField
