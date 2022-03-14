@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Download this repo. Install node.js and run `npm install` and `npm start` in the project directory. Then open [http://localhost:3000](http://localhost:3000) to view tha application.
 
-## build and deploy the app
+## Build and Deploy the app
 
 Creat an project in [Googld Firebase](https://firebase.google.com/). 
 
