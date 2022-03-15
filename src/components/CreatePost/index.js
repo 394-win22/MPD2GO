@@ -69,7 +69,7 @@ const CreatePost = () => {
   const context = useContext(UserContext);
 
   const postDescriptionPlaceHolder =
-    "Enter post detail below. Type @ or # to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://";
+    "Enter post detail below. Type @ to see mentions autocomplete. When inserting links, make sure url starts with http:// or https://";
 
   const [description, setDescription] = useState("");
   const [postTags, setPostTags] = useState([]);
