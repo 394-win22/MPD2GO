@@ -171,7 +171,7 @@ const CreatePost = () => {
   };
 
   return (
-    <Card className={classes.container} sx={{ mb: 3 }} data-cy="createPostBox">
+    <Card className={classes.container} sx={{ mb: 3 }}>
       <CardHeader
         sx={{ padding: "10px 16px" }}
         avatar={
@@ -179,7 +179,6 @@ const CreatePost = () => {
         }
         title="Create a Post"
         titleTypographyProps={{ variant: 'h6' }}
-        data-cy="createPostBox"
       />
       <Box className={classes.form}>
         <TextField
@@ -225,7 +224,7 @@ const CreatePost = () => {
         <Typography variant="caption" align="left" sx={{ color: "gray", mt: 2 }}>
           {postDescriptionPlaceHolder}
         </Typography>
-
+              <div data-cy="replyForm">
         <RichTextEditor
           value={description}
           onChange={setDescription}
@@ -237,8 +236,9 @@ const CreatePost = () => {
             ["bold", "italic", "underline", "link", "image"],
             ["unorderedList", "orderedList"],
           ]}
+          data-cy="replyForm"
         />
-
+</div>
         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           <Button
             variant="contained"

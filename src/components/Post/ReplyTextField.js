@@ -139,6 +139,7 @@ const ReplyTextField = ({ post, user }) => {
         >
           <Button
             variant="contained"
+            data-cy="submitPostBtn"
             onClick={() => {
               if (comment !== "<p><br></p>") submitComment();
             }}

@@ -47,7 +47,7 @@ const EditProfile = ({ userData, user, setIsEditProfile, projectData }) => {
         sx={{ p: 0 }}
         avatar={<BackButton />}
         action={
-          <IconButton onClick={handleProfileSubmit}>
+          <IconButton onClick={handleProfileSubmit} cy-data="submitEdition">
             <CheckIcon />
           </IconButton>
         }

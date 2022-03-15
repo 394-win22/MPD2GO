@@ -30,7 +30,7 @@ const Bio = ({ userData, uid }) => {
         <IconButton onClick={() => setIsBioEditing(false)}>
           <CancelOutlinedIcon />
         </IconButton>
-        <IconButton onClick={handleBioSubmit}>
+        <IconButton onClick={handleBioSubmit} cy-data="submitBio">
           <CheckIcon />
         </IconButton>
       </Stack>
@@ -38,7 +38,7 @@ const Bio = ({ userData, uid }) => {
   }
   return (
     <Typography component="div" sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}>
-      <IconButton onClick={() => setIsBioEditing(true)}>
+      <IconButton onClick={() => setIsBioEditing(true)} cy-data="editBio">
         <EditIcon />
       </IconButton>
       {bio ? bio : "No Bio"}

@@ -101,6 +101,7 @@ const DisplayProfile = ({ userData, user, setIsEditProfile, projectData }) => {
             onClick={() => {
               navigate(`/project/${userData.teamId}`);
             }}
+            cy-data="viewTeam"
             sx={{
               mt: 1,
               mb: 2,
