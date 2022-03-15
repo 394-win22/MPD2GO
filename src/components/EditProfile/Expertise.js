@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useState } from "react";
 import {
   Typography,
-  Avatar,
   Box,
-  Divider,
-  Button,
   Stack,
-  Card,
   Chip,
   IconButton,
-  CardHeader,
-  TextField,
   FormControl,
   InputLabel,
   Select,

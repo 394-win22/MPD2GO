@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import RichTextEditor from "@mantine/rte";
-import { Card, Button, CardContent, Box, Chip, Stack, Typography, CardHeader } from "@mui/material";
+import { Card, Button, CardContent, Box, Chip, Stack, CardHeader } from "@mui/material";
 
 import Thread from "./Thread";
 import { UserContext } from "components/Routing";

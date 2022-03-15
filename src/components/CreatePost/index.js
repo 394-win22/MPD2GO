@@ -1,5 +1,5 @@
 import { useState, useMemo, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -84,11 +84,7 @@ const CreatePost = () => {
     } = event;
     setPostTags(typeof value === "string" ? value.split(",") : value);
   };
-
-  const handleDescriptionClick = () => {
-    if (description === postDescriptionPlaceHolder) setDescription("");
-  };
-
+  
   const people = context.userList.map((u) => {
     return { id: u.uid, value: u.displayName };
   });
@@ -232,7 +228,6 @@ const CreatePost = () => {
 
         <RichTextEditor
           value={description}
-          // onClick={handleDescriptionClick}
           onChange={setDescription}
           placeholder="Type @ to see mentions autocomplete"
           mentions={mentions}

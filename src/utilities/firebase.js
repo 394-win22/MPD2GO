@@ -102,7 +102,7 @@ export const pushData = (path, value) => push(ref(database, path), value);
 export const updateData = (path, value) => update(ref(database, path), value);
 
 export const removeAtPath = (path) => {
-  const result = remove(ref(database, path));
+  remove(ref(database, path));
 };
 
 /* authentication functions */

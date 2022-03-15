@@ -1,21 +1,9 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useState } from "react";
 import {
   Typography,
-  Avatar,
-  Box,
-  Divider,
-  Button,
   Stack,
-  Card,
-  Chip,
   IconButton,
-  CardHeader,
   TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from "@mui/material";
 // icons
 import { Email as EmailIcon } from "@mui/icons-material";
