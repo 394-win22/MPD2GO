@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -6,7 +6,6 @@ import {
   Card,
   Box,
   Chip,
-  CardHeader,
   Button
 } from "@mui/material/";
 import { makeStyles, useTheme } from "@mui/styles";

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useState } from "react";
 import { Typography, Stack, IconButton, TextField } from "@mui/material";
 // icons
 import EditIcon from "@mui/icons-material/Edit";

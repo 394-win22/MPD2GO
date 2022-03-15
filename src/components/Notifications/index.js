@@ -6,26 +6,8 @@ import CommentReplyNotification from "./CommentReplyNotification";
 import MentionNotification from "./MentionNotification";
 import { ClearAllNotification } from "./ClearAllNotificationButton";
 import BackButton from "../Navigation/BackButton";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 import { makeStyles } from "@mui/styles";
-
-// const getNotifications = (userData) => {
-//   try {
-//     let notificationList = Object.entries(userData.notifications).map(
-//       ([id, notifObj]) => {
-//         return { ...notifObj, id: id };
-//       }
-//     );
-//     notificationList = notificationList.sort((item1, item2) => {
-//       return item2.time - item1.time;
-//     });
-//     return notificationList;
-//   } catch {
-//     return [];
-//   }
-// };
-
 
 const useStyles = makeStyles({
   card: {

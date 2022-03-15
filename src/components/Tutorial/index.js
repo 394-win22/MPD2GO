@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, IconButton, Stack, Button } from "@mui/material";
+import { IconButton, Button } from "@mui/material";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import First from "resources/tutorial/1.png";

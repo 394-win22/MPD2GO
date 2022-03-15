@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Typography, Stack, IconButton, TextField } from "@mui/material";
 // icons
-import { Email as EmailIcon } from "@mui/icons-material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";

@@ -18,7 +18,6 @@ import { findLevel, replyToThread } from "utilities/posts";
 import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
-import DeleteThread from "./DeleteThread";
 import { deleteCommentNotifications } from "utilities/notifications";
 import DeleteCommentMenu from "./DeleteCommentMenu";
 
