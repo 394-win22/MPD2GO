@@ -31,13 +31,13 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyALmMHVtIxzi3hogJcDlbbaue9_nfEzUjQ",
-  authDomain: "hive-mpd2.firebaseapp.com",
-  databaseURL: "https://hive-mpd2-default-rtdb.firebaseio.com",
-  projectId: "hive-mpd2",
-  storageBucket: "hive-mpd2.appspot.com",
-  messagingSenderId: "276071050379",
-  appId: "1:276071050379:web:50d75b811610e8f60df88e",
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
 };
 
 export const firebase = initializeApp(firebaseConfig);
@@ -49,9 +49,6 @@ if (window.Cypress) {
   connectAuthEmulator(auth, "http://127.0.0.1:9099");
   connectDatabaseEmulator(database, "127.0.0.1", 9000);
   connectStorageEmulator(storage, "localhost", 9199);
-  // signInWithCredential(auth, GoogleAuthProvider.credential(
-  //   '{"sub": "U7npX0jtE4ssHAPKwXV5q9bvPjPQ", "email": "test@example.com", "displayName":"Testing User 1", "email_verified": true}'
-  // ));
 }
 
 const firebaseSignOut = () => signOut(getAuth(firebase));
@@ -124,7 +121,7 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
         this.uid = res._tokenResponse.localId;
         this.displayName = name;
         this.photoURL =
-          "https://firebasestorage.googleapis.com/v0/b/hive-mpd2.appspot.com/o/demo_ico%2Fdefult%20avatar.png?alt=media&token=b6439e6a-b4b6-4440-aff7-9bccd9df7a36";
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
       }
     }
     const newUser = new user();
