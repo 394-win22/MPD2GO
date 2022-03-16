@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     justifyContent: "flex-start",
     marginBottom: "15px",
     alignItems: "stretch",
-    width: "100%"
+    width: "100%",
   },
   leftContainer: {
     display: "flex",
@@ -84,8 +84,8 @@ const useStyles = makeStyles({
   alignIconWithText: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   time: {
     color: "#888888",
@@ -147,7 +147,7 @@ const Thread = ({ postId, ids, data, style }) => {
       path += id;
     });
     return path;
-  }
+  };
 
   const replyToComment = (comment, notifications) => {
     let path = myPath();
@@ -228,7 +228,6 @@ const Thread = ({ postId, ids, data, style }) => {
         ) : (
           <Box className={classes.collapseButton} />
         )}
-
       </Box>
       <Box className={classes.rightContainer}>
         {/* comment */}
@@ -238,7 +237,9 @@ const Thread = ({ postId, ids, data, style }) => {
               <Typography variant="subtitle2">
                 {postAuthor.displayName}
               </Typography>
-              {data.author === user.uid && <DeleteCommentMenu delThreadFunction={deleteThread} />}
+              {data.author === user.uid && (
+                <DeleteCommentMenu delThreadFunction={deleteThread} />
+              )}
             </Box>
 
             <Typography className={classes.time}>
@@ -248,7 +249,13 @@ const Thread = ({ postId, ids, data, style }) => {
           <RichTextEditor
             readOnly
             value={data.comment}
-            style={{ marginLeft: -17, marginTop: -8, marginBottom: -25, border: "none", padding: "0" }}
+            style={{
+              marginLeft: -17,
+              marginTop: -8,
+              marginBottom: -25,
+              border: "none",
+              padding: "0",
+            }}
           />
         </Box>
 
@@ -306,7 +313,7 @@ const Thread = ({ postId, ids, data, style }) => {
             })}
         </Collapse>
       </Box>
-    </Box >
+    </Box>
   );
 };
 
