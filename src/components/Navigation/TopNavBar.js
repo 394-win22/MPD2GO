@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import {
   AppBar,
@@ -24,6 +24,16 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
   const context = useContext(UserContext);
 
   const [, setAnchorEl] = useState(null);
+
+  const location = useLocation();
+  const pathname= location.pathname;
+
+  const onSamePage=(pathname, pathend)=>{
+    const pieces= pathname.split("/");
+    const lastPart = pieces[pieces.length-1];
+    return (pathend === lastPart);
+  }
+
 
   const handleClickAway = () => {
     setAnchorEl(null);
@@ -59,7 +69,13 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
 
             {isDesktopScreen && isLoggedIn && (
               <>
-                <MenuItem onClick={() => navigate("/createPost")}>
+                <MenuItem onClick={() => {
+                  if (! onSamePage(pathname, "createPost")){
+                    navigate("/createPost");
+                  }
+                    
+                }
+                  }>
                   <AddCircleIcon />
                 </MenuItem>
 
@@ -79,7 +95,10 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
 
                 <MenuItem
                   onClick={() => {
-                    navigate("/directory");
+                    if (! onSamePage(pathname, "directory")){
+                      navigate("/directory");
+                    }
+                    
                   }}
                 >
                   <PeopleAltIcon />
@@ -87,7 +106,10 @@ const TopNavBar = ({ isLoggedIn, isDesktopScreen }) => {
 
                 <MenuItem
                   onClick={() => {
-                    navigate("/profile");
+                    if (! onSamePage(pathname, "profile")){
+                      navigate("/profile");
+                    }
+                    
                   }}
                 >
                   <AccountCircleIcon />

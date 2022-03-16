@@ -3,7 +3,6 @@ import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 import { RichTextEditor } from "@mantine/rte";
 import { UserContext } from "components/Routing/index.js";
-
 import { addCommentToPost } from "../../utilities/posts.js";
 import { createNotification } from "utilities/notifications.js";
 
@@ -70,7 +69,7 @@ const ReplyTextField = ({ post, user }) => {
             modifiedContent,
             "mention"
           ).toString().split('/');
-          const notificationId = notificationPath[notificationPath.length-1];
+          const notificationId = notificationPath[notificationPath.length - 1];
           notificationIds.push(notificationId);
         }
       });
@@ -92,6 +91,7 @@ const ReplyTextField = ({ post, user }) => {
         paddingLeft: "3%",
         paddingRight: "3%",
         paddingBottom: "20px",
+        marginBottom: "20px"
       }}
       borderBottom={"1px solid #e9e9e9"}
     >
@@ -101,14 +101,14 @@ const ReplyTextField = ({ post, user }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
-          marginTop: "5px",
+          marginTop: "0px",
           width: "100%",
         }}
       >
         <RichTextEditor
           controls={[
             ["bold", "italic", "underline", "link"],
-            ["unorderedList","orderedList"],
+            ["unorderedList", "orderedList"],
           ]}
           onImageUpload={() => {
             return new Promise((_, reject) => {
@@ -139,6 +139,7 @@ const ReplyTextField = ({ post, user }) => {
         >
           <Button
             variant="contained"
+            data-cy="submitPostBtn"
             onClick={() => {
               if (comment !== "<p><br></p>") submitComment();
             }}

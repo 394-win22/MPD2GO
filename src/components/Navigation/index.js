@@ -6,6 +6,7 @@ import MobileBottomNavBar from "./MobileBottomNavBar";
 const Navigation = ({ user }) => {
   const isDesktopScreen = useMediaQuery("(min-width:600px)");
   const isLoggedIn = user != null;
+  
 
   if (!isDesktopScreen) {
     return (

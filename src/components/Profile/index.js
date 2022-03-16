@@ -1,31 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
-import {
-  Typography,
-  Avatar,
-  Box,
-  Divider,
-  Button,
-  Stack,
-  Card,
-  Chip,
-} from "@mui/material";
-import { getUserStatus } from "../../utilities/firebase";
+import { useParams } from "react-router";
+import { Card } from "@mui/material";
 // icons
-import { Email as EmailIcon } from "@mui/icons-material";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 // local files
-import { EditUserButton } from "../EditProfile/EditUserButton";
 import { getProjectFromUid, getUserFromUid } from "../../utilities/firebase";
-import { signOut } from "utilities/firebase";
-import BackButton from "../Navigation/BackButton"
+import DisplayProfile from "./DisplayProfile";
+import EditProfile from "components/EditProfile";
 
 const Profile = ({ user }) => {
   const params = useParams();
   const [userData, setUserData] = useState(null);
-  const navigate = useNavigate();
   const [projectData, setProjectData] = useState(null);
+
+  const [isEditProfile, setIsEditProfile] = useState(false);
 
   useEffect(() => {
     const userToSearch = params.userID || user.uid;
@@ -53,165 +41,129 @@ const Profile = ({ user }) => {
     return <h1 style={{ marginLeft: 20 }}>User Not Found</h1>;
 
   return (
-    <>
-      <Card sx={{ px: 2, py: 2, mb: 10 }} style={{ borderRadius: 10 }}>
-      <BackButton/>
-        <Box textAlign="center">
-          <Avatar
-            alt={userData.displayName}
-            src={userData.photoURL}
-            variant="circular"
-            sx={{
-              height: "20vh",
-              width: "20vh",
-              margin: "auto",
-              my: 1,
-            }}
-          />
-          <Typography
-            variant="h4"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              paddingLeft: 1,
-              paddingBottom: 1,
-              marginBottom: "0px",
-            }}
-          >
-            {userData.displayName}
-          </Typography>
-
-          <Typography
-            component="div"
-            sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}
-          >
-            {userData.bio ? userData.bio : "No Bio"}
-          </Typography>
-
-          <Typography
-            variant="body1"
-            display="block"
-            sx={{ my: 1 }}
-            style={{ color: "#7B7B7B" }}
-          >
-            {userData.location ? userData.location : "Unknown Location"}
-          </Typography>
-          <Divider />
-          <Typography
-            variant="body1"
-            style={{ color: "#7B7B7B" }}
-            sx={{ paddingLeft: 1, my: 1 }}
-          >
-            {getUserStatus(userData)}
-          </Typography>
-
-          <Typography
-            variant="body1"
-            display="block"
-            style={{ color: "#7B7B7B" }}
-            sx={{ flexGrow: 1, paddingLeft: 1 }}
-          >
-            {userData.year ? "Class of " + userData.year : "No Year"}
-          </Typography>
-
-
-
-          {"teamId" in userData && (
-            <Button
-              variant="contained"
-              onClick={() => {
-                navigate(`/project/${userData.teamId}`);
-              }}
-              sx={{
-                mt: 1,
-                mb: 2,
-                backgroundColor: projectData.teamColor,
-                color: projectData.textColor,
-                textBlendMode: "exclusion",
-              }}
-            >
-              View {projectData.name}
-            </Button>
-          )}
-
-          <Divider />
-
-
-          <Typography
-            align="left"
-            sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}
-          >
-            Expertise
-          </Typography>
-          <Stack
-            direction="row"
-            sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
-            spacing={1}
-          >
-            {"expertise" in userData &&
-              Object.values(userData.expertise).map((x, i) => (
-                <Chip key={i} color="secondary" label={x} />
-              ))}
-          </Stack>
-
-          <Divider />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <Stack
-                direction="row"
-                sx={{ marginBottom: 3, marginTop: 2 }}
-                spacing={1}
-              >
-                <EmailIcon sx={{ color: "#999999" }} />
-                <Typography>{userData.email}</Typography>
-              </Stack>
-              <Stack direction="row" sx={{ marginBottom: 3 }} spacing={1}>
-                <LinkedInIcon sx={{ color: "#4173ac" }} />
-                <Typography>
-                  {userData.linkedIn ? userData.linkedIn : "No LinkedIn"}
-                </Typography>
-              </Stack>
-            </Box>
-          </Box>
-          {(!params.userID || params.userID === user.uid) && (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <EditUserButton
-                key={userData}
-                user={userData}
-                userID={user.uid}
-              />
-              <Button
-                sx={{ width: "150px", marginTop: "10px" }}
-                variant="contained"
-                onClick={signOut}
-                id="logout_btn"
-              >
-                Sign out{" "}
-              </Button>
-            </Box>
-          )}
-        </Box>
-      </Card>
-    </>
+    <Card
+      sx={{ px: 2, py: 2, mb: 2, minHeight: "77vh" }}
+      style={{ borderRadius: 10 }}
+    >
+      {isEditProfile ? (
+        <EditProfile
+          userData={userData}
+          user={user}
+          setIsEditProfile={setIsEditProfile}
+          projectData={projectData}
+        />
+      ) : (
+        <DisplayProfile
+          userData={userData}
+          user={user}
+          setIsEditProfile={setIsEditProfile}
+          projectData={projectData}
+        />
+      )}
+    </Card>
   );
 };
 
 export default Profile;
+
+// <Card sx={{ px: 2, py: 2, mb: 2, minHeight: "77vh" }} style={{ borderRadius: 10 }}>
+
+//   <BackButton />
+//   <Box textAlign="center">
+//     <Avatar
+//       alt={userData.displayName}
+//       src={userData.photoURL}
+//       variant="circular"
+//       sx={{
+//         height: "80px",
+//         width: "80px",
+//         margin: "auto",
+//         mb: 3,
+//       }}
+//     />
+//     <Typography
+//       variant="h5"
+//       component="div"
+//       sx={{
+//         flexGrow: 1,
+//         paddingLeft: 1,
+//         paddingBottom: 1,
+//         marginBottom: "0px",
+//       }}
+//     >
+//       {userData.displayName}
+//     </Typography>
+
+//     <Typography
+//       component="div"
+//       cy-data="bio"
+//       sx={{ flexGrow: 1, paddingLeft: 1, color: "#7B7B7B" }}
+//     >
+//       {userData.bio ? userData.bio : "No Bio"}
+//     </Typography>
+
+//     <Typography
+//       variant="body1"
+//       display="block"
+//       cy-data="location"
+//       sx={{ my: 1 }}
+//       style={{ color: "#7B7B7B" }}
+//     >
+//       {userData.location ? userData.location : "Unknown Location"}
+//     </Typography>
+//     <Divider />
+//     <Typography
+//       variant="body1"
+//       style={{ color: "#7B7B7B" }}
+//       sx={{ paddingLeft: 1, my: 1 }}
+//     >
+//       {getUserStatus(userData)}
+//     </Typography>
+
+//     <Typography
+//       variant="body1"
+//       display="block"
+//       cy-data="class"
+//       style={{ color: "#7B7B7B" }}
+//       sx={{ flexGrow: 1, paddingLeft: 1 }}
+//     >
+//       {userData.year ? "Class of " + userData.year : "No Year"}
+//     </Typography>
+
+//     {"teamId" in userData && (
+//       <Button
+//         variant="contained"
+//         onClick={() => {
+//           navigate(`/project/${userData.teamId}`);
+//         }}
+//         sx={{
+//           mt: 1,
+//           mb: 2,
+//           backgroundColor: projectData.teamColor,
+//           color: projectData.textColor,
+//           textBlendMode: "exclusion",
+//         }}
+//         cy-data="teamButton"
+//       >
+//         View {projectData.name}
+//       </Button>
+//     )}
+
+//     <Divider />
+
+//     <Typography
+//       align="left"
+//       sx={{ marginBottom: 3, ml: 2, mt: 1, color: "#7B7B7B" }}
+//     >
+//       Expertise
+//     </Typography>
+//     <Stack
+//       direction="row"
+//       sx={{ marginBottom: 3, ml: 2, overflowX: "scroll" }}
+//       spacing={1}
+//     >
+//       {"expertise" in userData &&
+//         Object.values(userData.expertise).map((x, i) => (
+//           <Chip key={i} color="secondary" label={x} />
+//         ))}
+//     </Stack>

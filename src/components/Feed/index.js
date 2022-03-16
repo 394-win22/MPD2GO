@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import PostList from "./PostsList";
 import { UserContext } from "components/Routing";
 import PostSearchBar from "components/PostSearchBar";
@@ -9,8 +9,11 @@ const Main = () => {
   const context = useContext(UserContext);
   const [phaseFilter, setPhaseFilter] = useState([]);
   const [teamFilter, setTeamFilter] = useState([]);
+  // scroll to top on load
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
-  
   let filteredPosts = context.postList;
   const filtering = (e) => {
     let x = true;
@@ -55,9 +58,9 @@ const Main = () => {
         phaseFilter={phaseFilter}
         teamFilter={teamFilter}
       />
-      
-      {(!filteredPosts) ? <Typography>No posts yet</Typography>:<PostList posts={filteredPosts} />}
-      
+
+      {(!filteredPosts) ? <Typography>No posts yet</Typography> : <PostList posts={filteredPosts} />}
+
     </div>
   );
 };

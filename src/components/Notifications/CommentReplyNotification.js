@@ -18,6 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import RichTextEditor from "@mantine/rte";
 
 const CommentReplyNotification = ({ notifId, notifObj }) => {
+
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const users = context.userList;

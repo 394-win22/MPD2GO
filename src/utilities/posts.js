@@ -11,6 +11,21 @@ export const createPostInFirebase = (postObj) => {
   return postId.key;
 };
 
+export const findLevel = (path) => {
+  // console.log("finding level for path", path);
+  let count = 0;
+  for (let i = 0; i < path.length; i++) {
+    if (path[i] === "/") {
+      count += 1;
+    }
+    if (count > 2) {
+      return 1; // 1 represents level beyond the first comment
+    }
+  }
+  // console.log("returning 0 from findLevel");
+  return 0; // first level
+};
+
 export const addCommentToPost = (
   postAuthorUid,
   commentAuthorUid,
@@ -18,6 +33,7 @@ export const addCommentToPost = (
   comment,
   notifications,
 ) => {
+  // console.log(`posts/${postId}/threads`);
   const notificationPath = createNotification(
     postAuthorUid,
     commentAuthorUid,
@@ -25,7 +41,7 @@ export const addCommentToPost = (
     comment,
     "comment"
   ).toString().split('/');
-  const notificationId = notificationPath[notificationPath.length-1];
+  const notificationId = notificationPath[notificationPath.length - 1];
   if (notifications) {
     //console.log("util notifications:", notifications);
     notifications.push(notificationId);
@@ -62,10 +78,10 @@ function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16),
+    }
     : null;
 }
 

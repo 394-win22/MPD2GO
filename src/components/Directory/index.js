@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -25,9 +25,7 @@ const Directory = () => {
     type: [],
   });
   const [query, setQuery] = useState("");
-
   let filteredUsers = users;
-
   function filtering(e) {
     let x = false;
     if (
@@ -50,6 +48,11 @@ const Directory = () => {
     return x;
   }
 
+  // scroll to top on load
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   if (query !== "" || filter.expertise.length > 0 || filter.type.length > 0) {
     // Filter by criteria
     filteredUsers = users.filter((e) => {
@@ -58,64 +61,66 @@ const Directory = () => {
   }
   // Sort alphabetically
   filteredUsers = filteredUsers.sort((a, b) => {
-    let nameA = a.displayName.toUpperCase();
-    let nameB = b.displayName.toUpperCase();
-    if (nameA < nameB) return -1;
-    if (nameA > nameB) return 1;
+    try {
+      let nameA = a.displayName.toUpperCase();
+      let nameB = b.displayName.toUpperCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+    } catch {
+      console.log(a, b)
+    }
     return 0;
   });
 
   return (
-    <>      
-      <Card sx={{ mb:10 }} style={{ borderRadius: 10 }}>
-        <CardHeader
-          sx={{ padding: "10px 16px" }}
-          avatar={
-            <BackButton/>
-          }
-          title="Directory"
-          titleTypographyProps={{ variant:'h6' }}
-        />
-        <DirectorySearchBar
+    <Card sx={{ mb: 10 }} style={{ borderRadius: 10 }}>
+      <CardHeader
+        sx={{ padding: "10px 16px" }}
+        avatar={
+          <BackButton />
+        }
+        title="Directory"
+        titleTypographyProps={{ variant: 'h6' }}
+      />
+      <DirectorySearchBar
         setQuery={setQuery}
         filter={filter}
         setFilter={setFilter}
       />
-        <List>
-          {filteredUsers.sort((u1, u2) => u1.displayName.localeCompare(u2.displayName)).map((user) => (
-            <ListItem
-              component={ListItemButton}
-              onClick={() => navigate(`/profile/${user.uid}`)}
-              key={user.uid}
-            >
-              <ListItemAvatar>
-                <Avatar alt={user.displayName} src={user.photoURL} />
-              </ListItemAvatar>
-              {"year" in user && user.year !== "" ? (
-                <ListItemText
-                  primary={user.displayName}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        {getUserStatus(user)}
-                      </Typography>
-                      {` - Class of ${user.year}`}
-                    </React.Fragment>
-                  }
-                />
-              ) : (
-                <ListItemText primary={user.displayName} />
-              )}
-            </ListItem>
-          ))}
-        </List>
-      </Card>
-    </>
+      <List>
+        {filteredUsers.sort((u1, u2) => u1.displayName.localeCompare(u2.displayName)).map((user) => (
+          <ListItem
+            component={ListItemButton}
+            onClick={() => navigate(`/profile/${user.uid}`)}
+            key={user.uid}
+          >
+            <ListItemAvatar>
+              <Avatar alt={user.displayName} src={user.photoURL} />
+            </ListItemAvatar>
+            {"year" in user && user.year !== "" ? (
+              <ListItemText
+                primary={user.displayName}
+                secondary={
+                  <React.Fragment>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      {getUserStatus(user)}
+                    </Typography>
+                    {` - Class of ${user.year}`}
+                  </React.Fragment>
+                }
+              />
+            ) : (
+              <ListItemText primary={user.displayName} />
+            )}
+          </ListItem>
+        ))}
+      </List>
+    </Card>
   );
 };
 

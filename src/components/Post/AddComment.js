@@ -4,8 +4,7 @@ import { RichTextEditor } from "@mantine/rte";
 import { useUserState } from "utilities/firebase.js";
 import { UserContext } from "components/Routing";
 import { createNotification } from "utilities/notifications";
-import { deleteData } from "../../utilities/firebase";
-import { deleteCommentNotifications, markNotificationAsRead } from "utilities/notifications";
+import { makeStyles } from "@mui/styles";
 
 /*const topicTags = [
   { id: 1, value: "JavaScript" },
@@ -14,8 +13,16 @@ import { deleteCommentNotifications, markNotificationAsRead } from "utilities/no
   { id: 4, value: "Python" },
 ];*/
 
+
+const useStyles = makeStyles({
+  addCommentContainer: {
+    display: "flex", flexDirection: "column", maxWidth: "600px"
+  }
+});
+
 const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
   const [comment, setComment] = useState("");
+  const classes = useStyles();
   const context = useContext(UserContext);
   const user = useUserState();
   const people = context.userList.map((u) => {
@@ -51,7 +58,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
             modifiedContent,
             "mention"
           ).toString().split('/');
-          const notificationId = notificationPath[notificationPath.length-1];
+          const notificationId = notificationPath[notificationPath.length - 1];
           //console.log("NOTIF ID:", notificationId);
           notificationIds.push(notificationId);
         }
@@ -81,11 +88,11 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
   );
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", maxWidth: "600px" }}>
+    <Box className={classes.addCommentContainer}>
       <RichTextEditor
         controls={[
           ["bold", "italic", "underline", "link"],
-          ["unorderedList","orderedList"],
+          ["unorderedList", "orderedList"]
         ]}
         onImageUpload={() => {
           return new Promise((_, reject) => {
@@ -114,6 +121,7 @@ const AddComment = ({ replyToComment, setIsShowTextField, postId }) => {
         }}
       >
         <Button
+          data-cy="AddCommentButton"
           onClick={() => {
             setIsShowTextField(false);
             setComment("");

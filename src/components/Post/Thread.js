@@ -14,11 +14,10 @@ import { makeStyles } from "@mui/styles";
 import moment from "moment";
 import { RichTextEditor } from "@mantine/rte";
 
-import { replyToThread } from "utilities/posts";
+import { findLevel, replyToThread } from "utilities/posts";
 import { deleteData, updateData } from "../../utilities/firebase";
 import { increment } from "firebase/database";
 import AddComment from "./AddComment";
-import DeleteThread from "./DeleteThread";
 import { deleteCommentNotifications } from "utilities/notifications";
 import DeleteCommentMenu from "./DeleteCommentMenu";
 
@@ -32,6 +31,7 @@ const useStyles = makeStyles({
     justifyContent: "flex-start",
     marginBottom: "15px",
     alignItems: "stretch",
+    width: "100%",
   },
   leftContainer: {
     display: "flex",
@@ -43,10 +43,12 @@ const useStyles = makeStyles({
     float: "left",
     flexDirection: "column",
     marginLeft: "5px",
+    marginRight: "14px",
     alignItems: "flex-start",
     height: "100%",
     minWidth: "0px",
     flexWrap: "wrap",
+    flexGrow: 1,
   },
   avatarButton: {
     width: "24px",
@@ -79,13 +81,19 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     minWidth: "0px",
   },
+  alignIconWithText: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   time: {
     color: "#888888",
     fontSize: "13px !important",
   },
   collapseButton: {
     display: "flex",
-    marginTop: "10px",
+    marginTop: "13px",
     width: "20px",
     boxSizing: "border-box",
     justifyContent: "center",
@@ -131,13 +139,18 @@ const Thread = ({ postId, ids, data, style }) => {
   const [isShowTextField, setIsShowTextField] = useState(false);
   const [isShowThreads, setIsShowThreads] = useState(true);
 
-  const replyToComment = (comment, notifications) => {
+  const myPath = () => {
     // GENERATE A PATH TO PUSH TO IN DATABASE
     let path = `${postId}`;
     ids.forEach((id) => {
       path += "/threads/";
       path += id;
     });
+    return path;
+  };
+
+  const replyToComment = (comment, notifications) => {
+    let path = myPath();
     path += "/threads/";
     replyToThread(user.uid, postId, path, comment, notifications);
     setIsShowTextField(false);
@@ -196,7 +209,7 @@ const Thread = ({ postId, ids, data, style }) => {
   if (haveChild) sortedThreads = Object.entries(data.threads).sort().reverse();
   return (
     <Box className={classes.container}>
-      <Box className={classes.leftContainer} sx={{ ml: 1 }}>
+      <Box className={classes.leftContainer} sx={{ ml: 1, pt: 0.6 }}>
         <IconButton
           className={classes.avatarButton}
           onClick={() => {
@@ -205,7 +218,7 @@ const Thread = ({ postId, ids, data, style }) => {
         >
           <Avatar className={classes.avatar} src={postAuthor.photoURL} />
         </IconButton>
-        {isShowThreads && haveChild ? (
+        {isShowThreads && haveChild && findLevel(myPath()) === 0 ? (
           <Box
             className={classes.collapseButton}
             onClick={() => setIsShowThreads(false)}
@@ -219,13 +232,14 @@ const Thread = ({ postId, ids, data, style }) => {
       <Box className={classes.rightContainer}>
         {/* comment */}
         <Box className={classes.contentContainer}>
-
           <Box className={classes.infoContainer}>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Box className={classes.alignIconWithText}>
               <Typography variant="subtitle2">
                 {postAuthor.displayName}
               </Typography>
-              {data.author === user.uid && <DeleteCommentMenu delThreadFunction={deleteThread} />}
+              {data.author === user.uid && (
+                <DeleteCommentMenu delThreadFunction={deleteThread} />
+              )}
             </Box>
 
             <Typography className={classes.time}>
@@ -235,7 +249,13 @@ const Thread = ({ postId, ids, data, style }) => {
           <RichTextEditor
             readOnly
             value={data.comment}
-            style={{ marginLeft: -17, marginBottom: -20, border: "none", padding: "0" }}
+            style={{
+              marginLeft: -17,
+              marginTop: -8,
+              marginBottom: -25,
+              border: "none",
+              padding: "0",
+            }}
           />
         </Box>
 
@@ -261,7 +281,7 @@ const Thread = ({ postId, ids, data, style }) => {
             </Button>
           )}
 
-          {!isShowTextField && (
+          {!isShowTextField && findLevel(myPath()) === 0 && (
             <Button
               className={classes.replyButton}
               color="primary"
@@ -293,7 +313,7 @@ const Thread = ({ postId, ids, data, style }) => {
             })}
         </Collapse>
       </Box>
-    </Box >
+    </Box>
   );
 };
 

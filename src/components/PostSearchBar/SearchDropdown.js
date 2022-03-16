@@ -100,8 +100,11 @@ const SearchDropdown = ({
                   < Chip
                     key={i}
                     style={{
-                      backgroundColor: teamActive && team.teamColor,
-                      color: teamActive && team.textColor
+                      backgroundColor: team.teamColor,
+                      color: team.textColor,
+                      outline: teamActive && "2px solid #7b7b7b",
+
+                      boxSizing: "border-box"
                     }
                     }
                     label={team.name}
