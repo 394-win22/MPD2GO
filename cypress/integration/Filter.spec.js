@@ -21,18 +21,6 @@ describe('Testing Filters in Home page', function(){
         cy.wait(1000);
         cy.get('.MuiInputBase-input.css-yz9k0d-MuiInputBase-input').should("be.visible").click();
         cy.contains("Marketing").should("be.visible").click();
-        cy.contains("Testing User 2").should("be.visible");
-        cy.contains("Testing User 1").should("be.visible");
-    });
-
-    it("Show only posts with multiple clicked tags", ()=>{
-        cy.visit("/");
-        cy.wait(1000);
-        cy.get('.MuiInputBase-input.css-yz9k0d-MuiInputBase-input').should("be.visible").click();
-        cy.contains("Industrial Design").should("be.visible").click();
-        cy.contains("Testing User 2").should("be.visible");
-        cy.contains("Testing User 1").should("not.exist");
-        cy.contains("Software Development").should("be.visible").click();
         cy.contains("Testing User 1").should("be.visible");
     });
 
